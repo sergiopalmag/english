@@ -9,143 +9,157 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&family=Noto+Sans+TC:wght@500;700&display=swap">
 <style>
-/* Layout: one column of five Wednesday cards on a timeline rail, then a reference grid for Debate Day rules. Single dark look, same identity as the class decks. */
+/* Layout: dark hero band, then one column of five Wednesday cards, then Debate Day rules. Light theme shared with the class deck and the Team Board. */
 :root{
-  --bg:#0d1117; --panel:#151c29; --panel-2:#1c2536; --line:#2b3852;
-  --fg:#eef2f8; --fg-2:#c9d3e3; --muted:#93a1b8;
-  --s1:#5aa9ff; --s2:#ffb347; --s3:#c792ff; --s4:#ffd166;
-  --aff:#3fd896; --neg:#ff7a6b; --hw:#ffd166;
+  --bg:#FAF6EE; --panel:#FFFDF8; --panel-2:#F3EEE3; --panel-3:#EDE7DA; --line:#E4DCCB;
+  --ink:#1D2B47; --fg:#1D2B47; --fg-2:#5B667C; --muted:#646E84;
+  --s1:#2563C9; --s2:#B9520B; --s3:#6D3FC4; --s4:#8A5A00; --gold:#F2C14E; --gold-2:#E0A82E;
+  --aff:#17784E; --neg:#C2412D; --hw:#8A5A00;
+  --t1:#E6EEFB; --t2:#FBEADC; --t3:#EEE7FB; --t4:#FBF0D2; --ta:#E1F1E8; --tn:#FBE6E2;
   --font-display:"Baloo 2","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --font-body:"Nunito","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --font-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1040px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-.zh{font-family:var(--font-zh);color:var(--fg-2);font-size:.86em;font-weight:500}
+.wrap{max-width:1040px;margin:0 auto;padding-block:24px 64px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.zh{font-family:var(--font-zh);color:var(--fg-2);font-size:.88em;font-weight:500}
 .blk{display:block}
-h1,h2,h3{font-family:var(--font-display);line-height:1.1;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--font-display);line-height:1.1;text-wrap:balance;margin:0;color:var(--ink)}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--s4);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:3px solid var(--gold-2);outline-offset:3px;border-radius:6px}
 
-/* ---------- header ---------- */
-.eyebrow{font-family:var(--font-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.85rem;color:var(--muted)}
-.hero{display:grid;gap:18px;padding-bottom:26px;border-bottom:1px solid var(--line)}
-.hero h1{font-size:clamp(2.1rem,5.6vw,3.6rem);font-weight:800}
-.hero h1 .zh{display:block;font-size:.42em;margin-top:.35em;color:var(--fg-2)}
-.lede{max-width:62ch;color:var(--fg-2);margin:0;font-size:1.05rem}
-.lede strong{color:var(--fg)}
+/* ---------- hero ---------- */
+.hero{display:grid;gap:16px;padding:28px 28px 24px;border-radius:24px;color:#FAF6EE;background:radial-gradient(circle at 85% 15%,#34507F 0%,#1D2B47 62%)}
+.hero .eyebrow{font-family:var(--font-display);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.85rem;color:var(--gold)}
+.hero h1{font-size:clamp(2.1rem,5.6vw,3.4rem);font-weight:800;color:#FAF6EE}
+.hero h1 .zh{display:block;font-size:.45em;margin-top:.35em;color:#C9D3E6}
+.lede{max-width:64ch;color:#DCE4F2;margin:0;font-size:1.05rem}
+.lede strong{color:#FFFFFF}
+.lede .zh{color:#B9C5DB}
 
-.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:6px}
-.day{--c:var(--s1);display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;background:var(--panel);border:1.5px solid var(--line);text-decoration:none;position:relative}
-.day:hover{border-color:var(--c)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:4px}
+.day{--c:var(--s1);display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:#FFFDF8;color:var(--ink);text-decoration:none;position:relative;border-top:6px solid var(--c)}
+.day:hover{transform:translateY(-2px)}
 .day .d{font-family:var(--font-display);font-weight:800;font-size:1.45rem;line-height:1;color:var(--c)}
-.day .w{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.day .t{font-weight:700;font-size:.92rem;line-height:1.25}
-.day.final{background:linear-gradient(135deg,color-mix(in srgb,var(--aff) 16%,var(--panel)),color-mix(in srgb,var(--neg) 16%,var(--panel)));border-color:color-mix(in srgb,var(--aff) 45%,var(--line))}
-.day.final .d{background:linear-gradient(90deg,var(--aff),var(--neg));-webkit-background-clip:text;background-clip:text;color:transparent}
-.next{position:absolute;top:-9px;right:8px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--fg);color:var(--bg);padding:1px 7px;border-radius:99px}
+.day .w{font-size:.76rem;color:var(--muted);font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.day .t{font-weight:800;font-size:.92rem;line-height:1.25}
+.day .t .zh{display:block;font-size:.82em;font-weight:500}
+.day.final{--c:var(--aff);background:linear-gradient(135deg,var(--ta),var(--tn))}
+.next{white-space:nowrap;position:absolute;top:-10px;right:8px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:1px 8px;border-radius:99px}
 
-.pipe{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px;margin-top:4px}
-.pipe span{font-weight:800;font-size:.9rem;padding:5px 11px;border-radius:99px;background:var(--panel-2);border:1px solid var(--line)}
-.pipe i{font-style:normal;color:var(--muted)}
+.pipe{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px;margin-top:2px}
+.pipe span{font-weight:800;font-size:.86rem;padding:5px 11px;border-radius:99px;background:#2A3D63;border:1px solid #4A6496;color:#FAF6EE}
+.pipe span small{font-family:var(--font-zh);font-weight:500;color:#C9D3E6;margin-left:4px}
+.pipe i{font-style:normal;color:#8DA0C4}
 
 /* ---------- timeline ---------- */
-.sec-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin:38px 0 16px}
+.sec-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin:36px 0 16px}
 .sec-title h2{font-size:1.7rem;font-weight:800}
-.timeline{display:grid;gap:18px;position:relative}
-.card{--c:var(--s1);display:grid;grid-template-columns:170px minmax(0,1fr);background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;scroll-margin-top:16px}
-.card .when{padding:20px 18px;background:color-mix(in srgb,var(--c) 12%,var(--panel));border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.sec-title .zh{font-size:1.1rem;font-weight:700}
+.timeline{display:grid;gap:18px}
+.card{--c:var(--s1);--t:var(--t1);display:grid;grid-template-columns:180px minmax(0,1fr);background:var(--panel);border:2px solid var(--line);border-radius:22px;overflow:hidden;scroll-margin-top:16px}
+.card .when{padding:20px 18px;background:var(--t);display:flex;flex-direction:column;gap:6px;border-top:8px solid var(--c)}
 .card .when .num{font-family:var(--font-display);font-weight:800;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--c)}
-.card .when .date{font-family:var(--font-display);font-weight:800;font-size:2.3rem;line-height:.95}
+.card .when .num .zh{display:block;letter-spacing:.1em;font-size:.95em;font-weight:700}
+.card .when .date{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:.95;color:var(--ink)}
 .card .when .dow{font-weight:800;color:var(--fg-2);font-size:.95rem}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.chip{font-size:.78rem;font-weight:800;padding:3px 9px;border-radius:99px;border:1.5px solid color-mix(in srgb,var(--c) 55%,transparent);color:var(--fg)}
+.chip{font-size:.78rem;font-weight:800;padding:3px 9px;border-radius:99px;background:#FFFDF8;color:var(--ink)}
 .card .body{padding:20px 22px 22px;display:grid;gap:14px;min-width:0}
-.card h3{font-size:1.5rem;font-weight:800}
-.card h3 .zh{font-size:.62em;margin-left:.4em}
+.card h3{font-size:1.55rem;font-weight:800}
+.card h3 .zh{font-size:.62em;margin-left:.45em}
 .label{font-family:var(--font-display);font-weight:800;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
-ol.steps{margin:0;padding:0;list-style:none;display:grid;gap:7px;counter-reset:s}
-ol.steps li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:baseline}
-ol.steps li::before{counter-increment:s;content:counter(s);font-family:var(--font-display);font-weight:800;font-size:.8rem;width:1.55em;height:1.55em;display:inline-grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--c)}
-.pg{font-size:.78rem;font-weight:700;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.period{font-weight:800;color:var(--c);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 2px}
+.label .zh{letter-spacing:.06em;margin-left:.4em}
+ol.steps{margin:0;padding:0;list-style:none;display:grid;gap:8px;counter-reset:s}
+ol.steps li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 10px;align-items:start}
+ol.steps li::before{counter-increment:s;content:counter(s);font-family:var(--font-display);font-weight:800;font-size:.8rem;width:1.65em;height:1.65em;display:inline-grid;place-items:center;border-radius:50%;background:var(--c);color:#FFFDF8;margin-top:.1em}
+ol.steps li .zh{display:block;font-size:.84em}
+.pg{font-size:.78rem;font-weight:800;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;padding-top:.2em}
+.period{font-weight:800;color:var(--c);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;margin:8px 0 4px}
+.period .zh{text-transform:none;letter-spacing:0;margin-left:.4em}
 .leave{display:flex;flex-wrap:wrap;gap:6px}
-.leave span{font-size:.86rem;font-weight:700;padding:4px 10px;border-radius:8px;background:var(--panel-2);border:1px solid var(--line)}
-.hwbox{border-radius:12px;padding:12px 14px;background:color-mix(in srgb,var(--hw) 9%,var(--panel-2));border:1.5px dashed color-mix(in srgb,var(--hw) 55%,transparent);display:grid;gap:4px}
-.hwbox .due{font-family:var(--font-display);font-weight:800;color:var(--hw);font-size:1.05rem}
+.leave span{font-size:.86rem;font-weight:800;padding:4px 10px;border-radius:10px;background:var(--t);color:var(--ink)}
+.leave span small{font-family:var(--font-zh);font-weight:500;color:var(--fg-2);margin-left:4px}
+.hwbox{border-radius:16px;padding:12px 16px;background:var(--t4);border:2px dashed var(--gold-2);display:grid;gap:4px}
+.hwbox .due{font-family:var(--font-display);font-weight:800;color:var(--hw);font-size:1.08rem}
+.hwbox .due .zh{display:block;font-size:.84em;font-weight:700}
 .hwbox p{margin:0}
-.check{border-radius:12px;padding:10px 14px;background:var(--panel-2);border:1px solid var(--line);font-size:.92rem}
-.check b{color:var(--c)}
+.check{border-radius:14px;padding:10px 14px;background:var(--t4);font-size:.94rem}
+.check b{color:var(--hw)}
 
-.card.final{border-color:color-mix(in srgb,var(--aff) 40%,var(--line))}
-.card.final .when{background:linear-gradient(160deg,color-mix(in srgb,var(--aff) 18%,var(--panel)),color-mix(in srgb,var(--neg) 18%,var(--panel)))}
-.card.final .when .num{color:var(--aff)}
+.card.final{--c:var(--aff);border-color:#BFDCCB}
+.card.final .when{background:linear-gradient(160deg,var(--ta),var(--tn))}
 
 /* run sheet */
 .runsheet{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.per{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px;align-content:start}
-.per h4{margin:0;font-family:var(--font-display);font-size:1.05rem}
+.per{background:var(--panel-2);border-radius:14px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.per h4{margin:0;font-family:var(--font-display);font-size:1.05rem;color:var(--ink)}
 .per h4 small{font-family:var(--font-body);font-weight:700;color:var(--muted);font-size:.78rem;margin-left:6px}
 .slot{display:grid;grid-template-columns:3.6em minmax(0,1fr);gap:8px;font-size:.92rem;align-items:baseline}
-.slot .m{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;font-size:.82rem}
+.slot .m{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:800;font-size:.82rem}
+.slot .zh{display:block;font-size:.84em}
 .slot.deb b{color:var(--aff)}
 
 /* ---------- reference grid ---------- */
 .ref{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:grid;gap:12px;align-content:start;min-width:0}
+.box{background:var(--panel);border:2px solid var(--line);border-radius:22px;padding:20px 22px;display:grid;gap:12px;align-content:start;min-width:0}
 .box h3{font-size:1.3rem;font-weight:800}
-.box h3 .zh{font-size:.66em;margin-left:.4em}
+.box h3 .zh{font-size:.68em;margin-left:.45em}
 .box.wide{grid-column:1/-1}
 
 .order{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
-.sp{border-radius:10px;padding:8px 6px;text-align:center;display:grid;gap:2px;border:1.5px solid}
-.sp b{font-family:var(--font-display);font-size:1.05rem;line-height:1}
-.sp small{font-size:.72rem;font-weight:800;color:var(--fg-2)}
+.sp{border-radius:12px;padding:8px 6px;text-align:center;display:grid;gap:2px}
+.sp b{font-family:var(--font-display);font-size:1.1rem;line-height:1}
+.sp small{font-size:.72rem;font-weight:800;color:var(--ink)}
+.sp small span{display:block;font-family:var(--font-zh);font-weight:500;color:var(--fg-2)}
 .sp em{font-style:normal;font-variant-numeric:tabular-nums;font-weight:800;font-size:.85rem}
-.sp.a{border-color:var(--aff);background:color-mix(in srgb,var(--aff) 12%,transparent)}
-.sp.a b,.sp.a em{color:var(--aff)}
-.sp.n{border-color:var(--neg);background:color-mix(in srgb,var(--neg) 12%,transparent)}
-.sp.n b,.sp.n em{color:var(--neg)}
-.note{font-size:.9rem;color:var(--fg-2);margin:0}
+.sp.a{background:var(--ta)} .sp.a b,.sp.a em{color:var(--aff)}
+.sp.n{background:var(--tn)} .sp.n b,.sp.n em{color:var(--neg)}
+.note{font-size:.92rem;color:var(--fg-2);margin:0}
 
 .signals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.sig{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;background:var(--panel-2);border:1px solid var(--line);font-size:.9rem;font-weight:700}
+.sig{display:flex;gap:10px;align-items:center;padding:10px;border-radius:12px;background:var(--panel-2);font-size:.9rem;font-weight:800}
 .sig i{flex:none;width:22px;height:30px;border-radius:4px}
+.sig .zh{display:block;font-weight:500}
 
 .roles{display:grid;gap:8px;margin:0;padding:0;list-style:none}
 .roles li{display:grid;grid-template-columns:5.6em minmax(0,1fr);gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
 .roles li:last-child{border-bottom:0}
 .roles b{font-family:var(--font-display);font-size:1.05rem}
+.roles b .zh{display:block;font-size:.8em;font-weight:700}
+.roles .zh.blk{font-size:.86em}
 
 .rules{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 .rules li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start}
-.rules li::before{content:"";width:10px;height:10px;margin-top:.5em;border-radius:3px;background:var(--s4)}
+.rules li::before{content:"";width:10px;height:10px;margin-top:.5em;border-radius:3px;background:var(--gold-2)}
 
 table.score{width:100%;border-collapse:collapse;font-size:.92rem}
 table.score th,table.score td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
 table.score th{font-family:var(--font-display);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+table.score td .zh{display:block;font-size:.84em}
 table.score td.n{font-variant-numeric:tabular-nums;font-weight:800;text-align:right;white-space:nowrap}
 table.score tr.tot td{border-bottom:0;font-weight:800}
 
-.teacher{border-style:dashed}
-.teacher ul{margin:0;padding-left:1.1em;display:grid;gap:6px}
-.teacher li{font-size:.94rem}
-.teacher b{color:var(--s4)}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{display:inline-flex;flex-direction:column;gap:2px;padding:10px 16px;border-radius:14px;background:var(--panel);border:2px solid var(--line);text-decoration:none;font-weight:800}
+.links a:hover{border-color:var(--s1)}
+.links a small{font-family:var(--font-zh);font-weight:500;color:var(--fg-2)}
 footer{margin-top:34px;color:var(--muted);font-size:.85rem}
 
 @media (max-width:760px){
-  .strip{grid-template-columns:repeat(5,minmax(96px,1fr));overflow-x:auto;padding-top:10px;padding-bottom:4px}
+  .hero{padding:22px 18px}
+  .strip{grid-template-columns:repeat(5,minmax(104px,1fr));overflow-x:auto;padding-top:12px;padding-bottom:4px}
   .card{grid-template-columns:minmax(0,1fr)}
-  .card .when{border-right:0;border-bottom:1px solid var(--line);flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+  .card .when{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
   .card .when .date{font-size:1.9rem}
   .runsheet{grid-template-columns:minmax(0,1fr)}
   .ref{grid-template-columns:minmax(0,1fr)}
   .order{grid-template-columns:repeat(4,minmax(0,1fr))}
   .signals{grid-template-columns:minmax(0,1fr)}
 }
-@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}.day{transition:transform .15s}}
 </style>
 </head>
 <body>
@@ -153,16 +167,16 @@ footer{margin-top:34px;color:var(--muted);font-size:.85rem}
   <header class="hero">
     <div class="eyebrow">Grade 9 Debate Mini-Course · Group A · Round 2</div>
     <h1>Five Wednesdays to Debate Day<span class="zh">五個星期三，一起走到辯論日</span></h1>
-    <p class="lede">Your team builds one case together. Everyone owns <strong>two reasons</strong> and gives <strong>one speech</strong>. On <strong>Wednesday 11/18</strong> all four debates happen in our classroom.<span class="zh blk">每個人負責兩個理由、發表一篇演講。11/18 在我們的教室進行四場辯論。</span></p>
+    <p class="lede">Your team builds one case together. Everyone owns <strong>two reasons</strong> and gives <strong>one speech</strong>. On <strong>Wednesday 11/18</strong> all four debates happen in our classroom.<span class="zh blk">全隊一起準備。每個人負責兩個理由、發表一篇演講。11/18（三）在我們的教室進行四場辯論。</span></p>
     <nav class="strip" aria-label="Session dates">
-      <a class="day" href="#s1" style="--c:var(--s1)" data-date="2026-10-21"><span class="w">Wed · P5–7</span><span class="d">10/21</span><span class="t">Start strong</span></a>
-      <a class="day" href="#s2" style="--c:var(--s2)" data-date="2026-10-28"><span class="w">Wed · P7</span><span class="d">10/28</span><span class="t">Reasons → speech</span></a>
-      <a class="day" href="#s3" style="--c:var(--s3)" data-date="2026-11-04"><span class="w">Wed · P5–7</span><span class="d">11/4</span><span class="t">Polish &amp; practice</span></a>
-      <a class="day" href="#s4" style="--c:var(--s4)" data-date="2026-11-11"><span class="w">Wed · P7</span><span class="d">11/11</span><span class="t">Dress rehearsal</span></a>
-      <a class="day final" href="#s5" data-date="2026-11-18"><span class="w">Wed · P5–7</span><span class="d">11/18</span><span class="t">Debate Day</span></a>
+      <a class="day" href="#s1" style="--c:var(--s1)" data-date="2026-10-21"><span class="w">Wed · P5–7</span><span class="d">10/21</span><span class="t">Start strong<span class="zh">打好基礎</span></span></a>
+      <a class="day" href="#s2" style="--c:var(--s2)" data-date="2026-10-28"><span class="w">Wed · P7</span><span class="d">10/28</span><span class="t">Reasons → speech<span class="zh">從理由到講稿</span></span></a>
+      <a class="day" href="#s3" style="--c:var(--s3)" data-date="2026-11-04"><span class="w">Wed · P5–7</span><span class="d">11/4</span><span class="t">Polish &amp; practice<span class="zh">修改與練習</span></span></a>
+      <a class="day" href="#s4" style="--c:var(--s4)" data-date="2026-11-11"><span class="w">Wed · P7</span><span class="d">11/11</span><span class="t">Dress rehearsal<span class="zh">彩排</span></span></a>
+      <a class="day final" href="#s5" data-date="2026-11-18"><span class="w">Wed · P5–7</span><span class="d">11/18</span><span class="t">Debate Day<span class="zh">辯論日</span></span></a>
     </nav>
     <div class="pipe" aria-label="What your team builds">
-      <span>10+ reasons</span><i>→</i><span>8 signposts</span><i>→</i><span>2 reasons + supports each</span><i>→</i><span>Speech draft</span><i>→</i><span>Final speech</span><i>→</i><span>Debate</span>
+      <span>10+ reasons<small>理由</small></span><i>→</i><span>8 signposts<small>路標</small></span><i>→</i><span>2 reasons + supports each<small>每人兩個理由＋證據</small></span><i>→</i><span>Speech draft<small>講稿草稿</small></span><i>→</i><span>Final speech<small>最終講稿</small></span><i>→</i><span>Debate<small>辯論</small></span>
     </div>
   </header>
 
@@ -170,47 +184,47 @@ footer{margin-top:34px;color:var(--muted);font-size:.85rem}
   <div class="timeline">
 
     <!-- SESSION 1 -->
-    <article class="card" id="s1" style="--c:var(--s1)">
+    <article class="card" id="s1" style="--c:var(--s1);--t:var(--t1)">
       <div class="when">
-        <span class="num">Session 1</span>
+        <span class="num">Session 1<span class="zh">第一堂</span></span>
         <span class="date">10/21</span>
-        <span class="dow">Wednesday</span>
-        <div class="chips"><span class="chip">Periods 5–7</span><span class="chip">Units 1–4</span></div>
+        <span class="dow">Wednesday<span class="zh blk">星期三</span></span>
+        <div class="chips"><span class="chip">Periods 5–7 · 第 5–7 節</span><span class="chip">Units 1–4</span></div>
       </div>
       <div class="body">
         <h3>Start strong<span class="zh">打好基礎</span></h3>
         <div>
-          <span class="label">In class</span>
-          <div class="period">Period 5 · Names, then what is debate?</div>
+          <span class="label">In class<span class="zh">課堂活動</span></span>
+          <div class="period">Period 5 · Names, then what is debate?<span class="zh">第 5 節：英文名字、什麼是辯論</span></div>
           <ol class="steps">
-            <li><span>Write your English name on the class list <span style="white-space:nowrap">(10–15 min)</span></span><span class="pg"></span></li>
-            <li><span>Agree or disagree? Stand up for your opinion</span><span class="pg">p. 4</span></li>
-            <li><span>What debate is, and the five parts of a debate</span><span class="pg">pp. 5–6</span></li>
-            <li><span>Resolutions about policy: “The school should …”</span><span class="pg">p. 7</span></li>
-            <li><span>Form 8 teams (A–H), 3–4 students each</span><span class="pg"></span></li>
+            <li><span>Write your English name on the class list<span class="zh">在班級名單上寫你的英文名字</span></span><span class="pg"></span></li>
+            <li><span>Agree or disagree? Stand up for your opinion<span class="zh">同意還是不同意？站起來表達你的意見</span></span><span class="pg">p. 4</span></li>
+            <li><span>What debate is, and the five parts of a debate<span class="zh">什麼是辯論，以及辯論的五個角色</span></span><span class="pg">pp. 5–6</span></li>
+            <li><span>Resolutions about policy: “The school should …”<span class="zh">政策性的辯題：「學校應該……」</span></span><span class="pg">p. 7</span></li>
+            <li><span>Form 8 teams (A–H), 3–4 students each<span class="zh">組成 8 隊（A–H），每隊 3–4 人</span></span><span class="pg"></span></li>
           </ol>
-          <div class="period">Period 6 · Our resolution, our reasons</div>
+          <div class="period">Period 6 · Our resolution, our reasons<span class="zh">第 6 節：選辯題、想理由</span></div>
           <ol class="steps">
-            <li><span>Vote on 8 resolutions → 4 debates, Affirmative vs. Negative</span><span class="pg">p. 32</span></li>
-            <li><span>What makes a strong reason</span><span class="pg">pp. 8–9</span></li>
-            <li><span>Team brainstorm: 10+ reasons</span><span class="pg">pp. 32–33</span></li>
-            <li><span>Opinion → Reason → Support, and the 4 types of support</span><span class="pg">pp. 12–13</span></li>
+            <li><span>Vote on 8 resolutions → 4 debates, Affirmative vs. Negative<span class="zh">投票選辯題 → 4 場辯論，正方對反方</span></span><span class="pg">p. 32</span></li>
+            <li><span>What makes a strong reason<span class="zh">什麼是有力的理由</span></span><span class="pg">pp. 8–9</span></li>
+            <li><span>Team brainstorm: 10+ reasons<span class="zh">全隊腦力激盪：10 個以上的理由</span></span><span class="pg">pp. 32–33</span></li>
+            <li><span>Opinion → Reason → Support, and the 4 types of support<span class="zh">意見 → 理由 → 證據，以及四種證據</span></span><span class="pg">pp. 12–13</span></li>
           </ol>
-          <div class="period">Period 7 · iPads, signposts, and who does what</div>
+          <div class="period">Period 7 · iPads, signposts, and who does what<span class="zh">第 7 節：平板、路標、分工</span></div>
           <ol class="steps">
-            <li><span>Get your iPad, join Google Classroom (code 2nrpombx) and join your team on the Team Board <span style="white-space:nowrap">(10–15 min)</span></span><span class="pg"></span></li>
-            <li><span>Signposts: short names for your reasons</span><span class="pg">pp. 18–19</span></li>
-            <li><span>Divide the work: 8 reasons, 2 per person, plus speaker roles</span><span class="pg">p. 34</span></li>
-            <li><span>Put your team plan on the Team Board</span><span class="pg"></span></li>
+            <li><span>Get your iPad, join Google Classroom (code 2nrpombx) and join your team on the Team Board<span class="zh">拿平板，加入 Google Classroom（代碼 2nrpombx），在 Team Board 加入隊伍</span></span><span class="pg"></span></li>
+            <li><span>Signposts: short names for your reasons<span class="zh">路標：理由的短名字</span></span><span class="pg">pp. 18–19</span></li>
+            <li><span>Divide the work: 8 reasons, 2 per person, plus speaker roles<span class="zh">分工：8 個理由，每人 2 個，並決定講者角色</span></span><span class="pg">p. 34</span></li>
+            <li><span>Put your team plan on the Team Board<span class="zh">把隊伍計畫放上 Team Board</span></span><span class="pg"></span></li>
           </ol>
         </div>
         <div>
-          <span class="label">You leave with</span>
-          <div class="leave"><span>Your team</span><span>Your resolution + side</span><span>Your 2 reasons</span><span>Your speaker role</span></div>
+          <span class="label">You leave with<span class="zh">今天你會確定</span></span>
+          <div class="leave"><span>Your team<small>隊伍</small></span><span>Your resolution + side<small>辯題與正反方</small></span><span>Your 2 reasons<small>你的 2 個理由</small></span><span>Your speaker role<small>講者角色</small></span></div>
         </div>
         <div class="hwbox">
-          <span class="label" style="margin:0;color:var(--hw)">Homework 1 · My Reasons</span>
-          <span class="due">Due Sunday 10/25, 11:59 PM · on the Team Board</span>
+          <span class="label" style="margin:0;color:var(--hw)">Homework 1 · My Reasons<span class="zh">作業 1：我的理由</span></span>
+          <span class="due">Due Sunday 10/25, 11:59 PM · on the Team Board<span class="zh">10/25（日）晚上 11:59 前，交在 Team Board</span></span>
           <p>For each of <b>your</b> reasons: a signpost (1–2 words), the reason (one sentence), and 2 supports of different types.</p>
           <p class="zh">針對你負責的每個理由：寫出路標（1–2 個字）、理由（一句話）、兩個不同類型的支持證據。</p>
         </div>
@@ -218,124 +232,124 @@ footer{margin-top:34px;color:var(--muted);font-size:.85rem}
     </article>
 
     <!-- SESSION 2 -->
-    <article class="card" id="s2" style="--c:var(--s2)">
+    <article class="card" id="s2" style="--c:var(--s2);--t:var(--t2)">
       <div class="when">
-        <span class="num">Session 2</span>
+        <span class="num">Session 2<span class="zh">第二堂</span></span>
         <span class="date">10/28</span>
-        <span class="dow">Wednesday</span>
-        <div class="chips"><span class="chip">Period 7</span><span class="chip">Units 3 &amp; 6</span></div>
+        <span class="dow">Wednesday<span class="zh blk">星期三</span></span>
+        <div class="chips"><span class="chip">Period 7 · 第 7 節</span><span class="chip">Units 3 &amp; 6</span></div>
       </div>
       <div class="body">
-        <h3>From reasons to a speech<span class="zh">從理由到演講稿</span></h3>
+        <h3>From reasons to a speech<span class="zh">從理由到講稿</span></h3>
         <div>
-          <span class="label">In class</span>
+          <span class="label">In class<span class="zh">課堂活動</span></span>
           <ol class="steps">
-            <li><span>Read your Homework 1 feedback; fix weak or repeated reasons</span><span class="pg"></span></li>
-            <li><span>Language for giving support</span><span class="pg">p. 14</span></li>
-            <li><span>The eight-speech debate and what each speaker says</span><span class="pg">pp. 28–30</span></li>
-            <li><span>Read a model speech, then start yours</span><span class="pg"></span></li>
+            <li><span>Read your Homework 1 feedback; fix weak or repeated reasons<span class="zh">看作業 1 的回饋，修改太弱或重複的理由</span></span><span class="pg"></span></li>
+            <li><span>Language for giving support<span class="zh">提出證據的句型</span></span><span class="pg">p. 14</span></li>
+            <li><span>The eight-speech debate and what each speaker says<span class="zh">八人辯論的順序，以及每位講者要說什麼</span></span><span class="pg">pp. 28–30</span></li>
+            <li><span>Read a model speech, then start yours<span class="zh">讀範例講稿，然後開始寫你的</span></span><span class="pg"></span></li>
           </ol>
         </div>
         <div class="hwbox">
-          <span class="label" style="margin:0;color:var(--hw)">Homework 2 · Speech draft</span>
-          <span class="due">Due Sunday 11/1, 11:59 PM · on the Team Board</span>
+          <span class="label" style="margin:0;color:var(--hw)">Homework 2 · Speech draft<span class="zh">作業 2：講稿草稿</span></span>
+          <span class="due">Due Sunday 11/1, 11:59 PM · on the Team Board<span class="zh">11/1（日）晚上 11:59 前，交在 Team Board</span></span>
           <p>Write the full speech for your role. Read it aloud with a timer and enter your time.</p>
-          <p class="zh">寫出你角色的完整演講稿，計時朗讀一次，並填上你的時間。</p>
+          <p class="zh">寫出你角色的完整講稿，計時朗讀一次，並填上你的時間。</p>
         </div>
       </div>
     </article>
 
     <!-- SESSION 3 -->
-    <article class="card" id="s3" style="--c:var(--s3)">
+    <article class="card" id="s3" style="--c:var(--s3);--t:var(--t3)">
       <div class="when">
-        <span class="num">Session 3</span>
+        <span class="num">Session 3<span class="zh">第三堂</span></span>
         <span class="date">11/4</span>
-        <span class="dow">Wednesday</span>
-        <div class="chips"><span class="chip">Periods 5–7</span><span class="chip">Unit 6 · Peer Assessment</span></div>
+        <span class="dow">Wednesday<span class="zh blk">星期三</span></span>
+        <div class="chips"><span class="chip">Periods 5–7 · 第 5–7 節</span><span class="chip">Unit 6 · Peer Assessment</span></div>
       </div>
       <div class="body">
         <h3>Polish and practice<span class="zh">修改與練習</span></h3>
         <div>
-          <span class="label">In class</span>
-          <div class="period">Period 5 · Better speeches</div>
+          <span class="label">In class<span class="zh">課堂活動</span></span>
+          <div class="period">Period 5 · Better speeches<span class="zh">第 5 節：讓講稿更好</span></div>
           <ol class="steps">
-            <li><span>Revise your draft with your teacher's feedback</span><span class="pg"></span></li>
-            <li><span>Put a speech in the right order</span><span class="pg">p. 31</span></li>
-            <li><span>How you are scored: eye contact, gestures, voice, clarity, arguments</span><span class="pg">p. 44</span></li>
+            <li><span>Revise your draft with your teacher’s feedback<span class="zh">根據老師的回饋修改草稿</span></span><span class="pg"></span></li>
+            <li><span>Put a speech in the right order<span class="zh">把講稿排出正確順序</span></span><span class="pg">p. 31</span></li>
+            <li><span>How you are scored: eye contact, gestures, voice, clarity, arguments<span class="zh">評分方式：眼神、手勢、聲音、清楚度、論點</span></span><span class="pg">p. 44</span></li>
           </ol>
-          <div class="period">Period 6 · Team rehearsal</div>
+          <div class="period">Period 6 · Team rehearsal<span class="zh">第 6 節：隊伍排練</span></div>
           <ol class="steps">
-            <li><span>Make cue cards: key words only, no full sentences</span><span class="pg"></span></li>
-            <li><span>Rehearse in speaking order with a timer</span><span class="pg"></span></li>
+            <li><span>Make cue cards: key words only, no full sentences<span class="zh">做提示卡：只寫關鍵字，不寫完整句子</span></span><span class="pg"></span></li>
+            <li><span>Rehearse in speaking order with a timer<span class="zh">照發言順序計時排練</span></span><span class="pg"></span></li>
           </ol>
-          <div class="period">Period 7 · Practice debates</div>
+          <div class="period">Period 7 · Practice debates<span class="zh">第 7 節：模擬辯論</span></div>
           <ol class="steps">
-            <li><span>All four debates at once, face to face, with peer scoring</span><span class="pg">pp. 45–46</span></li>
+            <li><span>All four debates at once, face to face, with peer scoring<span class="zh">四場辯論同時進行，同學互相評分</span></span><span class="pg">pp. 45–46</span></li>
           </ol>
         </div>
         <div class="hwbox">
-          <span class="label" style="margin:0;color:var(--hw)">Homework 3 · Final speech</span>
-          <span class="due">Due Sunday 11/8, 11:59 PM · on the Team Board</span>
+          <span class="label" style="margin:0;color:var(--hw)">Homework 3 · Final speech<span class="zh">作業 3：最終講稿</span></span>
+          <span class="due">Due Sunday 11/8, 11:59 PM · on the Team Board<span class="zh">11/8（日）晚上 11:59 前，交在 Team Board</span></span>
           <p>Post your final speech and your practice time. Practice it aloud three times at home.</p>
-          <p class="zh">上傳最終版演講稿和練習時間，在家大聲練習三次。</p>
+          <p class="zh">上傳最終版講稿和練習時間，在家大聲練習三次。</p>
         </div>
       </div>
     </article>
 
     <!-- SESSION 4 -->
-    <article class="card" id="s4" style="--c:var(--s4)">
-      <div class="when">
-        <span class="num">Session 4</span>
+    <article class="card" id="s4" style="--c:var(--s4);--t:var(--t4)">
+      <div class="when" style="border-top-color:var(--gold-2)">
+        <span class="num">Session 4<span class="zh">第四堂</span></span>
         <span class="date">11/11</span>
-        <span class="dow">Wednesday</span>
-        <div class="chips"><span class="chip">Period 7</span></div>
+        <span class="dow">Wednesday<span class="zh blk">星期三</span></span>
+        <div class="chips"><span class="chip">Period 7 · 第 7 節</span></div>
       </div>
       <div class="body">
         <h3>Dress rehearsal<span class="zh">彩排</span></h3>
         <div>
-          <span class="label">In class</span>
+          <span class="label">In class<span class="zh">課堂活動</span></span>
           <ol class="steps">
-            <li><span>Debate Day rules: speaking order, time cards, how the Chairman runs it</span><span class="pg"></span></li>
-            <li><span>Readiness check: every role has a speech, and a back-up for anyone absent</span><span class="pg"></span></li>
-            <li><span>Timed run-through in speaking order</span><span class="pg"></span></li>
-            <li><span>Debate Day checklist</span><span class="pg"></span></li>
+            <li><span>Debate Day rules: speaking order, time cards, how the Chairman runs it<span class="zh">辯論日規則：發言順序、計時牌、主席如何主持</span></span><span class="pg"></span></li>
+            <li><span>Readiness check: every role has a speech, and a back-up for anyone absent<span class="zh">準備檢查：每個角色都有講稿，並安排備援講者</span></span><span class="pg"></span></li>
+            <li><span>Timed run-through in speaking order<span class="zh">照發言順序計時彩排</span></span><span class="pg"></span></li>
+            <li><span>Debate Day checklist<span class="zh">辯論日檢查清單</span></span><span class="pg"></span></li>
           </ol>
         </div>
-        <div class="check"><b>Bring on 11/18:</b> your Debate Now book (for peer scoring), your cue cards, and a pen. <span class="zh">11/18 請帶課本、提示卡、筆。</span></div>
+        <div class="check"><b>Bring on 11/18:</b> your Debate Now book (for peer scoring), your cue cards, and a pen. <span class="zh blk">11/18 請帶：課本（同儕評分用）、提示卡、一支筆。</span></div>
       </div>
     </article>
 
     <!-- DEBATE DAY -->
     <article class="card final" id="s5">
       <div class="when">
-        <span class="num">Debate Day</span>
+        <span class="num">Debate Day<span class="zh">辯論日</span></span>
         <span class="date">11/18</span>
-        <span class="dow">Wednesday</span>
-        <div class="chips"><span class="chip" style="border-color:color-mix(in srgb,var(--aff) 60%,transparent)">Periods 5–7</span><span class="chip" style="border-color:color-mix(in srgb,var(--neg) 60%,transparent)">Our classroom</span></div>
+        <span class="dow">Wednesday<span class="zh blk">星期三</span></span>
+        <div class="chips"><span class="chip">Periods 5–7 · 第 5–7 節</span><span class="chip">Our classroom · 我們的教室</span></div>
       </div>
       <div class="body">
         <h3>Four debates<span class="zh">四場辯論</span></h3>
         <div class="runsheet">
           <div class="per">
-            <h4>Period 5<small>50 min</small></h4>
-            <div class="slot"><span class="m">0–4</span><span>Room set-up and rules</span></div>
-            <div class="slot deb"><span class="m">4–27</span><span><b>Debate 1</b></span></div>
-            <div class="slot deb"><span class="m">27–50</span><span><b>Debate 2</b></span></div>
+            <h4>Period 5<small>50 min · 第 5 節</small></h4>
+            <div class="slot"><span class="m">0–4</span><span>Room set-up and rules<span class="zh">布置教室、說明規則</span></span></div>
+            <div class="slot deb"><span class="m">4–27</span><span><b>Debate 1</b><span class="zh">第一場</span></span></div>
+            <div class="slot deb"><span class="m">27–50</span><span><b>Debate 2</b><span class="zh">第二場</span></span></div>
           </div>
           <div class="per">
-            <h4>Period 6<small>50 min</small></h4>
-            <div class="slot"><span class="m">0–2</span><span>Reset</span></div>
-            <div class="slot deb"><span class="m">2–25</span><span><b>Debate 3</b></span></div>
-            <div class="slot deb"><span class="m">25–48</span><span><b>Debate 4</b></span></div>
+            <h4>Period 6<small>50 min · 第 6 節</small></h4>
+            <div class="slot"><span class="m">0–2</span><span>Reset<span class="zh">準備</span></span></div>
+            <div class="slot deb"><span class="m">2–25</span><span><b>Debate 3</b><span class="zh">第三場</span></span></div>
+            <div class="slot deb"><span class="m">25–48</span><span><b>Debate 4</b><span class="zh">第四場</span></span></div>
           </div>
           <div class="per">
-            <h4>Period 7<small>50 min</small></h4>
-            <div class="slot"><span class="m">0–15</span><span>Spare time if a debate ran late</span></div>
-            <div class="slot"><span class="m">15–35</span><span>Judges' results: winning team of each debate</span></div>
-            <div class="slot"><span class="m">35–50</span><span>Most Valuable Debater (MVD) and reflection</span></div>
+            <h4>Period 7<small>50 min · 第 7 節</small></h4>
+            <div class="slot"><span class="m">0–15</span><span>Spare time if a debate ran late<span class="zh">預留時間</span></span></div>
+            <div class="slot"><span class="m">15–35</span><span>Judges’ results: the winning team of each debate<span class="zh">評審公布每場勝隊</span></span></div>
+            <div class="slot"><span class="m">35–50</span><span>Most Valuable Debater and reflection<span class="zh">最佳辯士與心得</span></span></div>
           </div>
         </div>
-        <p class="note">Each debate takes about 23 minutes: 8 speeches of up to 18 minutes, plus changeovers and scoring.</p>
+        <p class="note">Each debate takes about 23 minutes: 8 speeches of up to 18 minutes, plus changeovers and scoring.<span class="zh blk">每場辯論約 23 分鐘：8 篇演講最多 18 分鐘，加上換場和評分。</span></p>
       </div>
     </article>
   </div>
@@ -345,72 +359,70 @@ footer{margin-top:34px;color:var(--muted);font-size:.85rem}
     <section class="box wide">
       <h3>Speaking order and time limits<span class="zh">發言順序與時間</span></h3>
       <div class="order" role="list">
-        <div class="sp a" role="listitem"><b>1</b><small>Aff 1st</small><em>2:30</em></div>
-        <div class="sp n" role="listitem"><b>2</b><small>Neg 1st</small><em>2:30</em></div>
-        <div class="sp a" role="listitem"><b>3</b><small>Aff 2nd</small><em>2:00</em></div>
-        <div class="sp n" role="listitem"><b>4</b><small>Neg 2nd</small><em>2:00</em></div>
-        <div class="sp a" role="listitem"><b>5</b><small>Aff 3rd</small><em>2:00</em></div>
-        <div class="sp n" role="listitem"><b>6</b><small>Neg 3rd</small><em>2:00</em></div>
-        <div class="sp n" role="listitem"><b>7</b><small>Neg Final</small><em>2:30</em></div>
-        <div class="sp a" role="listitem"><b>8</b><small>Aff Final</small><em>2:30</em></div>
+        <div class="sp a" role="listitem"><b>1</b><small>Aff 1st<span>正方一辯</span></small><em>2:30</em></div>
+        <div class="sp n" role="listitem"><b>2</b><small>Neg 1st<span>反方一辯</span></small><em>2:30</em></div>
+        <div class="sp a" role="listitem"><b>3</b><small>Aff 2nd<span>正方二辯</span></small><em>2:00</em></div>
+        <div class="sp n" role="listitem"><b>4</b><small>Neg 2nd<span>反方二辯</span></small><em>2:00</em></div>
+        <div class="sp a" role="listitem"><b>5</b><small>Aff 3rd<span>正方三辯</span></small><em>2:00</em></div>
+        <div class="sp n" role="listitem"><b>6</b><small>Neg 3rd<span>反方三辯</span></small><em>2:00</em></div>
+        <div class="sp n" role="listitem"><b>7</b><small>Neg Final<span>反方結辯</span></small><em>2:30</em></div>
+        <div class="sp a" role="listitem"><b>8</b><small>Aff Final<span>正方結辯</span></small><em>2:30</em></div>
       </div>
-      <p class="note">The Affirmative team wants the change, so it speaks first and last (p. 28). Teams of 3: if both teams have 3, skip the 3rd speeches. If only one team has 3, one person gives two speeches.<span class="zh blk">正方（同意的一方）第一個發言也最後一個發言。三人隊伍：如果兩隊都是三人，就省略第三位講者；如果只有一隊是三人，由一位隊員講兩次。</span></p>
+      <p class="note">The Affirmative team wants the change, so it speaks first and last (p. 28). Teams of 3: if both teams have 3, skip the 3rd speeches. If only one team has 3, one person gives two speeches.<span class="zh blk">正方（同意的一方）第一個發言，也最後一個發言。三人隊伍：如果兩隊都是三人，就省略第三位講者；如果只有一隊是三人，由一位隊員講兩次。</span></p>
       <div class="signals">
-        <div class="sig"><i style="background:var(--aff)"></i><span>Green card: start</span></div>
-        <div class="sig"><i style="background:var(--s4)"></i><span>Yellow card: 30 seconds left</span></div>
-        <div class="sig"><i style="background:var(--neg)"></i><span>Red card: time's up, finish your sentence</span></div>
+        <div class="sig"><i style="background:var(--aff)"></i><span>Green card: start<span class="zh">綠牌：開始</span></span></div>
+        <div class="sig"><i style="background:var(--gold)"></i><span>Yellow card: 30 seconds left<span class="zh">黃牌：剩 30 秒</span></span></div>
+        <div class="sig"><i style="background:var(--neg)"></i><span>Red card: time’s up, finish your sentence<span class="zh">紅牌：時間到，說完這句話</span></span></div>
       </div>
     </section>
 
     <section class="box">
       <h3>Speaker roles<span class="zh">講者角色</span></h3>
       <ul class="roles">
-        <li><b>1st</b><span>Introduces the resolution and lists <b>all</b> of the team's signposts. Then presents their own 2 reasons.</span></li>
-        <li><b>2nd</b><span>Presents their own 2 reasons, each with supports.</span></li>
-        <li><b>3rd</b><span>Presents their own 2 reasons, each with supports.</span></li>
-        <li><b>Final</b><span>Presents their own 2 reasons, then summarizes every teammate's points and closes for the team.</span></li>
+        <li><b>1st<span class="zh">一辯</span></b><span>Introduces the resolution and lists <b>all</b> of the team’s signposts. Then presents their own 2 reasons.<span class="zh blk">介紹辯題，列出全隊所有的路標，再說自己的 2 個理由。</span></span></li>
+        <li><b>2nd<span class="zh">二辯</span></b><span>Presents their own 2 reasons, each with supports.<span class="zh blk">說自己的 2 個理由，每個都有證據。</span></span></li>
+        <li><b>3rd<span class="zh">三辯</span></b><span>Presents their own 2 reasons, each with supports.<span class="zh blk">說自己的 2 個理由，每個都有證據。</span></span></li>
+        <li><b>Final<span class="zh">結辯</span></b><span>Presents their own 2 reasons, then summarizes every teammate’s points and closes for the team.<span class="zh blk">說自己的 2 個理由，再整理所有隊友的論點並做結論。</span></span></li>
       </ul>
     </section>
 
     <section class="box">
       <h3>Teamwork rules<span class="zh">團隊合作規則</span></h3>
       <ul class="rules">
-        <li><span><b>One reason, one owner.</b> Never write a teammate's reason.<span class="zh blk">每個理由只有一位負責人，不要寫隊友的理由。</span></span></li>
+        <li><span><b>One reason, one owner.</b> Never write a teammate’s reason.<span class="zh blk">每個理由只有一位負責人，不要寫隊友的理由。</span></span></li>
         <li><span><b>Check the Team Board before you write.</b> See what your teammates already did.<span class="zh blk">動筆前先看 Team Board，確認隊友寫了什麼。</span></span></li>
-        <li><span><b>Your argument is yours.</b> Introductions can be the same; arguments can't.<span class="zh blk">開場白可以一樣，論點不能一樣。</span></span></li>
-        <li><span><b>Help, don't copy.</b> Give teammates ideas and feedback. Every word in your speech must be one you understand.<span class="zh blk">可以幫忙，但不能抄。演講稿裡的每個字你都要懂。</span></span></li>
+        <li><span><b>Your argument is yours.</b> Introductions can be the same; arguments can’t.<span class="zh blk">開場白可以一樣，論點不能一樣。</span></span></li>
+        <li><span><b>Help, don’t copy.</b> Give teammates ideas and feedback. Every word in your speech must be one you understand.<span class="zh blk">可以幫忙，但不能抄。講稿裡的每個字你都要懂。</span></span></li>
       </ul>
     </section>
 
     <section class="box">
       <h3>How each speaker is scored<span class="zh">評分方式</span></h3>
       <table class="score">
-        <thead><tr><th>Category</th><th style="text-align:right">Points</th></tr></thead>
+        <thead><tr><th>Category · 項目</th><th style="text-align:right">Points · 分數</th></tr></thead>
         <tbody>
-          <tr><td>Used eye contact</td><td class="n">0–2</td></tr>
-          <tr><td>Used gestures</td><td class="n">0–2</td></tr>
-          <tr><td>Spoke loud and clear</td><td class="n">0–3</td></tr>
-          <tr><td>Easy to understand</td><td class="n">0–3</td></tr>
-          <tr><td>Strong arguments</td><td class="n">0–5</td></tr>
-          <tr class="tot"><td>Total per speaker</td><td class="n">15</td></tr>
+          <tr><td>Used eye contact<span class="zh">眼神接觸</span></td><td class="n">0–2</td></tr>
+          <tr><td>Used gestures<span class="zh">手勢</span></td><td class="n">0–2</td></tr>
+          <tr><td>Spoke loud and clear<span class="zh">聲音大又清楚</span></td><td class="n">0–3</td></tr>
+          <tr><td>Easy to understand<span class="zh">容易聽懂</span></td><td class="n">0–3</td></tr>
+          <tr><td>Strong arguments<span class="zh">論點有力</span></td><td class="n">0–5</td></tr>
+          <tr class="tot"><td>Total per speaker<span class="zh">每位講者總分</span></td><td class="n">15</td></tr>
         </tbody>
       </table>
-      <p class="note">From the Peer Assessment pages (pp. 44–49). The judges and Mr. Chairman decide each winning team and the Most Valuable Debater.</p>
+      <p class="note">From the Peer Assessment pages (pp. 44–49). The judges and Mr. Chairman decide each winning team and the Most Valuable Debater.<span class="zh blk">評分表在課本第 44–49 頁。評審和主席決定每場的勝隊和最佳辯士。</span></p>
     </section>
 
-    <section class="box teacher">
-      <h3>Teacher checkpoints</h3>
-      <ul>
-        <li><b>10/21, Period 7:</b> everyone joins the Team Board. Check that each team has 8 signposts with owners and all four roles.</li>
-        <li><b>10/26–27:</b> review Homework 1 by team; reply before Session 2.</li>
-        <li><b>By 11/4:</b> confirm judges for 11/18 (Anna, Ruth or another colleague).</li>
-        <li><b>11/2–3:</b> feedback on speech drafts before Session 3.</li>
-        <li><b>11/9–10:</b> find missing final speeches; plan back-up speakers for 11/11.</li>
-      </ul>
+    <section class="box">
+      <h3>Your links<span class="zh">常用連結</span></h3>
+      <div class="links">
+        <a href="https://sergiopalmag.github.io/english/debate-a/">Class slides<small>課堂投影片</small></a>
+        <a href="https://script.google.com/a/macros/gl.ckgsh.ntpc.edu.tw/s/AKfycby0Fqf2Lbjz30q7BIaM-ZzNvEknwvpruSKAT1Wc9dw_Z6TwfnRPsqwFfxALTf6Cbh_c/exec">Team Board (homework)<small>團隊作業板（作業）</small></a>
+      </div>
+      <p class="note">Sign in to the Team Board with your school Google account.<span class="zh blk">請用學校的 Google 帳號登入 Team Board。</span></p>
     </section>
   </div>
 
-  <footer>Debate Now (Byron Roberts, Kanga Publishing) · page numbers refer to the student book.</footer>
+  <footer>Debate Now (Byron Roberts, Kanga Publishing) · page numbers refer to the student book · 頁碼指課本頁數。</footer>
 </div>
 
 <script>
@@ -425,7 +437,7 @@ footer{margin-top:34px;color:var(--muted);font-size:.85rem}
       if(d>=today){
         var tag=document.createElement('span');
         tag.className='next';
-        tag.textContent=(d.getTime()===today.getTime())?'Today':'Next';
+        tag.textContent=(d.getTime()===today.getTime())?'Today · 今天':'Next · 下一堂';
         days[i].appendChild(tag);
         break;
       }
