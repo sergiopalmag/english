@@ -7,18 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&family=Noto+Sans+TC:wght@500;700&display=swap">
 <style>
 :root{
-  --bg:#0d1117; --panel:#151c29; --panel-2:#1c2536; --panel-3:#232e43; --line:#2b3852;
-  --fg:#eef2f8; --fg-2:#c9d3e3; --muted:#93a1b8;
-  --yellow:#ffd166; --blue:#5aa9ff; --orange:#ffb347; --green:#3fd896; --purple:#c792ff; --coral:#ff7a6b;
+  --bg:#FAF6EE; --panel:#FFFDF8; --panel-2:#F3EEE3; --panel-3:#EDE7DA; --line:#E4DCCB;
+  --fg:#1D2B47; --fg-2:#5B667C; --muted:#646E84; --ink:#1D2B47;
+  --yellow:#8A5A00; --gold:#F2C14E; --gold-2:#E0A82E; --blue:#2563C9; --orange:#B9520B; --green:#17784E; --purple:#6D3FC4; --coral:#C2412D;
   --s1:var(--blue); --s2:var(--orange); --s3:var(--purple); --s4:var(--yellow);
   --aff:var(--green); --neg:var(--coral);
-  --sign:var(--yellow); --reason:var(--blue); --support:var(--purple);
+  --sign:var(--yellow); --reason:var(--blue); --support:var(--green);
   --hw:var(--yellow);
   --font-display:"Baloo 2","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --font-body:"Nunito","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --font-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --nav-h:56px;
-  color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -407,6 +407,45 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
 .counter{font-weight:800;font-variant-numeric:tabular-nums;color:var(--fg-2);font-size:16px;min-width:5.5em;text-align:center}
 .sect{font-weight:800;font-size:14px;color:var(--muted);max-width:40vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
+
+/* =========================================================
+   Light theme (matches the Slides deck, roadmap and Team Board)
+   ========================================================= */
+.slide::before{inset:0 0 auto 0;height:10px;background:var(--accent)}
+.slide[style*="--s4"]::before,.slide[style*="--yellow"]::before{background:var(--gold-2)}
+.h1{color:var(--ink)}
+.card{border-width:2px;border-radius:20px}
+.card.acc{background:color-mix(in srgb,var(--c,var(--accent)) 9%,var(--panel));border-color:color-mix(in srgb,var(--c,var(--accent)) 28%,var(--line))}
+.kp{background:color-mix(in srgb,var(--accent) 11%,var(--panel));border-color:transparent;border-radius:18px}
+.num{background:var(--c,var(--accent));color:#FFFDF8}
+.hl-sign{background:color-mix(in srgb,var(--gold) 45%,transparent)}
+.hl-reason{background:color-mix(in srgb,var(--blue) 16%,transparent)}
+.hl-support{background:color-mix(in srgb,var(--green) 16%,transparent)}
+.codebox .code{text-shadow:none}
+.cuecard{box-shadow:0 12px 30px rgba(29,43,71,.18)}
+.rsp.cur{box-shadow:0 0 0 3px var(--gold-2);background:var(--panel)}
+.runner.warn .rcard-sig i{background:var(--gold);border-color:var(--gold-2)}
+.navbtn{background:var(--panel)}
+.navbtn.on{border-color:var(--gold-2);color:var(--yellow)}
+.btn:focus-visible,select:focus-visible,.navbtn:focus-visible{outline-color:var(--gold-2)}
+#keydiag{border-color:var(--gold-2)}
+.timer{background:var(--panel)}
+.quote .who{background:color-mix(in srgb,var(--accent) 14%,var(--panel));color:var(--accent)}
+.opt .l,.qopt .l{background:color-mix(in srgb,var(--accent) 14%,var(--panel));color:var(--accent)}
+.qopt.sel .l,.opt.best .l{color:#FFFDF8}
+.st.wip{background:color-mix(in srgb,var(--gold) 35%,transparent)}
+.mvd{background:color-mix(in srgb,var(--gold) 18%,var(--panel));border-color:var(--gold-2)}
+/* dark title slides */
+.title-slide{background:radial-gradient(circle at 82% 22%,color-mix(in srgb,var(--accent) 48%,#1D2B47) 0%,#1D2B47 62%);color:#FAF6EE}
+.title-slide::before{display:none}
+.title-slide .t-label{color:color-mix(in srgb,var(--accent) 45%,#ffffff)}
+.title-slide[style*="--yellow"] .t-label,.title-slide[style*="--s4"] .t-label{color:var(--gold)}
+.title-slide .t-title{color:#FAF6EE;text-shadow:0 0 50px color-mix(in srgb,var(--accent) 35%,transparent)}
+.title-slide .t-sub{color:#DCE4F2}
+.title-slide .t-sub .zh{color:#B9C5DB}
+.title-slide .tag{background:#2A3D63;border-color:#4A6496;color:#FAF6EE}
+.title-slide .tag .zh{color:#C9D3E6}
+
 /* ---------- narrow screens (phones / portrait iPads) ---------- */
 @media (max-aspect-ratio:1/1){
   .deck{font-size:clamp(12px,3.4vw,22px)}
@@ -525,26 +564,26 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
 <section class="slide " id="s1-terms" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
 <div class="top"><div><div class="eyebrow">Unit 1 · Debate terms<span class="pg">p. 6</span><span class="zh">辯論的五個角色</span></div><h2 class="h1">The five parts of a debate</h2></div><div class="ctrls" style="align-self:center"><button class="btn" type="button" data-reveal=".stg">Label the picture</button><button class="btn ghost" type="button" data-reveal=".stg" data-mode="all">All</button></div></div>
 <div class="svgwrap"><svg viewBox="70 8 960 537" role="img" aria-label="A debate: the resolution on a screen, the affirmative team on the left, the negative team on the right, the chairman with a timer and the judges in front">
-  <rect x="330" y="52" width="440" height="180" rx="12" fill="#16324f" stroke="#5aa9ff" stroke-width="3"/>
-  <text x="550" y="132" text-anchor="middle" fill="#eef2f8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="30">Students shouldn't have</text>
-  <text x="550" y="170" text-anchor="middle" fill="#eef2f8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="30">to wear uniforms.</text>
-  <circle cx="140" cy="284" r="18" fill="#3a4866"/><rect x="116" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="215" cy="284" r="18" fill="#3a4866"/><rect x="191" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="295" cy="284" r="18" fill="#3a4866"/><rect x="271" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="370" cy="284" r="18" fill="#3a4866"/><rect x="346" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="730" cy="284" r="18" fill="#3a4866"/><rect x="706" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="805" cy="284" r="18" fill="#3a4866"/><rect x="781" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="885" cy="284" r="18" fill="#3a4866"/><rect x="861" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="960" cy="284" r="18" fill="#3a4866"/><rect x="936" y="300" width="48" height="34" rx="14" fill="#3a4866"/>
-  <rect x="90" y="318" width="330" height="82" rx="8" fill="#1c2536" stroke="#3fd896" stroke-width="3"/>
-  <text x="255" y="372" text-anchor="middle" fill="#3fd896" font-family="Baloo 2, sans-serif" font-weight="800" font-size="36">YES!</text>
-  <rect x="680" y="318" width="330" height="82" rx="8" fill="#1c2536" stroke="#ff7a6b" stroke-width="3"/>
-  <text x="845" y="372" text-anchor="middle" fill="#ff7a6b" font-family="Baloo 2, sans-serif" font-weight="800" font-size="36">NO!</text>
-  <path d="M515 300h70l-10 110h-50z" fill="#232e43" stroke="#93a1b8" stroke-width="2"/>
-  <path d="M550 300v-26" stroke="#93a1b8" stroke-width="4"/><circle cx="550" cy="270" r="6" fill="#93a1b8"/>
-  <circle cx="250" cy="432" r="18" fill="#3a4866"/><rect x="226" y="448" width="48" height="34" rx="14" fill="#3a4866"/>
-  <rect x="160" y="458" width="200" height="44" rx="6" fill="#1c2536" stroke="#93a1b8" stroke-width="2"/>
-  <text x="300" y="489" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="24">01:56</text>
-  <circle cx="770" cy="432" r="18" fill="#3a4866"/><rect x="746" y="448" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="840" cy="432" r="18" fill="#3a4866"/><rect x="816" y="448" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="910" cy="432" r="18" fill="#3a4866"/><rect x="886" y="448" width="48" height="34" rx="14" fill="#3a4866"/>
-  <rect x="720" y="458" width="240" height="44" rx="6" fill="#1c2536" stroke="#93a1b8" stroke-width="2"/>
-  <g class="ans stg"><path d="M205 236 L230 258" stroke="#3fd896" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="205" y="228" text-anchor="middle" fill="#3fd896" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Affirmative Team</text></g>
-  <g class="ans stg"><path d="M550 42 L550 52" stroke="#5aa9ff" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="550" y="36" text-anchor="middle" fill="#5aa9ff" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Resolution</text></g>
-  <g class="ans stg"><path d="M905 236 L880 258" stroke="#ff7a6b" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="905" y="228" text-anchor="middle" fill="#ff7a6b" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Negative Team</text></g>
-  <g class="ans stg"><path d="M250 510 L250 502" stroke="#ffd166" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="250" y="535" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Mr. / Madam Chairman</text></g>
-  <g class="ans stg"><path d="M840 510 L840 502" stroke="#c792ff" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="840" y="535" text-anchor="middle" fill="#c792ff" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Judges</text></g>
+  <rect x="330" y="52" width="440" height="180" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="3"/>
+  <text x="550" y="132" text-anchor="middle" fill="#1D2B47" font-family="Baloo 2, sans-serif" font-weight="800" font-size="30">Students shouldn’t have</text>
+  <text x="550" y="170" text-anchor="middle" fill="#1D2B47" font-family="Baloo 2, sans-serif" font-weight="800" font-size="30">to wear uniforms.</text>
+  <circle cx="140" cy="284" r="18" fill="#17784E"/><rect x="116" y="300" width="48" height="34" rx="14" fill="#17784E"/><circle cx="215" cy="284" r="18" fill="#17784E"/><rect x="191" y="300" width="48" height="34" rx="14" fill="#17784E"/><circle cx="295" cy="284" r="18" fill="#17784E"/><rect x="271" y="300" width="48" height="34" rx="14" fill="#17784E"/><circle cx="370" cy="284" r="18" fill="#17784E"/><rect x="346" y="300" width="48" height="34" rx="14" fill="#17784E"/><circle cx="730" cy="284" r="18" fill="#C2412D"/><rect x="706" y="300" width="48" height="34" rx="14" fill="#C2412D"/><circle cx="805" cy="284" r="18" fill="#C2412D"/><rect x="781" y="300" width="48" height="34" rx="14" fill="#C2412D"/><circle cx="885" cy="284" r="18" fill="#C2412D"/><rect x="861" y="300" width="48" height="34" rx="14" fill="#C2412D"/><circle cx="960" cy="284" r="18" fill="#C2412D"/><rect x="936" y="300" width="48" height="34" rx="14" fill="#C2412D"/>
+  <rect x="90" y="318" width="330" height="82" rx="10" fill="#E1F1E8" stroke="#17784E" stroke-width="3"/>
+  <text x="255" y="372" text-anchor="middle" fill="#17784E" font-family="Baloo 2, sans-serif" font-weight="800" font-size="36">YES!</text>
+  <rect x="680" y="318" width="330" height="82" rx="10" fill="#FBE6E2" stroke="#C2412D" stroke-width="3"/>
+  <text x="845" y="372" text-anchor="middle" fill="#C2412D" font-family="Baloo 2, sans-serif" font-weight="800" font-size="36">NO!</text>
+  <path d="M515 300h70l-10 110h-50z" fill="#EDE7DA" stroke="#8A8FA0" stroke-width="2"/>
+  <path d="M550 300v-26" stroke="#8A8FA0" stroke-width="4"/><circle cx="550" cy="270" r="6" fill="#8A8FA0"/>
+  <circle cx="250" cy="432" r="18" fill="#8A5A00"/><rect x="226" y="448" width="48" height="34" rx="14" fill="#8A5A00"/>
+  <rect x="160" y="458" width="200" height="44" rx="8" fill="#FBF0D2" stroke="#8A5A00" stroke-width="2"/>
+  <text x="300" y="489" text-anchor="middle" fill="#8A5A00" font-family="Baloo 2, sans-serif" font-weight="800" font-size="24">01:56</text>
+  <circle cx="770" cy="432" r="18" fill="#6D3FC4"/><rect x="746" y="448" width="48" height="34" rx="14" fill="#6D3FC4"/><circle cx="840" cy="432" r="18" fill="#6D3FC4"/><rect x="816" y="448" width="48" height="34" rx="14" fill="#6D3FC4"/><circle cx="910" cy="432" r="18" fill="#6D3FC4"/><rect x="886" y="448" width="48" height="34" rx="14" fill="#6D3FC4"/>
+  <rect x="720" y="458" width="240" height="44" rx="8" fill="#EEE7FB" stroke="#6D3FC4" stroke-width="2"/>
+  <g class="ans stg"><path d="M205 236 L230 258" stroke="#17784E" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="205" y="228" text-anchor="middle" fill="#17784E" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Affirmative Team</text></g>
+  <g class="ans stg"><path d="M550 42 L550 52" stroke="#2563C9" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="550" y="36" text-anchor="middle" fill="#2563C9" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Resolution</text></g>
+  <g class="ans stg"><path d="M905 236 L880 258" stroke="#C2412D" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="905" y="228" text-anchor="middle" fill="#C2412D" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Negative Team</text></g>
+  <g class="ans stg"><path d="M250 510 L250 502" stroke="#8A5A00" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="250" y="535" text-anchor="middle" fill="#8A5A00" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Mr. / Madam Chairman</text></g>
+  <g class="ans stg"><path d="M840 510 L840 502" stroke="#6D3FC4" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="840" y="535" text-anchor="middle" fill="#6D3FC4" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Judges</text></g>
 </svg></div>
 
 <div class="defs5">
@@ -685,7 +724,7 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
 <section class="slide tight" id="s1-join" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
 <div class="top"><div><div class="eyebrow">Period 7 · Join now<span class="zh">現在加入 Team Board</span></div><h2 class="h1">Join the Team Board</h2></div></div>
 <div class="joinrow fill">
-  <div class="qr big"><svg viewBox="0 0 204 204" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h51v51h-51z"/><path class="qrline" stroke="#0d1117" d="M1 1.5h7m2 0h1m3 0h1m3 0h2m1 0h3m3 0h3m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h7m-49 1h1m5 0h1m2 0h2m3 0h8m1 0h1m1 0h1m1 0h3m3 0h1m1 0h1m1 0h4m1 0h1m5 0h1m-49 1h1m1 0h3m1 0h1m3 0h1m1 0h2m3 0h1m4 0h1m1 0h3m6 0h2m4 0h2m1 0h1m1 0h3m1 0h1m-49 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h3m2 0h1m2 0h2m3 0h1m4 0h1m2 0h1m1 0h3m1 0h1m-49 1h1m1 0h3m1 0h1m2 0h1m1 0h1m6 0h3m1 0h6m1 0h2m2 0h1m1 0h1m6 0h1m1 0h3m1 0h1m-49 1h1m5 0h1m1 0h1m2 0h2m3 0h3m1 0h1m1 0h1m3 0h3m1 0h2m1 0h3m2 0h1m3 0h1m5 0h1m-49 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-40 1h1m3 0h2m1 0h1m1 0h1m2 0h2m3 0h1m2 0h2m3 0h1m1 0h1m2 0h2m-41 1h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m3 0h1m2 0h5m1 0h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h1m-44 1h3m4 0h1m1 0h4m1 0h2m1 0h2m16 0h3m1 0h1m3 0h1m1 0h1m1 0h2m-49 1h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h2m2 0h1m2 0h1m2 0h1m1 0h2m2 0h1m2 0h5m1 0h1m2 0h1m1 0h2m1 0h1m1 0h2m-49 1h2m3 0h1m1 0h2m1 0h5m2 0h4m2 0h6m2 0h1m4 0h1m5 0h4m1 0h2m-47 1h1m3 0h4m1 0h1m1 0h6m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1m2 0h2m3 0h1m2 0h3m2 0h1m-45 1h2m2 0h9m2 0h2m2 0h3m2 0h1m2 0h1m2 0h4m2 0h2m1 0h1m1 0h2m1 0h1m-47 1h7m6 0h1m1 0h2m1 0h1m2 0h1m4 0h1m1 0h2m1 0h1m3 0h2m2 0h1m3 0h2m1 0h1m-47 1h1m5 0h1m1 0h6m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h3m2 0h2m1 0h3m2 0h1m-48 1h1m1 0h1m1 0h3m5 0h1m2 0h2m1 0h1m1 0h1m3 0h5m2 0h7m2 0h1m2 0h4m-47 1h1m1 0h3m4 0h3m2 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h5m4 0h2m1 0h1m2 0h1m1 0h2m2 0h2m-47 1h1m2 0h2m2 0h5m1 0h3m3 0h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h1m5 0h3m-49 1h4m1 0h1m1 0h1m1 0h3m1 0h1m1 0h3m1 0h2m1 0h1m1 0h3m2 0h1m6 0h1m2 0h2m1 0h3m1 0h1m1 0h1m-49 1h2m4 0h2m5 0h3m1 0h5m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m3 0h1m2 0h1m1 0h2m-49 1h3m1 0h1m2 0h2m2 0h3m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h1m2 0h2m4 0h1m2 0h3m1 0h1m-48 1h1m2 0h5m5 0h1m1 0h4m2 0h5m4 0h2m1 0h2m1 0h1m1 0h10m-49 1h3m1 0h1m3 0h2m2 0h5m2 0h1m1 0h2m3 0h1m1 0h2m1 0h2m3 0h1m3 0h1m3 0h1m-45 1h1m3 0h1m1 0h1m1 0h3m1 0h1m2 0h3m4 0h1m1 0h1m1 0h3m2 0h3m2 0h1m3 0h1m1 0h1m1 0h1m3 0h1m-48 1h1m1 0h2m3 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h1m3 0h2m3 0h4m2 0h1m1 0h2m3 0h1m1 0h3m-48 1h10m4 0h12m1 0h1m2 0h2m3 0h1m1 0h1m1 0h6m2 0h1m-49 1h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h3m2 0h1m1 0h1m1 0h1m1 0h2m2 0h3m1 0h2m3 0h4m3 0h2m-48 1h1m1 0h1m1 0h3m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m3 0h2m4 0h1m4 0h1m-45 1h3m1 0h1m2 0h1m1 0h3m2 0h1m1 0h3m1 0h2m1 0h1m1 0h1m2 0h2m5 0h4m2 0h1m3 0h1m-45 1h1m1 0h3m1 0h1m4 0h1m1 0h1m1 0h3m3 0h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h2m2 0h1m1 0h2m-47 1h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1m1 0h1m1 0h2m2 0h1m1 0h1m6 0h1m1 0h1m2 0h1m1 0h1m-48 1h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h5m2 0h1m1 0h1m1 0h2m2 0h1m1 0h2m1 0h2m1 0h3m1 0h1m3 0h1m1 0h1m1 0h1m-48 1h2m5 0h2m1 0h2m2 0h2m4 0h2m2 0h2m2 0h1m5 0h1m6 0h1m5 0h1m-49 1h1m1 0h1m2 0h3m1 0h2m3 0h1m1 0h1m2 0h1m3 0h1m2 0h1m2 0h2m1 0h3m2 0h1m1 0h2m1 0h1m1 0h1m2 0h2m-49 1h1m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m2 0h3m1 0h5m2 0h4m1 0h1m1 0h1m1 0h2m2 0h1m1 0h2m-44 1h1m1 0h2m1 0h2m2 0h4m1 0h6m1 0h2m2 0h5m1 0h3m1 0h4m1 0h2m3 0h1m2 0h1m-46 1h1m5 0h2m2 0h1m1 0h1m3 0h1m1 0h1m3 0h2m4 0h1m2 0h1m1 0h2m1 0h1m1 0h3m2 0h1m1 0h1m-48 1h1m3 0h2m1 0h1m1 0h3m2 0h4m1 0h3m1 0h2m1 0h3m1 0h1m3 0h1m1 0h2m3 0h4m1 0h2m-48 1h3m5 0h3m2 0h2m1 0h5m1 0h1m3 0h6m1 0h1m1 0h1m3 0h1m1 0h2m4 0h1m-49 1h3m3 0h1m6 0h1m1 0h2m2 0h1m2 0h6m1 0h8m1 0h1m1 0h7m1 0h1m-41 1h3m5 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h2m8 0h1m1 0h1m3 0h2m2 0h1m-49 1h7m3 0h5m1 0h4m2 0h1m1 0h1m1 0h1m1 0h1m3 0h2m1 0h2m2 0h2m1 0h1m1 0h1m3 0h1m-49 1h1m5 0h1m1 0h2m3 0h2m2 0h1m1 0h4m3 0h2m1 0h1m2 0h3m1 0h2m2 0h1m3 0h1m1 0h2m-48 1h1m1 0h3m1 0h1m4 0h2m1 0h4m3 0h6m1 0h1m1 0h2m4 0h2m1 0h6m1 0h1m-47 1h1m1 0h3m1 0h1m1 0h4m4 0h1m3 0h6m6 0h1m2 0h1m6 0h1m1 0h1m2 0h1m-48 1h1m1 0h3m1 0h1m2 0h3m1 0h3m3 0h1m1 0h1m1 0h2m1 0h5m1 0h3m1 0h2m1 0h1m1 0h2m1 0h1m1 0h1m-47 1h1m5 0h1m4 0h1m1 0h1m1 0h3m4 0h2m1 0h3m1 0h3m1 0h2m1 0h4m1 0h1m1 0h2m-45 1h7m1 0h1m1 0h1m1 0h1m1 0h4m3 0h2m1 0h4m3 0h2m1 0h3m2 0h1m1 0h2m1 0h1m2 0h2"/></g></svg></div>
+  <div class="qr big"><svg viewBox="0 0 204 204" class="segno"><g transform="scale(4)"><path fill="#fffdf8" d="M0 0h51v51h-51z"/><path class="qrline" stroke="#1d2b47" d="M1 1.5h7m2 0h1m3 0h1m3 0h2m1 0h3m3 0h3m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h7m-49 1h1m5 0h1m2 0h2m3 0h8m1 0h1m1 0h1m1 0h3m3 0h1m1 0h1m1 0h4m1 0h1m5 0h1m-49 1h1m1 0h3m1 0h1m3 0h1m1 0h2m3 0h1m4 0h1m1 0h3m6 0h2m4 0h2m1 0h1m1 0h3m1 0h1m-49 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h3m2 0h1m2 0h2m3 0h1m4 0h1m2 0h1m1 0h3m1 0h1m-49 1h1m1 0h3m1 0h1m2 0h1m1 0h1m6 0h3m1 0h6m1 0h2m2 0h1m1 0h1m6 0h1m1 0h3m1 0h1m-49 1h1m5 0h1m1 0h1m2 0h2m3 0h3m1 0h1m1 0h1m3 0h3m1 0h2m1 0h3m2 0h1m3 0h1m5 0h1m-49 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-40 1h1m3 0h2m1 0h1m1 0h1m2 0h2m3 0h1m2 0h2m3 0h1m1 0h1m2 0h2m-41 1h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m3 0h1m2 0h5m1 0h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h1m-44 1h3m4 0h1m1 0h4m1 0h2m1 0h2m16 0h3m1 0h1m3 0h1m1 0h1m1 0h2m-49 1h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h2m2 0h1m2 0h1m2 0h1m1 0h2m2 0h1m2 0h5m1 0h1m2 0h1m1 0h2m1 0h1m1 0h2m-49 1h2m3 0h1m1 0h2m1 0h5m2 0h4m2 0h6m2 0h1m4 0h1m5 0h4m1 0h2m-47 1h1m3 0h4m1 0h1m1 0h6m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1m2 0h2m3 0h1m2 0h3m2 0h1m-45 1h2m2 0h9m2 0h2m2 0h3m2 0h1m2 0h1m2 0h4m2 0h2m1 0h1m1 0h2m1 0h1m-47 1h7m6 0h1m1 0h2m1 0h1m2 0h1m4 0h1m1 0h2m1 0h1m3 0h2m2 0h1m3 0h2m1 0h1m-47 1h1m5 0h1m1 0h6m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h3m2 0h2m1 0h3m2 0h1m-48 1h1m1 0h1m1 0h3m5 0h1m2 0h2m1 0h1m1 0h1m3 0h5m2 0h7m2 0h1m2 0h4m-47 1h1m1 0h3m4 0h3m2 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h5m4 0h2m1 0h1m2 0h1m1 0h2m2 0h2m-47 1h1m2 0h2m2 0h5m1 0h3m3 0h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h1m5 0h3m-49 1h4m1 0h1m1 0h1m1 0h3m1 0h1m1 0h3m1 0h2m1 0h1m1 0h3m2 0h1m6 0h1m2 0h2m1 0h3m1 0h1m1 0h1m-49 1h2m4 0h2m5 0h3m1 0h5m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m3 0h1m2 0h1m1 0h2m-49 1h3m1 0h1m2 0h2m2 0h3m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h1m2 0h2m4 0h1m2 0h3m1 0h1m-48 1h1m2 0h5m5 0h1m1 0h4m2 0h5m4 0h2m1 0h2m1 0h1m1 0h10m-49 1h3m1 0h1m3 0h2m2 0h5m2 0h1m1 0h2m3 0h1m1 0h2m1 0h2m3 0h1m3 0h1m3 0h1m-45 1h1m3 0h1m1 0h1m1 0h3m1 0h1m2 0h3m4 0h1m1 0h1m1 0h3m2 0h3m2 0h1m3 0h1m1 0h1m1 0h1m3 0h1m-48 1h1m1 0h2m3 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h1m3 0h2m3 0h4m2 0h1m1 0h2m3 0h1m1 0h3m-48 1h10m4 0h12m1 0h1m2 0h2m3 0h1m1 0h1m1 0h6m2 0h1m-49 1h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h3m2 0h1m1 0h1m1 0h1m1 0h2m2 0h3m1 0h2m3 0h4m3 0h2m-48 1h1m1 0h1m1 0h3m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m3 0h2m4 0h1m4 0h1m-45 1h3m1 0h1m2 0h1m1 0h3m2 0h1m1 0h3m1 0h2m1 0h1m1 0h1m2 0h2m5 0h4m2 0h1m3 0h1m-45 1h1m1 0h3m1 0h1m4 0h1m1 0h1m1 0h3m3 0h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h2m2 0h1m1 0h2m-47 1h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1m1 0h1m1 0h2m2 0h1m1 0h1m6 0h1m1 0h1m2 0h1m1 0h1m-48 1h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h5m2 0h1m1 0h1m1 0h2m2 0h1m1 0h2m1 0h2m1 0h3m1 0h1m3 0h1m1 0h1m1 0h1m-48 1h2m5 0h2m1 0h2m2 0h2m4 0h2m2 0h2m2 0h1m5 0h1m6 0h1m5 0h1m-49 1h1m1 0h1m2 0h3m1 0h2m3 0h1m1 0h1m2 0h1m3 0h1m2 0h1m2 0h2m1 0h3m2 0h1m1 0h2m1 0h1m1 0h1m2 0h2m-49 1h1m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m2 0h3m1 0h5m2 0h4m1 0h1m1 0h1m1 0h2m2 0h1m1 0h2m-44 1h1m1 0h2m1 0h2m2 0h4m1 0h6m1 0h2m2 0h5m1 0h3m1 0h4m1 0h2m3 0h1m2 0h1m-46 1h1m5 0h2m2 0h1m1 0h1m3 0h1m1 0h1m3 0h2m4 0h1m2 0h1m1 0h2m1 0h1m1 0h3m2 0h1m1 0h1m-48 1h1m3 0h2m1 0h1m1 0h3m2 0h4m1 0h3m1 0h2m1 0h3m1 0h1m3 0h1m1 0h2m3 0h4m1 0h2m-48 1h3m5 0h3m2 0h2m1 0h5m1 0h1m3 0h6m1 0h1m1 0h1m3 0h1m1 0h2m4 0h1m-49 1h3m3 0h1m6 0h1m1 0h2m2 0h1m2 0h6m1 0h8m1 0h1m1 0h7m1 0h1m-41 1h3m5 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h2m8 0h1m1 0h1m3 0h2m2 0h1m-49 1h7m3 0h5m1 0h4m2 0h1m1 0h1m1 0h1m1 0h1m3 0h2m1 0h2m2 0h2m1 0h1m1 0h1m3 0h1m-49 1h1m5 0h1m1 0h2m3 0h2m2 0h1m1 0h4m3 0h2m1 0h1m2 0h3m1 0h2m2 0h1m3 0h1m1 0h2m-48 1h1m1 0h3m1 0h1m4 0h2m1 0h4m3 0h6m1 0h1m1 0h2m4 0h2m1 0h6m1 0h1m-47 1h1m1 0h3m1 0h1m1 0h4m4 0h1m3 0h6m6 0h1m2 0h1m6 0h1m1 0h1m2 0h1m-48 1h1m1 0h3m1 0h1m2 0h3m1 0h3m3 0h1m1 0h1m1 0h2m1 0h5m1 0h3m1 0h2m1 0h1m1 0h2m1 0h1m1 0h1m-47 1h1m5 0h1m4 0h1m1 0h1m1 0h3m4 0h2m1 0h3m1 0h3m1 0h2m1 0h4m1 0h1m1 0h2m-45 1h7m1 0h1m1 0h1m1 0h1m1 0h4m3 0h2m1 0h4m3 0h2m1 0h3m2 0h1m1 0h2m1 0h1m2 0h2"/></g></svg></div>
   <div class="qrtx" style="font-size:1.15em;gap:.5em">
     <b style="font-size:1.2em">Scan with your iPad or laptop camera</b><span class="zh">用平板或筆電相機掃描</span>
     <a href="https://script.google.com/a/macros/gl.ckgsh.ntpc.edu.tw/s/AKfycby0Fqf2Lbjz30q7BIaM-ZzNvEknwvpruSKAT1Wc9dw_Z6TwfnRPsqwFfxALTf6Cbh_c/exec" target="_blank" rel="noopener">Open the Team Board</a>
@@ -1046,20 +1085,20 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
 </section>
 <section class="slide tight" id="s4-room" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
 <div class="top"><div><div class="eyebrow">Debate Day · Our classroom</div><h2 class="h1">Where everyone sits<span class="zh">座位安排</span></h2></div><div class="frame" style="align-self:center">Next debate's teams wait<br>at the side, ready to go.</div></div><div class="svgwrap"><svg viewBox="0 0 1100 520" role="img" aria-label="Classroom map for Debate Day">
-  <rect x="20" y="10" width="1060" height="500" rx="16" fill="none" stroke="#2b3852" stroke-width="3"/>
-  <rect x="300" y="22" width="500" height="34" rx="6" fill="#16324f" stroke="#5aa9ff" stroke-width="2"/>
-  <text x="550" y="46" text-anchor="middle" fill="#eef2f8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22">Board · screen: resolution + clock</text>
-  <rect x="60" y="90" width="240" height="90" rx="8" fill="#1c2536" stroke="#3fd896" stroke-width="3"/><text x="180.0" y="144.0" text-anchor="middle" fill="#3fd896" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Affirmative</text>
-  <rect x="800" y="90" width="240" height="90" rx="8" fill="#1c2536" stroke="#ff7a6b" stroke-width="3"/><text x="920.0" y="144.0" text-anchor="middle" fill="#ff7a6b" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Negative</text>
-  <circle cx="550" cy="150" r="40" fill="#232e43" stroke="#ffd166" stroke-width="3"/>
-  <text x="550" y="158" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22">Speak</text>
-  <text x="550" y="222" text-anchor="middle" fill="#c9d3e3" font-family="Nunito, sans-serif" font-weight="700" font-size="20">Speaker stands here, facing the class</text>
-  <rect x="60" y="230" width="180" height="64" rx="8" fill="#1c2536" stroke="#ffd166" stroke-width="3"/><text x="150.0" y="271.0" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Chairman</text>
-  <text x="150" y="318" text-anchor="middle" fill="#93a1b8" font-family="Nunito, sans-serif" font-weight="700" font-size="18">timer + cards</text>
-  <circle cx="330" cy="360" r="11" fill="#2b3852"/><circle cx="376" cy="360" r="11" fill="#2b3852"/><circle cx="422" cy="360" r="11" fill="#2b3852"/><circle cx="468" cy="360" r="11" fill="#2b3852"/><circle cx="514" cy="360" r="11" fill="#2b3852"/><circle cx="560" cy="360" r="11" fill="#2b3852"/><circle cx="606" cy="360" r="11" fill="#2b3852"/><circle cx="652" cy="360" r="11" fill="#2b3852"/><circle cx="698" cy="360" r="11" fill="#2b3852"/><circle cx="744" cy="360" r="11" fill="#2b3852"/><circle cx="330" cy="395" r="11" fill="#2b3852"/><circle cx="376" cy="395" r="11" fill="#2b3852"/><circle cx="422" cy="395" r="11" fill="#2b3852"/><circle cx="468" cy="395" r="11" fill="#2b3852"/><circle cx="514" cy="395" r="11" fill="#2b3852"/><circle cx="560" cy="395" r="11" fill="#2b3852"/><circle cx="606" cy="395" r="11" fill="#2b3852"/><circle cx="652" cy="395" r="11" fill="#2b3852"/><circle cx="698" cy="395" r="11" fill="#2b3852"/><circle cx="744" cy="395" r="11" fill="#2b3852"/><circle cx="330" cy="430" r="11" fill="#2b3852"/><circle cx="376" cy="430" r="11" fill="#2b3852"/><circle cx="422" cy="430" r="11" fill="#2b3852"/><circle cx="468" cy="430" r="11" fill="#2b3852"/><circle cx="514" cy="430" r="11" fill="#2b3852"/><circle cx="560" cy="430" r="11" fill="#2b3852"/><circle cx="606" cy="430" r="11" fill="#2b3852"/><circle cx="652" cy="430" r="11" fill="#2b3852"/><circle cx="698" cy="430" r="11" fill="#2b3852"/><circle cx="744" cy="430" r="11" fill="#2b3852"/>
-  <text x="560" y="478" text-anchor="middle" fill="#93a1b8" font-family="Nunito, sans-serif" font-weight="700" font-size="20">Audience: score each speaker in your book</text>
-  <rect x="860" y="380" width="180" height="70" rx="8" fill="#1c2536" stroke="#c792ff" stroke-width="3"/><text x="950.0" y="424.0" text-anchor="middle" fill="#c792ff" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Judges</text>
-  <rect x="860" y="250" width="180" height="64" rx="8" fill="#1c2536" stroke="#93a1b8" stroke-width="3"/><text x="950.0" y="291.0" text-anchor="middle" fill="#93a1b8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Next teams</text>
+  <rect x="20" y="10" width="1060" height="500" rx="18" fill="#FFFDF8" stroke="#C9BFA8" stroke-width="3"/>
+  <rect x="300" y="22" width="500" height="34" rx="6" fill="#E6EEFB" stroke="#2563C9" stroke-width="2"/>
+  <text x="550" y="46" text-anchor="middle" fill="#1D2B47" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22">Board · screen: resolution + clock</text>
+  <rect x="60" y="90" width="240" height="90" rx="10" fill="#E1F1E8" stroke="#17784E" stroke-width="3"/><text x="180.0" y="144.0" text-anchor="middle" fill="#17784E" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Affirmative</text>
+  <rect x="800" y="90" width="240" height="90" rx="10" fill="#FBE6E2" stroke="#C2412D" stroke-width="3"/><text x="920.0" y="144.0" text-anchor="middle" fill="#C2412D" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Negative</text>
+  <circle cx="550" cy="150" r="40" fill="#FBF0D2" stroke="#8A5A00" stroke-width="3"/>
+  <text x="550" y="158" text-anchor="middle" fill="#8A5A00" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22">Speak</text>
+  <text x="550" y="222" text-anchor="middle" fill="#3B475E" font-family="Nunito, sans-serif" font-weight="700" font-size="20">Speaker stands here, facing the class</text>
+  <rect x="60" y="230" width="180" height="64" rx="10" fill="#FBF0D2" stroke="#8A5A00" stroke-width="3"/><text x="150.0" y="271.0" text-anchor="middle" fill="#8A5A00" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Chairman</text>
+  <text x="150" y="318" text-anchor="middle" fill="#646E84" font-family="Nunito, sans-serif" font-weight="700" font-size="18">timer + cards</text>
+  <circle cx="330" cy="360" r="11" fill="#D8CFBD"/><circle cx="376" cy="360" r="11" fill="#D8CFBD"/><circle cx="422" cy="360" r="11" fill="#D8CFBD"/><circle cx="468" cy="360" r="11" fill="#D8CFBD"/><circle cx="514" cy="360" r="11" fill="#D8CFBD"/><circle cx="560" cy="360" r="11" fill="#D8CFBD"/><circle cx="606" cy="360" r="11" fill="#D8CFBD"/><circle cx="652" cy="360" r="11" fill="#D8CFBD"/><circle cx="698" cy="360" r="11" fill="#D8CFBD"/><circle cx="744" cy="360" r="11" fill="#D8CFBD"/><circle cx="330" cy="395" r="11" fill="#D8CFBD"/><circle cx="376" cy="395" r="11" fill="#D8CFBD"/><circle cx="422" cy="395" r="11" fill="#D8CFBD"/><circle cx="468" cy="395" r="11" fill="#D8CFBD"/><circle cx="514" cy="395" r="11" fill="#D8CFBD"/><circle cx="560" cy="395" r="11" fill="#D8CFBD"/><circle cx="606" cy="395" r="11" fill="#D8CFBD"/><circle cx="652" cy="395" r="11" fill="#D8CFBD"/><circle cx="698" cy="395" r="11" fill="#D8CFBD"/><circle cx="744" cy="395" r="11" fill="#D8CFBD"/><circle cx="330" cy="430" r="11" fill="#D8CFBD"/><circle cx="376" cy="430" r="11" fill="#D8CFBD"/><circle cx="422" cy="430" r="11" fill="#D8CFBD"/><circle cx="468" cy="430" r="11" fill="#D8CFBD"/><circle cx="514" cy="430" r="11" fill="#D8CFBD"/><circle cx="560" cy="430" r="11" fill="#D8CFBD"/><circle cx="606" cy="430" r="11" fill="#D8CFBD"/><circle cx="652" cy="430" r="11" fill="#D8CFBD"/><circle cx="698" cy="430" r="11" fill="#D8CFBD"/><circle cx="744" cy="430" r="11" fill="#D8CFBD"/>
+  <text x="560" y="478" text-anchor="middle" fill="#3B475E" font-family="Nunito, sans-serif" font-weight="700" font-size="20">Audience: score each speaker in your book</text>
+  <rect x="860" y="380" width="180" height="70" rx="10" fill="#EEE7FB" stroke="#6D3FC4" stroke-width="3"/><text x="950.0" y="424.0" text-anchor="middle" fill="#6D3FC4" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Judges</text>
+  <rect x="860" y="250" width="180" height="64" rx="10" fill="#EDE7DA" stroke="#646E84" stroke-width="3"/><text x="950.0" y="291.0" text-anchor="middle" fill="#646E84" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Next teams</text>
 </svg></div>
 </section>
 <section class="slide " id="s4-run" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
