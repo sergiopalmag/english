@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Debate Now Group A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&family=Noto+Sans+TC:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#0d1117; --panel:#151c29; --panel-2:#1c2536; --panel-3:#232e43; --line:#2b3852;
+  --fg:#eef2f8; --fg-2:#c9d3e3; --muted:#93a1b8;
+  --yellow:#ffd166; --blue:#5aa9ff; --orange:#ffb347; --green:#3fd896; --purple:#c792ff; --coral:#ff7a6b;
+  --s1:var(--blue); --s2:var(--orange); --s3:var(--purple); --s4:var(--yellow);
+  --aff:var(--green); --neg:var(--coral);
+  --sign:var(--yellow); --reason:var(--blue); --support:var(--purple);
+  --hw:var(--yellow);
+  --font-display:"Baloo 2","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --font-body:"Nunito","Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --font-zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --nav-h:56px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);overflow:hidden;-webkit-font-smoothing:antialiased}
+button,select,input{font:inherit;color:inherit}
+.zh{font-family:var(--font-zh)}
+b,strong{font-weight:800}
+
+/* ---------- deck frame ---------- */
+.deck{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));font-size:clamp(12px,min(1.48vw,2.62vh),36px)}
+.slide{--accent:var(--s1);position:absolute;inset:0;display:flex;flex-direction:column;gap:.95em;padding:1.6em clamp(16px,4.2vw,4.4em) 1.1em;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility 0s linear .28s}
+.slide.tight{gap:.6em;padding-top:1.25em}
+.slide.on{opacity:1;visibility:visible;transition:opacity .28s ease}
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60em 24em at 88% -12%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%)}
+.slide>*{position:relative}
+
+/* ---------- headings ---------- */
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:1.2em}
+.eyebrow{display:flex;flex-wrap:wrap;gap:.15em .8em;align-items:baseline;font-family:var(--font-display);font-weight:800;font-size:1.02em;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.eyebrow .pg{color:var(--muted);letter-spacing:.08em}
+.eyebrow .zh{letter-spacing:.2em;font-weight:700}
+.h1{margin:.1em 0 0;font-family:var(--font-display);font-weight:800;font-size:2.55em;line-height:1.05;text-wrap:balance}
+.h1 .zh{display:block;margin-top:.2em;font-weight:700;font-size:.62em;color:var(--fg-2);line-height:1.25}
+.sub{margin:.3em 0 0;font-size:1.25em;color:var(--fg-2);max-width:48em}
+.sub .zh{display:block;font-size:.8em;margin-top:.15em}
+
+/* ---------- title slides ---------- */
+.title-slide{justify-content:center;align-items:flex-start;gap:1.2em}
+.t-label{font-family:var(--font-display);font-weight:800;font-size:1.45em;letter-spacing:5px;text-transform:uppercase;color:var(--accent)}
+.t-title{margin:0;font-family:var(--font-display);font-weight:800;font-size:5.4em;line-height:.98;text-wrap:balance;text-shadow:0 0 60px color-mix(in srgb,var(--accent) 55%,transparent)}
+.t-sub{font-size:1.65em;color:var(--fg-2);margin:0;max-width:30em}
+.t-sub .zh{display:block;font-size:.78em;margin-top:.2em}
+.tags{display:flex;flex-wrap:wrap;gap:.6em}
+.tag{display:inline-flex;align-items:baseline;gap:.45em;font-weight:800;font-size:1.05em;padding:.35em .8em;border-radius:8px;border:1.5px solid color-mix(in srgb,var(--accent) 55%,transparent);background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.tag.lg{font-size:1.38em;padding:.5em .95em;border-radius:10px}
+.tag .zh{font-size:.8em;color:var(--fg-2);font-weight:700}
+.badge{display:inline-flex;align-items:center;gap:.5em;font-weight:800;font-size:1em;padding:.45em .85em;border-radius:10px;background:var(--panel-2);border:1.5px solid var(--line)}
+.badge.lg{font-size:1.15em;padding:.6em 1em}
+
+/* ---------- generic building blocks ---------- */
+.row{display:flex;gap:1em;align-items:stretch}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1em}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9em}
+.fill{flex:1;min-height:0}
+.center{display:flex;align-items:center;justify-content:center}
+.card{background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:1em 1.15em;display:flex;flex-direction:column;gap:.45em;min-width:0}
+.card h3{margin:0;font-family:var(--font-display);font-weight:800;font-size:1.6em;line-height:1.1}
+.card h3 .zh{display:block;font-size:.66em;color:var(--fg-2);font-weight:700;margin-top:.1em}
+.card p{margin:0;font-size:1.26em;line-height:1.4}
+.card p .zh,.card li .zh{display:block;font-size:.82em;color:var(--fg-2);margin-top:.1em}
+.card.acc{border-color:color-mix(in srgb,var(--c,var(--accent)) 60%,var(--line));background:color-mix(in srgb,var(--c,var(--accent)) 8%,var(--panel))}
+.kp{font-size:1.3em;line-height:1.4;padding:.7em 1em;border-radius:14px;background:color-mix(in srgb,var(--accent) 10%,var(--panel));border:1.5px solid color-mix(in srgb,var(--accent) 45%,var(--line))}
+.kp .zh{display:block;font-size:.8em;color:var(--fg-2);margin-top:.15em}
+.big-quote{font-family:var(--font-display);font-weight:800;font-size:2.4em;line-height:1.15;text-wrap:balance}
+.muted{color:var(--muted)}
+.num{font-family:var(--font-display);font-weight:800;display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:color-mix(in srgb,var(--c,var(--accent)) 22%,transparent);color:var(--c,var(--accent));flex:none}
+ul.clean{list-style:none;margin:0;padding:0;display:grid;gap:.55em}
+ul.clean li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.6em;align-items:start;font-size:1.26em;line-height:1.35}
+ul.clean li::before{content:"";width:.5em;height:.5em;margin-top:.45em;border-radius:3px;background:var(--c,var(--accent))}
+ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
+.frame{font-family:var(--font-display);font-weight:700;font-size:1.15em;padding:.35em .7em;border-radius:10px;background:var(--panel-2);border:1px dashed var(--line)}
+.sign{color:var(--sign)} .reason{color:var(--reason)} .support{color:var(--support)}
+.hl-sign{background:color-mix(in srgb,var(--sign) 26%,transparent);border-radius:4px;padding:0 .15em}
+.hl-reason{background:color-mix(in srgb,var(--reason) 24%,transparent);border-radius:4px;padding:0 .15em}
+.hl-support{background:color-mix(in srgb,var(--support) 24%,transparent);border-radius:4px;padding:0 .15em}
+.aff{color:var(--aff)} .neg{color:var(--neg)}
+.svgwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+.svgwrap>svg{width:100% !important;max-width:none !important;height:auto !important;max-height:100% !important}
+
+/* ---------- buttons ---------- */
+.btn{cursor:pointer;border:1.5px solid color-mix(in srgb,var(--accent) 60%,var(--line));background:color-mix(in srgb,var(--accent) 14%,var(--panel));border-radius:10px;padding:.4em .9em;font-weight:800;font-size:1em;line-height:1.2;transition:background .15s}
+.btn:hover{background:color-mix(in srgb,var(--accent) 26%,var(--panel))}
+.btn.ghost{background:transparent;border-color:var(--line)}
+.btn:focus-visible,select:focus-visible,.navbtn:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.ctrls{display:flex;flex-wrap:wrap;gap:.5em;align-items:center}
+
+/* reveal */
+.ans{transition:opacity .25s,filter .25s}
+.ans:not(.on){opacity:0;pointer-events:none}
+.slot-ans{position:relative}
+.slot-ans::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;color:var(--muted);border:1.5px dashed var(--line);border-radius:10px;transition:opacity .25s}
+.slot-ans.on::after{opacity:0}
+.slot-ans>*{transition:opacity .25s}
+.slot-ans:not(.on)>*{opacity:0}
+.pick{outline:3px solid var(--green);outline-offset:3px}
+
+/* ---------- carousel ---------- */
+.carousel{display:flex;flex-direction:column;gap:.8em;flex:1;min-height:0}
+.carousel .item{display:none}
+.carousel .item.cur{display:flex}
+.cbar{display:flex;align-items:center;gap:.7em}
+.cbar .count{font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- timer ---------- */
+.timer{display:inline-flex;align-items:center;gap:.7em;padding:.45em .7em .45em 1em;border-radius:14px;background:var(--panel-2);border:1.5px solid var(--line)}
+.timer .t{font-family:var(--font-display);font-weight:800;font-size:2.2em;line-height:1;font-variant-numeric:tabular-nums;min-width:3.1em;text-align:center}
+.timer.run .t{color:var(--green)}
+.timer.warn .t{color:var(--yellow)}
+.timer.done .t{color:var(--coral)}
+.timer .lbl{font-weight:800;color:var(--muted);font-size:.9em;text-transform:uppercase;letter-spacing:.1em}
+
+/* ---------- agree / disagree ---------- */
+.ad{flex:1;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1em;min-height:0}
+.ad .side{font-family:var(--font-display);font-weight:800;font-size:2.4em;text-align:center;line-height:1}
+.ad .side small{display:block;font-family:var(--font-body);font-size:.42em;color:var(--fg-2);margin-top:.35em;font-weight:700}
+.ad .opinion{max-width:24em;text-align:center;font-family:var(--font-display);font-weight:800;font-size:2.6em;line-height:1.12;text-wrap:balance}
+.ad .opinion .zh{display:block;font-size:.5em;color:var(--fg-2);font-weight:700;margin-top:.3em}
+
+/* ---------- quotes ---------- */
+.quote{display:flex;gap:.9em;align-items:flex-start;padding:1em 1.1em;border-radius:16px;background:var(--panel);border:1.5px solid var(--line);cursor:pointer;transition:border-color .2s,background .2s}
+.quote .who{flex:none;width:3.4em;height:3.4em;border-radius:50%;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:1.2em;background:var(--panel-3)}
+.quote p{margin:0;font-size:1.3em;line-height:1.35}
+.quote .from{display:block;margin-top:.35em;font-size:.8em;color:var(--muted);font-weight:800}
+.quote.best{border-color:var(--green);background:color-mix(in srgb,var(--green) 10%,var(--panel))}
+
+/* ---------- resolution vote ---------- */
+.res-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7em;align-content:start}
+.res{position:relative;display:flex;flex-direction:column;gap:.3em;padding:.65em .85em .75em;border-radius:14px;background:var(--panel);border:1.5px solid var(--line);min-width:0;transition:border-color .2s,background .2s}
+.res .n{font-family:var(--font-display);font-weight:800;color:var(--accent);font-size:1.05em}
+.res .en{font-weight:800;font-size:1.18em;line-height:1.22}
+.res .zh{font-size:.9em;color:var(--fg-2)}
+.res .rtop{display:flex;align-items:center;justify-content:space-between;gap:.5em}
+.res .tally{display:flex;align-items:center;gap:.3em}
+.res .tally button{width:1.9em;height:1.9em;border-radius:8px;border:1.5px solid var(--line);background:var(--panel-2);cursor:pointer;font-weight:800}
+.res .tally .pts{font-family:var(--font-display);font-weight:800;font-size:1.5em;min-width:1.6em;text-align:center;font-variant-numeric:tabular-nums}
+.res .tally .pl{font-size:.85em;color:var(--muted);font-weight:700}
+.res.top{border-color:var(--green);background:color-mix(in srgb,var(--green) 9%,var(--panel))}
+.res.top .n::after{content:" · TOP 4";font-size:.8em;letter-spacing:.08em;color:var(--green)}
+
+/* ---------- matchups ---------- */
+.match{display:grid;grid-template-columns:auto minmax(0,2.4fr) minmax(0,1fr) minmax(0,1fr) auto;gap:.6em .8em;align-items:center}
+.match .hd{font-family:var(--font-display);font-weight:800;font-size:.95em;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.match select{width:100%;padding:.45em .5em;border-radius:10px;border:1.5px solid var(--line);background:var(--panel-2);font-weight:800;font-size:1.05em}
+.match select.a{border-color:color-mix(in srgb,var(--aff) 60%,var(--line))}
+.match select.n{border-color:color-mix(in srgb,var(--neg) 60%,var(--line))}
+.match>*{min-width:0}
+.match .dn{font-family:var(--font-display);font-weight:800;font-size:1.4em;color:var(--accent)}
+.coin{font-weight:800;min-width:7.5em;text-align:center;color:var(--muted)}
+
+/* ---------- strong reasons ---------- */
+.qual{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em}
+.qual .card h3{color:var(--c)}
+.bad{font-size:1.05em;color:var(--fg-2);border-top:1px dashed var(--line);padding-top:.5em;margin-top:.2em}
+.bad b{color:var(--coral)}
+.judge-q{font-family:var(--font-display);font-weight:800;font-size:1.8em;line-height:1.15}
+.opts{display:grid;gap:.6em}
+.opt{display:flex;gap:.8em;align-items:center;padding:.55em 1em;border-radius:14px;background:var(--panel);border:1.5px solid var(--line);font-size:1.35em;font-weight:700;line-height:1.3}
+.opt .l{flex:none;font-family:var(--font-display);font-weight:800;width:1.9em;height:1.9em;border-radius:10px;display:grid;place-items:center;background:var(--panel-3)}
+.opt.best{border-color:var(--green);background:color-mix(in srgb,var(--green) 10%,var(--panel))}
+.opt.best .l{background:var(--green);color:var(--bg)}
+.why{font-size:1.15em;color:var(--fg-2);padding:.6em .9em;border-left:4px solid var(--green);background:var(--panel)}
+
+/* ---------- O-R-S panels ---------- */
+.ors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em;flex:1;min-height:0}
+.ors .card{justify-content:flex-start}
+.ors .lab{font-family:var(--font-display);font-weight:800;font-size:1.05em;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
+.ors .say{font-size:1.55em;font-weight:700;line-height:1.3}
+
+/* ---------- support types ---------- */
+.stype .card h3{color:var(--c)}
+.stype .frame{font-size:1.02em}
+.sup-table{display:grid;grid-template-columns:minmax(0,1fr) 10em;gap:.55em .9em;align-items:stretch}
+.sup-table .s{font-size:1.2em;line-height:1.35;padding:.55em .85em;background:var(--panel);border:1.5px solid var(--line);border-radius:12px}
+.sup-table .a{display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:1.2em;border-radius:12px;background:color-mix(in srgb,var(--support) 16%,var(--panel));color:var(--support)}
+.orbar{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:.4em .8em;font-size:1.2em}
+.orbar .k{font-family:var(--font-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.85em;padding:.25em .6em;border-radius:8px;text-align:center}
+.orbar .k.o{background:var(--panel-3)}
+.orbar .k.r{background:color-mix(in srgb,var(--reason) 22%,transparent);color:var(--reason)}
+
+/* ---------- signpost match ---------- */
+.spm{display:grid;grid-template-columns:12em 3.4em minmax(0,1fr);gap:.6em .9em;align-items:center}
+.spm .sp{font-family:var(--font-display);font-weight:800;font-size:1.3em;letter-spacing:.06em;text-align:center;padding:.5em;border-radius:999px;background:color-mix(in srgb,var(--sign) 16%,var(--panel));border:2px solid var(--sign);color:var(--sign)}
+.spm .tx{font-size:1.12em;line-height:1.35;padding:.5em .8em;background:var(--panel);border:1.5px solid var(--line);border-radius:12px}
+.spm .tx .l{font-family:var(--font-display);font-weight:800;color:var(--muted);margin-right:.4em}
+.spm .m{height:2.4em;font-family:var(--font-display);font-weight:800;font-size:1.25em;display:grid;place-items:center;color:var(--sign)}
+
+/* ---------- argument model ---------- */
+.argline{font-size:1.5em;line-height:1.6}
+.legend{display:flex;flex-wrap:wrap;gap:.6em}
+.legend span{font-weight:800;font-size:1.05em;padding:.3em .7em;border-radius:8px}
+
+/* ---------- steps (divide the work) ---------- */
+.stepgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.9em}
+.stepgrid .card{gap:.45em}
+.stepgrid .card p{font-size:1.15em}
+.stepgrid .num{font-size:1.2em}
+.stepgrid h3{font-size:1.3em}
+.rule{display:flex;align-items:center;gap:1em;padding:.8em 1.1em;border-radius:14px;border:2px solid var(--coral);background:color-mix(in srgb,var(--coral) 9%,var(--panel))}
+.rule .big{font-family:var(--font-display);font-weight:800;font-size:1.7em;line-height:1.1}
+.rule .zh{display:block;font-size:.95em;color:var(--fg-2)}
+
+/* ---------- order strip ---------- */
+.order{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:.45em}
+.spk{border-radius:12px;padding:.55em .3em;text-align:center;display:grid;gap:.15em;border:1.5px solid}
+.spk b{font-family:var(--font-display);font-size:1.35em;line-height:1}
+.spk small{font-size:.86em;font-weight:800;color:var(--fg-2)}
+.spk em{font-style:normal;font-variant-numeric:tabular-nums;font-weight:800}
+.spk.a{border-color:var(--aff);background:color-mix(in srgb,var(--aff) 11%,transparent)}
+.spk.a b,.spk.a em{color:var(--aff)}
+.spk.n{border-color:var(--neg);background:color-mix(in srgb,var(--neg) 11%,transparent)}
+.spk.n b,.spk.n em{color:var(--neg)}
+.roles4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8em}
+.roles4 .card h3{font-size:1.35em}
+.roles4 .card p{font-size:1.06em}
+.defs5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6em}
+.defs5>div{display:flex;flex-direction:column;gap:.1em;padding:.55em .7em;border-radius:12px;background:var(--panel);border:1.5px solid var(--line);font-size:1.08em;line-height:1.3}
+.defs5 b{font-family:var(--font-display);font-size:1.15em}
+.defs5 .zh{font-size:.85em;color:var(--fg-2)}
+
+/* ---------- board mock ---------- */
+.mock{border-radius:14px;border:1.5px solid var(--line);background:var(--panel);overflow:hidden;display:flex;flex-direction:column}
+.mock .bar{display:flex;gap:.4em;align-items:center;padding:.45em .7em;background:var(--panel-3);font-size:.85em;color:var(--muted);font-weight:700}
+.mock .bar i{width:.65em;height:.65em;border-radius:50%;background:var(--line)}
+.mock .in{padding:.8em;display:grid;gap:.5em}
+.mrow{display:grid;grid-template-columns:5.5em minmax(0,1fr) auto;gap:.6em;align-items:center;font-size:.98em;padding:.4em .55em;border-radius:10px;background:var(--panel-2)}
+.mrow .who{font-weight:800}
+.st{font-size:.8em;font-weight:800;padding:.15em .55em;border-radius:99px}
+.st.ok{background:color-mix(in srgb,var(--green) 22%,transparent);color:var(--green)}
+.st.wip{background:color-mix(in srgb,var(--yellow) 22%,transparent);color:var(--yellow)}
+.st.no{background:var(--panel-3);color:var(--muted)}
+.linkbox{font-family:var(--font-display);font-weight:800;font-size:1.3em;padding:.5em .8em;border-radius:12px;background:var(--panel-2);border:2px dashed var(--accent);word-break:break-all;text-align:center}
+.qrrow{display:flex;gap:1em;align-items:center;flex:1;min-height:0}
+.qr{flex:none;height:min(15em,100%);aspect-ratio:1;background:#fff;border-radius:12px;padding:.4em;display:grid;place-items:center}
+.qr svg{width:100%;height:100%;display:block}
+.joinrow{display:flex;gap:2em;align-items:center;min-height:0}
+.qr.big{height:min(24em,100%);max-height:100%}
+.qrtx{display:flex;flex-direction:column;gap:.35em;font-size:1.1em;min-width:0}
+.qrtx a{color:var(--blue);font-weight:800;font-size:1.15em}
+
+/* ---------- names & iPads ---------- */
+.nsteps{list-style:none;margin:0;padding:0;display:grid;gap:.6em;align-content:safe center}
+.nsteps li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.7em;align-items:center;font-size:1.26em;line-height:1.35;padding:.5em .8em;border-radius:12px;background:var(--panel);border:1.5px solid var(--line)}
+.nsteps li .zh{display:block;font-size:.82em;color:var(--fg-2)}
+.card .nsteps li{background:var(--panel-2)}
+.codebox{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4em;padding:1em 1.2em;border-radius:16px;background:color-mix(in srgb,var(--accent) 8%,var(--panel));border:3px solid var(--accent);text-align:center;min-width:0}
+.codebox .lab{font-family:var(--font-display);font-weight:800;font-size:1.5em}
+.codebox .lab .zh{font-size:.7em;color:var(--fg-2);margin-left:.35em}
+.codebox .code{font-family:var(--font-display);font-weight:800;font-size:4.6em;line-height:1.05;letter-spacing:.08em;color:var(--accent);text-shadow:0 0 .35em color-mix(in srgb,var(--accent) 45%,transparent)}
+.codebox .hint{font-size:1.1em;color:var(--fg-2);line-height:1.35}
+.codebox .hint .zh{display:block;font-size:.85em}
+.grid2.ipadgrid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
+.namechips{display:flex;flex-wrap:wrap;gap:.4em}
+.namechips span{font-weight:800;font-size:1.1em;padding:.15em .55em;border-radius:8px;background:var(--panel-2);border:1px solid var(--line)}
+
+/* ---------- homework ---------- */
+.hw{border-radius:16px;padding:1em 1.2em;background:color-mix(in srgb,var(--hw) 8%,var(--panel));border:2px dashed color-mix(in srgb,var(--hw) 60%,transparent);display:flex;flex-direction:column;gap:.5em}
+.hw .due{font-family:var(--font-display);font-weight:800;font-size:1.45em;color:var(--hw)}
+.hw .due .zh{display:block;font-size:.66em;color:var(--fg-2)}
+.example{display:grid;grid-template-columns:8em minmax(0,1fr);gap:.4em .8em;font-size:1.12em;line-height:1.35}
+.example .k{font-family:var(--font-display);font-weight:800;font-size:.8em;letter-spacing:.1em;text-transform:uppercase;padding:.3em .5em;border-radius:8px;text-align:center;align-self:start}
+.example .k.s{background:color-mix(in srgb,var(--sign) 20%,transparent);color:var(--sign)}
+.example .k.r{background:color-mix(in srgb,var(--reason) 20%,transparent);color:var(--reason)}
+.example .k.p{background:color-mix(in srgb,var(--support) 20%,transparent);color:var(--support)}
+.example .typ{font-size:.78em;font-weight:800;color:var(--support);margin-left:.4em}
+
+/* ---------- quiz ---------- */
+.quiz{flex:1;display:flex;flex-direction:column;gap:.9em;min-height:0}
+.qcard{display:none;flex-direction:column;gap:.8em}
+.qcard.cur{display:flex}
+.qn{font-family:var(--font-display);font-weight:800;color:var(--accent);font-size:1.05em;letter-spacing:.12em;text-transform:uppercase}
+.qq{font-family:var(--font-display);font-weight:800;font-size:1.75em;line-height:1.2;text-wrap:balance}
+.qopts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7em}
+.qopt{display:flex;gap:.8em;align-items:center;padding:.75em 1em;border-radius:14px;background:var(--panel);border:1.5px solid var(--line);font-size:1.3em;font-weight:700;cursor:pointer;text-align:left;line-height:1.3}
+.qopt .l{flex:none;font-family:var(--font-display);font-weight:800;width:1.9em;height:1.9em;border-radius:10px;display:grid;place-items:center;background:var(--panel-3)}
+.qopt.sel{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--panel))}
+.qopt.sel .l{background:var(--accent);color:var(--bg)}
+
+/* ---------- bridge ---------- */
+.bridge{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:1.1em;flex:1;min-height:0;align-content:start}
+.bridge .card h3{font-size:1.6em;color:var(--c)}
+.bridge ul.clean li{font-size:1.25em}
+.bridge p{font-size:1.25em !important}
+
+/* ---------- TOC ---------- */
+.toc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.9em;flex:1;min-height:0;align-content:center}
+.tocc{cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:.45em;padding:1.1em 1em;border-radius:16px;background:color-mix(in srgb,var(--c) 9%,var(--panel));border:1.5px solid color-mix(in srgb,var(--c) 55%,var(--line));transition:transform .15s}
+.tocc:hover{transform:translateY(-3px)}
+.tocc .k{font-family:var(--font-display);font-weight:800;color:var(--c);letter-spacing:.12em;text-transform:uppercase;font-size:.95em}
+.tocc .d{font-family:var(--font-display);font-weight:800;font-size:2.6em;line-height:1}
+.tocc .p{font-weight:800;color:var(--fg-2);font-size:.95em}
+.tocc .t{font-family:var(--font-display);font-weight:800;font-size:1.8em;line-height:1.05}
+.tocc .x{font-size:1em;color:var(--fg-2);line-height:1.35}
+
+/* ---------- roadmap strip ---------- */
+.rm{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.7em}
+.rm .card{gap:.3em}
+.rm .d{font-family:var(--font-display);font-weight:800;font-size:2em;line-height:1;color:var(--c)}
+.rm .t{font-weight:800;font-size:1.15em}
+.rm .x{font-size:1em;color:var(--fg-2);line-height:1.35}
+.rm .hwl{margin-top:auto;font-size:.92em;font-weight:800;color:var(--hw);border-top:1px dashed var(--line);padding-top:.4em}
+
+/* ---------- places ---------- */
+.places{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9em;flex:1;min-height:0;align-content:center}
+.place{display:flex;gap:.8em;align-items:center;padding:1em;border-radius:16px;background:var(--panel);border:1.5px solid var(--line)}
+.place .ic{flex:none;width:2.6em;height:2.6em}
+.place b{font-size:1.35em;display:block;line-height:1.2}
+.place .zh{font-size:1em;color:var(--fg-2)}
+
+
+/* ---------- session 2+ ---------- */
+.fbgrid{display:grid;gap:.55em}
+.fbrow{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1.25fr);gap:.6em;align-items:stretch}
+.fbrow>span{padding:.55em .8em;border-radius:12px;font-size:1.08em;line-height:1.3;background:var(--panel);border:1.5px solid var(--line)}
+.fbrow .fp{font-weight:800}
+.fbrow .fw b{color:var(--coral)} .fbrow .fs b{color:var(--green)}
+.fbrow .fs{border-color:color-mix(in srgb,var(--green) 45%,var(--line))}
+.pmatrix{display:grid;grid-template-columns:minmax(0,2.6fr) repeat(4,minmax(0,1fr));gap:.35em;margin-block:auto}
+.pm-h{font-family:var(--font-display);font-weight:800;font-size:1.25em;text-align:center;color:var(--accent)}
+.pm-p{display:flex;flex-direction:column;padding:.3em .8em;border-radius:12px;background:var(--panel);border:1.5px solid var(--line)}
+.pm-p b{font-family:var(--font-display);font-size:1.2em}
+.pm-p span{color:var(--fg-2);font-size:.95em;line-height:1.25}
+.pm-c{display:grid;place-items:center;border-radius:12px;background:var(--panel);border:1.5px solid var(--line);font-family:var(--font-display);font-weight:800;font-size:1.3em;color:var(--muted)}
+.pm-c.on{background:color-mix(in srgb,var(--green) 14%,var(--panel));border-color:color-mix(in srgb,var(--green) 55%,var(--line));color:var(--green)}
+.frames{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8em;align-content:safe center}
+.opgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.38em .8em;align-content:safe center}
+.opc{display:grid;grid-template-columns:2.6em minmax(0,1fr);gap:.6em;align-items:center}
+.opc .m{height:2.2em;font-family:var(--font-display);font-weight:800;font-size:1.1em;display:grid;place-items:center;color:var(--accent)}
+.opc .tx{font-size:.98em;line-height:1.28;padding:.35em .7em;border-radius:10px;background:var(--panel);border:1.5px solid var(--line)}
+.scoregrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.8em}
+.scoregrid .pts{font-family:var(--font-display);font-weight:800;font-size:2.4em;line-height:1}
+.scoregrid h3{font-size:1.35em}
+.cuecard{background:#fffdf5;color:#1f2635;border-radius:10px;padding:1em 1.3em;box-shadow:0 10px 30px rgba(0,0,0,.35);transform:rotate(-1.5deg);display:flex;flex-direction:column;gap:.3em;font-size:1.35em;font-weight:700;background-image:repeating-linear-gradient(#fffdf5 0 1.55em,#d8e3f5 1.55em calc(1.55em + 1px))}
+.cuecard .cc-h{font-family:var(--font-display);font-weight:800;color:#c0392b;font-size:1.25em}
+
+/* ---------- debate runner ---------- */
+.runner{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto 1fr auto;gap:.7em}
+.rteams{display:flex;gap:.6em;align-items:center;flex-wrap:wrap}
+.rteams select{padding:.4em .5em;border-radius:10px;border:1.5px solid var(--line);background:var(--panel-2);font-weight:800;font-size:1.05em;min-width:0}
+.rteams .rres{flex:1;min-width:12em}
+.rteams select.a{border-color:var(--aff);color:var(--aff)}
+.rteams select.n{border-color:var(--neg);color:var(--neg)}
+.rteams .vs{font-weight:800;color:var(--muted)}
+.rlist{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:.4em}
+.rsp{cursor:pointer;border-radius:12px;padding:.4em .2em;text-align:center;display:grid;gap:.1em;border:1.5px solid;background:transparent;transition:opacity .2s,transform .2s}
+.rsp b{font-family:var(--font-display);font-size:1.25em;line-height:1}
+.rsp small{font-size:.82em;font-weight:800;color:var(--fg-2)}
+.rsp em{font-style:normal;font-weight:800;font-variant-numeric:tabular-nums;font-size:.9em}
+.rsp.a{border-color:var(--aff)} .rsp.a b,.rsp.a em{color:var(--aff)}
+.rsp.n{border-color:var(--neg)} .rsp.n b,.rsp.n em{color:var(--neg)}
+.rsp.done{opacity:.35}
+.rsp.cur{transform:translateY(-3px);background:color-mix(in srgb,currentColor 0%,var(--panel-3));box-shadow:0 0 0 3px var(--yellow)}
+.rsp.off{display:none}
+.rmain{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto 1fr;align-items:center;gap:.3em 1.2em;padding:.6em 1.2em;border-radius:18px;background:var(--panel);border:1.5px solid var(--line)}
+.rnow{grid-column:1/-1;display:flex;gap:.8em;align-items:baseline;flex-wrap:wrap}
+.rwho{font-family:var(--font-display);font-weight:800;font-size:1.9em}
+.rteam{font-weight:800;font-size:1.3em;color:var(--fg-2)}
+.rclock{font-family:var(--font-display);font-weight:800;font-size:7em;line-height:.9;font-variant-numeric:tabular-nums;color:var(--fg)}
+.runner.go .rclock{color:var(--green)}
+.runner.warn .rclock{color:var(--yellow)}
+.runner.over .rclock{color:var(--coral)}
+.rcard-sig{display:flex;align-items:center;gap:.7em;font-weight:800;font-size:1.2em;max-width:16em}
+.rcard-sig i{flex:none;width:2.4em;height:3.3em;border-radius:6px;background:var(--panel-3);border:1.5px solid var(--line)}
+.runner.go .rcard-sig i{background:var(--green);border-color:var(--green)}
+.runner.warn .rcard-sig i{background:var(--yellow);border-color:var(--yellow)}
+.runner.over .rcard-sig i{background:var(--coral);border-color:var(--coral)}
+.r3{display:inline-flex;gap:.4em;align-items:center;font-weight:800;color:var(--fg-2);margin-left:auto;cursor:pointer}
+
+/* ---------- results ---------- */
+.results{display:grid;gap:.7em;align-content:safe center}
+.resrow{display:grid;grid-template-columns:7em minmax(0,1fr) auto;gap:1em;align-items:center;padding:.6em 1em;border-radius:14px;background:var(--panel);border:1.5px solid var(--line)}
+.resrow .dn{font-family:var(--font-display);font-weight:800;font-size:1.4em;color:var(--accent)}
+.resrow .rr{font-size:1.15em;font-weight:700;color:var(--fg-2)}
+.win{border:0;background:transparent;padding:.5em 1em;font-weight:800;cursor:pointer;color:var(--muted)}
+.win.a.on{background:var(--aff);color:var(--bg)} .win.n.on{background:var(--neg);color:var(--bg)}
+.mvd{display:flex;gap:1em;align-items:center;padding:.8em 1.1em;border-radius:16px;border:2px solid var(--yellow);background:color-mix(in srgb,var(--yellow) 10%,var(--panel))}
+.mvd .lab{font-family:var(--font-display);font-weight:800;font-size:1.5em;color:var(--yellow);white-space:nowrap}
+.mvdin{flex:1;min-width:0;background:transparent;border:0;border-bottom:2px dashed var(--line);font-family:var(--font-display);font-weight:800;font-size:2em;color:var(--fg);padding:.1em .2em}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));padding:0 max(14px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(14px,env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border-top:1px solid var(--line);z-index:5}
+.nav .mid{display:flex;align-items:center;gap:12px}
+.navbtn{cursor:pointer;min-width:52px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel-2);font-weight:800;font-size:18px;display:grid;place-items:center;padding:0 12px}
+.navbtn:disabled{opacity:.35;cursor:default}
+.nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+.nav .sect{grid-column:1;justify-self:start;max-width:100%}
+.nav .mid{grid-column:2}
+.nav .end{grid-column:3;justify-self:end;display:flex;align-items:center;gap:10px}
+.navbtn[hidden]{display:none}
+.navbtn .i-exit,.navbtn.on .i-enter{display:none}
+.navbtn.on .i-exit{display:block}
+.navbtn.on{border-color:var(--yellow);color:var(--yellow)}
+.counter{font-weight:800;font-variant-numeric:tabular-nums;color:var(--fg-2);font-size:16px;min-width:5.5em;text-align:center}
+.sect{font-weight:800;font-size:14px;color:var(--muted);max-width:40vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- narrow screens (phones / portrait iPads) ---------- */
+@media (max-aspect-ratio:1/1){
+  .deck{font-size:clamp(12px,3.4vw,22px)}
+  .slide{padding:1.2em 16px 1em}
+  .grid2,.grid3,.grid4,.qual,.ors,.stepgrid,.roles4,.bridge,.places,.rm,.toc,.res-grid{grid-template-columns:minmax(0,1fr)}
+  .qopts{grid-template-columns:minmax(0,1fr)}
+  .order{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .t-title{font-size:3.4em}
+  .h1{font-size:2.1em}
+  .ad{grid-template-columns:minmax(0,1fr)}
+  .ad .opinion{font-size:2em}
+  .spm{grid-template-columns:minmax(0,1fr) 2.4em minmax(0,1.6fr)}
+  .match{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .match .hd{display:none}
+  .match .dn,.match .rsel,.match .ctrls{grid-column:1/-1}
+  .sect{display:none}
+  .top{flex-wrap:wrap}
+  .timer{flex-wrap:wrap}
+  .example{grid-template-columns:minmax(0,1fr)}
+  .match select{min-width:0}
+  .row{flex-direction:column}
+  .sup-table{grid-template-columns:minmax(0,1fr) 7em}
+  .res-grid{grid-template-columns:minmax(0,1fr)}
+  .defs5{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .fbrow,.frames,.opgrid,.scoregrid{grid-template-columns:minmax(0,1fr)}
+  .pmatrix{grid-template-columns:minmax(0,2fr) repeat(4,minmax(0,1fr));font-size:.8em}
+  .rlist{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr))}
+  .rmain{grid-template-columns:minmax(0,1fr)}
+  .rclock{font-size:4.5em}
+  .resrow{grid-template-columns:minmax(0,1fr)}
+  .joinrow{flex-direction:column;align-items:flex-start}
+  .qr.big{height:auto;width:min(18em,100%)}
+  .match .ctrls{flex-wrap:wrap}
+  .grid2.ipadgrid{grid-template-columns:minmax(0,1fr)}
+  .nav{display:flex;justify-content:space-between}
+  .codebox .code{font-size:3.2em}
+}
+@media (prefers-reduced-motion:reduce){.slide,.ans,.tocc{transition:none}}
+</style>
+</head>
+<body>
+<main class="deck">
+<section class="slide title-slide" id="title" data-sect="Debate Now" style="--accent:var(--yellow)" aria-label="Debate Now">
+
+<div class="t-label">Grade 9 Debate Mini-Course · Group A</div>
+<h1 class="t-title">Debate Now</h1>
+<p class="t-sub">Five Wednesdays. One team. Four debates.<span class="zh">五個星期三・一個團隊・四場辯論</span></p>
+<div class="tags">
+  <span class="tag lg">8 teams <span class="zh">8 隊</span></span>
+  <span class="tag lg">4 debates <span class="zh">4 場辯論</span></span>
+  <span class="tag lg">Debate Day · Wed 11/18 <span class="zh">辯論日</span></span>
+</div>
+</section>
+<section class="slide " id="toc" data-sect="Contents" style="--accent:var(--yellow)" aria-label="Contents">
+<div class="top"><div><div class="eyebrow">Contents</div><h2 class="h1">Our five Wednesdays<span class="zh">我們的五個星期三</span></h2></div></div><div class="toc"><button class="tocc" type="button" data-goto="s1-title" style="--c:var(--s1)"><span class="k">Session 1</span><span class="d">10/21</span><span class="p">Periods 5–7</span><span class="t">Start strong</span><span class="x">Debate basics · resolution vote · reasons · supports · signposts</span></button><button class="tocc" type="button" data-goto="s2-title" style="--c:var(--s2)"><span class="k">Session 2</span><span class="d">10/28</span><span class="p">Period 7</span><span class="t">Reasons → speech</span><span class="x">Feedback · support language · speech structure</span></button><button class="tocc" type="button" data-goto="s3-title" style="--c:var(--s3)"><span class="k">Session 3</span><span class="d">11/4</span><span class="p">Periods 5–7</span><span class="t">Polish & practice</span><span class="x">Revise · delivery · rehearsal · practice debates</span></button><button class="tocc" type="button" data-goto="s4-title" style="--c:var(--s4)"><span class="k">Session 4</span><span class="d">11/11</span><span class="p">Period 7</span><span class="t">Dress rehearsal</span><span class="x">Debate Day rules · readiness check · run-through</span></button><button class="tocc" type="button" data-goto="dd-title" style="--c:var(--green)"><span class="k">Debate Day</span><span class="d">11/18</span><span class="p">Periods 5–7</span><span class="t">Four debates</span><span class="x">In our classroom · judges · awards</span></button></div>
+</section>
+<section class="slide title-slide" id="s1-title" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+
+<div class="t-label">Session 1 · Wed 10/21 · Periods 5–7</div>
+<h1 class="t-title">Start strong</h1>
+<p class="t-sub">What a debate is, our resolutions, and our reasons.<span class="zh">什麼是辯論、選擇辯題、找出理由</span></p>
+<div class="tags">
+  <span class="tag lg">Unit 1 · Your Opinion</span>
+  <span class="tag lg">Unit 2 · Reasons</span>
+  <span class="tag lg">Unit 3 · Supports</span>
+  <span class="tag lg">Unit 4 · Signposts</span>
+</div>
+</section>
+<section class="slide " id="s1-names" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 5 · Before we start</div><h2 class="h1">Your English name<span class="zh">你的英文名字</span></h2></div><div style="align-self:center"><div class="timer" data-sec="720" data-warn="60"><span class="lbl">Names</span><span class="t">12:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <ol class="nsteps" style="--c:var(--blue)">
+    <li><span class="num">1</span><span>Find your class and seat number on the class list.<span class="zh">在班級名單上找到你的班級和座號。</span></span></li>
+    <li><span class="num">2</span><span>Print your English name neatly.<span class="zh">用正楷把英文名字寫清楚。</span></span></li>
+    <li><span class="num">3</span><span>Pass the list to the next student.<span class="zh">傳給下一位同學。</span></span></li>
+  </ol>
+  <div class="card acc" style="--c:var(--yellow)">
+    <h3>One name, all semester<span class="zh">整個學期用同一個名字</span></h3>
+    <ul class="clean" style="--c:var(--yellow)">
+      <li><span>Use the same name on the Team Board, your homework and Debate Day.<span class="zh">Team Board、作業和辯論日都用這個名字。</span></span></li>
+      <li><span>No English name yet? Choose one now.<span class="zh">還沒有英文名字？現在選一個。</span></span></li>
+    </ul>
+    <div class="namechips" aria-label="Name ideas"><span>Amy</span><span>Ben</span><span>Chloe</span><span>Eric</span><span>Grace</span><span>Jason</span></div>
+  </div>
+</div>
+<div class="kp">While you wait: make a <b>name card</b> with your English name in BIG letters. Ask your neighbor: “What's your English name?”<span class="zh">等待時：做一張名牌，用大字寫上英文名字，並問旁邊的同學英文名字。</span></div>
+</section>
+<section class="slide " id="s1-roadmap" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">How this course works</div><h2 class="h1">Five Wednesdays to Debate Day<span class="zh">五個星期三，走到辯論日</span></h2></div></div><div class="rm"><div class="card acc" style="--c:var(--s1)"><span class="d">10/21</span><span class="t">Start strong</span><span class="x">Team, resolution, reasons, roles</span><span class="hwl">HW1 · My Reasons · Sun 10/25</span></div><div class="card acc" style="--c:var(--s2)"><span class="d">10/28</span><span class="t">Reasons → speech</span><span class="x">How a debate speech works</span><span class="hwl">HW2 · Speech draft · Sun 11/1</span></div><div class="card acc" style="--c:var(--s3)"><span class="d">11/4</span><span class="t">Polish & practice</span><span class="x">Revise, rehearse, practice debates</span><span class="hwl">HW3 · Final speech · Sun 11/8</span></div><div class="card acc" style="--c:var(--s4)"><span class="d">11/11</span><span class="t">Dress rehearsal</span><span class="x">Rules, timing, run-through</span><span class="hwl">Bring: book, cue cards, pen</span></div><div class="card acc" style="--c:var(--green)"><span class="d">11/18</span><span class="t">Debate Day</span><span class="x">Four debates in our classroom</span><span class="hwl">Judges + awards</span></div></div><div class="kp">Everyone owns <b>2 reasons</b> and gives <b>1 speech</b>. All homework goes on the <b>Team Board</b>, where you can see your teammates' work.<span class="zh">每個人負責 2 個理由、發表 1 篇演講。所有作業都上傳到 Team Board，你可以看到隊友的進度。</span></div>
+</section>
+<section class="slide " id="s1-goals" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Session 1 · Today's goals</div><h2 class="h1">By the end of today, I can …<span class="zh">今天結束時，我能夠……</span></h2></div></div>
+<div class="grid3 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)"><span class="num" style="--c:var(--blue)">1</span><h3>Explain what a debate is<span class="zh">說明什麼是辯論</span></h3><p>and name its five parts.</p></div>
+  <div class="card acc" style="--c:var(--yellow)"><span class="num" style="--c:var(--yellow)">2</span><h3>Give strong reasons<span class="zh">提出有力的理由</span></h3><p>for my team's side of a resolution.</p></div>
+  <div class="card acc" style="--c:var(--purple)"><span class="num" style="--c:var(--purple)">3</span><h3>Support a reason<span class="zh">為理由提出支持證據</span></h3><p>and give it a short signpost.</p></div>
+</div>
+<div class="kp">Today you also leave with your <b>team</b>, your <b>resolution</b>, your <b>side</b>, your <b>2 reasons</b> and your <b>speaker role</b>.<span class="zh">今天你也會確定：隊伍、辯題、正反方、你的 2 個理由和講者角色。</span></div>
+</section>
+<section class="slide " id="s1-agree" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Warm-up · Unit 1<span class="pg">p. 4</span></div><h2 class="h1">Agree or disagree?<span class="zh">同意還是不同意？</span></h2></div><div class="frame" style="align-self:center">“I agree because …”<br>“I disagree because …”</div></div><div class="carousel"><div class="item ad"><div class="side aff">← AGREE<small>Stand up · 站起來</small></div><div class="opinion">Cats are better than dogs.<span class="zh">貓比狗好。</span></div><div class="side neg">DISAGREE →<small>Stay seated · 坐著</small></div></div><div class="item ad"><div class="side aff">← AGREE<small>Stand up · 站起來</small></div><div class="opinion">Summer is better than winter.<span class="zh">夏天比冬天好。</span></div><div class="side neg">DISAGREE →<small>Stay seated · 坐著</small></div></div><div class="item ad"><div class="side aff">← AGREE<small>Stand up · 站起來</small></div><div class="opinion">Bubble tea is better than coffee.<span class="zh">珍珠奶茶比咖啡好。</span></div><div class="side neg">DISAGREE →<small>Stay seated · 坐著</small></div></div><div class="item ad"><div class="side aff">← AGREE<small>Stand up · 站起來</small></div><div class="opinion">Living in the city is better than living in the country.<span class="zh">住在城市比住在鄉下好。</span></div><div class="side neg">DISAGREE →<small>Stay seated · 坐著</small></div></div><div class="item ad"><div class="side aff">← AGREE<small>Stand up · 站起來</small></div><div class="opinion">Video games are good for teenagers.<span class="zh">電玩對青少年有好處。</span></div><div class="side neg">DISAGREE →<small>Stay seated · 坐著</small></div></div><div class="item ad"><div class="side aff">← AGREE<small>Stand up · 站起來</small></div><div class="opinion">Everyone should learn to swim.<span class="zh">每個人都應該學游泳。</span></div><div class="side neg">DISAGREE →<small>Stay seated · 坐著</small></div></div><div class="item ad"><div class="side aff">← AGREE<small>Stand up · 站起來</small></div><div class="opinion">Homework helps students learn.<span class="zh">回家作業能幫助學生學習。</span></div><div class="side neg">DISAGREE →<small>Stay seated · 坐著</small></div></div><div class="cbar"><button class="btn cprev" type="button">← Opinion</button><span class="count"></span><button class="btn cnext" type="button">Next opinion →</button></div></div><div class="kp">Debate starts when two people have <b>different opinions about the same idea</b>.<span class="zh">當兩個人對同一件事有不同意見時，辯論就開始了。</span></div>
+</section>
+<section class="slide " id="s1-what" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 1<span class="pg">p. 5</span></div><h2 class="h1">What is debate?<span class="zh">什麼是辯論？</span></h2><p class="sub">Which person describes debate best? Click your choice.<span class="zh">哪一個人說得最好？</span></p></div></div>
+<div class="grid3 fill" style="align-content:safe center" data-scope>
+  <div class="quote"><span class="who">B</span><p>“Debate is when two sides argue. They shout and scream at each other until one side gives up.”<span class="from">Benjamin, U.S.A.</span></p></div>
+  <div class="quote"><span class="who">D</span><p>“Debate is a competition. Whoever shouts the loudest or stops the other side from talking is usually the winner.”<span class="from">Dexter, CANADA</span></p></div>
+  <div class="quote" data-right><span class="who">M</span><p>“Debate is a formal discussion. Two sides follow a set of rules and take turns to express their different opinions.”<span class="from">Melanie, AUSTRALIA</span></p></div>
+  <div class="ctrls" style="grid-column:1/-1"><button class="btn" type="button" data-reveal=".mel-ans" data-mode="all" data-mark=".quote">Show the best answer</button>
+  <span class="ans mel-ans" style="font-size:1.25em;font-weight:700">Melanie. In a debate we follow <b>rules</b>, take <b>turns</b>, and <b>never shout</b>.<span class="zh" style="display:block;font-size:.82em;color:var(--fg-2)">辯論要遵守規則、輪流發言，不大吼大叫。</span></span></div>
+</div>
+</section>
+<section class="slide " id="s1-where" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 1<span class="pg">p. 5</span></div><h2 class="h1">Where do debates happen?<span class="zh">哪裡會有辯論？</span></h2><p class="sub">Debate is part of life, and it happens all around us. Where can you find it?<span class="zh">辯論是生活的一部分，到處都有。</span></p></div><span class="tag" style="align-self:center;--accent:var(--muted)">If time <span class="zh">時間允許</span></span></div><div class="places" data-scope><div class="place ans plc"><span style="font-size:2.4em;line-height:1">🏛️</span><div><b>Government</b><span class="zh">立法院、議會</span></div></div><div class="place ans plc"><span style="font-size:2.4em;line-height:1">⚖️</span><div><b>Courts</b><span class="zh">法院</span></div></div><div class="place ans plc"><span style="font-size:2.4em;line-height:1">🏫</span><div><b>Student council</b><span class="zh">學生會</span></div></div><div class="place ans plc"><span style="font-size:2.4em;line-height:1">📺</span><div><b>TV talk shows</b><span class="zh">電視政論節目</span></div></div><div class="place ans plc"><span style="font-size:2.4em;line-height:1">💼</span><div><b>Company meetings</b><span class="zh">公司會議</span></div></div><div class="place ans plc"><span style="font-size:2.4em;line-height:1">🍽️</span><div><b>Family dinner</b><span class="zh">家庭晚餐</span></div></div></div><div class="ctrls"><button class="btn" type="button" data-reveal=".plc">Show one more</button><button class="btn ghost" type="button" data-reveal=".plc" data-mode="all">Show / hide all</button></div>
+</section>
+<section class="slide " id="s1-terms" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 1 · Debate terms<span class="pg">p. 6</span><span class="zh">辯論的五個角色</span></div><h2 class="h1">The five parts of a debate</h2></div><div class="ctrls" style="align-self:center"><button class="btn" type="button" data-reveal=".stg">Label the picture</button><button class="btn ghost" type="button" data-reveal=".stg" data-mode="all">All</button></div></div>
+<div class="svgwrap"><svg viewBox="70 8 960 537" role="img" aria-label="A debate: the resolution on a screen, the affirmative team on the left, the negative team on the right, the chairman with a timer and the judges in front">
+  <rect x="330" y="52" width="440" height="180" rx="12" fill="#16324f" stroke="#5aa9ff" stroke-width="3"/>
+  <text x="550" y="132" text-anchor="middle" fill="#eef2f8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="30">Students shouldn't have</text>
+  <text x="550" y="170" text-anchor="middle" fill="#eef2f8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="30">to wear uniforms.</text>
+  <circle cx="140" cy="284" r="18" fill="#3a4866"/><rect x="116" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="215" cy="284" r="18" fill="#3a4866"/><rect x="191" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="295" cy="284" r="18" fill="#3a4866"/><rect x="271" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="370" cy="284" r="18" fill="#3a4866"/><rect x="346" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="730" cy="284" r="18" fill="#3a4866"/><rect x="706" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="805" cy="284" r="18" fill="#3a4866"/><rect x="781" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="885" cy="284" r="18" fill="#3a4866"/><rect x="861" y="300" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="960" cy="284" r="18" fill="#3a4866"/><rect x="936" y="300" width="48" height="34" rx="14" fill="#3a4866"/>
+  <rect x="90" y="318" width="330" height="82" rx="8" fill="#1c2536" stroke="#3fd896" stroke-width="3"/>
+  <text x="255" y="372" text-anchor="middle" fill="#3fd896" font-family="Baloo 2, sans-serif" font-weight="800" font-size="36">YES!</text>
+  <rect x="680" y="318" width="330" height="82" rx="8" fill="#1c2536" stroke="#ff7a6b" stroke-width="3"/>
+  <text x="845" y="372" text-anchor="middle" fill="#ff7a6b" font-family="Baloo 2, sans-serif" font-weight="800" font-size="36">NO!</text>
+  <path d="M515 300h70l-10 110h-50z" fill="#232e43" stroke="#93a1b8" stroke-width="2"/>
+  <path d="M550 300v-26" stroke="#93a1b8" stroke-width="4"/><circle cx="550" cy="270" r="6" fill="#93a1b8"/>
+  <circle cx="250" cy="432" r="18" fill="#3a4866"/><rect x="226" y="448" width="48" height="34" rx="14" fill="#3a4866"/>
+  <rect x="160" y="458" width="200" height="44" rx="6" fill="#1c2536" stroke="#93a1b8" stroke-width="2"/>
+  <text x="300" y="489" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="24">01:56</text>
+  <circle cx="770" cy="432" r="18" fill="#3a4866"/><rect x="746" y="448" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="840" cy="432" r="18" fill="#3a4866"/><rect x="816" y="448" width="48" height="34" rx="14" fill="#3a4866"/><circle cx="910" cy="432" r="18" fill="#3a4866"/><rect x="886" y="448" width="48" height="34" rx="14" fill="#3a4866"/>
+  <rect x="720" y="458" width="240" height="44" rx="6" fill="#1c2536" stroke="#93a1b8" stroke-width="2"/>
+  <g class="ans stg"><path d="M205 236 L230 258" stroke="#3fd896" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="205" y="228" text-anchor="middle" fill="#3fd896" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Affirmative Team</text></g>
+  <g class="ans stg"><path d="M550 42 L550 52" stroke="#5aa9ff" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="550" y="36" text-anchor="middle" fill="#5aa9ff" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Resolution</text></g>
+  <g class="ans stg"><path d="M905 236 L880 258" stroke="#ff7a6b" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="905" y="228" text-anchor="middle" fill="#ff7a6b" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Negative Team</text></g>
+  <g class="ans stg"><path d="M250 510 L250 502" stroke="#ffd166" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="250" y="535" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Mr. / Madam Chairman</text></g>
+  <g class="ans stg"><path d="M840 510 L840 502" stroke="#c792ff" stroke-width="3" fill="none" stroke-dasharray="6 6"/><text x="840" y="535" text-anchor="middle" fill="#c792ff" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27">Judges</text></g>
+</svg></div>
+
+<div class="defs5">
+  <div><b style="color:var(--blue)">Resolution <span class="zh">辯題</span></b>the opinion we debate</div>
+  <div><b class="aff">Affirmative <span class="zh">正方</span></b>agrees: YES</div>
+  <div><b class="neg">Negative <span class="zh">反方</span></b>disagrees: NO</div>
+  <div><b style="color:var(--purple)">Judges <span class="zh">評審</span></b>decide who wins</div>
+  <div><b style="color:var(--yellow)">Chairman <span class="zh">主席</span></b>runs it, keeps time</div>
+</div>
+</section>
+<section class="slide " id="s1-who" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 1 · In our class</div><h2 class="h1">Who's who on Debate Day<span class="zh">辯論日的角色</span></h2></div></div>
+<div class="grid4 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--yellow)"><h3>Mr. Chairman<span class="zh">主席</span></h3><p>Teacher Sergio</p><p class="muted" style="font-size:1em">Introduces each speaker and keeps the time.</p></div>
+  <div class="card acc" style="--c:var(--purple)"><h3>Judges<span class="zh">評審</span></h3><p>Guest teachers</p><p class="muted" style="font-size:1em">Score every speaker and choose the winning team.</p></div>
+  <div class="card acc" style="--c:var(--green)"><h3>Affirmative<span class="zh">正方</span></h3><p>3–4 speakers</p><p class="muted" style="font-size:1em">Agrees with the resolution. Speaks first and last.</p></div>
+  <div class="card acc" style="--c:var(--coral)"><h3>Negative<span class="zh">反方</span></h3><p>3–4 speakers</p><p class="muted" style="font-size:1em">Disagrees with the resolution.</p></div>
+</div>
+<div class="kp">Everyone else in the room is a <b>peer judge</b>: you score the speakers in your book (pp. 44–49). Only your teacher sees these scores.<span class="zh">其他同學都是同儕評審，在課本上幫講者評分，只有老師會看到。</span></div>
+</section>
+<section class="slide " id="s1-policy" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 1 · Opinions of policy<span class="pg">p. 7</span></div><h2 class="h1">Our debates are about policy<span class="zh">我們辯論「政策」</span></h2></div></div>
+<div class="kp">An opinion of policy says that a <b>government, company or school</b> should <b>do</b> or <b>change</b> something.<span class="zh">政策性的意見：主張政府、公司或學校應該做某件事或改變某件事。</span></div>
+<div class="grid3 fill" style="align-content:safe center">
+  <div class="card"><span class="frame">The school should …</span><p>The school should have a longer lunch break.</p></div>
+  <div class="card"><span class="frame">Students should …</span><p>Students should be able to wear sneakers.</p></div>
+  <div class="card"><span class="frame">Students shouldn't have to …</span><p>Students shouldn't have to wear uniforms.</p></div>
+</div>
+</section>
+<section class="slide " id="s1-make" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 1 · Practice<span class="pg">p. 7</span></div><h2 class="h1">Turn a complaint into a resolution<span class="zh">把抱怨變成辯題</span></h2><p class="sub">Say it as a policy: “The school should …” or “Students should …”</p></div><span class="tag" style="align-self:center;--accent:var(--muted)">If time <span class="zh">時間允許</span></span></div><div class="grid2 fill" style="align-content:safe center" data-scope><div class="card" style="flex-direction:row;align-items:center;gap:1em"><p style="flex:1">“Our lunch break is too short.”</p><span style="font-size:1.6em;color:var(--muted)">→</span><p class="ans mres" style="flex:1.3;font-weight:800;color:var(--accent)">The school should make lunch break longer.</p></div><div class="card" style="flex-direction:row;align-items:center;gap:1em"><p style="flex:1">“Our backpacks are too heavy.”</p><span style="font-size:1.6em;color:var(--muted)">→</span><p class="ans mres" style="flex:1.3;font-weight:800;color:var(--accent)">Students should be able to leave their books at school.</p></div><div class="card" style="flex-direction:row;align-items:center;gap:1em"><p style="flex:1">“The classroom is too hot in June.”</p><span style="font-size:1.6em;color:var(--muted)">→</span><p class="ans mres" style="flex:1.3;font-weight:800;color:var(--accent)">Every classroom should have air conditioning all day.</p></div><div class="card" style="flex-direction:row;align-items:center;gap:1em"><p style="flex:1">“We have too many tests.”</p><span style="font-size:1.6em;color:var(--muted)">→</span><p class="ans mres" style="flex:1.3;font-weight:800;color:var(--accent)">Students should have only one test a week.</p></div></div><div class="ctrls"><button class="btn" type="button" data-reveal=".mres">Show a model answer</button></div>
+</section>
+<section class="slide " id="s1-teams" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 5 · Teams</div><h2 class="h1">Make your team<span class="zh">組成隊伍</span></h2></div><div style="align-self:center"><div class="timer" data-sec="300" data-warn="60"><span class="lbl">Teams</span><span class="t">5:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)">
+    <h3>8 teams: A B C D E F G H<span class="zh">8 隊：A 到 H</span></h3>
+    <ul class="clean" style="--c:var(--blue)">
+      <li><span>3 or 4 students in each team.<span class="zh">每隊 3 到 4 人。</span></span></li>
+      <li><span>Sit together. Your table is your team.<span class="zh">坐在一起，同一桌就是同一隊。</span></span></li>
+      <li><span>Write your team letter and names in your book, p. 32.<span class="zh">在課本第 32 頁寫上隊伍字母和名字。</span></span></li>
+    </ul>
+  </div>
+  <div class="card acc" style="--c:var(--yellow)">
+    <h3>Choose a team captain<span class="zh">選出隊長</span></h3>
+    <ul class="clean" style="--c:var(--yellow)">
+      <li><span>Sets up your team on the Team Board in Period&nbsp;7.<span class="zh">第 7 節在 Team Board 上建立隊伍資料。</span></span></li>
+      <li><span>Makes sure everyone has a job.<span class="zh">確認每個人都有工作。</span></span></li>
+      <li><span>The captain is not the boss. Every voice counts.<span class="zh">隊長不是老大，每個人的意見都重要。</span></span></li>
+    </ul>
+  </div>
+</div>
+</section>
+<section class="slide tight" id="s1-vote" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 6 · Vote<span class="pg">p. 32</span></div><h2 class="h1">Choose your resolution<span class="zh">選擇辯題</span></h2></div><div style="align-self:center"><div class="timer" data-sec="180" data-warn="30"><span class="lbl">Team talk</span><span class="t">3:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div><div class="res-grid"><div class="res" data-res="r1"><div class="rtop"><span class="n">#1</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">Students shouldn&#x27;t have to clean the school.</span><span class="zh">學生不應該需要打掃學校。</span></div><div class="res" data-res="r2"><div class="rtop"><span class="n">#2</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">Students should be able to use their phones at break time.</span><span class="zh">學生下課時間應該可以使用手機。</span></div><div class="res" data-res="r3"><div class="rtop"><span class="n">#3</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">There should be no homework on weekends.</span><span class="zh">週末不應該有回家作業。</span></div><div class="res" data-res="r4"><div class="rtop"><span class="n">#4</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">Students shouldn&#x27;t have to take a nap at lunchtime.</span><span class="zh">學生午休時間不應該被要求睡覺。</span></div><div class="res" data-res="r5"><div class="rtop"><span class="n">#5</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">Students should be able to choose their own hairstyle.</span><span class="zh">學生應該可以自己決定髮型。</span></div><div class="res" data-res="r6"><div class="rtop"><span class="n">#6</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">Every class should have a class pet.</span><span class="zh">每個班級都應該養一隻班寵。</span></div><div class="res" data-res="r7"><div class="rtop"><span class="n">#7</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">Every student should learn to cook at school.</span><span class="zh">每個學生都應該在學校學做菜。</span></div><div class="res" data-res="r8"><div class="rtop"><span class="n">#8</span><div class="tally"><button class="minus" type="button" aria-label="Remove a point">−</button><span class="pts">0</span><button class="plus" type="button" aria-label="Add a point">+</button></div></div><span class="en">The school week should be four days long.</span><span class="zh">學校一週應該只上四天課。</span></div></div><div class="ctrls" style="justify-content:space-between;margin-top:auto;flex-wrap:nowrap"><div class="frame" style="font-size:1.05em"><b>Each team picks its top 3:</b> 1st choice = 3 points · 2nd = 2 · 3rd = 1 <span class="zh" style="font-size:.85em;color:var(--fg-2)">每隊選前三名：3 分、2 分、1 分</span></div><button class="btn ghost" id="resetVotes" type="button">Reset points</button></div>
+</section>
+<section class="slide " id="s1-match" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 6 · Our four debates<span class="pg">p. 32</span></div><h2 class="h1">Who debates whom?<span class="zh">誰對誰？</span></h2></div></div><div class="match"><div class="hd"></div><div class="hd h-res">Resolution</div><div class="hd aff">Affirmative</div><div class="hd neg">Negative</div><div class="hd h-coin">Coin toss</div><div class="dn">1</div><select class="rsel" data-k="r0" aria-label="Debate 1 resolution"><option value="">Choose a resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="a" data-k="a0" aria-label="Debate 1 affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><select class="n" data-k="n0" aria-label="Debate 1 negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><div class="ctrls" style="flex-wrap:nowrap"><button class="btn ghost coinbtn" type="button">Toss</button><span class="coin">—</span></div><div class="dn">2</div><select class="rsel" data-k="r1" aria-label="Debate 2 resolution"><option value="">Choose a resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="a" data-k="a1" aria-label="Debate 2 affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><select class="n" data-k="n1" aria-label="Debate 2 negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><div class="ctrls" style="flex-wrap:nowrap"><button class="btn ghost coinbtn" type="button">Toss</button><span class="coin">—</span></div><div class="dn">3</div><select class="rsel" data-k="r2" aria-label="Debate 3 resolution"><option value="">Choose a resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="a" data-k="a2" aria-label="Debate 3 affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><select class="n" data-k="n2" aria-label="Debate 3 negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><div class="ctrls" style="flex-wrap:nowrap"><button class="btn ghost coinbtn" type="button">Toss</button><span class="coin">—</span></div><div class="dn">4</div><select class="rsel" data-k="r3" aria-label="Debate 4 resolution"><option value="">Choose a resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="a" data-k="a3" aria-label="Debate 4 affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><select class="n" data-k="n3" aria-label="Debate 4 negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><div class="ctrls" style="flex-wrap:nowrap"><button class="btn ghost coinbtn" type="button">Toss</button><span class="coin">—</span></div></div>
+<div class="grid2">
+  <div class="kp" style="font-size:1.1em">Two teams want the same side? <b>Toss a coin.</b> Two teams of 3? Put them in the <b>same debate</b>.<span class="zh">兩隊想要同一方就擲硬幣；兩支三人隊伍放在同一場。</span></div>
+  <div class="kp" style="font-size:1.1em">Write your <b>resolution</b> and your <b>side</b> (Affirmative or Negative) in your book, p. 32.<span class="zh">在課本第 32 頁寫下辯題和你們是正方或反方。</span></div>
+</div>
+<div class="ctrls"><button class="btn ghost" id="resetMatch" type="button">Clear the table</button></div>
+</section>
+<section class="slide " id="s1-explain" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 2 · Reasons for your opinion<span class="pg">p. 8</span></div><h2 class="h1">Opinions need reasons<span class="zh">意見需要理由</span></h2></div></div>
+<div class="kp">Opinions do not stand up by themselves. Give reasons that <b>other people</b> find reasonable, not just you.<span class="zh">意見不能單獨成立，要提出別人也覺得合理的理由。</span></div>
+<div class="ors">
+  <div class="card acc" style="--c:var(--fg-2)"><span class="lab">Opinion</span><span class="say">Living in the city is better than living in the country …</span></div>
+  <div class="card acc" style="--c:var(--blue)"><span class="lab">+ because</span><span class="say">… because getting to and from work is easier in the city.</span></div>
+  <div class="card acc" style="--c:var(--green)"><span class="lab">= a reason others can check</span><span class="say">Not “because I like it.” A reason must work for <b>most people</b>.</span></div>
+</div>
+</section>
+<section class="slide " id="s1-strong" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 2 · Strong reasons<span class="pg">p. 9</span></div><h2 class="h1">A strong reason is …<span class="zh">有力的理由要……</span></h2></div></div>
+<div class="qual fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)"><h3>Logical<span class="zh">合乎邏輯</span></h3><p>It really supports the opinion.</p>
+    <p class="bad">Cats are better than dogs because <b>hot dogs have mustard</b>. ✗</p></div>
+  <div class="card acc" style="--c:var(--yellow)"><h3>Specific and clear<span class="zh">具體清楚</span></h3><p>It states one clear idea.</p>
+    <p class="bad">The country is better because <b>it has more good things</b>. ✗</p></div>
+  <div class="card acc" style="--c:var(--green)"><h3>Convincing<span class="zh">說服大多數人</span></h3><p>Most people would agree it matters.</p>
+    <p class="bad">The country is better than the city because <b>I like it</b>. ✗</p></div>
+</div>
+<div class="kp">Judges decide if a reason is strong or weak.<span class="zh">評審會判斷理由是強還是弱。</span></div>
+</section>
+<section class="slide " id="s1-judge" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 2 · Practice<span class="pg">p. 9</span></div><h2 class="h1">You are the judge<span class="zh">你是評審</span></h2></div><div class="frame" style="align-self:center">Which reason is strongest?<br>Show a, b or c with your fingers.</div></div><div class="carousel"><div class="item" style="flex-direction:column;gap:.8em" data-scope><div class="judge-q">Cats are better than dogs …</div><div class="opts"><div class="opt"><span class="l">a</span><span>because cats can see better in the dark.</span></div><div class="opt" data-right><span class="l">b</span><span>because cats are cleaner.</span></div><div class="opt"><span class="l">c</span><span>because hot dogs have mustard and cats don&#x27;t.</span></div></div><div class="why ans jw">Being clean matters to most pet owners. Seeing in the dark doesn&#x27;t help you as an owner, and hot dogs aren&#x27;t dogs.</div></div><div class="item" style="flex-direction:column;gap:.8em" data-scope><div class="judge-q">It is better to live in the country than the city …</div><div class="opts"><div class="opt"><span class="l">a</span><span>because the country has more good things.</span></div><div class="opt"><span class="l">b</span><span>because I like it.</span></div><div class="opt" data-right><span class="l">c</span><span>because the environment is cleaner.</span></div></div><div class="why ans jw">“More good things” is not specific, and “I like it” only convinces you.</div></div><div class="item" style="flex-direction:column;gap:.8em" data-scope><div class="judge-q">Teenagers should not smoke …</div><div class="opts"><div class="opt"><span class="l">a</span><span>because it makes their breath smell bad.</span></div><div class="opt"><span class="l">b</span><span>because I don&#x27;t like to smoke.</span></div><div class="opt" data-right><span class="l">c</span><span>because many people who begin smoking as teenagers later develop cancer.</span></div></div><div class="why ans jw">Cancer is a serious, specific result that convinces most people.</div></div><div class="item" style="flex-direction:column;gap:.8em" data-scope><div class="judge-q">The rainforests of the world should be protected …</div><div class="opts"><div class="opt"><span class="l">a</span><span>because rainforests are natural.</span></div><div class="opt" data-right><span class="l">b</span><span>because rainforests produce oxygen.</span></div><div class="opt"><span class="l">c</span><span>because trees are needed for wood to build houses.</span></div></div><div class="why ans jw">Oxygen is a clear, important reason. Wood for houses is a reason to cut trees down.</div></div><div class="cbar" style="margin-top:auto"><button class="btn cprev" type="button">← Back</button><span class="count"></span><button class="btn cnext" type="button">Next →</button><button class="btn" style="margin-left:auto" type="button" data-reveal=".item.cur .jw" data-mode="all" data-mark=".item.cur .opt">Show the strongest</button></div></div>
+</section>
+<section class="slide " id="s1-brain" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 6 · Debate Now 1<span class="pg">pp. 32–33</span></div><h2 class="h1">Brainstorm: 10+ reasons<span class="zh">腦力激盪：10 個以上的理由</span></h2></div><div style="align-self:center"><div class="timer" data-sec="720" data-warn="60"><span class="lbl">Brainstorm</span><span class="t">12:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)">
+    <h3>Rules<span class="zh">規則</span></h3>
+    <ul class="clean" style="--c:var(--blue)">
+      <li><span>Write <b>every</b> idea on p. 32. Don't judge ideas yet.<span class="zh">每個想法都寫在第 32 頁，先不要批評。</span></span></li>
+      <li><span>Only reasons for <b>your side</b>.<span class="zh">只想支持你們這一方的理由。</span></span></li>
+      <li><span>Goal: <b>10 or more</b> reasons.<span class="zh">目標：10 個以上。</span></span></li>
+      <li><span>Everyone speaks. Go around the table.<span class="zh">每個人都要發言，輪流說。</span></span></li>
+    </ul>
+  </div>
+  <div class="card acc" style="--c:var(--yellow)">
+    <h3>Stuck? Think about …<span class="zh">卡住了？從這些角度想</span></h3>
+    <div class="tags" style="--accent:var(--yellow)"><span class="tag lg">Students <span class="zh">學生</span></span><span class="tag lg">Teachers <span class="zh">老師</span></span><span class="tag lg">Parents <span class="zh">家長</span></span><span class="tag lg">Health <span class="zh">健康</span></span><span class="tag lg">Time <span class="zh">時間</span></span><span class="tag lg">Money <span class="zh">金錢</span></span><span class="tag lg">Safety <span class="zh">安全</span></span><span class="tag lg">Learning <span class="zh">學習</span></span></div>
+    <p class="muted" style="font-size:1.05em">Ask: “Who does this help? Who does it hurt?”<span class="zh">問自己：這對誰有幫助？對誰有壞處？</span></p>
+  </div>
+</div>
+</section>
+<section class="slide " id="s1-ors" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 6 · Unit 3 · Supporting your reasons<span class="pg">p. 12</span></div><h2 class="h1">Opinion → Reason → Support<span class="zh">意見 → 理由 → 支持證據</span></h2></div></div>
+<div class="ors">
+  <div class="card acc" style="--c:var(--fg-2)"><span class="lab">Opinion</span><span class="say">“In my opinion, the country is much better than the city …”</span></div>
+  <div class="card acc" style="--c:var(--reason)"><span class="lab">Reason</span><span class="say">“… because there are more fun things to do in the country.”</span></div>
+  <div class="card acc" style="--c:var(--support)"><span class="lab">Support</span><span class="say">“For example, in the country you can go fishing, hiking, rock climbing and camping.”</span></div>
+</div>
+<div class="kp">A reason without support is just another opinion. <b>Support</b> is the evidence that makes judges believe you.<span class="zh">沒有證據的理由只是另一個意見。支持證據讓評審相信你。</span></div>
+</section>
+<section class="slide " id="s1-types" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 3 · Types of support<span class="pg">pp. 13–14</span></div><h2 class="h1">Four kinds of support<span class="zh">四種支持證據</span></h2></div></div><div class="grid4 stype fill" style="align-content:safe center"><div class="card acc" style="--c:var(--blue)"><h3>Explanation<span class="zh">解釋</span></h3><p>Explain how or why it happens.</p><span class="frame">Cats are independent, so …</span></div><div class="card acc" style="--c:var(--yellow)"><h3>Example<span class="zh">例子</span></h3><p>A real case, often from your own life.</p><span class="frame">For example, my cat can …</span></div><div class="card acc" style="--c:var(--green)"><h3>Statistic<span class="zh">統計數字</span></h3><p>A number, a percent, a fact you can count.</p><span class="frame">20% of all students …</span></div><div class="card acc" style="--c:var(--purple)"><h3>Expert opinion<span class="zh">專家意見</span></h3><p>What a doctor, scientist or report says.</p><span class="frame">According to Dr. Kittilove, …</span></div></div><div class="kp">Use <b>two different types</b> for each reason. A statistic + an example is stronger than two examples.<span class="zh">每個理由用兩種不同類型的證據。</span></div>
+</section>
+<section class="slide " id="s1-ipads" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 7 · iPads</div><h2 class="h1">Get your iPad and sign in<span class="zh">拿平板、登入</span></h2></div><div style="align-self:center"><div class="timer" data-sec="720" data-warn="60"><span class="lbl">Sign in</span><span class="t">12:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div>
+<div class="grid2 ipadgrid fill" style="align-content:safe center">
+  <ol class="nsteps" style="--c:var(--blue)">
+    <li><span class="num">1</span><span>Get your school iPad and open <b>Google Classroom</b>.<span class="zh">拿學校的平板，打開 Google Classroom。</span></span></li>
+    <li><span class="num">2</span><span>Sign in with your <b>school</b> Google account, not a personal Gmail.<span class="zh">用學校的 Google 帳號登入，不要用個人 Gmail。</span></span></li>
+    <li><span class="num">3</span><span>Tap <b>+</b> → <b>Join class</b> → type the class code.<span class="zh">點「+」→「加入課程」→ 輸入課程代碼。</span></span></li>
+    <li><span class="num">4</span><span>Open <b>Classwork → Team Board</b>, or scan the QR code on the next slide.<span class="zh">打開「課堂作業」→ Team Board，或掃描下一頁的 QR code。</span></span></li>
+  </ol>
+  <div class="codebox">
+    <span class="lab">Class code<span class="zh">課程代碼</span></span>
+    <span class="code">2nrpombx</span>
+    <span class="hint">Debate Now - Group A (Fall 2026)</span>
+    <span class="hint">Already joined in homeroom? Go to step 4.<span class="zh">已經在導師班加入了？直接做第 4 步。</span></span>
+    <span class="hint" style="color:var(--fg);font-weight:700">Stuck? Raise your hand. Finished? Help a teammate.<span class="zh">卡住了就舉手；完成了就幫隊友。</span></span>
+  </div>
+</div>
+</section>
+<section class="slide tight" id="s1-join" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 7 · Join now<span class="zh">現在加入 Team Board</span></div><h2 class="h1">Join the Team Board</h2></div></div>
+<div class="joinrow fill">
+  <div class="qr big"><svg viewBox="0 0 204 204" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h51v51h-51z"/><path class="qrline" stroke="#0d1117" d="M1 1.5h7m2 0h1m3 0h1m3 0h2m1 0h3m3 0h3m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h7m-49 1h1m5 0h1m2 0h2m3 0h8m1 0h1m1 0h1m1 0h3m3 0h1m1 0h1m1 0h4m1 0h1m5 0h1m-49 1h1m1 0h3m1 0h1m3 0h1m1 0h2m3 0h1m4 0h1m1 0h3m6 0h2m4 0h2m1 0h1m1 0h3m1 0h1m-49 1h1m1 0h3m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h3m2 0h1m2 0h2m3 0h1m4 0h1m2 0h1m1 0h3m1 0h1m-49 1h1m1 0h3m1 0h1m2 0h1m1 0h1m6 0h3m1 0h6m1 0h2m2 0h1m1 0h1m6 0h1m1 0h3m1 0h1m-49 1h1m5 0h1m1 0h1m2 0h2m3 0h3m1 0h1m1 0h1m3 0h3m1 0h2m1 0h3m2 0h1m3 0h1m5 0h1m-49 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-40 1h1m3 0h2m1 0h1m1 0h1m2 0h2m3 0h1m2 0h2m3 0h1m1 0h1m2 0h2m-41 1h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h1m3 0h1m2 0h5m1 0h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h1m-44 1h3m4 0h1m1 0h4m1 0h2m1 0h2m16 0h3m1 0h1m3 0h1m1 0h1m1 0h2m-49 1h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h2m2 0h1m2 0h1m2 0h1m1 0h2m2 0h1m2 0h5m1 0h1m2 0h1m1 0h2m1 0h1m1 0h2m-49 1h2m3 0h1m1 0h2m1 0h5m2 0h4m2 0h6m2 0h1m4 0h1m5 0h4m1 0h2m-47 1h1m3 0h4m1 0h1m1 0h6m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1m2 0h2m3 0h1m2 0h3m2 0h1m-45 1h2m2 0h9m2 0h2m2 0h3m2 0h1m2 0h1m2 0h4m2 0h2m1 0h1m1 0h2m1 0h1m-47 1h7m6 0h1m1 0h2m1 0h1m2 0h1m4 0h1m1 0h2m1 0h1m3 0h2m2 0h1m3 0h2m1 0h1m-47 1h1m5 0h1m1 0h6m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h3m2 0h2m1 0h3m2 0h1m-48 1h1m1 0h1m1 0h3m5 0h1m2 0h2m1 0h1m1 0h1m3 0h5m2 0h7m2 0h1m2 0h4m-47 1h1m1 0h3m4 0h3m2 0h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h5m4 0h2m1 0h1m2 0h1m1 0h2m2 0h2m-47 1h1m2 0h2m2 0h5m1 0h3m3 0h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h1m5 0h3m-49 1h4m1 0h1m1 0h1m1 0h3m1 0h1m1 0h3m1 0h2m1 0h1m1 0h3m2 0h1m6 0h1m2 0h2m1 0h3m1 0h1m1 0h1m-49 1h2m4 0h2m5 0h3m1 0h5m2 0h1m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m3 0h1m2 0h1m1 0h2m-49 1h3m1 0h1m2 0h2m2 0h3m2 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m3 0h1m2 0h2m4 0h1m2 0h3m1 0h1m-48 1h1m2 0h5m5 0h1m1 0h4m2 0h5m4 0h2m1 0h2m1 0h1m1 0h10m-49 1h3m1 0h1m3 0h2m2 0h5m2 0h1m1 0h2m3 0h1m1 0h2m1 0h2m3 0h1m3 0h1m3 0h1m-45 1h1m3 0h1m1 0h1m1 0h3m1 0h1m2 0h3m4 0h1m1 0h1m1 0h3m2 0h3m2 0h1m3 0h1m1 0h1m1 0h1m3 0h1m-48 1h1m1 0h2m3 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h1m3 0h2m3 0h4m2 0h1m1 0h2m3 0h1m1 0h3m-48 1h10m4 0h12m1 0h1m2 0h2m3 0h1m1 0h1m1 0h6m2 0h1m-49 1h3m1 0h2m1 0h1m2 0h1m1 0h2m2 0h3m2 0h1m1 0h1m1 0h1m1 0h2m2 0h3m1 0h2m3 0h4m3 0h2m-48 1h1m1 0h1m1 0h3m1 0h4m2 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m3 0h2m4 0h1m4 0h1m-45 1h3m1 0h1m2 0h1m1 0h3m2 0h1m1 0h3m1 0h2m1 0h1m1 0h1m2 0h2m5 0h4m2 0h1m3 0h1m-45 1h1m1 0h3m1 0h1m4 0h1m1 0h1m1 0h3m3 0h3m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m2 0h2m2 0h1m1 0h2m-47 1h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m2 0h1m3 0h1m2 0h1m1 0h1m1 0h2m2 0h1m1 0h1m6 0h1m1 0h1m2 0h1m1 0h1m-48 1h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h5m2 0h1m1 0h1m1 0h2m2 0h1m1 0h2m1 0h2m1 0h3m1 0h1m3 0h1m1 0h1m1 0h1m-48 1h2m5 0h2m1 0h2m2 0h2m4 0h2m2 0h2m2 0h1m5 0h1m6 0h1m5 0h1m-49 1h1m1 0h1m2 0h3m1 0h2m3 0h1m1 0h1m2 0h1m3 0h1m2 0h1m2 0h2m1 0h3m2 0h1m1 0h2m1 0h1m1 0h1m2 0h2m-49 1h1m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m2 0h3m1 0h5m2 0h4m1 0h1m1 0h1m1 0h2m2 0h1m1 0h2m-44 1h1m1 0h2m1 0h2m2 0h4m1 0h6m1 0h2m2 0h5m1 0h3m1 0h4m1 0h2m3 0h1m2 0h1m-46 1h1m5 0h2m2 0h1m1 0h1m3 0h1m1 0h1m3 0h2m4 0h1m2 0h1m1 0h2m1 0h1m1 0h3m2 0h1m1 0h1m-48 1h1m3 0h2m1 0h1m1 0h3m2 0h4m1 0h3m1 0h2m1 0h3m1 0h1m3 0h1m1 0h2m3 0h4m1 0h2m-48 1h3m5 0h3m2 0h2m1 0h5m1 0h1m3 0h6m1 0h1m1 0h1m3 0h1m1 0h2m4 0h1m-49 1h3m3 0h1m6 0h1m1 0h2m2 0h1m2 0h6m1 0h8m1 0h1m1 0h7m1 0h1m-41 1h3m5 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h2m8 0h1m1 0h1m3 0h2m2 0h1m-49 1h7m3 0h5m1 0h4m2 0h1m1 0h1m1 0h1m1 0h1m3 0h2m1 0h2m2 0h2m1 0h1m1 0h1m3 0h1m-49 1h1m5 0h1m1 0h2m3 0h2m2 0h1m1 0h4m3 0h2m1 0h1m2 0h3m1 0h2m2 0h1m3 0h1m1 0h2m-48 1h1m1 0h3m1 0h1m4 0h2m1 0h4m3 0h6m1 0h1m1 0h2m4 0h2m1 0h6m1 0h1m-47 1h1m1 0h3m1 0h1m1 0h4m4 0h1m3 0h6m6 0h1m2 0h1m6 0h1m1 0h1m2 0h1m-48 1h1m1 0h3m1 0h1m2 0h3m1 0h3m3 0h1m1 0h1m1 0h2m1 0h5m1 0h3m1 0h2m1 0h1m1 0h2m1 0h1m1 0h1m-47 1h1m5 0h1m4 0h1m1 0h1m1 0h3m4 0h2m1 0h3m1 0h3m1 0h2m1 0h4m1 0h1m1 0h2m-45 1h7m1 0h1m1 0h1m1 0h1m1 0h4m3 0h2m1 0h4m3 0h2m1 0h3m2 0h1m1 0h2m1 0h1m2 0h2"/></g></svg></div>
+  <div class="qrtx" style="font-size:1.15em;gap:.5em">
+    <b style="font-size:1.2em">Scan with your iPad or laptop camera</b><span class="zh">用平板或筆電相機掃描</span>
+    <a href="https://script.google.com/a/macros/gl.ckgsh.ntpc.edu.tw/s/AKfycby0Fqf2Lbjz30q7BIaM-ZzNvEknwvpruSKAT1Wc9dw_Z6TwfnRPsqwFfxALTf6Cbh_c/exec" target="_blank" rel="noopener">Open the Team Board</a>
+    <ul class="clean" style="--c:var(--blue);font-size:.9em">
+      <li><span>Tap your <b>team letter</b>.<span class="zh">點你的隊伍字母。</span></span></li>
+      <li><span>Type your English name (the one on the class list), Chinese name, class and seat number → <b>Join team</b>.<span class="zh">輸入英文名字（和名單上一樣）、中文姓名、班級、座號，按 Join team。</span></span></li>
+      <li><span><b>Captain:</b> step 1, choose your resolution, side and captain → <b>Save</b>.<span class="zh">隊長：第 1 步選辯題、正反方、隊長，按 Save。</span></span></li>
+      <li><span>Done? Put your iPad <b>face down</b>.<span class="zh">完成後把平板蓋上。</span></span></li>
+    </ul>
+    <span class="muted" style="font-size:.85em">Can't scan? Classroom → Classwork → Team Board · class code 2nrpombx<span class="zh" style="display:block">無法掃描？Classroom →「課堂作業」→ Team Board</span></span>
+  </div>
+</div>
+</section>
+<section class="slide " id="s1-which" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 7 · Unit 3 · Practice<span class="pg">p. 13</span></div><h2 class="h1">Which type of support?<span class="zh">這是哪一種證據？</span></h2></div></div>
+<div class="orbar"><span class="k o">Opinion</span><span>Cats are better than dogs.</span><span class="k r">Reason</span><span class="reason">This is because cats are cheaper to care for than dogs.</span></div><div class="fill" data-scope style="display:flex;flex-direction:column;gap:.7em"><div class="sup-table"><div class="s">1. At the Pets 4 You pet shop, a cat costs $100 while a dog costs $200.</div><div class="a slot-ans ty"><span>Statistic</span></div><div class="s">2. My friend had a really big dog, a Great Dane. That dog cost so much to keep because it ate so much food that they had to give it away.</div><div class="a slot-ans ty"><span>Example</span></div><div class="s">3. Cats are smaller, so they eat less food, and therefore you spend less money.</div><div class="a slot-ans ty"><span>Explanation</span></div><div class="s">4. According to the book How to Choose a Pet by Dr. Pickapet, published in 2007, cats are cheaper than dogs.</div><div class="a slot-ans ty"><span>Expert opinion</span></div></div><div class="ctrls"><button class="btn" type="button" data-reveal=".ty">Show next answer</button><button class="btn ghost" type="button" data-reveal=".ty" data-mode="all">All</button></div></div>
+</section>
+<section class="slide " id="s1-sign" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 4 · Organizing your argument<span class="pg">p. 18</span></div><h2 class="h1">Signposts: a short name for each reason<span class="zh">路標：每個理由的短名字</span></h2><p class="sub">Signposts help judges remember your reasons. Match each signpost with its reason.<span class="zh">路標要短、好記。請配對。</span></p></div></div><div class="fill" data-scope style="display:flex;flex-direction:column;gap:.7em;justify-content:center"><div class="spm"><span class="sp">COST</span><span class="m slot-ans spk-a"><span>b</span></span><div class="tx"><span class="l">a</span>Soccer is much easier than baseball. Baseball rules take hours to explain, and you need a bat, glove and baseball diamond to play.</div><span class="sp">COLOR</span><span class="m slot-ans spk-a"><span>d</span></span><div class="tx"><span class="l">b</span>Soccer tickets are much cheaper than baseball tickets. In this city, a baseball ticket costs about three times more.</div><span class="sp">EXCITEMENT</span><span class="m slot-ans spk-a"><span>c</span></span><div class="tx"><span class="l">c</span>Soccer is much more exciting than baseball. In baseball, 90% of the time the players are just standing around waiting.</div><span class="sp">SIMPLICITY</span><span class="m slot-ans spk-a"><span>a</span></span><div class="tx"><span class="l">d</span>Soccer uniforms are much more colorful than baseball uniforms. The New York Yankees have one of the most boring uniforms in the world.</div></div><div class="ctrls"><button class="btn" type="button" data-reveal=".spk-a" data-mode="all">Show answers</button></div></div>
+</section>
+<section class="slide " id="s1-arg" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Unit 4 · Your argument<span class="pg">p. 19</span></div><h2 class="h1">Every point has three parts<span class="zh">每個論點有三個部分</span></h2></div></div>
+<div class="legend"><span class="hl-sign">1 · Signpost</span><span class="hl-reason">2 · Reason</span><span class="hl-support">3 · Supports</span></div>
+<div class="card fill" style="justify-content:center;gap:1em">
+  <p class="argline"><span class="hl-sign">Our first point is cost.</span> <span class="hl-reason">Soccer tickets are much cheaper than baseball tickets.</span> <span class="hl-support">In this city, the price of a ticket to a baseball game is about three times higher than the price of a ticket to a soccer game.</span></p>
+  <p class="argline"><span class="hl-sign">Our second point is excitement.</span> <span class="hl-reason">Soccer is much more exciting than baseball.</span> <span class="hl-support">In baseball, 90% of the time the players are just standing around waiting. Soccer has action all the time.</span></p>
+</div>
+<div class="kp">This is exactly what you write for homework, one block per reason.<span class="zh">回家作業就是照這個格式寫，一個理由一段。</span></div>
+</section>
+<section class="slide " id="s1-divide" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 7 · Teamwork<span class="pg">pp. 33–34</span></div><h2 class="h1">Divide the work<span class="zh">分工合作</span></h2></div></div>
+<div class="stepgrid">
+  <div class="card acc" style="--c:var(--blue)"><span class="num" style="--c:var(--blue)">1</span><h3>Choose the best 8<span class="zh">選出最好的 8 個</span></h3><p>Put similar ideas together. Keep the 8 strongest reasons.</p></div>
+  <div class="card acc" style="--c:var(--yellow)"><span class="num" style="--c:var(--yellow)">2</span><h3>Name them<span class="zh">取路標</span></h3><p>Give each reason a signpost of 1–2 words.</p></div>
+  <div class="card acc" style="--c:var(--purple)"><span class="num" style="--c:var(--purple)">3</span><h3>Share them out<span class="zh">分配理由</span></h3><p>Each person owns <b>2 reasons</b>. Team of 3: 2–3 each.</p></div>
+  <div class="card acc" style="--c:var(--green)"><span class="num" style="--c:var(--green)">4</span><h3>Pick roles<span class="zh">決定講者</span></h3><p>1st, 2nd, 3rd and Final speaker. One role each.</p></div>
+</div>
+<div class="rule"><span style="font-size:2.4em">☝️</span><div><span class="big">One reason = one owner.</span> <span style="font-size:1.2em">Never write a teammate's reason or copy their homework. On Debate Day, every speaker must say <b>something new</b>.</span><span class="zh">一個理由只屬於一個人。不要寫隊友的理由，也不要抄作業。辯論日每位講者都要講新的內容。</span></div></div>
+</section>
+<section class="slide " id="s1-roles" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 7 · Speaker roles<span class="pg">p. 28</span></div><h2 class="h1">Who speaks when?<span class="zh">誰在什麼時候發言？</span></h2></div></div>
+<div class="roles4">
+  <div class="card acc" style="--c:var(--blue)"><h3>1st speaker<span class="zh">第一位</span></h3><p>Introduces the resolution and lists <b>all</b> the team's signposts. Then gives their own 2 reasons.</p><p class="muted" style="font-size:.95em">Limit 2:30</p></div>
+  <div class="card acc" style="--c:var(--orange)"><h3>2nd speaker<span class="zh">第二位</span></h3><p>Gives their own 2 reasons, each with supports.</p><p class="muted" style="font-size:.95em">Limit 2:00</p></div>
+  <div class="card acc" style="--c:var(--purple)"><h3>3rd speaker<span class="zh">第三位</span></h3><p>Gives their own 2 reasons, each with supports.</p><p class="muted" style="font-size:.95em">Limit 2:00</p></div>
+  <div class="card acc" style="--c:var(--yellow)"><h3>Final speaker<span class="zh">結辯</span></h3><p>Gives their own 2 reasons, then <b>summarizes</b> every teammate's points and closes.</p><p class="muted" style="font-size:.95em">Limit 2:30</p></div>
+</div>
+<div class="eyebrow" style="color:var(--muted)">Speaking order on Debate Day · the Affirmative team speaks first and last <span class="zh">正方先講也最後講</span></div>
+<div class="order"><div class="spk a"><b>1</b><small>Aff 1st</small><em>2:30</em></div><div class="spk n"><b>2</b><small>Neg 1st</small><em>2:30</em></div><div class="spk a"><b>3</b><small>Aff 2nd</small><em>2:00</em></div><div class="spk n"><b>4</b><small>Neg 2nd</small><em>2:00</em></div><div class="spk a"><b>5</b><small>Aff 3rd</small><em>2:00</em></div><div class="spk n"><b>6</b><small>Neg 3rd</small><em>2:00</em></div><div class="spk n"><b>7</b><small>Neg Final</small><em>2:30</em></div><div class="spk a"><b>8</b><small>Aff Final</small><em>2:30</em></div></div>
+</section>
+<section class="slide " id="s1-board" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Period 7 · Team Board</div><h2 class="h1">Finish your team page<span class="zh">完成隊伍頁面</span></h2><p class="sub">iPads out again. Put your plan on the Team Board.<span class="zh">再拿出平板，把計畫放上 Team Board。</span></p></div><div style="align-self:center"><div class="timer" data-sec="360" data-warn="60"><span class="lbl">Finish</span><span class="t">6:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div>
+<div class="row fill" style="min-height:0;gap:1.2em">
+  <div style="flex:1.25;display:flex;flex-direction:column;gap:.7em;min-width:0">
+    <div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span>Team C · Affirmative · “Every class should have a class pet.”</span></div>
+      <div class="in">
+        <div class="mrow"><span class="who">1st · Amy</span><span><span class="sign">Responsibility</span> · <span class="sign">Calm</span></span><span class="st ok">Submitted</span></div>
+        <div class="mrow"><span class="who">2nd · Ben</span><span><span class="sign">Science</span> · <span class="sign">Friendship</span></span><span class="st wip">Draft</span></div>
+        <div class="mrow"><span class="who">3rd · Cindy</span><span><span class="sign">Attendance</span> · <span class="sign">Kindness</span></span><span class="st no">Not started</span></div>
+        <div class="mrow"><span class="who">Final · Dan</span><span><span class="sign">Cost</span> · <span class="sign">Stress</span></span><span class="st ok">Submitted</span></div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:1em;margin:0">Example team. You see your teammates' work, so nobody repeats a reason.<span class="zh" style="display:block">範例。你可以看到隊友寫了什麼，就不會重複。</span></p>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;gap:.8em;min-width:0">
+    <ul class="clean" style="--c:var(--blue)">
+      <li><span><b>Captain:</b> step 3, type your 8 signposts and choose <b>one owner</b> for each.<span class="zh">隊長：第 3 步輸入 8 個路標，每個選一位負責人。</span></span></li>
+      <li><span><b>Everyone:</b> step 2, choose your speaker role.<span class="zh">每個人：第 2 步選擇講者角色。</span></span></li>
+      <li><span><b>Everyone:</b> check that you own 2 signposts.<span class="zh">每個人：確認你負責 2 個路標。</span></span></li>
+    </ul>
+    <div class="linkbox" data-goto="s1-join" style="cursor:pointer">← Need the QR code again?<span class="zh" style="display:block;font-size:.7em;color:var(--fg-2)">需要再掃一次 QR code？</span></div>
+  </div>
+</div>
+</section>
+<section class="slide tight" id="s1-hw" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Homework 1 · My Reasons</div><h2 class="h1">Write up your two reasons<span class="zh">寫出你的兩個理由</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)">
+  <div class="hw">
+    <span class="due">Due Sunday 10/25, 11:59 PM<span class="zh">10/25（日）晚上 11:59 前 · Team Board → My Reasons</span></span>
+    <ul class="clean" style="--c:var(--yellow)">
+      <li><span>For each of <b>your</b> reasons: signpost, reason (1 sentence), <b>2 supports</b> of different types.<span class="zh">每個理由：路標、理由（一句話）、兩個不同類型的支持證據。</span></span></li>
+      <li><span>Read your teammates' reasons first. <b>No repeats.</b><span class="zh">先看隊友的理由，不要重複。</span></span></li>
+      <li><span>Use your own words. Say where your facts come from.<span class="zh">用自己的話寫，並寫出資料來源。</span></span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <span class="eyebrow" style="color:var(--muted)">Example · “Soccer is a better sport than baseball.”</span>
+    <div class="example">
+      <span class="k s">Signpost</span><span><b>Cost</b></span>
+      <span class="k r">Reason</span><span>Soccer tickets are much cheaper than baseball tickets.</span>
+      <span class="k p">Support 1</span><span>In this city, a baseball ticket costs about three times more than a soccer ticket.<span class="typ">STATISTIC</span></span>
+      <span class="k p">Support 2</span><span>Baseball stadiums are bigger and cost more to run, so baseball teams have to charge more for tickets.<span class="typ">EXPLANATION</span></span>
+    </div>
+  </div>
+</div>
+</section>
+<section class="slide " id="s1-exit" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Session 1 · Exit ticket</div><h2 class="h1">Check your understanding<span class="zh">確認你學會了</span></h2></div></div><div class="quiz"><div class="qcard"><div class="qn">Question 1</div><div class="qq">The team that <b>disagrees</b> with the resolution is the …</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>Affirmative team</span></button><button class="qopt" type="button"><span class="l">B</span><span>Negative team</span></button><button class="qopt" type="button"><span class="l">C</span><span>judges</span></button><button class="qopt" type="button"><span class="l">D</span><span>chairman</span></button></div></div><div class="qcard"><div class="qn">Question 2</div><div class="qq">Which one is a resolution about <b>policy</b>?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>Cats are cuter than dogs.</span></button><button class="qopt" type="button"><span class="l">B</span><span>Summer is hotter than winter.</span></button><button class="qopt" type="button"><span class="l">C</span><span>The school should have a longer lunch break.</span></button><button class="qopt" type="button"><span class="l">D</span><span>Math is difficult.</span></button></div></div><div class="qcard"><div class="qn">Question 3</div><div class="qq">“Cats are better than dogs because …” Which reason is the <b>strongest</b>?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>… I like cats.</span></button><button class="qopt" type="button"><span class="l">B</span><span>… cats are cheaper to care for.</span></button><button class="qopt" type="button"><span class="l">C</span><span>… hot dogs have mustard.</span></button><button class="qopt" type="button"><span class="l">D</span><span>… cats can see in the dark.</span></button></div></div><div class="qcard"><div class="qn">Question 4</div><div class="qq">“According to Dr. Kittilove, most cats are happy alone.” This support is …</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>an example</span></button><button class="qopt" type="button"><span class="l">B</span><span>an explanation</span></button><button class="qopt" type="button"><span class="l">C</span><span>a statistic</span></button><button class="qopt" type="button"><span class="l">D</span><span>an expert opinion</span></button></div></div><div class="qcard"><div class="qn">Question 5</div><div class="qq">A <b>signpost</b> is …</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>a short name for a reason</span></button><button class="qopt" type="button"><span class="l">B</span><span>the team's resolution</span></button><button class="qopt" type="button"><span class="l">C</span><span>a type of support</span></button><button class="qopt" type="button"><span class="l">D</span><span>the judges' score</span></button></div></div><div class="cbar" style="margin-top:auto"><button class="btn qprev" type="button">← Prev</button><span class="count" style="font-weight:800;color:var(--muted)"></span><button class="btn qnext" type="button">Next →</button></div></div>
+</section>
+<section class="slide " id="s1-bridge" data-sect="Session 1 · 10/21" style="--accent:var(--s1)" aria-label="Session 1 · 10/21">
+<div class="top"><div><div class="eyebrow">Session 1 · Wrap-up</div><h2 class="h1">Today → next week<span class="zh">今天 → 下週</span></h2></div></div>
+<div class="bridge">
+  <div class="card acc" style="--c:var(--blue)"><h3>What we learned<span class="zh">今天學到的</span></h3>
+    <ul class="clean" style="--c:var(--blue)">
+      <li><span>A debate is a formal discussion with rules, turns and judges.</span></li>
+      <li><span>A strong reason is logical, specific and convincing.</span></li>
+      <li><span>Every point = <span class="sign">signpost</span> + <span class="reason">reason</span> + <span class="support">supports</span>.</span></li>
+      <li><span>One reason = one owner. Your team divides the work.</span></li>
+    </ul></div>
+  <div class="card acc" style="--c:var(--orange)"><h3>Coming up · Wed 10/28<span class="zh">下週</span></h3>
+    <p>We read your Homework 1 feedback and fix weak reasons. Then we learn how a debate speech is built: what the 1st, 2nd, 3rd and Final speakers each say.</p>
+    <p class="muted">Homework 1 is due <b style="color:var(--yellow)">Sunday 10/25, 11:59 PM</b>.<span class="zh">作業 1：10/25（日）晚上 11:59 前。</span></p></div>
+</div>
+</section>
+<section class="slide title-slide" id="s2-title" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+
+<div class="t-label">Session 2 · Wed 10/28 · Period 7</div>
+<h1 class="t-title">From reasons to a speech</h1>
+<p class="t-sub">Stronger supports, and how a debate speech is built.<span class="zh">更有力的證據，以及辯論講稿的結構</span></p>
+<div class="tags">
+  <span class="tag lg">Unit 3 · Giving support · p. 14</span>
+  <span class="tag lg">Unit 6 · Writing your speech · pp. 28–30</span>
+</div>
+</section>
+<section class="slide " id="s2-goals" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Session 2 · Today's goals</div><h2 class="h1">By the end of today, I can …<span class="zh">今天結束時，我能夠……</span></h2></div></div>
+<div class="grid3 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--purple)"><span class="num" style="--c:var(--purple)">1</span><h3>Fix my supports<span class="zh">修正我的證據</span></h3><p>using my teacher's feedback.</p></div>
+  <div class="card acc" style="--c:var(--orange)"><span class="num" style="--c:var(--orange)">2</span><h3>Name the parts of my speech<span class="zh">說出講稿的各部分</span></h3><p>for my speaker role.</p></div>
+  <div class="card acc" style="--c:var(--green)"><span class="num" style="--c:var(--green)">3</span><h3>Start my speech<span class="zh">開始寫講稿</span></h3><p>from the Team Board template.</p></div>
+</div>
+</section>
+<section class="slide tight" id="s2-feedback" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Homework 1 · What to fix</div><h2 class="h1">Four common problems<span class="zh">四個常見問題</span></h2></div><div style="align-self:center"><div class="timer" data-sec="480" data-warn="60"><span class="lbl">Fix it</span><span class="t">8:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div><div class="fbgrid"><div class="fbrow"><span class="fp">The reason is too general.</span><span class="fw"><b>✗</b> Cats are better because they are good.</span><span class="fs"><b>✓</b> Cats are better because they are cheaper to care for.</span></div><div class="fbrow"><span class="fp">The support repeats the reason.</span><span class="fw"><b>✗</b> Cats are cheap. This is because they don&#x27;t cost much.</span><span class="fs"><b>✓</b> At the Pets 4 You shop, a cat costs $100, but a dog costs $200.</span></div><div class="fbrow"><span class="fp">The expert has no source.</span><span class="fw"><b>✗</b> Experts say cats are cheaper.</span><span class="fs"><b>✓</b> According to the book How to Choose a Pet by Dr. Pickapet (2007), cats are cheaper than dogs.</span></div><div class="fbrow"><span class="fp">Two teammates have the same reason.</span><span class="fw"><b>✗</b> “Money” and “Cheap” are the same idea.</span><span class="fs"><b>✓</b> Keep one. The other person chooses a new reason.</span></div></div><div class="kp" style="font-size:1.15em">Open the Team Board → <b>My Reasons</b>. Read your feedback. Fix your reasons, then click <b>Submit</b> again.<span class="zh">打開 Team Board 的 My Reasons，看老師的回饋，修改後再按 Submit。</span></div>
+</section>
+<section class="slide " id="s2-lang" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Unit 3 · Giving support<span class="pg">p. 14</span></div><h2 class="h1">The language of support<span class="zh">提出證據的句型</span></h2></div></div><div class="grid4 fill" style="align-content:safe center"><div class="card acc" style="--c:var(--yellow)"><h3 style="color:var(--yellow)">Examples<span class="zh">例子</span></h3><span class="frame" style="font-size:1.05em">For example, my dog can …</span><span class="frame" style="font-size:1.05em">For instance, my frog can …</span><span class="frame" style="font-size:1.05em">Let me give an example. …</span></div><div class="card acc" style="--c:var(--green)"><h3 style="color:var(--green)">Statistics<span class="zh">統計數字</span></h3><span class="frame" style="font-size:1.05em">20% of all women own …</span><span class="frame" style="font-size:1.05em">One out of five families own …</span><span class="frame" style="font-size:1.05em">1/5 of all people over 60 own …</span></div><div class="card acc" style="--c:var(--purple)"><h3 style="color:var(--purple)">Expert opinions<span class="zh">專家意見</span></h3><span class="frame" style="font-size:1.05em">According to Dr. Kittilove, most cats …</span><span class="frame" style="font-size:1.05em">A recent article in Dog Lover&#x27;s Magazine stated that …</span><span class="frame" style="font-size:1.05em">To quote Dr. Tweetman, “Most birds …”</span></div><div class="card acc" style="--c:var(--blue)"><h3 style="color:var(--blue)">Explanations<span class="zh">解釋</span></h3><span class="frame" style="font-size:1.05em">If we don&#x27;t feed our cats, they will …</span><span class="frame" style="font-size:1.05em">If we didn&#x27;t feed our dogs, they would …</span><span class="frame" style="font-size:1.05em">Cats are independent, so …</span></div></div>
+</section>
+<section class="slide " id="s2-fill" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Unit 3 · Practice<span class="pg">p. 15</span></div><h2 class="h1">Add the missing words<span class="zh">填入缺少的字</span></h2></div></div><div class="fill" data-scope style="display:flex;flex-direction:column;gap:.7em;justify-content:safe center"><div class="sup-table" style="grid-template-columns:minmax(0,1fr) 12em"><div class="s">1. _____ the <i>Taipei Times</i>, by 2027 there will be more pets than children in Taiwan.</div><div class="a slot-ans fl"><span>According to<small style="display:block;font-size:.62em;color:var(--fg-2)">Expert opinion</small></span></div><div class="s">2. Technology is getting better, _____ computers are getting faster.</div><div class="a slot-ans fl"><span>so<small style="display:block;font-size:.62em;color:var(--fg-2)">Explanation</small></span></div><div class="s">3. _____ teachers didn't give tests, students _____ not study.</div><div class="a slot-ans fl"><span>If · would<small style="display:block;font-size:.62em;color:var(--fg-2)">Explanation</small></span></div><div class="s">4. _____ days of the week begin with the letter “S”.</div><div class="a slot-ans fl"><span>Two out of seven<small style="display:block;font-size:.62em;color:var(--fg-2)">Statistic</small></span></div><div class="s">5. _____, my grandmother smoked two packs of cigarettes every day, and she died of lung cancer.</div><div class="a slot-ans fl"><span>For example<small style="display:block;font-size:.62em;color:var(--fg-2)">Example</small></span></div></div><div class="ctrls"><button class="btn" type="button" data-reveal=".fl">Show next answer</button><button class="btn ghost" type="button" data-reveal=".fl" data-mode="all">All</button></div></div>
+</section>
+<section class="slide " id="s2-format" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Unit 6 · Debate format<span class="pg">p. 28</span></div><h2 class="h1">The eight-speech debate<span class="zh">八人辯論的順序</span></h2></div></div><div class="kp">The Affirmative team wants the change, so it speaks <b>first and last</b>. Speakers take turns: one Affirmative, then one Negative.<span class="zh">正方想要改變，所以第一個和最後一個發言。正反方輪流上台。</span></div><div class="fill" style="display:flex;flex-direction:column;justify-content:safe center;gap:1em"><div class="order"><div class="spk a"><b>1</b><small>Aff 1st</small><em>2:30</em></div><div class="spk n"><b>2</b><small>Neg 1st</small><em>2:30</em></div><div class="spk a"><b>3</b><small>Aff 2nd</small><em>2:00</em></div><div class="spk n"><b>4</b><small>Neg 2nd</small><em>2:00</em></div><div class="spk a"><b>5</b><small>Aff 3rd</small><em>2:00</em></div><div class="spk n"><b>6</b><small>Neg 3rd</small><em>2:00</em></div><div class="spk n"><b>7</b><small>Neg Final</small><em>2:30</em></div><div class="spk a"><b>8</b><small>Aff Final</small><em>2:30</em></div></div><div class="grid2"><div class="card acc" style="--c:var(--blue)"><h3>2:30 · 1st and Final speakers<span class="zh">第一位與結辯</span></h3><p>About 220–275 words.</p></div>
+<div class="card acc" style="--c:var(--orange)"><h3>2:00 · 2nd and 3rd speakers<span class="zh">第二、三位</span></h3><p>About 175–220 words.</p></div></div></div>
+</section>
+<section class="slide tight" id="s2-parts" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Unit 6 · Organizing your speech<span class="pg">pp. 28–30</span><span class="zh">你的講稿要包含什麼？</span></div><h2 class="h1">What goes in your speech?</h2></div></div><div class="pmatrix"><div class="pm-h"></div><div class="pm-h">1st</div><div class="pm-h">2nd</div><div class="pm-h">3rd</div><div class="pm-h">Final</div><div class="pm-p"><b>Introduction 1</b><span>Greet, say the resolution and your side.</span></div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-p"><b>Introduction 2</b><span>List ALL the team's signposts.</span></div><div class="pm-c on">✓</div><div class="pm-c">—</div><div class="pm-c">—</div><div class="pm-c">—</div><div class="pm-p"><b>Your argument</b><span>Your 2 reasons: signpost → reason → supports.</span></div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-p"><b>Summary</b><span>What every teammate said.</span></div><div class="pm-c">—</div><div class="pm-c">—</div><div class="pm-c">—</div><div class="pm-c on">✓</div><div class="pm-p"><b>Conclusion</b><span>Tell the judges they must agree with you.</span></div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-c on">✓</div><div class="pm-c on">✓</div></div><div class="kp" style="font-size:1.05em;padding:.5em .9em">Introduction 1 can be the same for everyone. <b>Your argument must be different from every teammate's.</b> <span class="zh" style="display:inline">開場白可以一樣，論點一定要不同。</span></div>
+</section>
+<section class="slide " id="s2-frames" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Unit 6 · Sentence frames<span class="pg">pp. 29–30</span></div><h2 class="h1">Useful language for each part<span class="zh">每個部分的實用句型</span></h2></div></div><div class="frames fill"><div class="card acc" style="--c:var(--blue);gap:.35em"><h3 style="color:var(--blue);font-size:1.25em">Introduction 1</h3><span style="font-size:1.02em;line-height:1.3">Good morning, Mr. Chairman, judges and fellow students.</span><span style="font-size:1.02em;line-height:1.3">Today&#x27;s resolution is “…”</span><span style="font-size:1.02em;line-height:1.3">We, of the affirmative team, wholeheartedly agree with this resolution.</span></div><div class="card acc" style="--c:var(--yellow);gap:.35em"><h3 style="color:var(--yellow);font-size:1.25em">Introduction 2 · 1st only</h3><span style="font-size:1.02em;line-height:1.3">My colleagues and I will present to you … reasons: …</span><span style="font-size:1.02em;line-height:1.3">Today, we will present to you … reasons: …</span></div><div class="card acc" style="--c:var(--purple);gap:.35em"><h3 style="color:var(--purple);font-size:1.25em">Your argument</h3><span style="font-size:1.02em;line-height:1.3">Now I would like to present our argument.</span><span style="font-size:1.02em;line-height:1.3">Now this brings me to my argument.</span><span style="font-size:1.02em;line-height:1.3">Let me now present our final reasons.</span></div><div class="card acc" style="--c:var(--orange);gap:.35em"><h3 style="color:var(--orange);font-size:1.25em">Summary · Final only</h3><span style="font-size:1.02em;line-height:1.3">I would now like to summarize the … team&#x27;s points.</span><span style="font-size:1.02em;line-height:1.3">Our first speaker spoke to you about …</span><span style="font-size:1.02em;line-height:1.3">She also said that …</span></div><div class="card acc" style="--c:var(--green);gap:.35em"><h3 style="color:var(--green);font-size:1.25em">Conclusion</h3><span style="font-size:1.02em;line-height:1.3">Because of these reasons, we, of the … team, strongly believe that …</span><span style="font-size:1.02em;line-height:1.3">Now that you have heard my argument, you must agree that …</span></div></div>
+</section>
+<section class="slide tight" id="s2-model" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Unit 6 · Model speech</div><h2 class="h1">A 1st speaker's speech<span class="zh">第一位講者範例</span></h2><p class="sub">Resolution: “Students should be able to eat in class.” · Affirmative</p></div></div>
+<div class="legend"><span style="background:var(--panel-3)">Introduction</span><span class="hl-sign">Signpost</span><span class="hl-reason">Reason</span><span class="hl-support">Support</span></div>
+<div class="card fill" style="justify-content:center;gap:.7em;font-size:1.02em">
+  <p><span class="muted">Intro 1 ·</span> Good morning, Mr. Chairman, judges, and fellow students. Today's resolution is “Students should be able to eat in class.” We, of the affirmative team, wholeheartedly agree with this resolution.</p>
+  <p><span class="muted">Intro 2 ·</span> My colleagues and I will present to you 8 reasons: <b class="sign">time, feeling better, rules …</b></p>
+  <p><span class="muted">Argument ·</span> Now I would like to present our argument. The first reason is <span class="hl-sign">time</span>. <span class="hl-reason">Students do not have enough break time to eat</span> <span class="hl-support">and they need to go to different classrooms. Eating a little food in class can help them feel better.</span> The second reason is <span class="hl-sign">feeling better</span> …</p>
+  <p><span class="muted">Conclusion ·</span> Because of these reasons, we, of the affirmative team, strongly believe that students should be able to eat in class. Thank you.</p>
+</div>
+</section>
+<section class="slide " id="s2-board" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Homework 2 · On the Team Board</div><h2 class="h1">Write your speech draft<span class="zh">在 Team Board 寫講稿草稿</span></h2></div></div>
+<div class="stepgrid fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)"><span class="num" style="--c:var(--blue)">1</span><h3>Open My Speech<span class="zh">打開 My Speech</span></h3><p>Choose <b>Draft · HW2</b>. Check your role.</p></div>
+  <div class="card acc" style="--c:var(--yellow)"><span class="num" style="--c:var(--yellow)">2</span><h3>Start from the template<span class="zh">從範本開始</span></h3><p>It already has your resolution, your side and your reasons.</p></div>
+  <div class="card acc" style="--c:var(--purple)"><span class="num" style="--c:var(--purple)">3</span><h3>Make it yours<span class="zh">改成你自己的話</span></h3><p>Connect the sentences. Add details. Use words you can say.</p></div>
+  <div class="card acc" style="--c:var(--green)"><span class="num" style="--c:var(--green)">4</span><h3>Read it aloud<span class="zh">大聲唸並計時</span></h3><p>Use the timer. Too long? Cut. Then <b>Submit</b>.</p></div>
+</div>
+<div class="kp" style="font-size:1.12em">Final speaker: the template also writes a <b>summary</b> of your teammates' points. 1st speaker: it lists <b>all</b> the signposts.<span class="zh">結辯的範本會整理隊友的論點；第一位的範本會列出所有路標。</span></div>
+</section>
+<section class="slide " id="s2-hw" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Homework 2 · Speech draft</div><h2 class="h1">Your full speech, first draft<span class="zh">完整講稿初稿</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="hw">
+    <span class="due">Due Sunday 11/1, 11:59 PM<span class="zh">11/1（日）晚上 11:59 前 · Team Board → My Speech → Draft</span></span>
+    <ul class="clean" style="--c:var(--yellow)">
+      <li><span>The <b>whole</b> speech for your role, all parts.<span class="zh">寫出你角色的完整講稿。</span></span></li>
+      <li><span>Read it aloud with the timer. Your time is saved.<span class="zh">用計時器唸一次，時間會被記錄。</span></span></li>
+      <li><span>Your argument = <b>your</b> 2 reasons only.<span class="zh">論點只講你自己的 2 個理由。</span></span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <span class="eyebrow" style="color:var(--muted)">Check before you submit</span>
+    <ul class="clean" style="--c:var(--green)">
+      <li><span>Every part for my role is there.</span></li>
+      <li><span>Each reason has a signpost, a reason and supports.</span></li>
+      <li><span>I can say every word in my speech.</span></li>
+      <li><span>My time is under the limit.</span></li>
+    </ul>
+  </div>
+</div>
+</section>
+<section class="slide " id="s2-exit" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Session 2 · Exit ticket</div><h2 class="h1">Check your understanding<span class="zh">確認你學會了</span></h2></div></div><div class="quiz"><div class="qcard"><div class="qn">Question 1</div><div class="qq">Which team speaks <b>first and last</b>?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>the Negative team</span></button><button class="qopt" type="button"><span class="l">B</span><span>the Affirmative team</span></button><button class="qopt" type="button"><span class="l">C</span><span>the judges</span></button><button class="qopt" type="button"><span class="l">D</span><span>the team with more people</span></button></div></div><div class="qcard"><div class="qn">Question 2</div><div class="qq">Who lists <b>all</b> of the team's signposts?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>the 1st speaker</span></button><button class="qopt" type="button"><span class="l">B</span><span>the 2nd speaker</span></button><button class="qopt" type="button"><span class="l">C</span><span>the 3rd speaker</span></button><button class="qopt" type="button"><span class="l">D</span><span>the Final speaker</span></button></div></div><div class="qcard"><div class="qn">Question 3</div><div class="qq">“If we didn't feed our dogs, they would be hungry.” This support is …</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>an example</span></button><button class="qopt" type="button"><span class="l">B</span><span>a statistic</span></button><button class="qopt" type="button"><span class="l">C</span><span>an explanation</span></button><button class="qopt" type="button"><span class="l">D</span><span>an expert opinion</span></button></div></div><div class="qcard"><div class="qn">Question 4</div><div class="qq">Who <b>summarizes</b> every teammate's points?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>the 1st speaker</span></button><button class="qopt" type="button"><span class="l">B</span><span>the 2nd speaker</span></button><button class="qopt" type="button"><span class="l">C</span><span>the judges</span></button><button class="qopt" type="button"><span class="l">D</span><span>the Final speaker</span></button></div></div><div class="cbar" style="margin-top:auto"><button class="btn qprev" type="button">← Prev</button><span class="count" style="font-weight:800;color:var(--muted)"></span><button class="btn qnext" type="button">Next →</button></div></div>
+</section>
+<section class="slide " id="s2-bridge" data-sect="Session 2 · 10/28" style="--accent:var(--s2)" aria-label="Session 2 · 10/28">
+<div class="top"><div><div class="eyebrow">Session 2 · Wrap-up</div><h2 class="h1">Today → next week<span class="zh">今天 → 下週</span></h2></div></div>
+<div class="bridge">
+  <div class="card acc" style="--c:var(--orange)"><h3>What we learned<span class="zh">今天學到的</span></h3>
+    <ul class="clean" style="--c:var(--orange)">
+      <li><span>Each type of support has its own language.</span></li>
+      <li><span>The Affirmative speaks first and last.</span></li>
+      <li><span>Every speech: Intro 1 → Argument → Conclusion. The 1st speaker adds Intro 2; the Final speaker adds a Summary.</span></li>
+    </ul></div>
+  <div class="card acc" style="--c:var(--purple)"><h3>Coming up · Wed 11/4<span class="zh">下週</span></h3>
+    <p>Three periods: we revise speeches, learn how speakers are scored, rehearse in teams and hold practice debates.</p>
+    <p class="muted">Homework 2 is due <b style="color:var(--yellow)">Sunday 11/1, 11:59 PM</b>.<span class="zh">作業 2：11/1（日）晚上 11:59 前。</span></p></div>
+</div>
+</section>
+<section class="slide title-slide" id="s3-title" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+
+<div class="t-label">Session 3 · Wed 11/4 · Periods 5–7</div>
+<h1 class="t-title">Polish and practice</h1>
+<p class="t-sub">Better speeches, better delivery, and our first practice debates.<span class="zh">修改講稿、練習台風、第一次模擬辯論</span></p>
+<div class="tags">
+  <span class="tag lg">Unit 6 · p. 31</span>
+  <span class="tag lg">Peer Assessment · pp. 44–46</span>
+</div>
+</section>
+<section class="slide " id="s3-goals" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Session 3 · Today's goals</div><h2 class="h1">By the end of today, I can …<span class="zh">今天結束時，我能夠……</span></h2></div></div>
+<div class="grid3 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--purple)"><span class="num" style="--c:var(--purple)">1</span><h3>Revise my speech<span class="zh">修改講稿</span></h3><p>with my teacher's feedback.</p></div>
+  <div class="card acc" style="--c:var(--blue)"><span class="num" style="--c:var(--blue)">2</span><h3>Deliver it well<span class="zh">好好表達</span></h3><p>with eye contact, gestures and a clear voice.</p></div>
+  <div class="card acc" style="--c:var(--green)"><span class="num" style="--c:var(--green)">3</span><h3>Debate on time<span class="zh">準時完成辯論</span></h3><p>in a full practice debate.</p></div>
+</div>
+</section>
+<section class="slide " id="s3-revise" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 5 · Revise</div><h2 class="h1">Make your draft better<span class="zh">讓草稿更好</span></h2></div><div style="align-self:center"><div class="timer" data-sec="1200" data-warn="120"><span class="lbl">Revise</span><span class="t">20:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--purple)"><h3>On the Team Board<span class="zh">在 Team Board 上</span></h3>
+    <ul class="clean" style="--c:var(--purple)">
+      <li><span>Read your HW2 feedback.<span class="zh">看作業 2 的回饋。</span></span></li>
+      <li><span>Switch to <b>Final · HW3</b> → <b>Start from my draft</b>.<span class="zh">切到 Final，按「Start from my draft」。</span></span></li>
+      <li><span>Fix what your teacher marked.<span class="zh">修改老師標出的地方。</span></span></li>
+    </ul></div>
+  <div class="card acc" style="--c:var(--green)"><h3>Check with your team<span class="zh">和隊友確認</span></h3>
+    <ul class="clean" style="--c:var(--green)">
+      <li><span>1st speaker: are the signposts in the right order?</span></li>
+      <li><span>Final speaker: does your summary match what each teammate says?</span></li>
+      <li><span>Everyone: no repeated reasons.</span></li>
+    </ul></div>
+</div>
+</section>
+<section class="slide tight" id="s3-order" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 5 · Unit 6 · Practice<span class="pg">p. 31</span></div><h2 class="h1">Put the speech in order<span class="zh">把講稿排出正確順序</span></h2></div><div class="ctrls" style="align-self:center"><button class="btn" type="button" data-reveal=".ord" data-mode="all">Show the order</button></div></div><div class="opgrid fill"><div class="opc"><span class="m slot-ans ord"><span>9</span></span><span class="tx"><b class="muted">a</b> Our second point is excitement. Soccer is much more exciting than baseball.</span></div><div class="opc"><span class="m slot-ans ord"><span>3</span></span><span class="tx"><b class="muted">b</b> Today, we will present to you seven reasons.</span></div><div class="opc"><span class="m slot-ans ord"><span>8</span></span><span class="tx"><b class="muted">c</b> In addition, according to FIFA&#x27;s president, more than 120 nations showed the 2023 FIFA World Cup on TV.</span></div><div class="opc"><span class="m slot-ans ord"><span>12</span></span><span class="tx"><b class="muted">d</b> Thank you very much.</span></div><div class="opc"><span class="m slot-ans ord"><span>2</span></span><span class="tx"><b class="muted">e</b> We, of the affirmative team, strongly agree with this resolution.</span></div><div class="opc"><span class="m slot-ans ord"><span>7</span></span><span class="tx"><b class="muted">f</b> A recent article in World Sports Magazine said 97 countries wanted to play in the 2023 FIFA World Cup, but only 31 in the Baseball World Cup.</span></div><div class="opc"><span class="m slot-ans ord"><span>11</span></span><span class="tx"><b class="muted">g</b> Now that you have heard my argument, you must agree that soccer is a better sport than baseball.</span></div><div class="opc"><span class="m slot-ans ord"><span>1</span></span><span class="tx"><b class="muted">h</b> Good morning, Madam Chairman, judges and fellow students. Today we are debating the resolution, “Soccer is a better sport than baseball.”</span></div><div class="opc"><span class="m slot-ans ord"><span>4</span></span><span class="tx"><b class="muted">i</b> They are popularity, excitement, simplicity, participation, color, fitness and cost.</span></div><div class="opc"><span class="m slot-ans ord"><span>10</span></span><span class="tx"><b class="muted">j</b> In baseball, 90% of the time the players are just standing around waiting. Soccer has action all the time.</span></div><div class="opc"><span class="m slot-ans ord"><span>6</span></span><span class="tx"><b class="muted">k</b> Our first point is popularity. Soccer is more popular around the world than baseball.</span></div><div class="opc"><span class="m slot-ans ord"><span>5</span></span><span class="tx"><b class="muted">l</b> I would now like to begin presenting our argument.</span></div></div>
+</section>
+<section class="slide " id="s3-scoring" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 5 · Peer Assessment<span class="pg">p. 44</span></div><h2 class="h1">How every speaker is scored<span class="zh">每位講者的評分方式</span></h2></div></div><div class="scoregrid fill" style="align-content:safe center"><div class="card acc" style="--c:var(--blue)"><span class="pts" style="color:var(--blue)">0–2</span><h3>Used eye contact</h3><p style="font-size:1.08em">Look at people, not at your paper.</p></div><div class="card acc" style="--c:var(--yellow)"><span class="pts" style="color:var(--yellow)">0–2</span><h3>Used gestures</h3><p style="font-size:1.08em">Use your hands at important moments.</p></div><div class="card acc" style="--c:var(--orange)"><span class="pts" style="color:var(--orange)">0–3</span><h3>Spoke loud and clear</h3><p style="font-size:1.08em">The back row hears every word.</p></div><div class="card acc" style="--c:var(--purple)"><span class="pts" style="color:var(--purple)">0–3</span><h3>Easy to understand</h3><p style="font-size:1.08em">Words the audience knows. Not too fast.</p></div><div class="card acc" style="--c:var(--green)"><span class="pts" style="color:var(--green)">0–5</span><h3>Strong arguments</h3><p style="font-size:1.08em">Strong reasons with solid supports.</p></div></div><div class="kp">Total: <b>15 points</b> per speaker. Your classmates score you in their books. The judges decide the winners.<span class="zh">每位講者滿分 15 分。同學在課本上評分，評審決定勝負。</span></div>
+</section>
+<section class="slide " id="s3-delivery" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 5 · Delivery</div><h2 class="h1">Speak like a debater<span class="zh">像辯手一樣說話</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--green)"><h3>Do<span class="zh">要</span></h3>
+    <ul class="clean" style="--c:var(--green)">
+      <li><span>Stand still and tall. Feet on the floor.</span></li>
+      <li><span>Look at three places: left, middle, right.</span></li>
+      <li><span>Show the number with your fingers: “Our <b>first</b> reason …”</span></li>
+      <li><span>Pause after each signpost.</span></li>
+      <li><span>Speak to the back row.</span></li>
+    </ul></div>
+  <div class="card acc" style="--c:var(--coral)"><h3>Don't<span class="zh">不要</span></h3>
+    <ul class="clean" style="--c:var(--coral)">
+      <li><span>Read every word from your paper.</span></li>
+      <li><span>Use your phone.</span></li>
+      <li><span>Rush to finish.</span></li>
+      <li><span>Turn your back to the audience.</span></li>
+      <li><span>Use words you can't pronounce.</span></li>
+    </ul></div>
+</div>
+</section>
+<section class="slide " id="s3-cue" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 6 · Cue cards</div><h2 class="h1">Key words, not sentences<span class="zh">提示卡：只寫關鍵字</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)">
+  <div class="cuecard">
+    <span class="cc-h">② COST</span>
+    <span>fish = cheap</span>
+    <span>goldfish + tank ≈ NT$600</span>
+    <span>NT$20 each → easy</span>
+    <span class="cc-h" style="margin-top:.4em">③ STRESS</span>
+    <span>pets → relax</span>
+    <span>Am. Heart Assoc.</span>
+  </div>
+  <div class="card">
+    <ul class="clean">
+      <li><span>One card for each reason. Number them.<span class="zh">每個理由一張卡，標上號碼。</span></span></li>
+      <li><span>Write the signpost big. Then 3–4 key words.<span class="zh">路標寫大一點，再寫 3–4 個關鍵字。</span></span></li>
+      <li><span>Numbers and names go on the card, so you get them right.<span class="zh">數字和名字寫在卡上，避免說錯。</span></span></li>
+      <li><span>Practice until you only need to glance down.<span class="zh">練到只需要偶爾看一下。</span></span></li>
+    </ul>
+  </div>
+</div>
+</section>
+<section class="slide " id="s3-rehearse" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 6 · Team rehearsal</div><h2 class="h1">Rehearse in speaking order<span class="zh">依發言順序排練</span></h2></div></div>
+<div class="grid4 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)"><h3>Speaker<span class="zh">講者</span></h3><p>Stands up and gives the whole speech.</p></div>
+  <div class="card acc" style="--c:var(--yellow)"><h3>Timekeeper<span class="zh">計時員</span></h3><p>Shows green, yellow at 30 seconds, and red at 0.</p></div>
+  <div class="card acc" style="--c:var(--green)"><h3>Listener<span class="zh">聆聽者</span></h3><p>Checks: is any reason the same as a teammate's?</p></div>
+  <div class="card acc" style="--c:var(--purple)"><h3>Coach<span class="zh">教練</span></h3><p>Gives 2 stars and a wish: two good things, one thing to fix.</p></div>
+</div>
+<div class="kp">Change jobs after every speech, so everyone speaks and everyone coaches.<span class="zh">每講完一篇就換工作，每個人都要上台、也都要當教練。</span></div>
+</section>
+<section class="slide tight" id="s3-practice" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 7 · Practice debates</div><h2 class="h1">All four debates at once<span class="zh">四場同時模擬辯論</span></h2><p class="sub">Each debate takes a corner. Follow the clock on the screen. Score each speaker in your book, pp. 45–46.<span class="zh">每場辯論占一個角落，跟著螢幕上的時鐘進行，並在課本第 45–46 頁評分。</span></p></div></div><div class="runner" id="run-s3" data-long="150" data-short="120">
+  
+  <div class="rlist"><button class="rsp a" type="button" data-i="0"><b>1</b><small>Aff 1st</small><em>2:30</em></button><button class="rsp n" type="button" data-i="1"><b>2</b><small>Neg 1st</small><em>2:30</em></button><button class="rsp a" type="button" data-i="2"><b>3</b><small>Aff 2nd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="3"><b>4</b><small>Neg 2nd</small><em>2:00</em></button><button class="rsp a" type="button" data-i="4"><b>5</b><small>Aff 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="5"><b>6</b><small>Neg 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="6"><b>7</b><small>Neg Final</small><em>2:30</em></button><button class="rsp a" type="button" data-i="7"><b>8</b><small>Aff Final</small><em>2:30</em></button></div>
+  <div class="rmain">
+    <div class="rnow"><span class="rwho">Ready</span><span class="rteam"></span></div>
+    <div class="rclock">2:30</div>
+    <div class="rcard-sig"><i></i><span>Press Start when the speaker is ready</span></div>
+  </div>
+  <div class="ctrls rctrl"><button class="btn ghost rprev" type="button">← Speaker</button><button class="btn rgo" type="button">Start</button><button class="btn ghost rreset" type="button">Reset</button><button class="btn rnext" type="button">Next speaker →</button>
+  <label class="r3"><input type="checkbox" class="r3box"> 3 speakers per team</label></div>
+</div>
+</section>
+<section class="slide " id="s3-hw" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Homework 3 · Final speech</div><h2 class="h1">Ready for Debate Day<span class="zh">為辯論日做好準備</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="hw">
+    <span class="due">Due Sunday 11/8, 11:59 PM<span class="zh">11/8（日）晚上 11:59 前 · Team Board → My Speech → Final</span></span>
+    <ul class="clean" style="--c:var(--yellow)">
+      <li><span>Post your <b>final</b> speech and your time.<span class="zh">上傳最終版講稿和時間。</span></span></li>
+      <li><span>Practice it aloud <b>three times</b> at home.<span class="zh">在家大聲練習三次。</span></span></li>
+      <li><span>Make your cue cards.<span class="zh">做好提示卡。</span></span></li>
+    </ul>
+  </div>
+  <div class="card acc" style="--c:var(--purple)"><h3>Next week we check<span class="zh">下週會檢查</span></h3>
+    <p>Every role on every team has a final speech. If someone might be absent on 11/18, your team needs a back-up speaker.</p></div>
+</div>
+</section>
+<section class="slide " id="s3-exit" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Session 3 · Exit ticket</div><h2 class="h1">Check your understanding<span class="zh">確認你學會了</span></h2></div></div><div class="quiz"><div class="qcard"><div class="qn">Question 1</div><div class="qq">How many points is <b>Strong arguments</b> worth?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>2</span></button><button class="qopt" type="button"><span class="l">B</span><span>3</span></button><button class="qopt" type="button"><span class="l">C</span><span>5</span></button><button class="qopt" type="button"><span class="l">D</span><span>15</span></button></div></div><div class="qcard"><div class="qn">Question 2</div><div class="qq">What goes on a <b>cue card</b>?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>your whole speech</span></button><button class="qopt" type="button"><span class="l">B</span><span>key words</span></button><button class="qopt" type="button"><span class="l">C</span><span>a teammate's speech</span></button><button class="qopt" type="button"><span class="l">D</span><span>nothing</span></button></div></div><div class="qcard"><div class="qn">Question 3</div><div class="qq">The <b>yellow card</b> means …</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>start</span></button><button class="qopt" type="button"><span class="l">B</span><span>time's up</span></button><button class="qopt" type="button"><span class="l">C</span><span>30 seconds left</span></button><button class="qopt" type="button"><span class="l">D</span><span>you won</span></button></div></div><div class="qcard"><div class="qn">Question 4</div><div class="qq">Which one is good <b>eye contact</b>?</div><div class="qopts"><button class="qopt" type="button"><span class="l">A</span><span>reading your paper</span></button><button class="qopt" type="button"><span class="l">B</span><span>looking at the floor</span></button><button class="qopt" type="button"><span class="l">C</span><span>looking at the timer</span></button><button class="qopt" type="button"><span class="l">D</span><span>looking at different people in the room</span></button></div></div><div class="cbar" style="margin-top:auto"><button class="btn qprev" type="button">← Prev</button><span class="count" style="font-weight:800;color:var(--muted)"></span><button class="btn qnext" type="button">Next →</button></div></div>
+</section>
+<section class="slide " id="s3-bridge" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Session 3 · Wrap-up</div><h2 class="h1">Today → next week<span class="zh">今天 → 下週</span></h2></div></div>
+<div class="bridge">
+  <div class="card acc" style="--c:var(--purple)"><h3>What we learned<span class="zh">今天學到的</span></h3>
+    <ul class="clean" style="--c:var(--purple)">
+      <li><span>Each speaker is scored out of 15.</span></li>
+      <li><span>Eye contact, gestures and a clear voice win points.</span></li>
+      <li><span>Cue cards hold key words, numbers and names.</span></li>
+      <li><span>A full debate fits in about 23 minutes.</span></li>
+    </ul></div>
+  <div class="card acc" style="--c:var(--yellow)"><h3>Coming up · Wed 11/11<span class="zh">下週</span></h3>
+    <p>Dress rehearsal: Debate Day rules, a readiness check for every team, and a timed run-through.</p>
+    <p class="muted">Homework 3 is due <b style="color:var(--yellow)">Sunday 11/8, 11:59 PM</b>.<span class="zh">作業 3：11/8（日）晚上 11:59 前。</span></p></div>
+</div>
+</section>
+<section class="slide title-slide" id="s4-title" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
+
+<div class="t-label">Session 4 · Wed 11/11 · Period 7</div>
+<h1 class="t-title">Dress rehearsal</h1>
+<p class="t-sub">Everything ready for next week.<span class="zh">為下週的辯論日做好一切準備</span></p>
+<div class="tags"><span class="tag lg">Rules</span><span class="tag lg">Readiness check</span><span class="tag lg">Run-through</span></div>
+</section>
+<section class="slide tight" id="s4-room" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
+<div class="top"><div><div class="eyebrow">Debate Day · Our classroom</div><h2 class="h1">Where everyone sits<span class="zh">座位安排</span></h2></div><div class="frame" style="align-self:center">Next debate's teams wait<br>at the side, ready to go.</div></div><div class="svgwrap"><svg viewBox="0 0 1100 520" role="img" aria-label="Classroom map for Debate Day">
+  <rect x="20" y="10" width="1060" height="500" rx="16" fill="none" stroke="#2b3852" stroke-width="3"/>
+  <rect x="300" y="22" width="500" height="34" rx="6" fill="#16324f" stroke="#5aa9ff" stroke-width="2"/>
+  <text x="550" y="46" text-anchor="middle" fill="#eef2f8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22">Board · screen: resolution + clock</text>
+  <rect x="60" y="90" width="240" height="90" rx="8" fill="#1c2536" stroke="#3fd896" stroke-width="3"/><text x="180.0" y="144.0" text-anchor="middle" fill="#3fd896" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Affirmative</text>
+  <rect x="800" y="90" width="240" height="90" rx="8" fill="#1c2536" stroke="#ff7a6b" stroke-width="3"/><text x="920.0" y="144.0" text-anchor="middle" fill="#ff7a6b" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Negative</text>
+  <circle cx="550" cy="150" r="40" fill="#232e43" stroke="#ffd166" stroke-width="3"/>
+  <text x="550" y="158" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22">Speak</text>
+  <text x="550" y="222" text-anchor="middle" fill="#c9d3e3" font-family="Nunito, sans-serif" font-weight="700" font-size="20">Speaker stands here, facing the class</text>
+  <rect x="60" y="230" width="180" height="64" rx="8" fill="#1c2536" stroke="#ffd166" stroke-width="3"/><text x="150.0" y="271.0" text-anchor="middle" fill="#ffd166" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Chairman</text>
+  <text x="150" y="318" text-anchor="middle" fill="#93a1b8" font-family="Nunito, sans-serif" font-weight="700" font-size="18">timer + cards</text>
+  <circle cx="330" cy="360" r="11" fill="#2b3852"/><circle cx="376" cy="360" r="11" fill="#2b3852"/><circle cx="422" cy="360" r="11" fill="#2b3852"/><circle cx="468" cy="360" r="11" fill="#2b3852"/><circle cx="514" cy="360" r="11" fill="#2b3852"/><circle cx="560" cy="360" r="11" fill="#2b3852"/><circle cx="606" cy="360" r="11" fill="#2b3852"/><circle cx="652" cy="360" r="11" fill="#2b3852"/><circle cx="698" cy="360" r="11" fill="#2b3852"/><circle cx="744" cy="360" r="11" fill="#2b3852"/><circle cx="330" cy="395" r="11" fill="#2b3852"/><circle cx="376" cy="395" r="11" fill="#2b3852"/><circle cx="422" cy="395" r="11" fill="#2b3852"/><circle cx="468" cy="395" r="11" fill="#2b3852"/><circle cx="514" cy="395" r="11" fill="#2b3852"/><circle cx="560" cy="395" r="11" fill="#2b3852"/><circle cx="606" cy="395" r="11" fill="#2b3852"/><circle cx="652" cy="395" r="11" fill="#2b3852"/><circle cx="698" cy="395" r="11" fill="#2b3852"/><circle cx="744" cy="395" r="11" fill="#2b3852"/><circle cx="330" cy="430" r="11" fill="#2b3852"/><circle cx="376" cy="430" r="11" fill="#2b3852"/><circle cx="422" cy="430" r="11" fill="#2b3852"/><circle cx="468" cy="430" r="11" fill="#2b3852"/><circle cx="514" cy="430" r="11" fill="#2b3852"/><circle cx="560" cy="430" r="11" fill="#2b3852"/><circle cx="606" cy="430" r="11" fill="#2b3852"/><circle cx="652" cy="430" r="11" fill="#2b3852"/><circle cx="698" cy="430" r="11" fill="#2b3852"/><circle cx="744" cy="430" r="11" fill="#2b3852"/>
+  <text x="560" y="478" text-anchor="middle" fill="#93a1b8" font-family="Nunito, sans-serif" font-weight="700" font-size="20">Audience: score each speaker in your book</text>
+  <rect x="860" y="380" width="180" height="70" rx="8" fill="#1c2536" stroke="#c792ff" stroke-width="3"/><text x="950.0" y="424.0" text-anchor="middle" fill="#c792ff" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Judges</text>
+  <rect x="860" y="250" width="180" height="64" rx="8" fill="#1c2536" stroke="#93a1b8" stroke-width="3"/><text x="950.0" y="291.0" text-anchor="middle" fill="#93a1b8" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26">Next teams</text>
+</svg></div>
+</section>
+<section class="slide " id="s4-run" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
+<div class="top"><div><div class="eyebrow">Debate Day · How it runs</div><h2 class="h1">Follow the Chairman<span class="zh">跟著主席的指示</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)">
+  <div class="card acc" style="--c:var(--yellow)"><h3>The Chairman says …<span class="zh">主席會說</span></h3>
+    <p class="frame" style="font-size:1.05em">“Today's resolution is … I now call on the first speaker of the affirmative team.”</p>
+    <p class="frame" style="font-size:1.05em">“Thank you. I now call on the first speaker of the negative team.”</p>
+    <p class="frame" style="font-size:1.05em">“That ends the debate. Judges, please complete your scores.”</p></div>
+  <div class="card acc" style="--c:var(--blue)"><h3>The speaker …<span class="zh">講者要</span></h3>
+    <ul class="clean" style="--c:var(--blue)">
+      <li><span>walks to the speaking spot when called.</span></li>
+      <li><span>waits for the <b class="aff">green card</b>, then starts.</span></li>
+      <li><span>at the <b style="color:var(--yellow)">yellow card</b>, moves to the conclusion.</span></li>
+      <li><span>at the <b class="neg">red card</b>, finishes the sentence and sits down.</span></li>
+    </ul></div>
+</div>
+<div class="kp" style="font-size:1.1em">Audience: quiet while someone speaks. Clap after each speech.<span class="zh">觀眾：有人發言時保持安靜，每篇講完後鼓掌。</span></div>
+</section>
+<section class="slide " id="s4-ready" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
+<div class="top"><div><div class="eyebrow">Readiness check</div><h2 class="h1">Is your team ready?<span class="zh">你們準備好了嗎？</span></h2></div><div style="align-self:center"><div class="timer" data-sec="300" data-warn="60"><span class="lbl">Team check</span><span class="t">5:00</span><button class="btn go" type="button">Start</button><button class="btn ghost rs" type="button">Reset</button></div></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--green)"><h3>Check together<span class="zh">一起檢查</span></h3>
+    <ul class="clean" style="--c:var(--green)">
+      <li><span>Every role has a <b>final</b> speech on the Team Board.</span></li>
+      <li><span>Every speech is under the time limit.</span></li>
+      <li><span>Nobody repeats a teammate's reason.</span></li>
+      <li><span>Everyone has cue cards.</span></li>
+    </ul></div>
+  <div class="card acc" style="--c:var(--coral)"><h3>Back-up plan<span class="zh">備案</span></h3>
+    <p>If someone is absent on 11/18, who gives their speech?</p>
+    <p class="frame">Our back-up speaker is ______.</p>
+    <p class="muted" style="font-size:1.02em">The back-up practices that speech this week.<span class="zh">備援講者這週要練習那篇講稿。</span></p></div>
+</div>
+</section>
+<section class="slide tight" id="s4-runthrough" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
+<div class="top"><div><div class="eyebrow">Run-through</div><h2 class="h1">One full debate, on time<span class="zh">完整彩排一次</span></h2><p class="sub">Each team rehearses its own speeches in order, with the clock on the screen.<span class="zh">每隊照順序練習，跟著螢幕上的時鐘。</span></p></div></div><div class="runner" id="run-s4" data-long="150" data-short="120">
+  
+  <div class="rlist"><button class="rsp a" type="button" data-i="0"><b>1</b><small>Aff 1st</small><em>2:30</em></button><button class="rsp n" type="button" data-i="1"><b>2</b><small>Neg 1st</small><em>2:30</em></button><button class="rsp a" type="button" data-i="2"><b>3</b><small>Aff 2nd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="3"><b>4</b><small>Neg 2nd</small><em>2:00</em></button><button class="rsp a" type="button" data-i="4"><b>5</b><small>Aff 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="5"><b>6</b><small>Neg 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="6"><b>7</b><small>Neg Final</small><em>2:30</em></button><button class="rsp a" type="button" data-i="7"><b>8</b><small>Aff Final</small><em>2:30</em></button></div>
+  <div class="rmain">
+    <div class="rnow"><span class="rwho">Ready</span><span class="rteam"></span></div>
+    <div class="rclock">2:30</div>
+    <div class="rcard-sig"><i></i><span>Press Start when the speaker is ready</span></div>
+  </div>
+  <div class="ctrls rctrl"><button class="btn ghost rprev" type="button">← Speaker</button><button class="btn rgo" type="button">Start</button><button class="btn ghost rreset" type="button">Reset</button><button class="btn rnext" type="button">Next speaker →</button>
+  <label class="r3"><input type="checkbox" class="r3box"> 3 speakers per team</label></div>
+</div>
+</section>
+<section class="slide " id="s4-check" data-sect="Session 4 · 11/11" style="--accent:var(--s4)" aria-label="Session 4 · 11/11">
+<div class="top"><div><div class="eyebrow">Debate Day checklist</div><h2 class="h1">Bring and know<span class="zh">要帶的與要知道的</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)">
+  <div class="card acc" style="--c:var(--yellow)"><ul class="clean" style="--c:var(--yellow)"><li><span>Your cue cards<span class="zh">提示卡</span></span></li><li><span>Your Debate Now book (scoring pages 44–49)<span class="zh">課本（評分頁 44–49）</span></span></li><li><span>A pen<span class="zh">一支筆</span></span></li><li><span>Your debate number and speaking number<span class="zh">你在第幾場、第幾個發言</span></span></li><li><span>Your back-up plan<span class="zh">備案</span></span></li><li><span>Be in the classroom before Period 5<span class="zh">第 5 節前到教室</span></span></li></ul></div>
+  <div class="card acc" style="--c:var(--green)"><h3>Wed 11/18 · Periods 5–7<span class="zh">在我們的教室</span></h3>
+    <p>Period 5: Debates 1 and 2</p><p>Period 6: Debates 3 and 4</p><p>Period 7: results and awards</p></div>
+</div>
+</section>
+<section class="slide title-slide" id="dd-title" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+
+<div class="t-label">Debate Day · Wed 11/18 · Periods 5–7</div>
+<h1 class="t-title">Let the debates begin</h1>
+<p class="t-sub">Four debates in our classroom. Every team, every voice.<span class="zh">四場辯論，在我們的教室</span></p>
+<div class="tags"><span class="tag lg">Mr. Chairman · Teacher Sergio</span><span class="tag lg">Judges · guest teachers</span></div>
+</section>
+<section class="slide " id="dd-plan" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Plan</div><h2 class="h1">Today's schedule<span class="zh">今天的流程</span></h2></div></div>
+<div class="grid3 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)"><h3>Period 5</h3><p>Set-up and rules</p><p><b>Debate 1</b></p><p><b>Debate 2</b></p></div>
+  <div class="card acc" style="--c:var(--purple)"><h3>Period 6</h3><p><b>Debate 3</b></p><p><b>Debate 4</b></p></div>
+  <div class="card acc" style="--c:var(--yellow)"><h3>Period 7</h3><p>Judges' results</p><p>Winning teams</p><p>Most Valuable Debater</p></div>
+</div>
+<div class="order"><div class="spk a"><b>1</b><small>Aff 1st</small><em>2:30</em></div><div class="spk n"><b>2</b><small>Neg 1st</small><em>2:30</em></div><div class="spk a"><b>3</b><small>Aff 2nd</small><em>2:00</em></div><div class="spk n"><b>4</b><small>Neg 2nd</small><em>2:00</em></div><div class="spk a"><b>5</b><small>Aff 3rd</small><em>2:00</em></div><div class="spk n"><b>6</b><small>Neg 3rd</small><em>2:00</em></div><div class="spk n"><b>7</b><small>Neg Final</small><em>2:30</em></div><div class="spk a"><b>8</b><small>Aff Final</small><em>2:30</em></div></div>
+</section>
+<section class="slide " id="dd-audience" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Audience<span class="pg">pp. 45–49</span></div><h2 class="h1">You are a judge too<span class="zh">你也是評審</span></h2></div></div>
+<div class="grid2 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--purple)"><h3>Score every speaker<span class="zh">為每位講者評分</span></h3>
+    <ul class="clean" style="--c:var(--purple)">
+      <li><span>Use one page for each debate.</span></li>
+      <li><span>Eye contact 0–2 · Gestures 0–2 · Loud and clear 0–3 · Easy to understand 0–3 · Strong arguments 0–5</span></li>
+      <li><span>Be honest. Only your teacher sees these scores.</span></li>
+    </ul></div>
+  <div class="card acc" style="--c:var(--green)"><h3>Be a good audience<span class="zh">做個好觀眾</span></h3>
+    <ul class="clean" style="--c:var(--green)">
+      <li><span>Quiet while someone speaks.</span></li>
+      <li><span>Clap after every speech.</span></li>
+      <li><span>Books are collected at the end.</span></li>
+    </ul></div>
+</div>
+</section>
+<section class="slide tight" id="dd-d1" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Period 5</div><h2 class="h1">Debate 1</h2></div><div class="frame" style="align-self:center">Chairman: “I now call on the first speaker of the affirmative team.”</div></div><div class="runner" id="run-dd0" data-long="150" data-short="120">
+  <div class="rteams"><select class="ddsel rres" data-k="dd-r0" data-src="r0" aria-label="Resolution"><option value="">Resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="ddsel a" data-k="dd-a0" data-src="a0" aria-label="Affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><span class="vs">vs</span><select class="ddsel n" data-k="dd-n0" data-src="n0" aria-label="Negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select></div>
+  <div class="rlist"><button class="rsp a" type="button" data-i="0"><b>1</b><small>Aff 1st</small><em>2:30</em></button><button class="rsp n" type="button" data-i="1"><b>2</b><small>Neg 1st</small><em>2:30</em></button><button class="rsp a" type="button" data-i="2"><b>3</b><small>Aff 2nd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="3"><b>4</b><small>Neg 2nd</small><em>2:00</em></button><button class="rsp a" type="button" data-i="4"><b>5</b><small>Aff 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="5"><b>6</b><small>Neg 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="6"><b>7</b><small>Neg Final</small><em>2:30</em></button><button class="rsp a" type="button" data-i="7"><b>8</b><small>Aff Final</small><em>2:30</em></button></div>
+  <div class="rmain">
+    <div class="rnow"><span class="rwho">Ready</span><span class="rteam"></span></div>
+    <div class="rclock">2:30</div>
+    <div class="rcard-sig"><i></i><span>Press Start when the speaker is ready</span></div>
+  </div>
+  <div class="ctrls rctrl"><button class="btn ghost rprev" type="button">← Speaker</button><button class="btn rgo" type="button">Start</button><button class="btn ghost rreset" type="button">Reset</button><button class="btn rnext" type="button">Next speaker →</button>
+  <label class="r3"><input type="checkbox" class="r3box"> 3 speakers per team</label></div>
+</div>
+</section>
+<section class="slide tight" id="dd-d2" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Period 5</div><h2 class="h1">Debate 2</h2></div><div class="frame" style="align-self:center">Chairman: “I now call on the first speaker of the affirmative team.”</div></div><div class="runner" id="run-dd1" data-long="150" data-short="120">
+  <div class="rteams"><select class="ddsel rres" data-k="dd-r1" data-src="r1" aria-label="Resolution"><option value="">Resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="ddsel a" data-k="dd-a1" data-src="a1" aria-label="Affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><span class="vs">vs</span><select class="ddsel n" data-k="dd-n1" data-src="n1" aria-label="Negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select></div>
+  <div class="rlist"><button class="rsp a" type="button" data-i="0"><b>1</b><small>Aff 1st</small><em>2:30</em></button><button class="rsp n" type="button" data-i="1"><b>2</b><small>Neg 1st</small><em>2:30</em></button><button class="rsp a" type="button" data-i="2"><b>3</b><small>Aff 2nd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="3"><b>4</b><small>Neg 2nd</small><em>2:00</em></button><button class="rsp a" type="button" data-i="4"><b>5</b><small>Aff 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="5"><b>6</b><small>Neg 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="6"><b>7</b><small>Neg Final</small><em>2:30</em></button><button class="rsp a" type="button" data-i="7"><b>8</b><small>Aff Final</small><em>2:30</em></button></div>
+  <div class="rmain">
+    <div class="rnow"><span class="rwho">Ready</span><span class="rteam"></span></div>
+    <div class="rclock">2:30</div>
+    <div class="rcard-sig"><i></i><span>Press Start when the speaker is ready</span></div>
+  </div>
+  <div class="ctrls rctrl"><button class="btn ghost rprev" type="button">← Speaker</button><button class="btn rgo" type="button">Start</button><button class="btn ghost rreset" type="button">Reset</button><button class="btn rnext" type="button">Next speaker →</button>
+  <label class="r3"><input type="checkbox" class="r3box"> 3 speakers per team</label></div>
+</div>
+</section>
+<section class="slide tight" id="dd-d3" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Period 6</div><h2 class="h1">Debate 3</h2></div><div class="frame" style="align-self:center">Chairman: “I now call on the first speaker of the affirmative team.”</div></div><div class="runner" id="run-dd2" data-long="150" data-short="120">
+  <div class="rteams"><select class="ddsel rres" data-k="dd-r2" data-src="r2" aria-label="Resolution"><option value="">Resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="ddsel a" data-k="dd-a2" data-src="a2" aria-label="Affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><span class="vs">vs</span><select class="ddsel n" data-k="dd-n2" data-src="n2" aria-label="Negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select></div>
+  <div class="rlist"><button class="rsp a" type="button" data-i="0"><b>1</b><small>Aff 1st</small><em>2:30</em></button><button class="rsp n" type="button" data-i="1"><b>2</b><small>Neg 1st</small><em>2:30</em></button><button class="rsp a" type="button" data-i="2"><b>3</b><small>Aff 2nd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="3"><b>4</b><small>Neg 2nd</small><em>2:00</em></button><button class="rsp a" type="button" data-i="4"><b>5</b><small>Aff 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="5"><b>6</b><small>Neg 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="6"><b>7</b><small>Neg Final</small><em>2:30</em></button><button class="rsp a" type="button" data-i="7"><b>8</b><small>Aff Final</small><em>2:30</em></button></div>
+  <div class="rmain">
+    <div class="rnow"><span class="rwho">Ready</span><span class="rteam"></span></div>
+    <div class="rclock">2:30</div>
+    <div class="rcard-sig"><i></i><span>Press Start when the speaker is ready</span></div>
+  </div>
+  <div class="ctrls rctrl"><button class="btn ghost rprev" type="button">← Speaker</button><button class="btn rgo" type="button">Start</button><button class="btn ghost rreset" type="button">Reset</button><button class="btn rnext" type="button">Next speaker →</button>
+  <label class="r3"><input type="checkbox" class="r3box"> 3 speakers per team</label></div>
+</div>
+</section>
+<section class="slide tight" id="dd-d4" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Period 6</div><h2 class="h1">Debate 4</h2></div><div class="frame" style="align-self:center">Chairman: “I now call on the first speaker of the affirmative team.”</div></div><div class="runner" id="run-dd3" data-long="150" data-short="120">
+  <div class="rteams"><select class="ddsel rres" data-k="dd-r3" data-src="r3" aria-label="Resolution"><option value="">Resolution …</option><option value="r1">Students shouldn&#x27;t have to clean the school.</option><option value="r2">Students should be able to use their phones at break time.</option><option value="r3">There should be no homework on weekends.</option><option value="r4">Students shouldn&#x27;t have to take a nap at lunchtime.</option><option value="r5">Students should be able to choose their own hairstyle.</option><option value="r6">Every class should have a class pet.</option><option value="r7">Every student should learn to cook at school.</option><option value="r8">The school week should be four days long.</option></select><select class="ddsel a" data-k="dd-a3" data-src="a3" aria-label="Affirmative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select><span class="vs">vs</span><select class="ddsel n" data-k="dd-n3" data-src="n3" aria-label="Negative team"><option value="">—</option><option value="A">Team A</option><option value="B">Team B</option><option value="C">Team C</option><option value="D">Team D</option><option value="E">Team E</option><option value="F">Team F</option><option value="G">Team G</option><option value="H">Team H</option></select></div>
+  <div class="rlist"><button class="rsp a" type="button" data-i="0"><b>1</b><small>Aff 1st</small><em>2:30</em></button><button class="rsp n" type="button" data-i="1"><b>2</b><small>Neg 1st</small><em>2:30</em></button><button class="rsp a" type="button" data-i="2"><b>3</b><small>Aff 2nd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="3"><b>4</b><small>Neg 2nd</small><em>2:00</em></button><button class="rsp a" type="button" data-i="4"><b>5</b><small>Aff 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="5"><b>6</b><small>Neg 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="6"><b>7</b><small>Neg Final</small><em>2:30</em></button><button class="rsp a" type="button" data-i="7"><b>8</b><small>Aff Final</small><em>2:30</em></button></div>
+  <div class="rmain">
+    <div class="rnow"><span class="rwho">Ready</span><span class="rteam"></span></div>
+    <div class="rclock">2:30</div>
+    <div class="rcard-sig"><i></i><span>Press Start when the speaker is ready</span></div>
+  </div>
+  <div class="ctrls rctrl"><button class="btn ghost rprev" type="button">← Speaker</button><button class="btn rgo" type="button">Start</button><button class="btn ghost rreset" type="button">Reset</button><button class="btn rnext" type="button">Next speaker →</button>
+  <label class="r3"><input type="checkbox" class="r3box"> 3 speakers per team</label></div>
+</div>
+</section>
+<section class="slide " id="dd-results" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Results</div><h2 class="h1">And the winners are …<span class="zh">獲勝的是……</span></h2></div></div>
+<div class="results fill"><div class="resrow"><span class="dn">Debate 1</span><span class="rr" data-src="0"></span><div class="seg"><button type="button" class="win a" data-d="0" data-w="a">Affirmative</button><button type="button" class="win n" data-d="0" data-w="n">Negative</button></div></div><div class="resrow"><span class="dn">Debate 2</span><span class="rr" data-src="1"></span><div class="seg"><button type="button" class="win a" data-d="1" data-w="a">Affirmative</button><button type="button" class="win n" data-d="1" data-w="n">Negative</button></div></div><div class="resrow"><span class="dn">Debate 3</span><span class="rr" data-src="2"></span><div class="seg"><button type="button" class="win a" data-d="2" data-w="a">Affirmative</button><button type="button" class="win n" data-d="2" data-w="n">Negative</button></div></div><div class="resrow"><span class="dn">Debate 4</span><span class="rr" data-src="3"></span><div class="seg"><button type="button" class="win a" data-d="3" data-w="a">Affirmative</button><button type="button" class="win n" data-d="3" data-w="n">Negative</button></div></div></div>
+<div class="mvd"><span class="lab">Most Valuable Debater</span><input type="text" class="mvdin" aria-label="Most Valuable Debater" placeholder="Type the name …"></div>
+</section>
+<section class="slide " id="dd-reflect" data-sect="Debate Day · 11/18" style="--accent:var(--green)" aria-label="Debate Day · 11/18">
+<div class="top"><div><div class="eyebrow">Debate Day · Reflection</div><h2 class="h1">Think back<span class="zh">回想一下</span></h2></div></div>
+<div class="grid3 fill" style="align-content:safe center">
+  <div class="card acc" style="--c:var(--blue)"><h3>One thing I did well<span class="zh">我做得好的一件事</span></h3><p class="frame">I was proud that I …</p></div>
+  <div class="card acc" style="--c:var(--yellow)"><h3>One thing I learned<span class="zh">我學到的一件事</span></h3><p class="frame">I learned that …</p></div>
+  <div class="card acc" style="--c:var(--purple)"><h3>One reason from the other side<span class="zh">對方的一個好理由</span></h3><p class="frame">The other team made me think about …</p></div>
+</div>
+<div class="kp">Thank you, debaters! Every team built its case together, and every one of you gave a speech.<span class="zh">謝謝各位辯手！每一隊都一起完成了論點，每個人都上台發表了。</span></div>
+</section>
+</main>
+<nav class="nav" aria-label="Slide navigation"><span class="sect" id="sect"></span><div class="mid"><button class="navbtn" id="prev" type="button" aria-label="Previous slide">←</button><span class="counter" id="counter">1 / 1</span><button class="navbtn" id="next" type="button" aria-label="Next slide">→</button></div><div class="end"><button class="navbtn" id="fs" type="button" aria-label="Full screen" aria-pressed="false" title="Full screen (F)"><svg class="i-enter" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="i-exit" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="navbtn" id="home" type="button" aria-label="Contents">☰</button></div></nav>
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var cur = 0;
+  var counter = document.getElementById('counter');
+  var sect = document.getElementById('sect');
+  var prevB = document.getElementById('prev'), nextB = document.getElementById('next');
+  var KEY = 'debateA-deck';
+  function store(k, v){ try{ var o = JSON.parse(localStorage.getItem(KEY) || '{}'); o[k] = v; localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+  function load(k){ try{ var o = JSON.parse(localStorage.getItem(KEY) || '{}'); return o[k]; }catch(e){ return undefined; } }
+
+  function show(i){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[cur].classList.remove('on');
+    cur = i;
+    slides[cur].classList.add('on');
+    slides[cur].scrollTop = 0;
+    counter.textContent = (cur + 1) + ' / ' + slides.length;
+    sect.textContent = slides[cur].getAttribute('data-sect') || '';
+    prevB.disabled = cur === 0;
+    nextB.disabled = cur === slides.length - 1;
+    store('slide', cur); store('slideAt', Date.now());
+  }
+  prevB.addEventListener('click', function(){ show(cur - 1); });
+  nextB.addEventListener('click', function(){ show(cur + 1); });
+  document.getElementById('home').addEventListener('click', function(){ goto('toc'); });
+
+  /* ---- full screen toggle (button + F key); hidden where the browser can't do it ---- */
+  var fsB = document.getElementById('fs'), root = document.documentElement;
+  function fsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || null; }
+  var canFs = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled) && !!(root.requestFullscreen || root.webkitRequestFullscreen);
+  function toggleFs(){
+    if (!canFs) return;
+    var r;
+    try {
+      if (fsEl()) r = (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      else r = (root.requestFullscreen || root.webkitRequestFullscreen).call(root);
+    } catch(err) {}
+    if (r && r.catch) r.catch(function(){});
+  }
+  function syncFs(){
+    var on = !!fsEl();
+    fsB.classList.toggle('on', on);
+    fsB.setAttribute('aria-pressed', on ? 'true' : 'false');
+    fsB.setAttribute('aria-label', on ? 'Exit full screen' : 'Full screen');
+    fsB.title = on ? 'Exit full screen (F or Esc)' : 'Full screen (F)';
+  }
+  if (canFs) {
+    fsB.addEventListener('click', function(){ toggleFs(); fsB.blur(); });
+    document.addEventListener('fullscreenchange', syncFs);
+    document.addEventListener('webkitfullscreenchange', syncFs);
+  } else { fsB.hidden = true; }
+  function goto(id){
+    for (var i = 0; i < slides.length; i++) if (slides[i].id === id) { show(i); return; }
+  }
+  document.addEventListener('click', function(e){
+    var g = e.target.closest('[data-goto]');
+    if (g) { goto(g.getAttribute('data-goto')); }
+  });
+  document.addEventListener('keydown', function(e){
+    var t = e.target, tag = (t && t.tagName) || '';
+    if (tag === 'SELECT' || tag === 'TEXTAREA' || (tag === 'INPUT' && t.type !== 'checkbox')) return;
+    if ((e.key === ' ' || e.key === 'Enter') && tag === 'BUTTON') return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(cur + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(cur - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); show(0); }
+    else if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    else if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); toggleFs(); }
+  });
+
+  /* ---- reveal buttons: data-reveal="selector within slide" (reveals next hidden one each click) ---- */
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-reveal]');
+    if (!b) return;
+    var scope = b.closest('[data-scope]') || b.closest('.slide');
+    var items = scope.querySelectorAll(b.getAttribute('data-reveal'));
+    var mode = b.getAttribute('data-mode') || 'one';
+    var hidden = Array.prototype.filter.call(items, function(x){ return !x.classList.contains('on'); });
+    if (mode === 'all' || hidden.length === 0) {
+      var anyHidden = hidden.length > 0;
+      Array.prototype.forEach.call(items, function(x){ x.classList.toggle('on', anyHidden); });
+    } else {
+      hidden[0].classList.add('on');
+    }
+    var mark = b.getAttribute('data-mark');
+    if (mark) {
+      var all = scope.querySelectorAll(mark);
+      var onNow = scope.querySelectorAll(b.getAttribute('data-reveal') + '.on').length > 0;
+      Array.prototype.forEach.call(all, function(x){ x.classList.toggle(x.getAttribute('data-markclass') || 'best', onNow && x.hasAttribute('data-right')); });
+    }
+  });
+
+  /* ---- carousels ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.carousel'), function(c){
+    var items = c.querySelectorAll('.item');
+    var i = 0;
+    var cnt = c.querySelector('.count');
+    function paint(){
+      Array.prototype.forEach.call(items, function(x, k){ x.classList.toggle('cur', k === i); });
+      if (cnt) cnt.textContent = (i + 1) + ' / ' + items.length;
+    }
+    c.querySelector('.cprev').addEventListener('click', function(){ i = (i - 1 + items.length) % items.length; paint(); });
+    c.querySelector('.cnext').addEventListener('click', function(){ i = (i + 1) % items.length; paint(); });
+    paint();
+  });
+
+  /* ---- timers ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.timer'), function(t){
+    var total = +t.getAttribute('data-sec'), left = total, h = null, warnAt = +(t.getAttribute('data-warn') || 30);
+    var out = t.querySelector('.t'), go = t.querySelector('.go'), rs = t.querySelector('.rs');
+    function fmt(s){ var m = Math.floor(Math.abs(s) / 60), ss = Math.abs(s) % 60; return (s < 0 ? '+' : '') + m + ':' + (ss < 10 ? '0' : '') + ss; }
+    function paint(){
+      out.textContent = fmt(left);
+      t.classList.toggle('warn', h && left <= warnAt && left > 0);
+      t.classList.toggle('done', left <= 0);
+    }
+    go.addEventListener('click', function(){
+      if (h) { clearInterval(h); h = null; t.classList.remove('run'); go.textContent = 'Start'; paint(); return; }
+      t.classList.add('run'); go.textContent = 'Pause';
+      h = setInterval(function(){ left--; paint(); }, 1000);
+      paint();
+    });
+    rs.addEventListener('click', function(){ if (h) { clearInterval(h); h = null; } left = total; t.classList.remove('run','warn','done'); go.textContent = 'Start'; paint(); });
+    paint();
+  });
+
+  /* ---- quotes: click to choose ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.quote'), function(q){
+    q.addEventListener('click', function(){
+      var sib = q.parentNode.querySelectorAll('.quote');
+      Array.prototype.forEach.call(sib, function(x){ x.classList.toggle('pick', x === q && !q.classList.contains('pick')); });
+    });
+  });
+
+  /* ---- resolution vote ---- */
+  var resCards = Array.prototype.slice.call(document.querySelectorAll('.res[data-res]'));
+  var votes = load('votes') || {};
+  function paintVotes(){
+    var arr = resCards.map(function(c){ var k = c.getAttribute('data-res'); return { c: c, k: k, v: votes[k] || 0 }; });
+    arr.forEach(function(o){ o.c.querySelector('.pts').textContent = o.v; });
+    var sorted = arr.slice().sort(function(a, b){ return b.v - a.v; });
+    var cutoff = sorted[3] ? sorted[3].v : 0;
+    var anyVotes = sorted[0] && sorted[0].v > 0;
+    arr.forEach(function(o){ o.c.classList.toggle('top', anyVotes && o.v > 0 && o.v >= cutoff); });
+    fillResSelects(sorted.filter(function(o){ return o.v > 0; }).slice(0, 4).map(function(o){ return o.k; }));
+  }
+  resCards.forEach(function(c){
+    var k = c.getAttribute('data-res');
+    c.querySelector('.plus').addEventListener('click', function(){ votes[k] = (votes[k] || 0) + 1; store('votes', votes); paintVotes(); });
+    c.querySelector('.minus').addEventListener('click', function(){ votes[k] = Math.max(0, (votes[k] || 0) - 1); store('votes', votes); paintVotes(); });
+  });
+  var resetV = document.getElementById('resetVotes');
+  if (resetV) resetV.addEventListener('click', function(){ votes = {}; store('votes', votes); paintVotes(); });
+
+  /* ---- matchups ---- */
+  var mstate = load('match') || {};
+  var rsel = Array.prototype.slice.call(document.querySelectorAll('.match .rsel'));
+  function fillResSelects(topKeys){
+    rsel.forEach(function(s, i){
+      var key = 'r' + i;
+      if (!mstate[key] && topKeys[i]) { s.value = topKeys[i]; }
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.match select'), function(s){
+    var k = s.getAttribute('data-k');
+    if (mstate[k]) s.value = mstate[k];
+    s.addEventListener('change', function(){ mstate[k] = s.value; store('match', mstate); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.coinbtn'), function(b){
+    b.addEventListener('click', function(){
+      var out = b.parentNode.querySelector('.coin');
+      out.textContent = '…';
+      setTimeout(function(){ out.textContent = Math.random() < 0.5 ? 'Heads' : 'Tails'; out.style.color = 'var(--fg)'; }, 500);
+    });
+  });
+  var resetM = document.getElementById('resetMatch');
+  if (resetM) resetM.addEventListener('click', function(){ mstate = {}; store('match', mstate); Array.prototype.forEach.call(document.querySelectorAll('.match select'), function(s){ s.value = ''; }); paintVotes(); });
+  paintVotes();
+
+  /* ---- quizzes ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.quiz'), function(q){
+    var cards = q.querySelectorAll('.qcard'), i = 0, cnt = q.querySelector('.count');
+    function paint(){ Array.prototype.forEach.call(cards, function(c, k){ c.classList.toggle('cur', k === i); }); if (cnt) cnt.textContent = 'Question ' + (i + 1) + ' of ' + cards.length; }
+    q.querySelector('.qprev').addEventListener('click', function(){ i = Math.max(0, i - 1); paint(); });
+    q.querySelector('.qnext').addEventListener('click', function(){ i = Math.min(cards.length - 1, i + 1); paint(); });
+    Array.prototype.forEach.call(q.querySelectorAll('.qopt'), function(o){
+      o.addEventListener('click', function(){
+        var sib = o.parentNode.querySelectorAll('.qopt');
+        Array.prototype.forEach.call(sib, function(x){ x.classList.toggle('sel', x === o); });
+      });
+    });
+    paint();
+  });
+
+
+  /* ---- debate runners ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.runner'), function (R) {
+    var L = +R.getAttribute('data-long'), SH = +R.getAttribute('data-short');
+    var chips = Array.prototype.slice.call(R.querySelectorAll('.rsp'));
+    var three = false, pos = 0, left = L, h = null;
+    var who = R.querySelector('.rwho'), tm = R.querySelector('.rteam'), clock = R.querySelector('.rclock'), sig = R.querySelector('.rcard-sig span'), go = R.querySelector('.rgo');
+    function active() { return chips.filter(function (c) { var i = +c.getAttribute('data-i'); return !(three && (i === 4 || i === 5)); }); }
+    function lim(c) { var i = +c.getAttribute('data-i'); return (i < 2 || i > 5) ? L : SH; }
+    function fmt(s) { var a = Math.abs(s), m = Math.floor(a / 60), x = a % 60; return (s < 0 ? '+' : '') + m + ':' + (x < 10 ? '0' : '') + x; }
+    function teamName(c) {
+      var isA = c.classList.contains('a');
+      var sel = R.querySelector('.rteams select.' + (isA ? 'a' : 'n'));
+      return sel && sel.value ? 'Team ' + sel.value : '';
+    }
+    function paint() {
+      var act = active(), c = act[pos];
+      chips.forEach(function (x) { x.classList.toggle('off', act.indexOf(x) < 0); x.classList.remove('cur', 'done'); });
+      act.forEach(function (x, k) { if (k < pos) x.classList.add('done'); });
+      c.classList.add('cur');
+      var isA = c.classList.contains('a');
+      who.textContent = (isA ? 'Affirmative' : 'Negative') + ' · ' + c.querySelector('small').textContent.replace(/^(Aff|Neg) /, '') + ' speaker';
+      who.style.color = isA ? 'var(--aff)' : 'var(--neg)';
+      tm.textContent = teamName(c);
+      clock.textContent = fmt(left);
+      R.classList.toggle('go', !!h && left > 30);
+      R.classList.toggle('warn', !!h && left <= 30 && left > 0);
+      R.classList.toggle('over', left <= 0);
+      sig.textContent = left <= 0 ? 'Red card: time is up. Finish your sentence.' : (h && left <= 30) ? 'Yellow card: 30 seconds left. Conclude.' : h ? 'Green card: speak.' : 'Press Start when the speaker is ready.';
+      go.textContent = h ? 'Pause' : 'Start';
+    }
+    function stop() { if (h) { clearInterval(h); h = null; } }
+    function select(p) { stop(); var act = active(); pos = Math.max(0, Math.min(act.length - 1, p)); left = lim(act[pos]); paint(); }
+    go.addEventListener('click', function () { if (h) { stop(); paint(); return; } h = setInterval(function () { left--; paint(); }, 1000); paint(); });
+    R.querySelector('.rreset').addEventListener('click', function () { select(pos); });
+    R.querySelector('.rnext').addEventListener('click', function () { select(pos + 1); });
+    R.querySelector('.rprev').addEventListener('click', function () { select(pos - 1); });
+    chips.forEach(function (c) { c.addEventListener('click', function () { select(active().indexOf(c)); }); });
+    var box = R.querySelector('.r3box');
+    box.addEventListener('change', function () { var cur = active()[pos]; three = box.checked; var idx = active().indexOf(cur); select(idx < 0 ? 0 : idx); });
+    Array.prototype.forEach.call(R.querySelectorAll('.rteams select'), function (s) { s.addEventListener('change', paint); });
+    R.__paint = paint;
+    select(0);
+  });
+
+  /* ---- Debate Day selects: prefilled from the Session 1 matchup table ---- */
+  var dd = load('dd') || {};
+  var resText = {};
+  Array.prototype.forEach.call(document.querySelectorAll('.match .rsel option'), function (o) { resText[o.value] = o.textContent; });
+  function paintResults() {
+    Array.prototype.forEach.call(document.querySelectorAll('.rr[data-src]'), function (el) {
+      var n = el.getAttribute('data-src');
+      var r = dd['dd-r' + n] || mstate['r' + n] || '', a = dd['dd-a' + n] || mstate['a' + n] || '', ng = dd['dd-n' + n] || mstate['n' + n] || '';
+      el.textContent = (r ? '“' + (resText[r] || '') + '” · ' : '') + (a ? 'Team ' + a : '?') + ' vs ' + (ng ? 'Team ' + ng : '?');
+    });
+    var wins = load('wins') || {};
+    Array.prototype.forEach.call(document.querySelectorAll('.win'), function (b) { b.classList.toggle('on', wins[b.getAttribute('data-d')] === b.getAttribute('data-w')); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.ddsel'), function (s) {
+    var k = s.getAttribute('data-k'), src = s.getAttribute('data-src');
+    var v = dd[k] || mstate[src] || '';
+    if (v) s.value = v;
+    s.addEventListener('change', function () { dd[k] = s.value; store('dd', dd); paintResults(); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.runner'), function (R) { if (R.__paint) R.__paint(); });
+  Array.prototype.forEach.call(document.querySelectorAll('.win'), function (b) {
+    b.addEventListener('click', function () { var wins = load('wins') || {}; var d = b.getAttribute('data-d'); wins[d] = wins[d] === b.getAttribute('data-w') ? '' : b.getAttribute('data-w'); store('wins', wins); paintResults(); });
+  });
+  paintResults();
+
+  var start = 0;
+  var saved = load('slide'), at = load('slideAt');
+  if (typeof saved === 'number' && saved > 0 && saved < slides.length && at && Date.now() - at < 3 * 3600 * 1000) start = saved;
+  slides.forEach(function(s){ s.classList.remove('on'); });
+  slides[start].classList.add('on'); cur = start; show(start);
+})();
+</script>
+</body>
+</html>
