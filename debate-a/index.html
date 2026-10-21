@@ -396,6 +396,9 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
 .nav{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
 .nav .sect{grid-column:1;justify-self:start;max-width:100%}
 .nav .mid{grid-column:2}
+#blank{position:fixed;inset:0;background:#000;z-index:50;cursor:none}
+#keydiag{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:60;background:var(--panel-2);border:2px solid var(--yellow);color:var(--fg);font:800 18px/1.3 var(--font-body);padding:.4em .9em;border-radius:10px;white-space:nowrap}
+#blank[hidden],#keydiag[hidden]{display:none}
 .nav .end{grid-column:3;justify-self:end;display:flex;align-items:center;gap:10px}
 .navbtn[hidden]{display:none}
 .navbtn .i-exit,.navbtn.on .i-enter{display:none}
@@ -1214,6 +1217,7 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
 </section>
 </main>
 <nav class="nav" aria-label="Slide navigation"><span class="sect" id="sect"></span><div class="mid"><button class="navbtn" id="prev" type="button" aria-label="Previous slide">←</button><span class="counter" id="counter">1 / 1</span><button class="navbtn" id="next" type="button" aria-label="Next slide">→</button></div><div class="end"><button class="navbtn" id="fs" type="button" aria-label="Full screen" aria-pressed="false" title="Full screen (F)"><svg class="i-enter" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="i-exit" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="navbtn" id="home" type="button" aria-label="Contents">☰</button></div></nav>
+<div id="blank" hidden title="Click or press any slide key to come back"></div><div id="keydiag" hidden></div>
 <script>
 (function(){
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
@@ -1273,16 +1277,43 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
     var g = e.target.closest('[data-goto]');
     if (g) { goto(g.getAttribute('data-goto')); }
   });
-  document.addEventListener('keydown', function(e){
-    var t = e.target, tag = (t && t.tagName) || '';
-    if (tag === 'SELECT' || tag === 'TEXTAREA' || (tag === 'INPUT' && t.type !== 'checkbox')) return;
-    if ((e.key === ' ' || e.key === 'Enter') && tag === 'BUTTON') return;
-    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(cur + 1); }
-    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(cur - 1); }
-    else if (e.key === 'Home') { e.preventDefault(); show(0); }
-    else if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
-    else if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); toggleFs(); }
-  });
+  /* ---- keyboard + presentation clickers ----
+     Clickers send different keys: PageDown/PageUp (most), arrows (some), Space/Enter,
+     F5 or Shift+F5 for "start show", B or . for "blank screen". Add ?keys to the URL to see what a clicker sends. */
+  var NEXT = {ArrowRight:1, ArrowDown:1, PageDown:1, ' ':1, Spacebar:1, Enter:1, n:1, N:1, MediaTrackNext:1, MediaFastForward:1};
+  var PREV = {ArrowLeft:1, ArrowUp:1, PageUp:1, Backspace:1, p:1, P:1, MediaTrackPrevious:1, MediaRewind:1};
+  var CODE_NEXT = {13:1, 32:1, 34:1, 39:1, 40:1, 176:1}, CODE_PREV = {8:1, 33:1, 37:1, 38:1, 177:1};
+  var BLANK = {b:1, B:1, w:1, W:1, '.':1, ',':1}, CODE_BLANK = {66:1, 87:1, 188:1, 190:1};
+  var blankEl = document.getElementById('blank');
+  var keyDiag = /[?&]keys\b/.test(location.search) ? document.getElementById('keydiag') : null;
+  function setBlank(on){ blankEl.hidden = !on; }
+  blankEl.addEventListener('click', function(){ setBlank(false); });
+  function onKey(e){
+    var k = e.key || '', c = e.keyCode || e.which || 0;
+    if (keyDiag) { keyDiag.hidden = false; keyDiag.textContent = 'key: ' + (k === ' ' ? 'Space' : k) + '  ·  code: ' + (e.code || '?') + '  ·  keyCode: ' + c; }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (k === 'F5' || c === 116) { e.preventDefault(); if (!fsEl()) toggleFs(); return; }
+    var t = document.activeElement || e.target, tag = (t && t.tagName) || '';
+    var typing = tag === 'TEXTAREA' || (t && t.isContentEditable) ||
+                 (tag === 'INPUT' && !/^(checkbox|radio|button|submit|range)$/.test(t.type || ''));
+    var isPage = k === 'PageDown' || k === 'PageUp' || c === 33 || c === 34;
+    if ((typing || tag === 'SELECT') && !isPage) return;          // page keys only come from clickers
+    if ((k === ' ' || k === 'Enter' || c === 13 || c === 32) && (tag === 'BUTTON' || tag === 'A')) return;
+    var next = NEXT[k] || CODE_NEXT[c], prev = PREV[k] || CODE_PREV[c];
+    if (next || prev) {
+      e.preventDefault();
+      if (!blankEl.hidden) { setBlank(false); return; }
+      if (isPage && t && t.blur && t !== document.body) t.blur();
+      show(cur + (next ? 1 : -1));
+    }
+    else if (BLANK[k] || CODE_BLANK[c]) { e.preventDefault(); setBlank(blankEl.hidden); }
+    else if (k === 'Escape' && !blankEl.hidden) { setBlank(false); }
+    else if (k === 'Home') { e.preventDefault(); show(0); }
+    else if (k === 'End') { e.preventDefault(); show(slides.length - 1); }
+    else if (k === 'f' || k === 'F') { e.preventDefault(); toggleFs(); }
+  }
+  window.addEventListener('keydown', onKey, true);
+  try { window.focus(); } catch(err) {}
 
   /* ---- reveal buttons: data-reveal="selector within slide" (reveals next hidden one each click) ---- */
   document.addEventListener('click', function(e){
