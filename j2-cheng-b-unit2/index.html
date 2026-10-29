@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Body Sentences Unit 2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>/* Layout: full-screen slide stage above a fixed nav bar; light classroom identity (deliberately single-theme). */
+:root{
+  --bg:#FAF6EE; --panel:#FFFDF8; --panel2:#F3EEE3; --panel3:#EDE7DA; --line:#E4DCCB; --white:#FFFFFF;
+  --ink:#1D2B47; --ink2:#5B667C; --muted:#646E84; --cream:#FAF6EE; --navy2:#34507F;
+  --blue:#2563C9; --orange:#B9520B; --purple:#6D3FC4; --green:#17784E; --coral:#C2412D; --gold:#8A5A00;
+  --goldf:#F2C14E; --goldf2:#E0A82E;
+  --tblue:#E6EEFB; --torange:#FBEADC; --tpurple:#EEE7FB; --tgreen:#E1F1E8; --tcoral:#FBE6E2; --tgold:#FBF0D2;
+  --display:'Baloo 2','Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+  --body:'Nunito','Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+  --zh:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  --nav-h:3rem;
+  color-scheme:light;
+}
+html{font-size:clamp(14px,min(1.5vw,2.65vh),34px);height:100%}
+body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+/* ---------- slides */
+.slide{display:none;position:fixed;top:0;left:0;right:0;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));
+  flex-direction:column;background:var(--bg);overflow:hidden}
+.slide.active{display:flex}
+.slide[data-s="0"]{--sc:var(--blue);--scf:var(--blue);--sct:var(--tblue)}
+.slide[data-s="1"]{--sc:var(--orange);--scf:var(--orange);--sct:var(--torange)}
+.slide[data-s="2"]{--sc:var(--gold);--scf:var(--goldf2);--sct:var(--tgold)}
+.slide[data-s="3"]{--sc:var(--coral);--scf:var(--coral);--sct:var(--tcoral)}
+.stripe{height:10px;flex:none;background:var(--scf)}
+.inner{flex:1;min-height:0;display:flex;flex-direction:column;gap:.75rem;
+  padding-block:1.1rem .9rem;padding-left:max(2.4rem,env(safe-area-inset-left,0px));padding-right:max(2.4rem,env(safe-area-inset-right,0px))}
+.corner{position:absolute;top:calc(10px + .55rem);right:max(1rem,env(safe-area-inset-right,0px));display:flex;gap:.4rem;align-items:center;z-index:5}
+.snum{font-size:.7rem;font-weight:800;letter-spacing:.08em;color:var(--muted);background:var(--panel2);border-radius:999px;padding:.2rem .65rem}
+.title .snum{color:#C9D2E4;background:rgba(255,255,255,.08)}
+.tool{font-size:.68rem;font-weight:800;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:.25rem .7rem;cursor:pointer}
+.tool:hover{border-color:var(--ink2)}
+
+/* header */
+.sh{flex:none;padding-right:13rem}
+.kicker{font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sc);margin-bottom:.15rem}
+.sh h2{font-family:var(--display);font-weight:800;font-size:2.5rem;line-height:1.05;margin:0;color:var(--ink);text-wrap:balance}
+.hzh{font-family:var(--zh);font-size:1.15rem;color:var(--ink2);margin-top:.15rem;font-weight:500}
+.bk{display:inline-flex;align-items:center;gap:.3rem;text-transform:none;letter-spacing:0;font-size:.86rem;color:var(--sc);
+  background:var(--sct);border-radius:999px;padding:.12rem .7rem}
+
+/* body layouts */
+.body{flex:1;min-height:0;display:flex;flex-direction:column;gap:.8rem}
+.col{display:flex;flex-direction:column;gap:.75rem;min-width:0;min-height:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;align-items:start;min-height:0}
+.body.cols{flex:1}
+.cols.c46{grid-template-columns:.85fr 1.15fr}
+.cols.c37{grid-template-columns:.72fr 1.28fr}
+.cols.c64{grid-template-columns:1.25fr .75fr}
+.card{background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:.8rem 1.05rem;min-width:0}
+
+/* bilingual */
+.bi{display:flex;flex-direction:column;min-width:0}
+.bi .en{line-height:1.3}
+.bi .zh{font-family:var(--zh);font-size:.74em;color:var(--ink2);line-height:1.4;margin-top:.08em;font-weight:500}
+.bi .zh:empty{display:none}
+.lead{font-size:1.3rem;font-weight:700}
+.note{font-size:1.15rem;background:var(--sct);border-radius:12px;padding:.55rem .85rem;border-left:5px solid var(--scf)}
+.callout{font-size:1.35rem;font-weight:700;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.6rem 1rem}
+.small{font-size:1rem}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem;counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:2.2rem 1fr;gap:.7rem;align-items:start;font-size:1.3rem;font-weight:700}
+.steps li::before{content:counter(st);display:flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:50%;
+  background:var(--ink);color:var(--cream);font-family:var(--display);font-size:1.2rem;font-weight:800;margin-top:.05rem}
+
+/* chips / tags (meaning colors) */
+.chip{display:inline-flex;align-items:center;font-weight:800;font-size:.92rem;border-radius:999px;padding:.22rem .8rem;border:1.5px solid transparent}
+.tag{display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;border-radius:999px;padding:.12rem .6rem;white-space:nowrap;flex:none}
+.c-topic{background:var(--tpurple);color:var(--purple)}
+.c-main{background:var(--tblue);color:var(--blue)}
+.c-det{background:var(--tgreen);color:var(--green)}
+.c-tr{background:var(--tgold);color:var(--gold)}
+.c-off{background:var(--tcoral);color:var(--coral)}
+.c-topic-t{color:var(--purple)} .c-tr-t{color:var(--gold)} .c-det-t{color:var(--green);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:.45rem}
+.legend .chip{font-size:.85rem}
+.kw{display:flex;flex-direction:column;gap:.5rem;margin-top:.4rem}
+.kwh{font-weight:800;font-size:1rem;color:var(--ink2);letter-spacing:.04em;text-transform:uppercase}
+.kwl{display:flex;flex-wrap:wrap;gap:.5rem}
+.kwl .chip{font-size:1.1rem;padding:.35rem 1rem}
+
+/* reveals */
+.rv{cursor:pointer}
+.rv.hide{position:relative;display:block;border:2px dashed var(--goldf2);background:var(--tgold);border-radius:10px;padding:.3rem .65rem;min-height:2.1rem;min-width:6.5em;font-size:1.15rem;font-weight:700;transition:background .2s}
+.rv.hide:not(.on) .rvc{visibility:hidden}
+.rv.hide:not(.on)::after{content:"?  tap · 點我";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;font-weight:800;color:var(--gold);font-family:var(--body);letter-spacing:.03em}
+.rv.hide.on{border-style:solid;border-color:var(--line);background:var(--white);cursor:default}
+.rv.hide.inl{display:inline-flex;vertical-align:middle;min-width:7.5em;padding:.05rem .5rem;min-height:1.8rem;font-size:1em}
+.rv.hide.inl small{font-weight:600;color:var(--ink2);font-size:.7em;margin-left:.2em}
+.rv.block{width:100%}
+.rv.model{font-weight:600;font-size:1.05rem;line-height:1.45}
+.rv.mark{border-radius:6px;padding:0 .12em;transition:background .25s,color .25s;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.rv.mark.on.c-topic{background:var(--tpurple);color:var(--purple)}
+.rv.mark.on.c-main{background:var(--tblue);color:var(--blue)}
+.rv.mark.on.c-det{background:var(--tgreen);color:var(--green)}
+.rv.mark.on.c-tr{background:var(--goldf);color:var(--ink);font-weight:800}
+.rv.mark:not(.on){background:transparent;color:var(--ink)}
+.rv:not(.on) .on-only{display:none}
+.rv.on .off-only{display:none}
+.given{color:var(--ink);font-weight:600}
+.why{display:block;font-size:.8em;color:var(--ink2);font-weight:600}
+
+/* answers */
+.ans{display:flex;flex-direction:column;gap:.55rem}
+.anh{font-weight:800;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.arow{display:grid;grid-template-columns:7.2rem 1fr;gap:.6rem;align-items:center;font-size:1.15rem}
+.arow .given{font-size:1.15rem;padding:.3rem .1rem}
+.quote{font-size:1.15rem;font-style:italic;font-weight:600}
+
+/* rules + example */
+.rules .rule{display:grid;grid-template-columns:2.4rem 1fr;gap:.7rem;align-items:start;font-size:1.35rem;font-weight:700;
+  background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.6rem .9rem}
+.rmark{display:flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:50%;font-weight:900;font-size:1.3rem}
+.rule.ok .rmark{background:var(--tgreen);color:var(--green)}
+.rule.no .rmark{background:var(--tcoral);color:var(--coral)}
+.ex{display:flex;flex-direction:column;gap:.55rem}
+.exh{font-weight:800;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.extopic{font-size:1.25rem;font-weight:800;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.exline{display:grid;grid-template-columns:7.2rem 1fr;gap:.6rem;align-items:center;font-size:1.15rem;font-weight:600}
+.exline.off s{color:var(--muted)}
+
+/* belongs */
+.bel{display:flex;flex-direction:column;gap:.45rem}
+.rv.row{display:flex;justify-content:space-between;align-items:center;gap:.6rem;font-size:1.15rem;font-weight:600;
+  padding:.4rem .6rem;border-radius:10px;border:1.5px solid var(--line);background:var(--white)}
+.rv.row .txt{min-width:0}
+.qmark{flex:none;font-weight:900;color:var(--gold);background:var(--tgold);border:2px dashed var(--goldf2);border-radius:8px;padding:0 .6rem}
+.badge{flex:none;font-size:.82rem;font-weight:800;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.badge.good{background:var(--tgreen);color:var(--green)}
+.badge.bad{background:var(--tcoral);color:var(--coral)}
+.rv.row.on.isbad .txt{text-decoration:line-through;color:var(--muted)}
+.rv.row.on.isbad{border-color:var(--coral)}
+
+/* p15 */
+.p15list{gap:.6rem}
+.p15{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;padding:.6rem 1rem}
+.p15t{display:flex;gap:.7rem;align-items:center;font-size:1.25rem;font-weight:800}
+.num{flex:none;display:flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:50%;background:var(--ink);color:var(--cream);font-family:var(--display)}
+.xans{display:block;color:var(--coral);font-weight:800}
+
+/* main points defs */
+.defs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.def{font-size:1.2rem;border-radius:14px;padding:.55rem .9rem;border-left:6px solid}
+.c-main-b{background:var(--tblue);border-color:var(--blue)}
+.c-det-b{background:var(--tgreen);border-color:var(--green)}
+.c-topic-b{background:var(--tpurple);border-color:var(--purple)}
+.c-tr-b{background:var(--tgold);border-color:var(--goldf2)}
+.svgwrap{flex:1;min-height:0;display:flex;justify-content:center;align-items:center;overflow:hidden}
+svg.dia{height:100%;width:auto;max-width:100%;max-height:100%}
+svg text{font-family:var(--body)}
+
+/* outline */
+.outline{display:flex;flex-direction:column;gap:.35rem;background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:.75rem .9rem;min-width:0}
+.ol-row{display:grid;grid-template-columns:8.2rem 1fr;gap:.6rem;align-items:center;font-size:1.15rem}
+.ol-k{font-weight:800;font-size:.82rem;border-radius:999px;padding:.15rem .6rem;text-align:center;justify-self:start}
+.ol-k:empty{visibility:hidden}
+.ol-topic .ol-k,.ol-close .ol-k{background:var(--tpurple);color:var(--purple)}
+.ol-topic .ol-v,.ol-close .ol-v{font-weight:800;color:var(--purple)}
+.ol-main .ol-k{background:var(--tblue);color:var(--blue)}
+.ol-main .ol-v{font-weight:700;color:var(--blue)}
+.ol-main .ol-v .rv{color:var(--blue)}
+.ol-det .ol-k{background:var(--tgreen);color:var(--green);margin-left:1.2rem}
+.ol-det .ol-v{padding-left:1.2rem;color:var(--green);font-weight:600;display:flex;flex-direction:column;gap:.25rem}
+.ol-det .ol-v .rv,.ol-det .ol-v .given{color:var(--green)}
+.ol-main{margin-top:.2rem}
+.outline.tight .ol-row{font-size:1.08rem}
+.outline.tight .rv.hide{min-height:1.85rem;padding:.12rem .55rem;font-size:1.05rem}
+.outline.mini .ol-row{font-size:1.1rem}
+.outline.mini .ol-main{margin-top:0}
+.dsep{color:var(--ink2);margin:0 .3rem}
+.exlbl{font-weight:800;font-size:.92rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:-.4rem}
+
+/* bank */
+.bank{display:flex;flex-direction:column;gap:.5rem}
+.bankh{font-weight:800;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.bankl{display:flex;flex-direction:column;gap:.4rem;font-size:1.15rem;font-weight:600}
+.bankl.two{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.bankl span{background:var(--panel2);border-radius:10px;padding:.35rem .65rem}
+.bankl b{color:var(--green);margin-right:.35rem}
+.bigsmall{display:grid;grid-template-columns:1.2fr 1fr;gap:.7rem;align-items:center}
+.bs{border-radius:14px;padding:.6rem .8rem;font-size:1.15rem}
+.bs.big{background:var(--tblue);border:2px solid var(--blue);padding:1rem}
+.bs.small2{background:var(--tgreen);border:2px solid var(--green)}
+
+/* notes to sentences */
+.recipe{display:flex;flex-direction:column;gap:.6rem}
+.formula{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.fp{font-weight:800;font-size:1.1rem;border-radius:12px;padding:.35rem .8rem}
+.plus{font-weight:900;font-size:1.3rem;color:var(--ink2)}
+.nlist{display:flex;flex-direction:column;gap:.45rem}
+.nhead,.nrow{display:grid;grid-template-columns:13rem 2rem 1fr;gap:.5rem;align-items:center}
+.nhead{font-weight:800;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.note-n{font-size:1.15rem;font-weight:700;color:var(--green);background:var(--tgreen);border-radius:10px;padding:.3rem .6rem}
+.arrow{font-size:1.4rem;font-weight:900;color:var(--ink2);text-align:center}
+
+/* transitions */
+.trcols{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:1rem}
+.trc{display:flex;flex-direction:column;gap:.4rem;border-top:6px solid var(--goldf2)}
+.trh{font-family:var(--display);font-size:1.5rem;font-weight:800;margin-bottom:.15rem}
+.trw{font-size:1.3rem;font-weight:800;color:var(--gold);background:var(--tgold);border-radius:10px;padding:.25rem .65rem}
+.trw i{font-weight:600;font-size:.72em;color:var(--ink2);margin-left:.3rem}
+.tips{grid-template-columns:1fr 1fr}
+
+/* paragraphs */
+.para{font-size:1.45rem;line-height:1.75;font-weight:600;padding:1rem 1.4rem;max-width:62rem}
+.para.fill{line-height:2}
+.ptitle{font-family:var(--display);font-weight:800;font-size:1.3rem;text-align:center;margin-bottom:.1rem}
+.wbank{display:flex;gap:.6rem;flex-wrap:wrap}
+.wbank span{font-size:1.25rem;font-weight:800;color:var(--gold);background:var(--tgold);border:2px solid var(--goldf2);border-radius:12px;padding:.3rem .9rem}
+.frame{font-size:1.25rem;line-height:1.55;font-weight:600}
+.frame p{margin:.2rem 0 .5rem}
+
+/* timer */
+.timer{background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:.6rem .9rem;display:flex;flex-direction:column;align-items:center;gap:.35rem}
+.tlabel{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.tdisp{font-family:var(--display);font-weight:800;font-size:3rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tbtns{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+.tbtns button{font-weight:800;font-size:.95rem;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2);padding:.4rem .85rem;cursor:pointer;min-height:2.4rem}
+.tbtns .tgo{background:var(--green);border-color:var(--green);color:var(--white)}
+.timer.running .tgo{background:var(--orange);border-color:var(--orange)}
+.timer.done{border-color:var(--coral);background:var(--tcoral)}
+.timer.done .tdisp{color:var(--coral);font-size:2rem}
+@media (prefers-reduced-motion:no-preference){.timer.done{animation:pulse 1s ease-in-out 3}}
+@keyframes pulse{50%{transform:scale(1.04)}}
+
+/* idea bank & peer */
+.marks{display:flex;flex-direction:column;gap:.45rem}
+.mrow{display:grid;grid-template-columns:3.2rem 1fr;gap:.6rem;align-items:center;font-size:1.1rem;font-weight:600}
+.msym{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--coral);text-align:center;background:var(--tcoral);border-radius:10px;line-height:1.5}
+.circ{border:2px solid var(--coral);border-radius:999px;padding:0 .25rem;font-size:.75em}
+
+/* quiz */
+.quizwrap{align-items:center;justify-content:center}
+.qcard{width:100%;max-width:62rem;background:var(--panel);border:1.5px solid var(--line);border-radius:18px;padding:1rem 1.4rem;display:flex;flex-direction:column;gap:.8rem}
+.qprog{font-size:.9rem;font-weight:800;color:var(--ink2);letter-spacing:.05em;text-transform:uppercase}
+.qt{font-size:1.5rem;font-weight:800}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.qopt{display:flex;gap:.7rem;align-items:flex-start;text-align:left;font-size:1.25rem;font-weight:600;background:var(--white);border:2px solid var(--line);
+  border-radius:14px;padding:.6rem .8rem;cursor:pointer;min-height:3rem;line-height:1.3}
+.qopt:hover{border-color:var(--blue)}
+.qopt.sel{border-color:var(--blue);background:var(--tblue)}
+.ql{flex:none;font-family:var(--display);font-weight:800;color:var(--blue);background:var(--tblue);border-radius:8px;min-width:2.1rem;text-align:center}
+.qnav{display:flex;gap:.7rem;justify-content:center}
+.qnav button{font-weight:800;font-size:1rem;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2);padding:.45rem 1.2rem;cursor:pointer;min-height:2.6rem}
+.qnav button:disabled{opacity:.35;cursor:default}
+
+/* bridge */
+.bridge ul{margin:.3rem 0 0;padding-left:1.3rem;display:flex;flex-direction:column;gap:.6rem;font-size:1.25rem;font-weight:700}
+.brh{font-family:var(--display);font-size:1.4rem;font-weight:800}
+.learned{border-top:6px solid var(--green)} .learned .brh{color:var(--green)}
+.next{border-top:6px solid var(--blue)} .next .brh{color:var(--blue)}
+
+/* toc */
+.toclist{display:flex;flex-direction:column;gap:.8rem;flex:1;justify-content:center}
+.toc{display:grid;grid-template-columns:4.5rem 1fr;gap:1rem;align-items:center;text-align:left;background:var(--panel);border:2px solid var(--line);
+  border-radius:18px;padding:.75rem 1.2rem;cursor:pointer;transition:transform .15s,border-color .15s}
+.toc:hover{transform:translateX(6px)}
+.tocn{font-family:var(--display);font-weight:800;font-size:3.2rem;line-height:1;text-align:center}
+.toc1 .tocn{color:var(--orange)} .toc1{border-left:8px solid var(--orange)}
+.toc2 .tocn{color:var(--gold)} .toc2{border-left:8px solid var(--goldf2)}
+.toc3 .tocn{color:var(--coral)} .toc3{border-left:8px solid var(--coral)}
+.toct{display:flex;flex-direction:column;gap:.2rem}
+.tt{font-size:1.55rem;font-weight:800}
+.td{font-size:1.1rem;font-weight:600;color:var(--ink2)}
+.tocp{font-size:.88rem;font-weight:800;color:var(--muted)}
+
+/* title slides */
+.slide.title{background:radial-gradient(ellipse at 50% 30%,var(--navy2) 0%,var(--ink) 75%);color:var(--cream)}
+.tcenter{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.8rem}
+.eyebrow{color:var(--goldf);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:1.05rem}
+.slide.title h1{font-family:var(--display);font-weight:800;font-size:5.2rem;line-height:1;margin:0;color:var(--cream);text-wrap:balance}
+.slide.title h1.h1s{font-size:4.6rem}
+.tsub{font-family:var(--zh);font-size:1.6rem;color:#D9DFEC;font-weight:500}
+.tchips{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:.6rem}
+.tchips span{font-size:1.15rem;font-weight:800;border:1.5px solid rgba(250,246,238,.4);border-radius:999px;padding:.45rem 1.1rem;color:var(--cream);background:rgba(255,255,255,.08)}
+.bignum{font-family:var(--display);font-weight:800;font-size:6rem;line-height:.9;color:var(--goldf)}
+
+/* session 3 */
+.process{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:.5rem}
+.pstep{position:relative;display:flex;flex-direction:column;gap:.5rem;align-items:flex-start;border-radius:16px;padding:.9rem;border:2px solid var(--line);background:var(--panel)}
+.pstep.today{border-color:var(--coral);background:var(--tcoral)}
+.pstep.test{border-color:var(--blue);background:var(--tblue)}
+.pn{display:flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--ink);color:var(--cream);font-family:var(--display);font-weight:800;font-size:1.3rem;flex:none}
+.pt{font-size:1.35rem;font-weight:800}
+.pp{font-size:.92rem;font-weight:700;color:var(--ink2)}
+.pkey{display:flex;gap:.6rem}
+.chip.today{background:var(--tcoral);color:var(--coral);border-color:var(--coral)}
+.chip.test{background:var(--tblue);color:var(--blue);border-color:var(--blue)}
+.jobs{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem}
+.job{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.1rem;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.55rem .35rem}
+.ji{font-size:2.1rem;line-height:1.1}
+.je{font-weight:800;font-size:1.05rem;line-height:1.2}
+.jz{font-family:var(--zh);font-size:.82rem;color:var(--ink2)}
+.jp{font-size:.74rem;font-weight:800;color:var(--gold);background:var(--tgold);border-radius:999px;padding:0 .45rem}
+.qcols{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+.qc{border-top:6px solid var(--blue)}
+.qch{font-size:1.25rem;font-weight:800;color:var(--blue)}
+.qc ul{margin:.4rem 0 0;padding-left:1.2rem;font-size:1.15rem;font-weight:700;display:flex;flex-direction:column;gap:.25rem}
+.tsteps{display:flex;flex-direction:column;gap:.6rem}
+.ts{display:grid;grid-template-columns:2.4rem 1fr;gap:.2rem .7rem;align-items:start}
+.ts .small{grid-column:2}
+.tsh{font-size:1.25rem;font-weight:800}
+.checklist{display:flex;flex-direction:column;gap:.5rem}
+.cl{display:grid;grid-template-columns:1.6rem 1fr;gap:.4rem;font-size:1.2rem;font-weight:800;align-items:start}
+.cl .small{font-weight:700;font-size:1.08rem}
+.sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.sumc{border-left:8px solid;border-radius:16px;display:flex;flex-direction:column;gap:.4rem}
+.sumh{font-family:var(--display);font-size:1.55rem;font-weight:800}
+.sumc .small{font-size:1.2rem;font-weight:600}
+
+/* ---------- nav */
+#nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));
+  padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;justify-content:center;gap:.7rem;background:var(--ink);z-index:50}
+.nb{font-weight:800;font-size:.95rem;border-radius:999px;border:1.5px solid rgba(250,246,238,.3);background:rgba(255,255,255,.08);color:var(--cream);
+  padding:.45rem 1.1rem;cursor:pointer;min-height:2.3rem}
+.nb.primary{background:var(--goldf);border-color:var(--goldf);color:var(--ink)}
+.nb:disabled{opacity:.35;cursor:default}
+.nb.ghost{position:absolute}
+#btoc{left:max(16px,env(safe-area-inset-left,0px))}
+#bfs{right:max(16px,env(safe-area-inset-right,0px))}
+#count{color:var(--cream);font-weight:800;font-size:.95rem;min-width:5rem;text-align:center;font-variant-numeric:tabular-nums}
+#blank{position:fixed;inset:0;background:#0E1626;z-index:100;cursor:pointer}
+#keylog{position:fixed;left:16px;top:16px;z-index:120;background:var(--ink);color:var(--cream);font:700 14px/1.5 ui-monospace,monospace;padding:.6rem .9rem;border-radius:10px;max-width:90vw}
+
+/* ---------- phones and narrow tablets: stack and scroll inside the slide */
+@media (max-width:760px){
+  html{font-size:15px}
+  :root{--nav-h:3.4rem}
+  .slide{overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .inner{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1rem 1.2rem}
+  .corner{top:calc(10px + .4rem)}
+  .sh{padding-right:0;padding-top:1.4rem}
+  .sh h2{font-size:1.9rem}
+  .cols,.cols.c46,.cols.c37,.cols.c64,.defs,.trcols,.tips,.qcols,.sumgrid,.p15,.qopts,.bankl.two,.bigsmall{grid-template-columns:1fr}
+  .process{grid-template-columns:1fr 1fr}
+  .jobs{grid-template-columns:repeat(3,1fr)}
+  .nhead{display:none}
+  .nrow{grid-template-columns:1fr;gap:.25rem}
+  .nrow .arrow{display:none}
+  .arow,.exline{grid-template-columns:1fr;gap:.25rem}
+  .ol-row{grid-template-columns:1fr;gap:.2rem}
+  .ol-det .ol-k{margin-left:0}.ol-det .ol-v{padding-left:0}
+  .svgwrap{flex:none;overflow-x:auto;justify-content:flex-start}
+  svg.dia{height:auto;width:100%;min-width:0}
+  .para{font-size:1.2rem}
+  .slide.title h1{font-size:3rem}.slide.title h1.h1s{font-size:2.6rem}
+  .bignum{font-size:4rem}
+  .toc{grid-template-columns:3rem 1fr}.tocn{font-size:2.2rem}
+  .nz{display:none}
+  .nb.ghost{position:static}
+  #nav{gap:.5rem}
+}
+
+/* ---------- QA fixes */
+.toclist{gap:.6rem}
+.toc{padding:.5rem 1.1rem;grid-template-columns:4rem 1fr}
+.tocn{font-size:2.7rem}
+.tt{font-size:1.4rem}
+.td{font-size:1.02rem}
+.ol-main .ol-v .given{color:var(--blue)}
+.frow{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:center}
+.nlist{gap:.35rem}
+.nlist .rv.hide{min-height:1.9rem;padding:.15rem .6rem}
+.tsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:.5rem 1.2rem}
+.checklist .anh{grid-column:1/-1}
+.steps.big{gap:1rem}
+.steps.big li{font-size:1.6rem;grid-template-columns:2.6rem 1fr}
+.steps.big li::before{width:2.6rem;height:2.6rem;font-size:1.4rem}
+.qt{font-size:1.75rem}
+.qopt{font-size:1.4rem;padding:.75rem .9rem}
+.qcard{padding:1.3rem 1.6rem;gap:1rem}
+@media (max-width:760px){
+  .frow,.tsteps,.checklist{grid-template-columns:1fr}
+  .steps.big li{font-size:1.25rem}
+  .qt{font-size:1.35rem}.qopt{font-size:1.1rem}
+  .nb{min-width:2.8rem}
+}
+.timer.row{flex-direction:row;justify-content:space-between;padding:.45rem .8rem;gap:.6rem}
+.timer.row .tdisp{font-size:2.2rem}
+.timer.row .tlabel{display:none}
+.toc{padding:.4rem 1.1rem}
+.toct{gap:.05rem}
+.td{font-size:.98rem}
+.toclist{gap:.5rem}
+.timer.row .tbtns{flex-wrap:nowrap}
+.timer.row .tbtns button{padding:.35rem .65rem}
+@media (max-width:760px){
+  .inner,.body,.body.cols{flex:none;min-height:auto}
+  .col,.cols{min-height:auto}
+  .svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  svg.dia.wide{min-width:680px}
+  .toclist{flex:none}
+  .tcenter{min-height:70vh}
+}
+</style>
+</head>
+<body>
+<section class="slide title" data-s="0" data-id="start" id="p1" aria-label="Slide 1"><div class="inner"><div class="tcenter">
+<div class="eyebrow">J2 Cheng B · English Writing · Write Right 2 · Unit 2</div>
+<h1>The Body Sentences</h1>
+<div class="tsub">內文句 · How to write a great paragraph · 如何寫出一個好段落</div>
+<div class="tchips"><span>📖 Student Book pp. 14–21 · 課本</span><span>📒 Workbook pp. 6–9 · 習作</span></div>
+</div></div><div class="corner"><span class="snum">01 / 44</span></div></section>
+<section class="slide" data-s="0" data-id="toc" id="p2" aria-label="Slide 2"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Unit 2 · 第二單元</div><h2>This Unit in 3 Sessions</h2><div class="hzh">本單元共三堂課</div></header><div class="toclist"><button type="button" class="toc toc1" data-goto="s1">
+<span class="tocn">1</span><span class="toct"><div class="bi tt"><span class="en">What are body sentences?</span><span class="zh">什麼是內文句？</span></div><div class="bi td"><span class="en">Stay on topic · Main points and supporting details</span><span class="zh">切題 · 重點與支持細節</span></div><span class="tocp">Student Book pp. 14–17</span></span></button><button type="button" class="toc toc2" data-goto="s2">
+<span class="tocn">2</span><span class="toct"><div class="bi tt"><span class="en">Outlines and transitions</span><span class="zh">大綱與轉折詞</span></div><div class="bi td"><span class="en">Notes into sentences · First, In addition, Finally</span><span class="zh">把筆記寫成句子 · 轉折詞</span></div><span class="tocp">Student Book pp. 18–19 · Workbook pp. 8–9</span></span></button><button type="button" class="toc toc3" data-goto="s3">
+<span class="tocn">3</span><span class="toct"><div class="bi tt"><span class="en">Plan your own paragraph</span><span class="zh">規劃你自己的段落</span></div><div class="bi td"><span class="en">Brainstorm · Outline · Get ready for the writing test</span><span class="zh">腦力激盪 · 大綱 · 準備寫作測驗</span></div><span class="tocp">Student Book pp. 20–21 → Workbook pp. 6–7</span></span></button></div></div><div class="corner"><span class="snum">02 / 44</span></div></section>
+<section class="slide title" data-s="1" data-id="s1" id="p3" aria-label="Slide 3"><div class="inner"><div class="tcenter">
+<div class="eyebrow">Session 1 · Student Book pp. 14–17</div>
+<div class="bignum">1</div>
+<h1 class="h1s">What Are Body Sentences?</h1>
+<div class="tsub">什麼是內文句？</div></div></div><div class="corner"><span class="snum">03 / 44</span></div></section>
+<section class="slide" data-s="1" id="p4" aria-label="Slide 4"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Today's goals</div><h2>Today I Can…</h2><div class="hzh">今天我會……</div></header><div class="body col"><ol class="steps big"><li><div class="bi "><span class="en">find the topic sentence in a paragraph.</span><span class="zh">找出段落的主題句。</span></div></li><li><div class="bi "><span class="en">say if a sentence is on topic or off topic.</span><span class="zh">判斷一個句子是切題還是離題。</span></div></li><li><div class="bi "><span class="en">find main points and supporting details.</span><span class="zh">找出重點和支持細節。</span></div></li></ol><div class="kw"><div class="kwh">Key words · 關鍵字</div><div class="kwl"><span class="chip c-topic">topic sentence · 主題句</span><span class="chip c-main">body sentences · 內文句</span><span class="chip c-main">main point · 重點</span><span class="chip c-det">supporting detail · 支持細節</span><span class="chip c-topic">closing sentence · 結尾句</span></div></div></div></div><div class="corner"><span class="snum">04 / 44</span></div></section>
+<section class="slide" data-s="1" id="p5" aria-label="Slide 5"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Warm-up · 暖身</div><h2>A Paragraph Is Like a Hamburger</h2><div class="hzh">段落就像一個漢堡</div></header><div class="body col"><div class="svgwrap"><svg class="dia" viewBox="0 0 880 400" role="img" aria-label="A hamburger: the top bun is the topic sentence, the fillings are body sentences, the bottom bun is the closing sentence">
+<path d="M60,152 Q60,38 240,38 Q420,38 420,152 Z" fill="#F2C14E" stroke="#1D2B47" stroke-width="3"/><ellipse cx="170" cy="80" rx="9" ry="5" fill="#FFFDF8" transform="rotate(-20 170 80)"/><ellipse cx="240" cy="62" rx="9" ry="5" fill="#FFFDF8" transform="rotate(0 240 62)"/><ellipse cx="310" cy="82" rx="9" ry="5" fill="#FFFDF8" transform="rotate(20 310 82)"/><ellipse cx="200" cy="110" rx="9" ry="5" fill="#FFFDF8" transform="rotate(-10 200 110)"/><ellipse cx="280" cy="112" rx="9" ry="5" fill="#FFFDF8" transform="rotate(10 280 112)"/><ellipse cx="130" cy="118" rx="9" ry="5" fill="#FFFDF8" transform="rotate(-30 130 118)"/><ellipse cx="350" cy="118" rx="9" ry="5" fill="#FFFDF8" transform="rotate(30 350 118)"/>
+<path d="M48,166 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 q12,22 24,0 L432,190 L48,190 Z" fill="#E1F1E8" stroke="#17784E" stroke-width="3" stroke-linejoin="round"/>
+<rect x="60" y="196" width="360" height="48" rx="18" fill="#FBEADC" stroke="#B9520B" stroke-width="3"/>
+<rect x="72" y="250" width="336" height="30" rx="14" fill="#FBE6E2" stroke="#C2412D" stroke-width="3"/>
+<path d="M60,288 L420,288 Q420,368 360,368 L120,368 Q60,368 60,288 Z" fill="#F2C14E" stroke="#1D2B47" stroke-width="3"/>
+<line x1="430" y1="96" x2="492" y2="96" stroke="#5B667C" stroke-width="2.5" stroke-dasharray="6 5"/>
+<path d="M440,162 Q456,162 456,180 L456,206 Q456,221 472,221 Q456,221 456,236 L456,262 Q456,280 440,280" fill="none" stroke="#2563C9" stroke-width="3"/>
+<line x1="430" y1="330" x2="492" y2="330" stroke="#5B667C" stroke-width="2.5" stroke-dasharray="6 5"/>
+<text x="505" y="86" font-size="30" font-weight="800" fill="#6D3FC4">Topic sentence</text>
+<text x="505" y="115" font-size="21" fill="#1D2B47">Tells the main idea.</text>
+<text x="505" y="141" font-size="19" fill="#5B667C">主題句：說出主旨</text>
+<text x="505" y="206" font-size="30" font-weight="800" fill="#2563C9">Body sentences</text>
+<text x="505" y="235" font-size="21" fill="#1D2B47">Tell more about the topic.</text>
+<text x="505" y="261" font-size="19" fill="#5B667C">內文句：說明更多細節</text>
+<text x="505" y="318" font-size="30" font-weight="800" fill="#6D3FC4">Closing sentence</text>
+<text x="505" y="347" font-size="21" fill="#1D2B47">Ends the paragraph.</text>
+<text x="505" y="373" font-size="19" fill="#5B667C">結尾句：結束段落</text>
+</svg></div>
+<div class="bi callout"><span class="en">This unit is about the middle: the body sentences. They are the meat of your paragraph!</span><span class="zh">這個單元學中間的部分：內文句。它們是段落裡最重要的「肉」！</span></div></div></div><div class="corner"><span class="snum">05 / 44</span></div></section>
+<section class="slide" data-s="1" id="p6" aria-label="Slide 6"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 14 · 課本第 14 頁</span></div><h2>Read: My Future Dream</h2><div class="hzh">閱讀：我的未來夢想</div></header><div class="body cols c46"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Read the text on page 14.</span><span class="zh">閱讀第 14 頁的短文。</span></div></li><li><div class="bi "><span class="en">Circle the topic sentence.</span><span class="zh">圈出主題句。</span></div></li><li><div class="bi "><span class="en">Underline the 3 reasons. Write reasons 2 and 3.</span><span class="zh">畫出三個理由，寫下第 2 和第 3 個理由。</span></div></li></ol><div class="timer" data-min="5"><div class="tlabel">Timer · 計時器</div><div class="tdisp">05:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div><div class="col"><div class="card ans">
+<div class="anh">Answers · 答案</div>
+<div class="arow"><span class="tag c-topic">Topic sentence</span><div class="rv hide " data-g="1"><span class="rvc">When I grow up, I want to be a doctor.</span></div></div>
+<div class="arow"><span class="tag c-main">Reason 1</span><div class="given">He thinks he will really like being a doctor.</div></div>
+<div class="arow"><span class="tag c-main">Reason 2</span><div class="rv hide " data-g="2"><span class="rvc">He thinks he will be good at it.</span></div></div>
+<div class="arow"><span class="tag c-main">Reason 3</span><div class="rv hide " data-g="3"><span class="rvc">He wants to help people.</span></div></div>
+</div>
+<div class="bi note"><span class="en">The 3 reasons are body sentences. They tell more about the topic.</span><span class="zh">這三個理由就是內文句。它們更詳細說明主題。</span></div></div></div></div><div class="corner"><span class="snum">06 / 44</span></div></section>
+<section class="slide" data-s="1" id="p7" aria-label="Slide 7"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 15 · 課本第 15 頁</span></div><h2>What Do Body Sentences Do?</h2><div class="hzh">內文句的工作是什麼？</div></header><div class="body cols c46"><div class="col rules">
+<div class="rule ok"><span class="rmark">✓</span><div class="bi "><span class="en">They tell more about the topic sentence.</span><span class="zh">更詳細地說明主題句。</span></div></div>
+<div class="rule ok"><span class="rmark">✓</span><div class="bi "><span class="en">They explain, describe, give reasons, or give examples.</span><span class="zh">解釋、描述、給理由或舉例子。</span></div></div>
+<div class="rule no"><span class="rmark">✗</span><div class="bi "><span class="en">They don't talk about other topics.</span><span class="zh">不談跟主題無關的事。</span></div></div></div><div class="card ex">
+<div class="exh">Example · 範例</div>
+<div class="extopic"><span class="tag c-topic">Topic</span> Taiwanese night markets are fun.</div>
+<div class="exline"><span class="tag c-main">describe 描述</span>Night markets are bright, busy, and loud.</div>
+<div class="exline"><span class="tag c-main">example 舉例</span>You can eat stinky tofu and oyster omelets.</div>
+<div class="exline"><span class="tag c-main">explain 解釋</span>The food is cheap, so you can try a lot.</div>
+<div class="exline off"><span class="tag c-off">off topic 離題</span><s>My brother is in high school.</s></div></div></div></div><div class="corner"><span class="snum">07 / 44</span></div></section>
+<section class="slide" data-s="1" id="p8" aria-label="Slide 8"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Practice · 練習</div><h2>On Topic or Off Topic?</h2><div class="hzh">切題還是離題？</div></header><div class="bi lead"><span class="en">Read each sentence. Does it belong in the paragraph?</span><span class="zh">讀每一句。它屬於這個段落嗎？</span></div><div class="body cols"><div class="card bel"><div class="extopic"><span class="tag c-topic">Topic</span> My dog is a great pet.</div><div class="rv row " data-g="1"><span class="txt">a. He is friendly to everyone.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ on topic 切題</span></span></div><div class="rv row " data-g="2"><span class="txt">b. He waits for me at the door after school.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ on topic 切題</span></span></div><div class="rv row isbad" data-g="3"><span class="txt">c. My sister wants a cat.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge bad">✗ off topic 離題</span></span></div><div class="rv row " data-g="4"><span class="txt">d. He makes me happy when I feel sad.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ on topic 切題</span></span></div></div><div class="card bel"><div class="extopic"><span class="tag c-topic">Topic</span> Summer is my favorite season.</div><div class="rv row " data-g="5"><span class="txt">a. I can go swimming at the beach.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ on topic 切題</span></span></div><div class="rv row isbad" data-g="6"><span class="txt">b. Winter in Taiwan is cold and rainy.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge bad">✗ off topic 離題</span></span></div><div class="rv row " data-g="7"><span class="txt">c. There is no school for two months.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ on topic 切題</span></span></div><div class="rv row " data-g="8"><span class="txt">d. I can eat mango shaved ice.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ on topic 切題</span></span></div></div></div></div><div class="corner"><span class="snum">08 / 44</span></div></section>
+<section class="slide" data-s="1" id="p9" aria-label="Slide 9"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 15 · 課本第 15 頁</span></div><h2>Circle the Good Ones, Cross Out the Bad</h2><div class="hzh">圈出好的內文句，劃掉不好的</div></header><div class="bi lead"><span class="en">Open your book. Circle the good choices. Cross out the bad ones.</span><span class="zh">打開課本，圈出好的句子，劃掉不好的。</span></div><div class="body col p15list"><div class="card p15"><div class="p15t"><span class="num">1</span><span>The Internet is useful for many reasons.</span></div>
+<div class="rv hide block" data-g="1"><span class="rvc"><span class="xans">✗ Cross out <b>b</b></span><div class="bi small"><span class="en">It is a problem, not a reason the Internet is useful.</span><span class="zh">這是缺點，不是網路有用的理由。</span></div></span></div></div><div class="card p15"><div class="p15t"><span class="num">2</span><span>Police officers do many things to keep people safe.</span></div>
+<div class="rv hide block" data-g="2"><span class="rvc"><span class="xans">✗ Cross out <b>a</b></span><div class="bi small"><span class="en">It is about police cars, not what police officers do.</span><span class="zh">講的是警車，不是警察做的事。</span></div></span></div></div><div class="card p15"><div class="p15t"><span class="num">3</span><span>Moving to a different country can be very hard.</span></div>
+<div class="rv hide block" data-g="3"><span class="rvc"><span class="xans">✗ Cross out <b>b</b></span><div class="bi small"><span class="en">It is about my plan, not why moving is hard.</span><span class="zh">講的是我的計畫，不是搬家為什麼難。</span></div></span></div></div></div></div><div class="corner"><span class="snum">09 / 44</span></div></section>
+<section class="slide" data-s="1" id="p10" aria-label="Slide 10"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 16 · 課本第 16 頁</span></div><h2>Main Points and Supporting Details</h2><div class="hzh">重點與支持細節</div></header><div class="body col"><div class="defs">
+<div class="def c-main-b"><div class="bi "><span class="en"><b>Main points</b> tell about the main idea of the topic sentence.</span><span class="zh">重點：說明主題句的主旨。</span></div></div>
+<div class="def c-det-b"><div class="bi "><span class="en"><b>Supporting details</b> support the main points. Ask: Why? How? For example?</span><span class="zh">支持細節：支持重點。問自己：為什麼？怎麼做？例如？</span></div></div></div><div class="svgwrap"><svg class="dia wide" viewBox="0 0 1200 420" role="img" aria-label="Topic sentence with three main points, each with a supporting detail"><path d="M600,86 C600,130 200,120 200,168" fill="none" stroke="#5B667C" stroke-width="2.5"/><line x1="200" y1="234" x2="200" y2="300" stroke="#5B667C" stroke-width="2.5"/><path d="M600,86 C600,130 600,120 600,168" fill="none" stroke="#5B667C" stroke-width="2.5"/><line x1="600" y1="234" x2="600" y2="300" stroke="#5B667C" stroke-width="2.5"/><path d="M600,86 C600,130 1000,120 1000,168" fill="none" stroke="#5B667C" stroke-width="2.5"/><line x1="1000" y1="234" x2="1000" y2="300" stroke="#5B667C" stroke-width="2.5"/><rect x="320.0" y="16" width="560" height="70" rx="14" fill="#EEE7FB" stroke="#6D3FC4" stroke-width="2.5"/><text x="600" y="60.5" text-anchor="middle" font-size="27" font-weight="800" fill="#6D3FC4">My school is a great place.</text><rect x="25.0" y="170" width="350" height="64" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="200" y="210.1" text-anchor="middle" font-size="23" font-weight="800" fill="#2563C9">The teachers are kind.</text><text x="212" y="274" font-size="19" font-style="italic" font-weight="700" fill="#8A5A00">how?</text><rect x="25.0" y="300" width="350" height="100" rx="14" fill="#E1F1E8" stroke="#17784E" stroke-width="2.5"/><text x="200" y="343.1" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">They help me with my</text><text x="200" y="373.0" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">homework after class.</text><rect x="425.0" y="170" width="350" height="64" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="600" y="210.1" text-anchor="middle" font-size="23" font-weight="800" fill="#2563C9">The library is big.</text><text x="612" y="274" font-size="19" font-style="italic" font-weight="700" fill="#8A5A00">for example?</text><rect x="425.0" y="300" width="350" height="100" rx="14" fill="#E1F1E8" stroke="#17784E" stroke-width="2.5"/><text x="600" y="343.1" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">It has lots of comic</text><text x="600" y="373.0" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">books and English books.</text><rect x="825.0" y="170" width="350" height="64" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="1000" y="210.1" text-anchor="middle" font-size="23" font-weight="800" fill="#2563C9">There are many clubs.</text><text x="1012" y="274" font-size="19" font-style="italic" font-weight="700" fill="#8A5A00">for example?</text><rect x="825.0" y="300" width="350" height="100" rx="14" fill="#E1F1E8" stroke="#17784E" stroke-width="2.5"/><text x="1000" y="343.1" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">I can join the dance club</text><text x="1000" y="373.0" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">or the science club.</text></svg></div></div></div><div class="corner"><span class="snum">10 / 44</span></div></section>
+<section class="slide" data-s="1" id="p11" aria-label="Slide 11"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Practice · 練習</div><h2>Match the Detail to the Main Point</h2><div class="hzh">把細節配對到正確的重點</div></header><div class="body cols c46"><div class="col"><div class="card bank"><div class="bankh">Supporting details · 支持細節</div>
+<div class="bankl"><span><b>A</b> A cup costs about 60 dollars.</span>
+<span><b>B</b> There is a shop on almost every street.</span>
+<span><b>C</b> It is sweet, and the pearls are chewy.</span></div></div><div class="bi note"><span class="en">Read the main points. Which detail goes with each one?</span><span class="zh">讀每個重點。哪個細節跟它配對？</span></div></div><div class="outline "><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">Bubble tea is popular in Taiwan.</div></div><div class="ol-row ol-main"><span class="ol-k">Main point 1</span><div class="ol-v">It tastes good.</div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="1"><span class="rvc"><b>C</b> · It is sweet, and the pearls are chewy.</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 2</span><div class="ol-v">You can buy it everywhere.</div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc"><b>B</b> · There is a shop on almost every street.</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 3</span><div class="ol-v">It is cheap.</div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc"><b>A</b> · A cup costs about 60 dollars.</span></div></div></div></div></div></div><div class="corner"><span class="snum">11 / 44</span></div></section>
+<section class="slide" data-s="1" id="p12" aria-label="Slide 12"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 16 · 課本第 16 頁</span></div><h2>Things to Do in Sydney</h2><div class="hzh">雪梨可以做的事</div></header><div class="body cols c37"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Underline the 3 main points in the paragraph.</span><span class="zh">在段落中畫出三個重點。</span></div></li><li><div class="bi "><span class="en">Fill in the outline below it.</span><span class="zh">完成下面的大綱。</span></div></li></ol><div class="bi note"><span class="en">Tip: Words like <b>In addition</b> and <b>too</b> start a new main point.</span><span class="zh">提示：In addition 和 too 這類字會帶出新的重點。</span></div></div><div class="outline tight"><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">There are many things you can do in Sydney.</div></div><div class="ol-row ol-main"><span class="ol-k">Main point 1</span><div class="ol-v"><span class="given">spend the day at the Taronga Park Zoo</span></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><div class="rv hide " data-g="1"><span class="rvc">see animals like kangaroos and koalas</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 2</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">go up Sydney Tower</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><span class="given">second tallest building in Australia; pretty city lights at night</span></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 3</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">visit the Sydney Opera House</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><div class="rv hide " data-g="4"><span class="rvc">a cool-looking building</span></div><span class="given">puppet shows and concerts</span></div></div></div></div></div><div class="corner"><span class="snum">12 / 44</span></div></section>
+<section class="slide" data-s="1" id="p13" aria-label="Slide 13"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 17 · 課本第 17 頁</span></div><h2>The Usefulness of English</h2><div class="hzh">英文的用處</div></header><div class="body cols c46"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Underline the 3 main points.</span><span class="zh">畫出三個重點。</span></div></li><li><div class="bi "><span class="en">Where does this sentence go? Draw ∧ and write it.</span><span class="zh">這句話該放哪裡？畫 ∧ 並寫進去。</span></div></li><li><div class="bi "><span class="en">Fill in the outline.</span><span class="zh">完成大綱。</span></div></li></ol><div class="card ans"><div class="anh">Question 2 · 第 2 題</div>
+<div class="quote">"It will help me get into a good university and get a good job."</div>
+<div class="rv hide block" data-g="1"><span class="rvc"><div class="bi small"><span class="en">Put it after: <i>Second, learning English will help my future.</i></span><span class="zh">放在「Second, learning English will help my future.」後面。它是重點 2 的細節。</span></div></span></div></div></div><div class="outline tight"><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">Learning English is useful.</div></div><div class="ol-row ol-main"><span class="ol-k">Main point 1</span><div class="ol-v"><span class="given">helpful for traveling</span></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">many people speak English; most countries have English signs</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 2</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">help my future</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><span class="given">help me get into a good university and get a good job</span></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 3</span><div class="ol-v"><span class="given">make friends from different countries, learn about other cultures</span></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><div class="rv hide " data-g="4"><span class="rvc">they teach me about their holidays; I teach them about Korean holidays</span></div></div></div></div></div></div><div class="corner"><span class="snum">13 / 44</span></div></section>
+<section class="slide" data-s="1" id="p14" aria-label="Slide 14"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Exit ticket · 下課前小測驗</div><h2>Check Your Understanding</h2><div class="hzh">檢查你的理解</div></header><div class="body col quizwrap" data-quiz="q1"></div></div><div class="corner"><span class="snum">14 / 44</span></div></section>
+<section class="slide" data-s="1" id="p15" aria-label="Slide 15"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 → Session 2</div><h2>What We Learned · Coming Up Next</h2><div class="hzh">今天學到的 · 下一堂課</div></header><div class="body cols"><div class="card bridge learned"><div class="brh">✓ What we learned · 學到的</div><ul><li><div class="bi "><span class="en">Body sentences tell more about the topic sentence.</span><span class="zh">內文句更詳細說明主題句。</span></div></li><li><div class="bi "><span class="en">Every body sentence must stay on topic.</span><span class="zh">每一個內文句都要切題。</span></div></li><li><div class="bi "><span class="en">Main points tell about the topic. Supporting details tell about the main points.</span><span class="zh">重點說明主題，支持細節說明重點。</span></div></li></ul></div><div class="card bridge next"><div class="brh">→ Coming up next · 下一堂</div><ul><li><div class="bi "><span class="en">Make outlines: sort main points and details.</span><span class="zh">做大綱：分出重點和細節。</span></div></li><li><div class="bi "><span class="en">Turn notes into full sentences.</span><span class="zh">把筆記寫成完整的句子。</span></div></li><li><div class="bi "><span class="en">Use transitions: First, In addition, Finally.</span><span class="zh">使用轉折詞：First, In addition, Finally。</span></div></li></ul></div></div></div><div class="corner"><span class="snum">15 / 44</span></div></section>
+<section class="slide title" data-s="2" data-id="s2" id="p16" aria-label="Slide 16"><div class="inner"><div class="tcenter">
+<div class="eyebrow">Session 2 · Student Book pp. 18–19 · Workbook pp. 8–9</div>
+<div class="bignum">2</div>
+<h1 class="h1s">Outlines and Transitions</h1>
+<div class="tsub">大綱與轉折詞</div></div></div><div class="corner"><span class="snum">16 / 44</span></div></section>
+<section class="slide" data-s="2" id="p17" aria-label="Slide 17"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Today's goals</div><h2>Today I Can…</h2><div class="hzh">今天我會……</div></header><div class="body col"><ol class="steps big"><li><div class="bi "><span class="en">sort main points and supporting details in an outline.</span><span class="zh">在大綱裡分出重點和支持細節。</span></div></li><li><div class="bi "><span class="en">turn outline notes into full sentences.</span><span class="zh">把大綱的筆記寫成完整句子。</span></div></li><li><div class="bi "><span class="en">use transitions like <b>First</b>, <b>In addition</b>, and <b>Finally</b>.</span><span class="zh">使用 First、In addition、Finally 這類轉折詞。</span></div></li></ol><div class="kw"><div class="kwh">Key words · 關鍵字</div><div class="kwl"><span class="chip c-topic">outline · 大綱</span><span class="chip c-tr">transition · 轉折詞</span><span class="chip c-det">full sentence · 完整句子</span></div></div></div></div><div class="corner"><span class="snum">17 / 44</span></div></section>
+<section class="slide" data-s="2" id="p18" aria-label="Slide 18"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Warm-up · 暖身</div><h2>Main Point or Detail?</h2><div class="hzh">是重點還是細節？</div></header><div class="body cols c46"><div class="col"><div class="card bank"><div class="bankh">Sort these 6 phrases · 把這 6 個片語分類</div>
+<div class="bankl two"><span>eat vegetables and fruit every day</span><span>sleep well</span>
+<span>play basketball after school</span><span>eat healthy food</span>
+<span>go to bed before 10:30</span><span>exercise</span></div></div><div class="bigsmall"><div class="bs big"><div class="bi "><span class="en">A <b>main point</b> is big.</span><span class="zh">重點是「大」的想法。</span></div></div><div class="bs small2"><div class="bi "><span class="en">A <b>detail</b> is small and specific.</span><span class="zh">細節是「小」而具體的。</span></div></div></div></div><div class="outline tight"><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">There are many ways to stay healthy.</div></div><div class="ol-row ol-main"><span class="ol-k">Main point 1</span><div class="ol-v"><div class="rv hide " data-g="1"><span class="rvc">eat healthy food</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="1"><span class="rvc">eat vegetables and fruit every day</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 2</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">exercise</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">play basketball after school</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 3</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">sleep well</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">go to bed before 10:30</span></div></div></div></div></div></div><div class="corner"><span class="snum">18 / 44</span></div></section>
+<section class="slide" data-s="2" id="p19" aria-label="Slide 19"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 18 · 課本第 18 頁</span></div><h2>Help the Earth: Choose the Details</h2><div class="hzh">幫助地球：選出支持細節</div></header><div class="body cols c46"><div class="col"><div class="bi lead"><span class="en">Choose one detail from the box for each main point. Three phrases don't fit!</span><span class="zh">從框框中為每個重點選一個細節。有三個片語用不到！</span></div><div class="card ans"><div class="rv hide block" data-g="4"><span class="rvc"><div class="bi small"><span class="en">Not used: don't waste water · give prizes for recycling · eat all the food on your plate</span><span class="zh">用不到的：don't waste water、give prizes for recycling、eat all the food on your plate</span></div></span></div></div></div><div class="outline "><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">There are many ways to help the Earth.</div></div><div class="ol-row ol-main"><span class="ol-k">Main point 1</span><div class="ol-v"><span class="given">save energy</span></div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="1"><span class="rvc">turn off the lights and computer</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 2</span><div class="ol-v"><span class="given">drive your car less</span></div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">ride the bus or walk</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 3</span><div class="ol-v"><span class="given">protect trees</span></div></div><div class="ol-row ol-det"><span class="ol-k">Detail</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">use both sides of the paper <span class="why">(Paper comes from trees. 紙是從樹來的。)</span></span></div></div></div></div></div></div><div class="corner"><span class="snum">19 / 44</span></div></section>
+<section class="slide" data-s="2" id="p20" aria-label="Slide 20"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 18 · 課本第 18 頁</span></div><h2>Television Is Not Good for Kids</h2><div class="hzh">電視對小孩不好</div></header><div class="body cols c46"><div class="col"><div class="bi lead"><span class="en">Two phrases in the box are main points. Four are supporting details.</span><span class="zh">框框裡有兩個是重點，四個是支持細節。</span></div><div class="bi note"><span class="en">The two main points can go in either order.</span><span class="zh">兩個重點的順序可以對調。</span></div></div><div class="outline "><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">Television is not good for kids.</div></div><div class="ol-row ol-main"><span class="ol-k">Main point 1</span><div class="ol-v"><div class="rv hide " data-g="1"><span class="rvc">not good for the body</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">eyes get tired; sit still and don't exercise</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Main point 2</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">shows things kids shouldn't see or hear</span></div></div></div><div class="ol-row ol-det"><span class="ol-k">Details</span><div class="ol-v"><div class="rv hide " data-g="4"><span class="rvc">bad words on television shows; images of crime and violence</span></div></div></div></div></div></div><div class="corner"><span class="snum">20 / 44</span></div></section>
+<section class="slide" data-s="2" id="p21" aria-label="Slide 21"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Language focus · 語言重點</div><h2>From Notes to Sentences</h2><div class="hzh">從筆記到完整句子</div></header><div class="body col"><div class="recipe"><div class="bi callout"><span class="en">An outline has short notes. A paragraph needs full sentences.</span><span class="zh">大綱寫短筆記，段落要用完整的句子。</span></div>
+<div class="frow"><div class="formula"><span class="fp c-topic">Who? 誰</span><span class="plus">+</span><span class="fp c-main">verb 動詞</span><span class="plus">+</span><span class="fp c-det">more: when? why? how? 更多資訊</span></div><div class="bi note"><span class="en">Capital letter at the start, period at the end.</span><span class="zh">句首大寫，句尾加句號。</span></div></div></div><div class="card nlist"><div class="nhead"><span>Note · 筆記</span><span></span><span>Full sentence · 完整句子</span></div><div class="nrow"><span class="note-n">save energy</span><span class="arrow">→</span><div class="rv hide " data-g="1"><span class="rvc">You can save energy at home.</span></div></div><div class="nrow"><span class="note-n">turn off the lights</span><span class="arrow">→</span><div class="rv hide " data-g="2"><span class="rvc">You can turn off the lights when you leave a room.</span></div></div><div class="nrow"><span class="note-n">eyes get tired</span><span class="arrow">→</span><div class="rv hide " data-g="3"><span class="rvc">Your eyes get tired when you watch TV for a long time.</span></div></div><div class="nrow"><span class="note-n">help me get a good job</span><span class="arrow">→</span><div class="rv hide " data-g="4"><span class="rvc">English can help me get a good job in the future.</span></div></div></div></div></div><div class="corner"><span class="snum">21 / 44</span></div></section>
+<section class="slide" data-s="2" id="p22" aria-label="Slide 22"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 19 · 課本第 19 頁</span></div><h2>Transitions: Words That Connect</h2><div class="hzh">轉折詞：連接想法的字</div></header><div class="body col"><div class="trcols">
+<div class="card trc"><div class="bi trh"><span class="en">Start</span><span class="zh">開頭</span></div><div class="trw">First,</div><div class="trw">First of all,</div></div>
+<div class="card trc"><div class="bi trh"><span class="en">Add more</span><span class="zh">補充</span></div><div class="trw">Second, Third,</div><div class="trw">Also,</div><div class="trw">In addition, <i>in uh-DISH-un</i></div><div class="trw">Moreover, <i>mor-OH-ver</i></div><div class="trw">Furthermore, <i>FUR-ther-mor</i></div></div>
+<div class="card trc"><div class="bi trh"><span class="en">End</span><span class="zh">最後</span></div><div class="trw">Lastly,</div><div class="trw">Finally,</div><div class="trw">Most of all, <i>= the most important</i></div></div></div><div class="cols tips">
+<div class="bi note"><span class="en">Put a comma after the transition: <b>First,</b> I like it.</span><span class="zh">轉折詞後面要加逗號。</span></div>
+<div class="bi note"><span class="en"><b>Also</b> can go inside a sentence: Their fries are <b>also</b> good.</span><span class="zh">Also 也可以放在句子中間。</span></div></div></div></div><div class="corner"><span class="snum">22 / 44</span></div></section>
+<section class="slide" data-s="2" id="p23" aria-label="Slide 23"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Model paragraph · 範文</div><h2>See How It Works: Why I Love Weekends</h2><div class="hzh">看看怎麼寫：我為什麼喜歡週末</div></header><div class="body col"><div class="legend"><span class="chip c-topic">Topic / closing sentence · 主題句／結尾句</span><span class="chip c-main">Main point · 重點</span><span class="chip c-det">Supporting detail · 支持細節</span><span class="chip c-tr">Transition · 轉折詞</span></div><div class="card para"><span class="rv mark c-topic" data-g="1">I love weekends for many reasons.</span> <span class="rv mark c-tr" data-g="4">First of all,</span> <span class="rv mark c-main" data-g="2">I can sleep late.</span> <span class="rv mark c-det" data-g="3">I don't have to get up at 6:30 for school.</span> <span class="rv mark c-tr" data-g="4">In addition,</span> <span class="rv mark c-main" data-g="2">I can spend time with my family.</span> <span class="rv mark c-det" data-g="3">We often eat beef noodles together on Saturday night.</span> <span class="rv mark c-tr" data-g="4">Finally,</span> <span class="rv mark c-main" data-g="2">I have time for my hobbies.</span> <span class="rv mark c-det" data-g="3">I play basketball with my friends in the park.</span> <span class="rv mark c-topic" data-g="1">Weekends are the best part of my week.</span></div><div class="bi note"><span class="en">Press Next (or tap a sentence) to color each part.</span><span class="zh">按下一頁（或點句子）就會顯示每個部分的顏色。</span></div></div></div><div class="corner"><span class="snum">23 / 44</span></div></section>
+<section class="slide" data-s="2" id="p24" aria-label="Slide 24"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Practice · 練習</div><h2>Add the Transitions: My Best Friend</h2><div class="hzh">加上轉折詞：我最好的朋友</div></header><div class="body col"><div class="bi lead"><span class="en">Choose a transition for each blank.</span><span class="zh">為每個空格選一個轉折詞。</span></div><div class="wbank"><span>Finally</span><span>First of all</span><span>In addition</span></div><div class="card para fill">Leo is my best friend. <span class="rv hide inl" data-g="1"><span class="rvc"><b>First of all</b><small> (or First)</small></span></span>, he is very funny. He always tells jokes at lunch. <span class="rv hide inl" data-g="2"><span class="rvc"><b>In addition</b><small> (or Second / Also)</small></span></span>, he is kind. He helps me with my math homework. <span class="rv hide inl" data-g="3"><span class="rvc"><b>Finally</b><small> (or Lastly / Most of all)</small></span></span>, we like the same things. We both love baseball and video games. I am happy to have a friend like Leo.</div></div></div><div class="corner"><span class="snum">24 / 44</span></div></section>
+<section class="slide" data-s="2" id="p25" aria-label="Slide 25"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 19 · 課本第 19 頁</span></div><h2>Write Transitions: My Favorite Restaurant</h2><div class="hzh">寫轉折詞：我最喜歡的餐廳</div></header><div class="body cols c46"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Read the paragraph about Bob's Burgers.</span><span class="zh">閱讀 Bob's Burgers 的段落。</span></div></li><li><div class="bi "><span class="en">Write a transition in each blank.</span><span class="zh">在每個空格寫一個轉折詞。</span></div></li></ol><div class="bi note"><span class="en">Don't use the same transition twice. Remember the comma!</span><span class="zh">同一個轉折詞不要重複用，記得加逗號！</span></div></div><div class="card ans"><div class="anh">Possible answers · 參考答案</div><div class="arow"><span class="tag c-tr">Blank 1</span><div class="rv hide " data-g="1"><span class="rvc">First, · First of all,</span></div></div><div class="arow"><span class="tag c-tr">Blank 2</span><div class="rv hide " data-g="2"><span class="rvc">Second, · In addition, · Also, · Moreover,</span></div></div><div class="arow"><span class="tag c-tr">Blank 3</span><div class="rv hide " data-g="3"><span class="rvc">Finally, · Lastly,</span></div></div></div></div></div><div class="corner"><span class="snum">25 / 44</span></div></section>
+<section class="slide" data-s="2" id="p26" aria-label="Slide 26"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 19 · ✏️ Write · 課本第 19 頁 · 寫寫看</span></div><h2>Write a Paragraph: Help the Earth</h2><div class="hzh">寫一個段落：幫助地球</div></header><div class="body cols c64"><div class="col"><div class="bi lead"><span class="en">Use your outline from page 18. Write one main point and one detail for each transition.</span><span class="zh">用第 18 頁的大綱。每個轉折詞後面寫一個重點和一個細節。</span></div><div class="card frame">
+<p><span class="c-topic-t">There are many ways to help the Earth.</span> <b class="c-tr-t">First,</b> you can save energy. You can turn off ____________.</p>
+<p><b class="c-tr-t">In addition,</b> you can ____________. You can ____________.</p>
+<p><b class="c-tr-t">Finally,</b> you can ____________. You can ____________.</p>
+<p><span class="c-topic-t">We all need to do our best to save the Earth.</span></p></div></div><div class="col"><div class="timer" data-min="10"><div class="tlabel">Timer · 計時器</div><div class="tdisp">10:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div><div class="rv hide block model" data-g="1"><span class="rvc"><b>Model · 範文</b><br>There are many ways to help the Earth. First, you can save energy. You can turn off the lights and the computer when you don't use them. In addition, you can drive your car less. You can ride the bus or walk to school. Finally, you can protect trees. You can use both sides of the paper. We all need to do our best to save the Earth.</span></div></div></div></div><div class="corner"><span class="snum">26 / 44</span></div></section>
+<section class="slide" data-s="2" id="p27" aria-label="Slide 27"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Workbook p. 8 · 習作第 8 頁</span></div><h2>How to Make More Friends: Add Details</h2><div class="hzh">如何交更多朋友：加上細節</div></header><div class="body cols c46"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Write a supporting detail for each main point.</span><span class="zh">為每個重點寫一個支持細節。</span></div></li><li><div class="bi "><span class="en">Use the outline to write body sentences. Start with <b>First,</b></span><span class="zh">用大綱寫內文句，從 First, 開始。</span></div></li><li><div class="bi "><span class="en">Use transitions for main points 2 and 3.</span><span class="zh">重點 2 和 3 也要用轉折詞。</span></div></li></ol><div class="timer" data-min="10"><div class="tlabel">Timer · 計時器</div><div class="tdisp">10:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div><div class="col"><div class="card ans"><div class="anh">Idea bank · 點子庫</div>
+<div class="arow"><span class="tag c-main">1 classmates</span><div class="rv hide " data-g="1"><span class="rvc">eat lunch together; talk during breaks</span></div></div>
+<div class="arow"><span class="tag c-main">2 clubs, teams</span><div class="rv hide " data-g="2"><span class="rvc">meet people who like the same things as you</span></div></div>
+<div class="arow"><span class="tag c-main">3 don't be shy</span><div class="rv hide " data-g="3"><span class="rvc">say hi first and smile; ask about their hobbies</span></div></div></div>
+<div class="rv hide block model" data-g="4"><span class="rvc"><b>Model start · 範例開頭</b><br>First, you can spend more time with your classmates. You can eat lunch with them and talk during breaks.</span></div></div></div></div><div class="corner"><span class="snum">27 / 44</span></div></section>
+<section class="slide" data-s="2" id="p28" aria-label="Slide 28"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Workbook p. 9 · 習作第 9 頁</span></div><h2>Improve Your English: Add Main Points</h2><div class="hzh">增進英文的方法：加上重點</div></header><div class="body cols c46"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Read each detail. Ask: What do I <b>do</b>?</span><span class="zh">讀每個細節，問自己：我要「做」什麼？</span></div></li><li><div class="bi "><span class="en">Write the main point.</span><span class="zh">寫下重點。</span></div></li><li><div class="bi "><span class="en">Write body sentences with transitions.</span><span class="zh">用轉折詞寫內文句。</span></div></li></ol><div class="timer" data-min="10"><div class="tlabel">Timer · 計時器</div><div class="tdisp">10:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div><div class="col"><div class="card ans"><div class="anh">Idea bank · 點子庫</div>
+<div class="arow"><span class="tag c-det">learn words</span><div class="rv hide " data-g="1"><span class="rvc">read English books or comics</span></div></div>
+<div class="arow"><span class="tag c-det">listening</span><div class="rv hide " data-g="2"><span class="rvc">listen to English songs; watch English videos</span></div></div>
+<div class="arow"><span class="tag c-det">speaking</span><div class="rv hide " data-g="3"><span class="rvc">practice speaking English; join an English club</span></div></div></div>
+<div class="rv hide block model" data-g="4"><span class="rvc"><b>Model start · 範例開頭</b><br>First, you can read English books. You can learn different words and sentences.</span></div></div></div></div><div class="corner"><span class="snum">28 / 44</span></div></section>
+<section class="slide" data-s="2" id="p29" aria-label="Slide 29"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Workbook pp. 8–9 · 習作第 8–9 頁</span></div><h2>Check Your Partner's Work</h2><div class="hzh">檢查同伴的作業</div></header><div class="body cols c46"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Swap books with your partner.</span><span class="zh">和同伴交換習作。</span></div></li><li><div class="bi "><span class="en">Do the main points and details match? Underline what needs work.</span><span class="zh">重點和細節配得上嗎？畫出需要改進的地方。</span></div></li><li><div class="bi "><span class="en">Use editing marks to fix mistakes.</span><span class="zh">用校對符號改錯。</span></div></li><li><div class="bi "><span class="en">Give the book back. Say one good thing.</span><span class="zh">把習作還給同伴，說一個優點。</span></div></li></ol><div class="timer row" data-min="5"><div class="tlabel">Timer · 計時器</div><div class="tdisp">05:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div><div class="col"><div class="card marks"><div class="anh">Editing marks · 校對符號</div>
+<div class="mrow"><span class="msym">∧</span>add a word · 加字</div>
+<div class="mrow"><span class="msym"><u style="text-decoration-style:double">m</u></span>make it a capital · 改大寫</div>
+<div class="mrow"><span class="msym">⁄</span>make it lowercase · 改小寫</div>
+<div class="mrow"><span class="msym">⊙</span>add a period · 加句號</div>
+<div class="mrow"><span class="msym"><span class="circ">spel</span></span>check the spelling · 拼字錯誤</div></div><div class="bi note"><span class="en">Say: "Your detail about ___ is good." · "Can you add a transition here?"</span><span class="zh">可以說：「你關於……的細節很好。」「這裡可以加一個轉折詞嗎？」</span></div></div></div></div><div class="corner"><span class="snum">29 / 44</span></div></section>
+<section class="slide" data-s="2" id="p30" aria-label="Slide 30"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Exit ticket · 下課前小測驗</div><h2>Check Your Understanding</h2><div class="hzh">檢查你的理解</div></header><div class="body col quizwrap" data-quiz="q2"></div></div><div class="corner"><span class="snum">30 / 44</span></div></section>
+<section class="slide" data-s="2" id="p31" aria-label="Slide 31"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 → Session 3</div><h2>What We Learned · Coming Up Next</h2><div class="hzh">今天學到的 · 下一堂課</div></header><div class="body cols"><div class="card bridge learned"><div class="brh">✓ What we learned · 學到的</div><ul><li><div class="bi "><span class="en">An outline shows main points and supporting details.</span><span class="zh">大綱列出重點和支持細節。</span></div></li><li><div class="bi "><span class="en">Notes become full sentences: who + verb + more.</span><span class="zh">筆記要寫成完整句子：誰 + 動詞 + 更多資訊。</span></div></li><li><div class="bi "><span class="en">Transitions connect ideas. Put a comma after them.</span><span class="zh">轉折詞連接想法，後面要加逗號。</span></div></li></ul></div><div class="card bridge next"><div class="brh">→ Coming up next · 下一堂</div><ul><li><div class="bi "><span class="en">Brainstorm: What do you want to be?</span><span class="zh">腦力激盪：你長大想做什麼？</span></div></li><li><div class="bi "><span class="en">Make your own outline.</span><span class="zh">寫出你自己的大綱。</span></div></li><li><div class="bi "><span class="en">Get ready for the writing test (Workbook pp. 6–7).</span><span class="zh">準備寫作測驗（習作第 6–7 頁）。</span></div></li></ul></div></div></div><div class="corner"><span class="snum">31 / 44</span></div></section>
+<section class="slide title" data-s="3" data-id="s3" id="p32" aria-label="Slide 32"><div class="inner"><div class="tcenter">
+<div class="eyebrow">Session 3 · Student Book pp. 20–21 · Then Workbook pp. 6–7</div>
+<div class="bignum">3</div>
+<h1 class="h1s">Plan Your Own Paragraph</h1>
+<div class="tsub">規劃你自己的段落</div></div></div><div class="corner"><span class="snum">32 / 44</span></div></section>
+<section class="slide" data-s="3" id="p33" aria-label="Slide 33"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Today's goals</div><h2>Today I Can…</h2><div class="hzh">今天我會……</div></header><div class="body col"><ol class="steps big"><li><div class="bi "><span class="en">brainstorm ideas about my future job.</span><span class="zh">針對未來的工作腦力激盪。</span></div></li><li><div class="bi "><span class="en">make an outline from my brainstorm.</span><span class="zh">用腦力激盪的點子做大綱。</span></div></li><li><div class="bi "><span class="en">explain the steps of the writing test.</span><span class="zh">說出寫作測驗的步驟。</span></div></li></ol><div class="kw"><div class="kwh">Key words · 關鍵字</div><div class="kwl"><span class="chip c-topic">brainstorm · 腦力激盪</span><span class="chip c-main">outline · 大綱</span><span class="chip c-det">first draft · 初稿</span><span class="chip c-tr">final draft · 定稿</span></div></div></div></div><div class="corner"><span class="snum">33 / 44</span></div></section>
+<section class="slide" data-s="3" id="p34" aria-label="Slide 34"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · The plan · 計畫</div><h2>5 Steps to a Good Paragraph</h2><div class="hzh">寫好段落的五個步驟</div></header><div class="body col"><div class="process"><div class="pstep today"><span class="pn">1</span><div class="bi pt"><span class="en">Brainstorm</span><span class="zh">腦力激盪</span></div><span class="pp">Student Book p. 20</span></div><div class="pstep today"><span class="pn">2</span><div class="bi pt"><span class="en">Outline</span><span class="zh">大綱</span></div><span class="pp">Student Book p. 21</span></div><div class="pstep test"><span class="pn">3</span><div class="bi pt"><span class="en">First draft</span><span class="zh">初稿</span></div><span class="pp">Workbook p. 6</span></div><div class="pstep test"><span class="pn">4</span><div class="bi pt"><span class="en">Revise and edit</span><span class="zh">修改與校對</span></div><span class="pp">Workbook p. 6</span></div><div class="pstep test"><span class="pn">5</span><div class="bi pt"><span class="en">Final draft</span><span class="zh">定稿</span></div><span class="pp">Workbook p. 7</span></div></div>
+<div class="pkey"><span class="chip today">Today · 今天</span><span class="chip test">Writing test · 寫作測驗</span></div></div></div><div class="corner"><span class="snum">34 / 44</span></div></section>
+<section class="slide" data-s="3" id="p35" aria-label="Slide 35"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Warm-up · 暖身</div><h2>What Do You Want to Be?</h2><div class="hzh">你長大想做什麼？</div></header><div class="body col"><div class="jobs"><div class="job"><span class="ji">👩‍🏫</span><span class="je">a teacher</span><span class="jz">老師</span></div><div class="job"><span class="ji">🧑‍⚕️</span><span class="je">a nurse</span><span class="jz">護理師</span></div><div class="job"><span class="ji">👷</span><span class="je">an engineer</span><span class="jz">工程師</span><span class=jp>en-juh-NEER</span></div><div class="job"><span class="ji">👨‍🍳</span><span class="je">a chef</span><span class="jz">廚師</span><span class=jp>SHEF</span></div><div class="job"><span class="ji">👮</span><span class="je">a police officer</span><span class="jz">警察</span></div><div class="job"><span class="ji">🧑‍🚒</span><span class="je">a firefighter</span><span class="jz">消防員</span></div><div class="job"><span class="ji">🧑‍✈️</span><span class="je">a pilot</span><span class="jz">機師</span><span class=jp>PY-lut</span></div><div class="job"><span class="ji">🐶</span><span class="je">a vet</span><span class="jz">獸醫</span></div><div class="job"><span class="ji">🎮</span><span class="je">a game designer</span><span class="jz">遊戲設計師</span><span class=jp>dih-ZY-ner</span></div><div class="job"><span class="ji">🥐</span><span class="je">a baker</span><span class="jz">麵包師傅</span></div><div class="job"><span class="ji">🔬</span><span class="je">a scientist</span><span class="jz">科學家</span><span class=jp>SY-un-tist</span></div><div class="job"><span class="ji">🎥</span><span class="je">a YouTuber</span><span class="jz">YouTuber</span></div></div><div class="bi callout"><span class="en">Ask your partner: "What do you want to be? Why?" · Answer: "When I grow up, I want to be <b>a</b> chef / <b>an</b> engineer."</span><span class="zh">問同伴：「你長大想做什麼？為什麼？」母音開頭的字用 an。</span></div></div></div><div class="corner"><span class="snum">35 / 44</span></div></section>
+<section class="slide" data-s="3" id="p36" aria-label="Slide 36"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Model · 範例</div><h2>Brainstorm: My Example</h2><div class="hzh">腦力激盪：範例</div></header><div class="body col"><div class="legend"><span class="chip c-topic">Topic · 主題</span><span class="chip c-main">Main point (reason) · 重點（理由）</span><span class="chip c-tr">Ask · 問自己</span><span class="chip c-det">Detail · 細節</span></div><div class="svgwrap"><svg class="dia wide" viewBox="0 0 1200 430" role="img" aria-label="Brainstorm map: want to be a chef, with three reasons and details"><path d="M600,104 C600,140 200,130 200,158" fill="none" stroke="#5B667C" stroke-width="2.5"/><line x1="200" y1="222" x2="200" y2="320" stroke="#5B667C" stroke-width="2.5"/><path d="M600,104 C600,140 600,130 600,158" fill="none" stroke="#5B667C" stroke-width="2.5"/><line x1="600" y1="222" x2="600" y2="320" stroke="#5B667C" stroke-width="2.5"/><path d="M600,104 C600,140 1000,130 1000,158" fill="none" stroke="#5B667C" stroke-width="2.5"/><line x1="1000" y1="222" x2="1000" y2="320" stroke="#5B667C" stroke-width="2.5"/><ellipse cx="600" cy="60" rx="200" ry="44" fill="#EEE7FB" stroke="#6D3FC4" stroke-width="3"/><text x="600" y="69" text-anchor="middle" font-size="27" font-weight="800" fill="#6D3FC4">want to be a chef</text><rect x="30.0" y="160" width="340" height="62" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="200" y="198.7" text-anchor="middle" font-size="22" font-weight="800" fill="#2563C9">will enjoy it</text><rect x="150" y="254" width="100" height="36" rx="18" fill="#FBF0D2" stroke="#E0A82E" stroke-width="2.5"/><text x="200" y="279" text-anchor="middle" font-size="20" font-weight="800" fill="#8A5A00">why?</text><rect x="30.0" y="320" width="340" height="96" rx="14" fill="#E1F1E8" stroke="#17784E" stroke-width="2.5"/><text x="200" y="361.1" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">love cooking; cook with</text><text x="200" y="391.0" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">Grandma every weekend</text><rect x="430.0" y="160" width="340" height="62" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="600" y="198.7" text-anchor="middle" font-size="22" font-weight="800" fill="#2563C9">will be good at it</text><rect x="550" y="254" width="100" height="36" rx="18" fill="#FBF0D2" stroke="#E0A82E" stroke-width="2.5"/><text x="600" y="279" text-anchor="middle" font-size="20" font-weight="800" fill="#8A5A00">how?</text><rect x="430.0" y="320" width="340" height="96" rx="14" fill="#E1F1E8" stroke="#17784E" stroke-width="2.5"/><text x="600" y="361.1" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">practice at home, go to</text><text x="600" y="391.0" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">a great cooking school</text><rect x="830.0" y="160" width="340" height="62" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="1000" y="198.7" text-anchor="middle" font-size="22" font-weight="800" fill="#2563C9">want to make people happy</text><rect x="950" y="254" width="100" height="36" rx="18" fill="#FBF0D2" stroke="#E0A82E" stroke-width="2.5"/><text x="1000" y="279" text-anchor="middle" font-size="20" font-weight="800" fill="#8A5A00">how?</text><rect x="830.0" y="320" width="340" height="96" rx="14" fill="#E1F1E8" stroke="#17784E" stroke-width="2.5"/><text x="1000" y="361.1" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">open a small restaurant;</text><text x="1000" y="391.0" text-anchor="middle" font-size="23" font-weight="600" fill="#17784E">cheap, healthy food</text></svg></div>
+<div class="bi note"><span class="en">Write short notes, not full sentences. Ask: Why? How?</span><span class="zh">寫短筆記就好，不用完整句子。問自己：為什麼？怎麼做？</span></div></div></div><div class="corner"><span class="snum">36 / 44</span></div></section>
+<section class="slide" data-s="3" id="p37" aria-label="Slide 37"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Help · 幫手</div><h2>Questions That Help You Brainstorm</h2><div class="hzh">幫你想點子的問題</div></header><div class="body col"><div class="qcols"><div class="card qc"><div class="bi qch"><span class="en">Why will you like it?</span><span class="zh">你為什麼會喜歡這份工作？</span></div><ul><li>I love ___.</li><li>I am interested in ___.</li></ul></div><div class="card qc"><div class="bi qch"><span class="en">How will you be good at it?</span><span class="zh">你要怎麼把它做好？</span></div><ul><li>I will study / practice ___.</li><li>I am good at ___.</li></ul></div><div class="card qc"><div class="bi qch"><span class="en">What will you do?</span><span class="zh">你會做什麼？幫助誰？</span></div><ul><li>I want to help ___.</li><li>I want to make ___.</li></ul></div></div><div class="exlbl"><div class="bi "><span class="en">Another example · 另一個例子</span><span class="zh"></span></div></div><div class="outline mini"><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">want to be a vet</div></div><div class="ol-row ol-main"><span class="ol-k">1</span><div class="ol-v">love animals <span class="dsep">→</span> <span class="c-det-t">I have two cats.</span></div></div><div class="ol-row ol-main"><span class="ol-k">2</span><div class="ol-v">will be good at it <span class="dsep">→</span> <span class="c-det-t">study science hard</span></div></div><div class="ol-row ol-main"><span class="ol-k">3</span><div class="ol-v">want to help animals <span class="dsep">→</span> <span class="c-det-t">help sick street dogs and cats</span></div></div></div></div></div><div class="corner"><span class="snum">37 / 44</span></div></section>
+<section class="slide" data-s="3" id="p38" aria-label="Slide 38"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 20 · ✏️ Your turn · 課本第 20 頁 · 換你寫</span></div><h2>Your Brainstorming</h2><div class="hzh">你的腦力激盪</div></header><div class="body cols c64"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Write your future job in the middle.</span><span class="zh">在中間寫下你未來的工作。</span></div></li><li><div class="bi "><span class="en">Add 3 main points (your reasons).</span><span class="zh">加上三個重點（你的理由）。</span></div></li><li><div class="bi "><span class="en">Under each one, add a detail. Ask: Why? How?</span><span class="zh">每個重點下面加一個細節。問：為什麼？怎麼做？</span></div></li></ol><div class="bi note"><span class="en">Short notes are OK. You will write sentences later.</span><span class="zh">寫短筆記就可以，之後再寫成句子。</span></div></div><div class="col"><div class="timer" data-min="8"><div class="tlabel">Timer · 計時器</div><div class="tdisp">08:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div></div></div><div class="corner"><span class="snum">38 / 44</span></div></section>
+<section class="slide" data-s="3" id="p39" aria-label="Slide 39"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Model · 範例</div><h2>From Brainstorm to Outline</h2><div class="hzh">從腦力激盪到大綱</div></header><div class="body cols c64"><div class="outline tight"><div class="ol-row ol-topic"><span class="ol-k">Topic</span><div class="ol-v">want to be a chef</div></div><div class="ol-row ol-main"><span class="ol-k">Body 1</span><div class="ol-v">will really enjoy being a chef</div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v">love cooking; cook dinner with Grandma every weekend</div></div><div class="ol-row ol-main"><span class="ol-k">Body 2</span><div class="ol-v">will be good at it</div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v">practice cooking at home every day; go to a great cooking school</div></div><div class="ol-row ol-main"><span class="ol-k">Body 3</span><div class="ol-v">want to make people happy</div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v">open a small restaurant; sell cheap, healthy food to students</div></div><div class="ol-row ol-close"><span class="ol-k">Closing</span><div class="ol-v">hope to become a chef that many people love</div></div></div><div class="col"><div class="bi note"><span class="en">Your outline has the same parts as your paragraph.</span><span class="zh">大綱的部分和段落一樣。</span></div><div class="bi callout"><span class="en">Topic → Body (3 main points + details) → Closing</span><span class="zh">主題 → 內文（三個重點 + 細節）→ 結尾</span></div></div></div></div><div class="corner"><span class="snum">39 / 44</span></div></section>
+<section class="slide" data-s="3" id="p40" aria-label="Slide 40"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 21 · ✏️ Your turn · 課本第 21 頁 · 換你寫</span></div><h2>Your Outline</h2><div class="hzh">你的大綱</div></header><div class="body cols c64"><div class="col"><ol class="steps"><li><div class="bi "><span class="en"><b>Topic:</b> your future job.</span><span class="zh">主題：你未來的工作。</span></div></li><li><div class="bi "><span class="en"><b>Body:</b> 3 main points and details from page 20.</span><span class="zh">內文：第 20 頁的三個重點和細節。</span></div></li><li><div class="bi "><span class="en"><b>Closing:</b> your hope for the future.</span><span class="zh">結尾：你對未來的希望。</span></div></li></ol><div class="bi note"><span class="en">Closing ideas: "I hope I become a ___ that many people like." · "I will work hard to become a great ___."</span><span class="zh">結尾句範例：「我希望成為很多人喜歡的……」「我會努力成為很棒的……」</span></div><div class="bi note"><span class="en">Finished? Raise your hand and show your teacher.</span><span class="zh">寫完了嗎？舉手給老師看。</span></div></div><div class="col"><div class="timer" data-min="8"><div class="tlabel">Timer · 計時器</div><div class="tdisp">08:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div></div></div><div class="corner"><span class="snum">40 / 44</span></div></section>
+<section class="slide" data-s="3" id="p41" aria-label="Slide 41"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Model paragraph · 範文</div><h2>From Outline to Paragraph</h2><div class="hzh">從大綱到段落：我的未來夢想</div></header><div class="body col"><div class="legend"><span class="chip c-topic">Topic / closing sentence · 主題句／結尾句</span><span class="chip c-main">Main point · 重點</span><span class="chip c-det">Supporting detail · 支持細節</span><span class="chip c-tr">Transition · 轉折詞</span></div><div class="card para"><div class="ptitle">My Future Dream</div><span class="rv mark c-topic" data-g="1">When I grow up, I want to be a chef.</span> <span class="rv mark c-tr" data-g="4">First of all,</span> <span class="rv mark c-main" data-g="2">I think I will really enjoy being a chef.</span> <span class="rv mark c-det" data-g="3">I love cooking, and I cook dinner with my grandma every weekend.</span> <span class="rv mark c-tr" data-g="4">Second,</span> <span class="rv mark c-main" data-g="2">I think I will be good at it.</span> <span class="rv mark c-det" data-g="3">I will practice cooking at home every day. Then I will go to a great cooking school.</span> <span class="rv mark c-tr" data-g="4">Finally,</span> <span class="rv mark c-main" data-g="2">I want to make people happy.</span> <span class="rv mark c-det" data-g="3">I want to open a small restaurant near a school and sell cheap, healthy food to students.</span> <span class="rv mark c-topic" data-g="1">I hope I become a chef that many people love.</span></div></div></div><div class="corner"><span class="snum">41 / 44</span></div></section>
+<section class="slide" data-s="3" id="p42" aria-label="Slide 42"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Workbook pp. 6–7 · 習作第 6–7 頁</span></div><h2>Next: Your Writing Test</h2><div class="hzh">下一步：寫作測驗</div></header><div class="body col"><div class="tsteps">
+<div class="card ts"><span class="pn">1</span><div class="bi tsh"><span class="en">First draft (p. 6)</span><span class="zh">初稿（第 6 頁）</span></div><div class="bi small"><span class="en">Use your outline from p. 21. Write a title, topic sentence, body, and closing.</span><span class="zh">用第 21 頁的大綱寫標題、主題句、內文句和結尾句。</span></div></div>
+<div class="card ts"><span class="pn">2</span><div class="bi tsh"><span class="en">Revise and edit (p. 6)</span><span class="zh">修改與校對（第 6 頁）</span></div><div class="bi small"><span class="en">Read your draft. Use the checklist. Fix your mistakes.</span><span class="zh">讀你的初稿，用檢查表改錯。</span></div></div>
+<div class="card ts"><span class="pn">3</span><div class="bi tsh"><span class="en">Final draft (p. 7)</span><span class="zh">定稿（第 7 頁）</span></div><div class="bi small"><span class="en">Copy your paragraph neatly with all your fixes.</span><span class="zh">把改好的段落工整地抄寫一次。</span></div></div></div><div class="card checklist"><div class="anh">Checklist · 檢查表</div>
+<div class="cl">☐ <div class="bi small"><span class="en">All my body sentences are on topic.</span><span class="zh">所有內文句都切題。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">I have 3 main points with supporting details.</span><span class="zh">我有三個重點和支持細節。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">I used transitions (First, Second, Finally).</span><span class="zh">我用了轉折詞。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">I have a topic sentence and a closing sentence.</span><span class="zh">我有主題句和結尾句。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">Grammar · capital letters · punctuation · spelling</span><span class="zh">文法 · 大寫 · 標點符號 · 拼字</span></div></div></div></div></div><div class="corner"><span class="snum">42 / 44</span></div></section>
+<section class="slide" data-s="3" id="p43" aria-label="Slide 43"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Exit ticket · 下課前小測驗</div><h2>Check Your Understanding</h2><div class="hzh">檢查你的理解</div></header><div class="body col quizwrap" data-quiz="q3"></div></div><div class="corner"><span class="snum">43 / 44</span></div></section>
+<section class="slide" data-s="3" id="p44" aria-label="Slide 44"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Unit 2 · 第二單元</div><h2>Unit 2 Summary</h2><div class="hzh">第二單元重點整理</div></header><div class="body"><div class="sumgrid"><div class="card sumc c-topic-b"><div class="bi sumh"><span class="en">Stay on topic</span><span class="zh">要切題</span></div><div class="bi small"><span class="en">Every body sentence tells more about the topic sentence.</span><span class="zh">每個內文句都說明主題句。</span></div></div><div class="card sumc c-main-b"><div class="bi sumh"><span class="en">Main points and details</span><span class="zh">重點與細節</span></div><div class="bi small"><span class="en">Main points tell about the topic. Details tell about the main points.</span><span class="zh">重點說明主題，細節說明重點。</span></div></div><div class="card sumc c-tr-b"><div class="bi sumh"><span class="en">Transitions</span><span class="zh">轉折詞</span></div><div class="bi small"><span class="en">First, In addition, Finally: put a comma after them.</span><span class="zh">First, In addition, Finally 後面加逗號。</span></div></div><div class="card sumc c-det-b"><div class="bi sumh"><span class="en">Plan, then write</span><span class="zh">先規劃再寫</span></div><div class="bi small"><span class="en">Brainstorm → Outline → First draft → Revise and edit → Final draft</span><span class="zh">腦力激盪 → 大綱 → 初稿 → 修改校對 → 定稿</span></div></div></div></div></div><div class="corner"><span class="snum">44 / 44</span></div></section>
+<nav id="nav" aria-label="Slide navigation"><button type="button" id="btoc" class="nb ghost" aria-label="Contents">☰ <span class="nz">Contents 目錄</span></button><button type="button" id="bprev" class="nb">◀ <span class="nz">Back 上一頁</span></button><span id="count">1 / 44</span><button type="button" id="bnext" class="nb primary"><span class="nz">Next 下一頁</span> ▶</button><button type="button" id="bfs" class="nb ghost" aria-label="Full screen">⛶ <span class="nz">Full screen 全螢幕</span></button></nav><div id="blank" hidden></div><div id="keylog" hidden></div>
+<script>const QUIZ={"q1": [{"q": "What do body sentences do?", "z": "內文句的工作是什麼？", "o": ["They give the paragraph a title.", "They tell more about the topic sentence.", "They end the paragraph.", "They start a new topic."]}, {"q": "Topic: \"Cats make good pets.\" Which sentence is OFF topic?", "z": "主題：「貓是很好的寵物。」哪一句離題了？", "o": ["They are quiet.", "They are easy to take care of.", "My uncle has a new car.", "They like to sit with you."]}, {"q": "Main point: \"There is a lot of good food in my city.\" Which is the best supporting detail?", "z": "重點：「我的城市有很多好吃的食物。」哪一個是最好的支持細節？", "o": ["You can eat beef noodles and dumplings on every street.", "My city has a big park.", "I go to school by bus.", "It rains a lot in winter."]}, {"q": "Topic: \"Exercise is good for you.\" Which one is a MAIN POINT?", "z": "主題：「運動對你有好處。」哪一個是重點（不是細節）？", "o": ["I ride my bike for 30 minutes every day.", "My cousin swims on Saturdays.", "Exercise makes you feel happy.", "Basketball shoes are expensive."]}], "q2": [{"q": "Which transition is best for your FIRST main point?", "z": "第一個重點最適合用哪個轉折詞？", "o": ["Finally,", "First of all,", "Lastly,", "Most of all,"]}, {"q": "Outline note: \"eyes get tired\". Which one is a full sentence?", "z": "大綱筆記「eyes get tired」，哪一個是完整的句子？", "o": ["eyes get tired", "when you watch TV", "Tired eyes from TV.", "Your eyes get tired when you watch TV for a long time."]}, {"q": "Which sentence is written correctly?", "z": "哪一個句子寫得正確？", "o": ["First I like the food.", "first, I like the food.", "First, I like the food.", "First, i like the food."]}, {"q": "Which word fits? \"Their French fries are ___ very good.\"", "z": "哪個字可以放進句子中間？", "o": ["also", "first", "finally", "lastly"]}], "q3": [{"q": "In a brainstorm, what do you write in the middle?", "z": "腦力激盪時，中間要寫什麼？", "o": ["your closing sentence", "a transition", "your topic (main idea)", "your partner's name"]}, {"q": "Topic: \"I want to be a vet.\" Which is a good main point?", "z": "主題：「我想當獸醫。」哪一個是好的重點？", "o": ["I love animals.", "My school is big.", "I want to visit Japan.", "My favorite color is blue."]}, {"q": "Main point: \"I will be good at it.\" Which detail tells HOW?", "z": "重點：「我會做得很好。」哪一個細節說明「怎麼做」？", "o": ["Chefs wear white hats.", "I like pizza.", "My grandma is 70 years old.", "I will practice cooking every day."]}, {"q": "What is the correct order for your paragraph?", "z": "段落的正確順序是什麼？", "o": ["Closing → Body → Topic", "Topic → Body → Closing", "Body → Topic → Closing", "Topic → Closing → Body"]}]};
+(function(){
+const slides=[...document.querySelectorAll('.slide')];
+const TOTAL=slides.length;
+let cur=0;
+const $=id=>document.getElementById(id);
+const count=$('count'), bprev=$('bprev'), bnext=$('bnext'), blank=$('blank');
+
+/* ---------- reveals */
+function groups(sl){
+  const gs=[...new Set([...sl.querySelectorAll('.rv')].map(e=>+e.dataset.g))];
+  return gs.sort((a,b)=>a-b);
+}
+function revealGroup(sl,g){ sl.querySelectorAll('.rv[data-g="'+g+'"]').forEach(e=>e.classList.add('on')); }
+function revealNext(){
+  const sl=slides[cur];
+  for(const g of groups(sl)){
+    const items=sl.querySelectorAll('.rv[data-g="'+g+'"]');
+    if([...items].some(e=>!e.classList.contains('on'))){ revealGroup(sl,g); return true; }
+  }
+  return false;
+}
+slides.forEach(sl=>{
+  if(!sl.querySelector('.rv')) return;
+  const corner=sl.querySelector('.corner');
+  const all=document.createElement('button'); all.type='button'; all.className='tool'; all.textContent='Show all 全部顯示';
+  const hide=document.createElement('button'); hide.type='button'; hide.className='tool'; hide.textContent='Hide 隱藏';
+  all.addEventListener('click',e=>{e.stopPropagation();sl.querySelectorAll('.rv').forEach(x=>x.classList.add('on'));all.blur();});
+  hide.addEventListener('click',e=>{e.stopPropagation();sl.querySelectorAll('.rv').forEach(x=>x.classList.remove('on'));hide.blur();});
+  corner.prepend(hide); corner.prepend(all);
+  sl.addEventListener('click',e=>{
+    const r=e.target.closest('.rv'); if(!r) return;
+    revealGroup(sl,r.dataset.g);
+  });
+});
+
+/* ---------- navigation */
+function show(i){
+  if(i<0||i>=TOTAL) return;
+  slides[cur].classList.remove('active');
+  cur=i;
+  slides[cur].classList.add('active');
+  slides[cur].scrollTop=0;
+  count.textContent=(cur+1)+' / '+TOTAL;
+  bprev.disabled=cur===0; bnext.disabled=cur===TOTAL-1;
+  try{ history.replaceState(null,'','#p'+(cur+1)); }catch(e){}
+}
+function next(){ if(revealNext()) return; show(cur+1); }
+function prev(){ show(cur-1); }
+bprev.addEventListener('click',()=>{prev();bprev.blur();});
+bnext.addEventListener('click',()=>{next();bnext.blur();});
+$('btoc').addEventListener('click',()=>{const t=document.querySelector('.slide[data-id="toc"]');show(slides.indexOf(t));});
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>{
+  const t=document.querySelector('.slide[data-id="'+b.dataset.goto+'"]'); if(t) show(slides.indexOf(t));
+}));
+
+/* ---------- fullscreen + blank */
+function toggleFS(){
+  const d=document, el=d.documentElement;
+  try{
+    if(d.fullscreenElement||d.webkitFullscreenElement){ (d.exitFullscreen||d.webkitExitFullscreen).call(d); }
+    else { const p=(el.requestFullscreen||el.webkitRequestFullscreen); if(p){ const r=p.call(el); if(r&&r.catch) r.catch(()=>{}); } }
+  }catch(e){}
+}
+$('bfs').addEventListener('click',()=>{toggleFS();$('bfs').blur();});
+function toggleBlank(){ blank.hidden=!blank.hidden; }
+blank.addEventListener('click',toggleBlank);
+
+/* ---------- keys (clicker friendly, capture phase) */
+const keylog=$('keylog');
+const showKeys=/[?&]keys\b/.test(location.search)||location.hash==='#keys';
+if(showKeys){ keylog.hidden=false; keylog.textContent='Press a clicker button · key / code / keyCode appear here'; }
+window.addEventListener('keydown',e=>{
+  if(showKeys) keylog.textContent='key: '+e.key+' · code: '+e.code+' · keyCode: '+e.keyCode;
+  if(e.altKey||e.metaKey||(e.ctrlKey&&e.key!=='F5')) return;
+  const k=e.key;
+  if(!blank.hidden && k!=='b' && k!=='B' && k!=='.' && k!=='F5'){
+    if(k==='Escape'||k==='Enter'||k==='PageDown'||k==='PageUp'||k.startsWith('Arrow')||k===' '){ e.preventDefault(); toggleBlank(); return; }
+  }
+  if(['ArrowRight','ArrowDown','PageDown',' ','Enter','Spacebar'].includes(k)){ e.preventDefault(); next(); }
+  else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(k)){ e.preventDefault(); prev(); }
+  else if(k==='Home'){ e.preventDefault(); show(0); }
+  else if(k==='End'){ e.preventDefault(); show(TOTAL-1); }
+  else if(k==='F5'){ e.preventDefault(); toggleFS(); }
+  else if(k==='b'||k==='B'||k==='.'){ e.preventDefault(); toggleBlank(); }
+},true);
+
+/* ---------- timers */
+document.querySelectorAll('.timer').forEach(t=>{
+  const disp=t.querySelector('.tdisp'), go=t.querySelector('.tgo');
+  let total=(+t.dataset.min)*60, left=total, iv=null;
+  const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+  const paint=()=>{ disp.textContent=fmt(left); };
+  const stop=()=>{ clearInterval(iv); iv=null; t.classList.remove('running'); };
+  t.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return; e.stopPropagation(); b.blur();
+    const a=b.dataset.a;
+    if(a==='go'){
+      if(iv){ stop(); go.textContent='Resume 繼續'; return; }
+      if(left<=0){ left=total; t.classList.remove('done'); }
+      t.classList.add('running'); go.textContent='Pause 暫停';
+      iv=setInterval(()=>{ left--; paint(); if(left<=0){ stop(); t.classList.add('done'); disp.textContent="Time's up! 時間到！"; go.textContent='Start 開始'; } },1000);
+    } else if(a==='reset'){ stop(); left=total; t.classList.remove('done'); go.textContent='Start 開始'; paint(); }
+    else if(a==='plus'||a==='minus'){
+      if(a==='plus'){ total=Math.min(3600,total+60); left=Math.min(total,left+60); }
+      else { total=Math.max(60,total-60); left=Math.min(total,Math.max(0,left-60)); }
+      t.classList.remove('done'); paint();
+    }
+  });
+});
+
+/* ---------- exit tickets (never show answers) */
+document.querySelectorAll('[data-quiz]').forEach(w=>{
+  const qs=QUIZ[w.dataset.quiz]; let i=0;
+  w.innerHTML='<div class="qcard"><div class="qprog"></div><div class="bi qt"><span class="en"></span><span class="zh"></span></div><div class="qopts"></div></div>'+
+    '<div class="qnav"><button type="button" data-d="-1">◀ Previous 上一題</button><button type="button" data-d="1">Next question 下一題 ▶</button></div>';
+  const prog=w.querySelector('.qprog'), en=w.querySelector('.qt .en'), zh=w.querySelector('.qt .zh'), opts=w.querySelector('.qopts');
+  const [bp,bn]=w.querySelectorAll('.qnav button');
+  const chosen={};
+  function render(){
+    const q=qs[i];
+    prog.textContent='Question '+(i+1)+' of '+qs.length+' · 第 '+(i+1)+' / '+qs.length+' 題';
+    en.textContent=q.q; zh.textContent=q.z; opts.innerHTML='';
+    q.o.forEach((o,j)=>{
+      const b=document.createElement('button'); b.type='button'; b.className='qopt'+(chosen[i]===j?' sel':'');
+      b.innerHTML='<span class="ql">'+'ABCD'[j]+'</span><span></span>'; b.lastChild.textContent=o;
+      b.addEventListener('click',()=>{ chosen[i]=j; opts.querySelectorAll('.qopt').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); });
+      opts.appendChild(b);
+    });
+    bp.disabled=i===0; bn.disabled=i===qs.length-1;
+  }
+  w.querySelector('.qnav').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; b.blur(); const n=i+(+b.dataset.d); if(n>=0&&n<qs.length){i=n;render();}});
+  render();
+});
+
+/* ---------- start */
+const m=/^#p(\d+)$/.exec(location.hash);
+const start=m?Math.min(Math.max(+m[1]-1,0),TOTAL-1):0;
+slides[0].classList.add('active');
+show(start);
+window.addEventListener('hashchange',()=>{const h=/^#p(\d+)$/.exec(location.hash); if(h&&(+h[1]-1)!==cur) show(Math.min(Math.max(+h[1]-1,0),TOTAL-1));});
+})();
+</script>
+</body>
+</html>
