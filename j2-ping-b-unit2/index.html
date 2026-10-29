@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Having a Lot of Money</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>/* Layout: full-screen slide stage above a fixed nav bar; light classroom identity (deliberately single-theme). */
+:root{
+  --bg:#FAF6EE; --panel:#FFFDF8; --panel2:#F3EEE3; --panel3:#EDE7DA; --line:#E4DCCB; --white:#FFFFFF;
+  --ink:#1D2B47; --ink2:#5B667C; --muted:#646E84; --cream:#FAF6EE; --navy2:#34507F;
+  --blue:#2563C9; --orange:#B9520B; --purple:#6D3FC4; --green:#17784E; --coral:#C2412D; --gold:#8A5A00;
+  --goldf:#F2C14E; --goldf2:#E0A82E;
+  --tblue:#E6EEFB; --torange:#FBEADC; --tpurple:#EEE7FB; --tgreen:#E1F1E8; --tcoral:#FBE6E2; --tgold:#FBF0D2;
+  --display:'Baloo 2','Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+  --body:'Nunito','Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+  --zh:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  --nav-h:3rem;
+  color-scheme:light;
+}
+html{font-size:clamp(14px,min(1.5vw,2.65vh),34px);height:100%}
+body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+/* ---------- slides */
+.slide{display:none;position:fixed;top:0;left:0;right:0;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));
+  flex-direction:column;background:var(--bg);overflow:hidden}
+.slide.active{display:flex}
+.slide[data-s="0"]{--sc:var(--blue);--scf:var(--blue);--sct:var(--tblue)}
+.slide[data-s="1"]{--sc:var(--orange);--scf:var(--orange);--sct:var(--torange)}
+.slide[data-s="2"]{--sc:var(--gold);--scf:var(--goldf2);--sct:var(--tgold)}
+.slide[data-s="3"]{--sc:var(--coral);--scf:var(--coral);--sct:var(--tcoral)}
+.stripe{height:10px;flex:none;background:var(--scf)}
+.inner{flex:1;min-height:0;display:flex;flex-direction:column;gap:.75rem;
+  padding-block:1.1rem .9rem;padding-left:max(2.4rem,env(safe-area-inset-left,0px));padding-right:max(2.4rem,env(safe-area-inset-right,0px))}
+.corner{position:absolute;top:calc(10px + .55rem);right:max(1rem,env(safe-area-inset-right,0px));display:flex;gap:.4rem;align-items:center;z-index:5}
+.snum{font-size:.7rem;font-weight:800;letter-spacing:.08em;color:var(--muted);background:var(--panel2);border-radius:999px;padding:.2rem .65rem}
+.title .snum{color:#C9D2E4;background:rgba(255,255,255,.08)}
+.tool{font-size:.68rem;font-weight:800;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:.25rem .7rem;cursor:pointer}
+.tool:hover{border-color:var(--ink2)}
+
+/* header */
+.sh{flex:none;padding-right:13rem}
+.kicker{font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sc);margin-bottom:.15rem}
+.sh h2{font-family:var(--display);font-weight:800;font-size:2.5rem;line-height:1.05;margin:0;color:var(--ink);text-wrap:balance}
+.hzh{font-family:var(--zh);font-size:1.15rem;color:var(--ink2);margin-top:.15rem;font-weight:500}
+.bk{display:inline-flex;align-items:center;gap:.3rem;text-transform:none;letter-spacing:0;font-size:.86rem;color:var(--sc);
+  background:var(--sct);border-radius:999px;padding:.12rem .7rem}
+
+/* body layouts */
+.body{flex:1;min-height:0;display:flex;flex-direction:column;gap:.8rem}
+.col{display:flex;flex-direction:column;gap:.75rem;min-width:0;min-height:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;align-items:start;min-height:0}
+.body.cols{flex:1}
+.cols.c46{grid-template-columns:.85fr 1.15fr}
+.cols.c37{grid-template-columns:.72fr 1.28fr}
+.cols.c64{grid-template-columns:1.25fr .75fr}
+.card{background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:.8rem 1.05rem;min-width:0}
+
+/* bilingual */
+.bi{display:flex;flex-direction:column;min-width:0}
+.bi .en{line-height:1.3}
+.bi .zh{font-family:var(--zh);font-size:.74em;color:var(--ink2);line-height:1.4;margin-top:.08em;font-weight:500}
+.bi .zh:empty{display:none}
+.lead{font-size:1.3rem;font-weight:700}
+.note{font-size:1.15rem;background:var(--sct);border-radius:12px;padding:.55rem .85rem;border-left:5px solid var(--scf)}
+.callout{font-size:1.35rem;font-weight:700;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.6rem 1rem}
+.small{font-size:1rem}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.6rem;counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:2.2rem 1fr;gap:.7rem;align-items:start;font-size:1.3rem;font-weight:700}
+.steps li::before{content:counter(st);display:flex;align-items:center;justify-content:center;width:2.2rem;height:2.2rem;border-radius:50%;
+  background:var(--ink);color:var(--cream);font-family:var(--display);font-size:1.2rem;font-weight:800;margin-top:.05rem}
+
+/* chips / tags (meaning colors) */
+.chip{display:inline-flex;align-items:center;font-weight:800;font-size:.92rem;border-radius:999px;padding:.22rem .8rem;border:1.5px solid transparent}
+.tag{display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;border-radius:999px;padding:.12rem .6rem;white-space:nowrap;flex:none}
+.c-topic{background:var(--tpurple);color:var(--purple)}
+.c-main{background:var(--tblue);color:var(--blue)}
+.c-det{background:var(--tgreen);color:var(--green)}
+.c-tr{background:var(--tgold);color:var(--gold)}
+.c-off{background:var(--tcoral);color:var(--coral)}
+.c-topic-t{color:var(--purple)} .c-tr-t{color:var(--gold)} .c-det-t{color:var(--green);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:.45rem}
+.legend .chip{font-size:.85rem}
+.kw{display:flex;flex-direction:column;gap:.5rem;margin-top:.4rem}
+.kwh{font-weight:800;font-size:1rem;color:var(--ink2);letter-spacing:.04em;text-transform:uppercase}
+.kwl{display:flex;flex-wrap:wrap;gap:.5rem}
+.kwl .chip{font-size:1.1rem;padding:.35rem 1rem}
+
+/* reveals */
+.rv{cursor:pointer}
+.rv.hide{position:relative;display:block;border:2px dashed var(--goldf2);background:var(--tgold);border-radius:10px;padding:.3rem .65rem;min-height:2.1rem;min-width:6.5em;font-size:1.15rem;font-weight:700;transition:background .2s}
+.rv.hide:not(.on) .rvc{visibility:hidden}
+.rv.hide:not(.on)::after{content:"?  tap · 點我";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;font-weight:800;color:var(--gold);font-family:var(--body);letter-spacing:.03em}
+.rv.hide.on{border-style:solid;border-color:var(--line);background:var(--white);cursor:default}
+.rv.hide.inl{display:inline-flex;vertical-align:middle;min-width:7.5em;padding:.05rem .5rem;min-height:1.8rem;font-size:1em}
+.rv.hide.inl small{font-weight:600;color:var(--ink2);font-size:.7em;margin-left:.2em}
+.rv.block{width:100%}
+.rv.model{font-weight:600;font-size:1.05rem;line-height:1.45}
+.rv.mark{border-radius:6px;padding:0 .12em;transition:background .25s,color .25s;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.rv.mark.on.c-topic{background:var(--tpurple);color:var(--purple)}
+.rv.mark.on.c-main{background:var(--tblue);color:var(--blue)}
+.rv.mark.on.c-det{background:var(--tgreen);color:var(--green)}
+.rv.mark.on.c-tr{background:var(--goldf);color:var(--ink);font-weight:800}
+.rv.mark:not(.on){background:transparent;color:var(--ink)}
+.rv:not(.on) .on-only{display:none}
+.rv.on .off-only{display:none}
+.given{color:var(--ink);font-weight:600}
+.why{display:block;font-size:.8em;color:var(--ink2);font-weight:600}
+
+/* answers */
+.ans{display:flex;flex-direction:column;gap:.55rem}
+.anh{font-weight:800;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.arow{display:grid;grid-template-columns:7.2rem 1fr;gap:.6rem;align-items:center;font-size:1.15rem}
+.arow .given{font-size:1.15rem;padding:.3rem .1rem}
+.quote{font-size:1.15rem;font-style:italic;font-weight:600}
+
+/* rules + example */
+.rules .rule{display:grid;grid-template-columns:2.4rem 1fr;gap:.7rem;align-items:start;font-size:1.35rem;font-weight:700;
+  background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.6rem .9rem}
+.rmark{display:flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:50%;font-weight:900;font-size:1.3rem}
+.rule.ok .rmark{background:var(--tgreen);color:var(--green)}
+.rule.no .rmark{background:var(--tcoral);color:var(--coral)}
+.ex{display:flex;flex-direction:column;gap:.55rem}
+.exh{font-weight:800;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.extopic{font-size:1.25rem;font-weight:800;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.exline{display:grid;grid-template-columns:7.2rem 1fr;gap:.6rem;align-items:center;font-size:1.15rem;font-weight:600}
+.exline.off s{color:var(--muted)}
+
+/* belongs */
+.bel{display:flex;flex-direction:column;gap:.45rem}
+.rv.row{display:flex;justify-content:space-between;align-items:center;gap:.6rem;font-size:1.15rem;font-weight:600;
+  padding:.4rem .6rem;border-radius:10px;border:1.5px solid var(--line);background:var(--white)}
+.rv.row .txt{min-width:0}
+.qmark{flex:none;font-weight:900;color:var(--gold);background:var(--tgold);border:2px dashed var(--goldf2);border-radius:8px;padding:0 .6rem}
+.badge{flex:none;font-size:.82rem;font-weight:800;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.badge.good{background:var(--tgreen);color:var(--green)}
+.badge.bad{background:var(--tcoral);color:var(--coral)}
+.rv.row.on.isbad .txt{text-decoration:line-through;color:var(--muted)}
+.rv.row.on.isbad{border-color:var(--coral)}
+
+/* p15 */
+.p15list{gap:.6rem}
+.p15{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;padding:.6rem 1rem}
+.p15t{display:flex;gap:.7rem;align-items:center;font-size:1.25rem;font-weight:800}
+.num{flex:none;display:flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:50%;background:var(--ink);color:var(--cream);font-family:var(--display)}
+.xans{display:block;color:var(--coral);font-weight:800}
+
+/* main points defs */
+.defs{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.def{font-size:1.2rem;border-radius:14px;padding:.55rem .9rem;border-left:6px solid}
+.c-main-b{background:var(--tblue);border-color:var(--blue)}
+.c-det-b{background:var(--tgreen);border-color:var(--green)}
+.c-topic-b{background:var(--tpurple);border-color:var(--purple)}
+.c-tr-b{background:var(--tgold);border-color:var(--goldf2)}
+.svgwrap{flex:1;min-height:0;display:flex;justify-content:center;align-items:center;overflow:hidden}
+svg.dia{height:100%;width:auto;max-width:100%;max-height:100%}
+svg text{font-family:var(--body)}
+
+/* outline */
+.outline{display:flex;flex-direction:column;gap:.35rem;background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:.75rem .9rem;min-width:0}
+.ol-row{display:grid;grid-template-columns:8.2rem 1fr;gap:.6rem;align-items:center;font-size:1.15rem}
+.ol-k{font-weight:800;font-size:.82rem;border-radius:999px;padding:.15rem .6rem;text-align:center;justify-self:start}
+.ol-k:empty{visibility:hidden}
+.ol-topic .ol-k,.ol-close .ol-k{background:var(--tpurple);color:var(--purple)}
+.ol-topic .ol-v,.ol-close .ol-v{font-weight:800;color:var(--purple)}
+.ol-main .ol-k{background:var(--tblue);color:var(--blue)}
+.ol-main .ol-v{font-weight:700;color:var(--blue)}
+.ol-main .ol-v .rv{color:var(--blue)}
+.ol-det .ol-k{background:var(--tgreen);color:var(--green);margin-left:1.2rem}
+.ol-det .ol-v{padding-left:1.2rem;color:var(--green);font-weight:600;display:flex;flex-direction:column;gap:.25rem}
+.ol-det .ol-v .rv,.ol-det .ol-v .given{color:var(--green)}
+.ol-main{margin-top:.2rem}
+.outline.tight .ol-row{font-size:1.08rem}
+.outline.tight .rv.hide{min-height:1.85rem;padding:.12rem .55rem;font-size:1.05rem}
+.outline.mini .ol-row{font-size:1.1rem}
+.outline.mini .ol-main{margin-top:0}
+.dsep{color:var(--ink2);margin:0 .3rem}
+.exlbl{font-weight:800;font-size:.92rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:-.4rem}
+
+/* bank */
+.bank{display:flex;flex-direction:column;gap:.5rem}
+.bankh{font-weight:800;font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.bankl{display:flex;flex-direction:column;gap:.4rem;font-size:1.15rem;font-weight:600}
+.bankl.two{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+.bankl span{background:var(--panel2);border-radius:10px;padding:.35rem .65rem}
+.bankl b{color:var(--green);margin-right:.35rem}
+.bigsmall{display:grid;grid-template-columns:1.2fr 1fr;gap:.7rem;align-items:center}
+.bs{border-radius:14px;padding:.6rem .8rem;font-size:1.15rem}
+.bs.big{background:var(--tblue);border:2px solid var(--blue);padding:1rem}
+.bs.small2{background:var(--tgreen);border:2px solid var(--green)}
+
+/* notes to sentences */
+.recipe{display:flex;flex-direction:column;gap:.6rem}
+.formula{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.fp{font-weight:800;font-size:1.1rem;border-radius:12px;padding:.35rem .8rem}
+.plus{font-weight:900;font-size:1.3rem;color:var(--ink2)}
+.nlist{display:flex;flex-direction:column;gap:.45rem}
+.nhead,.nrow{display:grid;grid-template-columns:13rem 2rem 1fr;gap:.5rem;align-items:center}
+.nhead{font-weight:800;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.note-n{font-size:1.15rem;font-weight:700;color:var(--green);background:var(--tgreen);border-radius:10px;padding:.3rem .6rem}
+.arrow{font-size:1.4rem;font-weight:900;color:var(--ink2);text-align:center}
+
+/* transitions */
+.trcols{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:1rem}
+.trc{display:flex;flex-direction:column;gap:.4rem;border-top:6px solid var(--goldf2)}
+.trh{font-family:var(--display);font-size:1.5rem;font-weight:800;margin-bottom:.15rem}
+.trw{font-size:1.3rem;font-weight:800;color:var(--gold);background:var(--tgold);border-radius:10px;padding:.25rem .65rem}
+.trw i{font-weight:600;font-size:.72em;color:var(--ink2);margin-left:.3rem}
+.tips{grid-template-columns:1fr 1fr}
+
+/* paragraphs */
+.para{font-size:1.45rem;line-height:1.75;font-weight:600;padding:1rem 1.4rem;max-width:62rem}
+.para.fill{line-height:2}
+.ptitle{font-family:var(--display);font-weight:800;font-size:1.3rem;text-align:center;margin-bottom:.1rem}
+.wbank{display:flex;gap:.6rem;flex-wrap:wrap}
+.wbank span{font-size:1.25rem;font-weight:800;color:var(--gold);background:var(--tgold);border:2px solid var(--goldf2);border-radius:12px;padding:.3rem .9rem}
+.frame{font-size:1.25rem;line-height:1.55;font-weight:600}
+.frame p{margin:.2rem 0 .5rem}
+
+/* timer */
+.timer{background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:.6rem .9rem;display:flex;flex-direction:column;align-items:center;gap:.35rem}
+.tlabel{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.tdisp{font-family:var(--display);font-weight:800;font-size:3rem;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tbtns{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+.tbtns button{font-weight:800;font-size:.95rem;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2);padding:.4rem .85rem;cursor:pointer;min-height:2.4rem}
+.tbtns .tgo{background:var(--green);border-color:var(--green);color:var(--white)}
+.timer.running .tgo{background:var(--orange);border-color:var(--orange)}
+.timer.done{border-color:var(--coral);background:var(--tcoral)}
+.timer.done .tdisp{color:var(--coral);font-size:2rem}
+@media (prefers-reduced-motion:no-preference){.timer.done{animation:pulse 1s ease-in-out 3}}
+@keyframes pulse{50%{transform:scale(1.04)}}
+
+/* idea bank & peer */
+.marks{display:flex;flex-direction:column;gap:.45rem}
+.mrow{display:grid;grid-template-columns:3.2rem 1fr;gap:.6rem;align-items:center;font-size:1.1rem;font-weight:600}
+.msym{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--coral);text-align:center;background:var(--tcoral);border-radius:10px;line-height:1.5}
+.circ{border:2px solid var(--coral);border-radius:999px;padding:0 .25rem;font-size:.75em}
+
+/* quiz */
+.quizwrap{align-items:center;justify-content:center}
+.qcard{width:100%;max-width:62rem;background:var(--panel);border:1.5px solid var(--line);border-radius:18px;padding:1rem 1.4rem;display:flex;flex-direction:column;gap:.8rem}
+.qprog{font-size:.9rem;font-weight:800;color:var(--ink2);letter-spacing:.05em;text-transform:uppercase}
+.qt{font-size:1.5rem;font-weight:800}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.qopt{display:flex;gap:.7rem;align-items:flex-start;text-align:left;font-size:1.25rem;font-weight:600;background:var(--white);border:2px solid var(--line);
+  border-radius:14px;padding:.6rem .8rem;cursor:pointer;min-height:3rem;line-height:1.3}
+.qopt:hover{border-color:var(--blue)}
+.qopt.sel{border-color:var(--blue);background:var(--tblue)}
+.ql{flex:none;font-family:var(--display);font-weight:800;color:var(--blue);background:var(--tblue);border-radius:8px;min-width:2.1rem;text-align:center}
+.qnav{display:flex;gap:.7rem;justify-content:center}
+.qnav button{font-weight:800;font-size:1rem;border-radius:999px;border:1.5px solid var(--line);background:var(--panel2);padding:.45rem 1.2rem;cursor:pointer;min-height:2.6rem}
+.qnav button:disabled{opacity:.35;cursor:default}
+
+/* bridge */
+.bridge ul{margin:.3rem 0 0;padding-left:1.3rem;display:flex;flex-direction:column;gap:.6rem;font-size:1.25rem;font-weight:700}
+.brh{font-family:var(--display);font-size:1.4rem;font-weight:800}
+.learned{border-top:6px solid var(--green)} .learned .brh{color:var(--green)}
+.next{border-top:6px solid var(--blue)} .next .brh{color:var(--blue)}
+
+/* toc */
+.toclist{display:flex;flex-direction:column;gap:.8rem;flex:1;justify-content:center}
+.toc{display:grid;grid-template-columns:4.5rem 1fr;gap:1rem;align-items:center;text-align:left;background:var(--panel);border:2px solid var(--line);
+  border-radius:18px;padding:.75rem 1.2rem;cursor:pointer;transition:transform .15s,border-color .15s}
+.toc:hover{transform:translateX(6px)}
+.tocn{font-family:var(--display);font-weight:800;font-size:3.2rem;line-height:1;text-align:center}
+.toc1 .tocn{color:var(--orange)} .toc1{border-left:8px solid var(--orange)}
+.toc2 .tocn{color:var(--gold)} .toc2{border-left:8px solid var(--goldf2)}
+.toc3 .tocn{color:var(--coral)} .toc3{border-left:8px solid var(--coral)}
+.toct{display:flex;flex-direction:column;gap:.2rem}
+.tt{font-size:1.55rem;font-weight:800}
+.td{font-size:1.1rem;font-weight:600;color:var(--ink2)}
+.tocp{font-size:.88rem;font-weight:800;color:var(--muted)}
+
+/* title slides */
+.slide.title{background:radial-gradient(ellipse at 50% 30%,var(--navy2) 0%,var(--ink) 75%);color:var(--cream)}
+.tcenter{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.8rem}
+.eyebrow{color:var(--goldf);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:1.05rem}
+.slide.title h1{font-family:var(--display);font-weight:800;font-size:5.2rem;line-height:1;margin:0;color:var(--cream);text-wrap:balance}
+.slide.title h1.h1s{font-size:4.6rem}
+.tsub{font-family:var(--zh);font-size:1.6rem;color:#D9DFEC;font-weight:500}
+.tchips{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-top:.6rem}
+.tchips span{font-size:1.15rem;font-weight:800;border:1.5px solid rgba(250,246,238,.4);border-radius:999px;padding:.45rem 1.1rem;color:var(--cream);background:rgba(255,255,255,.08)}
+.bignum{font-family:var(--display);font-weight:800;font-size:6rem;line-height:.9;color:var(--goldf)}
+
+/* session 3 */
+.process{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:.5rem}
+.pstep{position:relative;display:flex;flex-direction:column;gap:.5rem;align-items:flex-start;border-radius:16px;padding:.9rem;border:2px solid var(--line);background:var(--panel)}
+.pstep.today{border-color:var(--coral);background:var(--tcoral)}
+.pstep.test{border-color:var(--blue);background:var(--tblue)}
+.pn{display:flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:50%;background:var(--ink);color:var(--cream);font-family:var(--display);font-weight:800;font-size:1.3rem;flex:none}
+.pt{font-size:1.35rem;font-weight:800}
+.pp{font-size:.92rem;font-weight:700;color:var(--ink2)}
+.pkey{display:flex;gap:.6rem}
+.chip.today{background:var(--tcoral);color:var(--coral);border-color:var(--coral)}
+.chip.test{background:var(--tblue);color:var(--blue);border-color:var(--blue)}
+.jobs{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem}
+.job{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.1rem;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.55rem .35rem}
+.ji{font-size:2.1rem;line-height:1.1}
+.je{font-weight:800;font-size:1.05rem;line-height:1.2}
+.jz{font-family:var(--zh);font-size:.82rem;color:var(--ink2)}
+.jp{font-size:.74rem;font-weight:800;color:var(--gold);background:var(--tgold);border-radius:999px;padding:0 .45rem}
+.qcols{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+.qc{border-top:6px solid var(--blue)}
+.qch{font-size:1.25rem;font-weight:800;color:var(--blue)}
+.qc ul{margin:.4rem 0 0;padding-left:1.2rem;font-size:1.15rem;font-weight:700;display:flex;flex-direction:column;gap:.25rem}
+.tsteps{display:flex;flex-direction:column;gap:.6rem}
+.ts{display:grid;grid-template-columns:2.4rem 1fr;gap:.2rem .7rem;align-items:start}
+.ts .small{grid-column:2}
+.tsh{font-size:1.25rem;font-weight:800}
+.checklist{display:flex;flex-direction:column;gap:.5rem}
+.cl{display:grid;grid-template-columns:1.6rem 1fr;gap:.4rem;font-size:1.2rem;font-weight:800;align-items:start}
+.cl .small{font-weight:700;font-size:1.08rem}
+.sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.sumc{border-left:8px solid;border-radius:16px;display:flex;flex-direction:column;gap:.4rem}
+.sumh{font-family:var(--display);font-size:1.55rem;font-weight:800}
+.sumc .small{font-size:1.2rem;font-weight:600}
+
+/* ---------- nav */
+#nav{position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));
+  padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;justify-content:center;gap:.7rem;background:var(--ink);z-index:50}
+.nb{font-weight:800;font-size:.95rem;border-radius:999px;border:1.5px solid rgba(250,246,238,.3);background:rgba(255,255,255,.08);color:var(--cream);
+  padding:.45rem 1.1rem;cursor:pointer;min-height:2.3rem}
+.nb.primary{background:var(--goldf);border-color:var(--goldf);color:var(--ink)}
+.nb:disabled{opacity:.35;cursor:default}
+.nb.ghost{position:absolute}
+#btoc{left:max(16px,env(safe-area-inset-left,0px))}
+#bfs{right:max(16px,env(safe-area-inset-right,0px))}
+#count{color:var(--cream);font-weight:800;font-size:.95rem;min-width:5rem;text-align:center;font-variant-numeric:tabular-nums}
+#blank{position:fixed;inset:0;background:#0E1626;z-index:100;cursor:pointer}
+#keylog{position:fixed;left:16px;top:16px;z-index:120;background:var(--ink);color:var(--cream);font:700 14px/1.5 ui-monospace,monospace;padding:.6rem .9rem;border-radius:10px;max-width:90vw}
+
+/* ---------- phones and narrow tablets: stack and scroll inside the slide */
+@media (max-width:760px){
+  html{font-size:15px}
+  :root{--nav-h:3.4rem}
+  .slide{overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .inner{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1rem 1.2rem}
+  .corner{top:calc(10px + .4rem)}
+  .sh{padding-right:0;padding-top:1.4rem}
+  .sh h2{font-size:1.9rem}
+  .cols,.cols.c46,.cols.c37,.cols.c64,.defs,.trcols,.tips,.qcols,.sumgrid,.p15,.qopts,.bankl.two,.bigsmall{grid-template-columns:1fr}
+  .process{grid-template-columns:1fr 1fr}
+  .jobs{grid-template-columns:repeat(3,1fr)}
+  .nhead{display:none}
+  .nrow{grid-template-columns:1fr;gap:.25rem}
+  .nrow .arrow{display:none}
+  .arow,.exline{grid-template-columns:1fr;gap:.25rem}
+  .ol-row{grid-template-columns:1fr;gap:.2rem}
+  .ol-det .ol-k{margin-left:0}.ol-det .ol-v{padding-left:0}
+  .svgwrap{flex:none;overflow-x:auto;justify-content:flex-start}
+  svg.dia{height:auto;width:100%;min-width:0}
+  .para{font-size:1.2rem}
+  .slide.title h1{font-size:3rem}.slide.title h1.h1s{font-size:2.6rem}
+  .bignum{font-size:4rem}
+  .toc{grid-template-columns:3rem 1fr}.tocn{font-size:2.2rem}
+  .nz{display:none}
+  .nb.ghost{position:static}
+  #nav{gap:.5rem}
+}
+
+/* ---------- QA fixes */
+.toclist{gap:.6rem}
+.toc{padding:.5rem 1.1rem;grid-template-columns:4rem 1fr}
+.tocn{font-size:2.7rem}
+.tt{font-size:1.4rem}
+.td{font-size:1.02rem}
+.ol-main .ol-v .given{color:var(--blue)}
+.frow{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:center}
+.nlist{gap:.35rem}
+.nlist .rv.hide{min-height:1.9rem;padding:.15rem .6rem}
+.tsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.checklist{display:grid;grid-template-columns:1fr 1fr;gap:.5rem 1.2rem}
+.checklist .anh{grid-column:1/-1}
+.steps.big{gap:1rem}
+.steps.big li{font-size:1.6rem;grid-template-columns:2.6rem 1fr}
+.steps.big li::before{width:2.6rem;height:2.6rem;font-size:1.4rem}
+.qt{font-size:1.75rem}
+.qopt{font-size:1.4rem;padding:.75rem .9rem}
+.qcard{padding:1.3rem 1.6rem;gap:1rem}
+@media (max-width:760px){
+  .frow,.tsteps,.checklist{grid-template-columns:1fr}
+  .steps.big li{font-size:1.25rem}
+  .qt{font-size:1.35rem}.qopt{font-size:1.1rem}
+  .nb{min-width:2.8rem}
+}
+.timer.row{flex-direction:row;justify-content:space-between;padding:.45rem .8rem;gap:.6rem}
+.timer.row .tdisp{font-size:2.2rem}
+.timer.row .tlabel{display:none}
+.toc{padding:.4rem 1.1rem}
+.toct{gap:.05rem}
+.td{font-size:.98rem}
+.toclist{gap:.5rem}
+.timer.row .tbtns{flex-wrap:nowrap}
+.timer.row .tbtns button{padding:.35rem .65rem}
+@media (max-width:760px){
+  .inner,.body,.body.cols{flex:none;min-height:auto}
+  .col,.cols{min-height:auto}
+  .svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  svg.dia.wide{min-width:680px}
+  .toclist{flex:none}
+  .tcenter{min-height:70vh}
+}
+
+/* ---------- Ping B additions */
+.votes{display:flex;flex-direction:column;gap:.55rem}
+.vote{display:grid;grid-template-columns:2rem 1fr auto;gap:.8rem;align-items:center;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.55rem .9rem}
+.vt{font-size:1.35rem;font-weight:700}
+.vbtn{display:flex;gap:.4rem}
+.vbtn b{font-size:.9rem;border-radius:999px;padding:.2rem .7rem}
+.va{background:var(--tgreen);color:var(--green)} .vd{background:var(--tcoral);color:var(--coral)}
+.frame2,.exlist,.pchart.one{display:flex;flex-direction:column;gap:.45rem}
+.fr{font-size:1.3rem;font-weight:700}
+.pat{color:var(--gold);background:var(--tgold);border-radius:6px;padding:0 .2em;font-weight:800}
+.exs{font-size:1.15rem;font-weight:600;border-left:4px solid var(--line);padding-left:.6rem}
+.errs{display:flex;flex-direction:column;gap:.4rem}
+.errrow{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;font-size:1.08rem;font-weight:700}
+.wrong{color:var(--coral);text-decoration:line-through;text-decoration-thickness:2px}
+.right{color:var(--green)}
+.rules3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.r3{font-size:1.15rem;font-weight:700;background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:.55rem .8rem}
+.pchart{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.pch{font-family:var(--display);font-weight:800;font-size:1.4rem;margin-bottom:.2rem}
+.pch.ok{color:var(--green)} .pch.no{color:var(--coral)}
+.pw{font-size:1.3rem;font-weight:800;color:var(--gold);background:var(--tgold);border-radius:10px;padding:.25rem .65rem;margin-bottom:.35rem}
+.comma{color:var(--coral);font-size:1.4em}
+.nrow.ev{grid-template-columns:20rem 2rem 1fr}
+.note-n.ev{color:var(--ink);background:var(--panel2)}
+.arow.sm{grid-template-columns:2.4rem 1fr}
+.arow.sm .rv.hide{font-size:1.08rem}
+.wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.wcard{border-left:8px solid;display:flex;flex-direction:column;gap:.5rem}
+.wh{font-family:var(--display);font-weight:800;font-size:1.45rem}
+.wp{font-size:1.25rem;font-weight:800;color:var(--gold)}
+.hwc{display:grid;grid-template-columns:2.4rem 1fr;gap:.2rem .7rem;align-items:start}
+.hwc .small{grid-column:2}
+.cols.c28{grid-template-columns:.55fr 1.45fr}
+.rules3.big{grid-template-columns:1fr;gap:.7rem}
+.rules3.big .r3{font-size:1.5rem;padding:.75rem 1rem}
+.fz{font-size:.8em;color:var(--ink2);margin-left:.4rem}
+.para.essay{font-size:1.18rem;line-height:1.55;padding:.7rem 1.2rem;max-width:none}
+.ep{margin:0 0 .35rem}
+.ep:first-of-type{margin-top:.1rem}
+@media (max-width:760px){
+  .rules3,.pchart,.wgrid,.errrow{grid-template-columns:1fr}
+  .vote{grid-template-columns:2rem 1fr}.vbtn{grid-column:2}
+  .nrow.ev{grid-template-columns:1fr}
+  .cols.c28{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<section class="slide title" data-s="0" data-id="start" id="p1" aria-label="Slide 1"><div class="inner"><div class="tcenter">
+<div class="eyebrow">J2 Ping B · English Writing · Write Right 3 · Unit 2</div>
+<h1>Having a Lot of Money</h1>
+<div class="tsub">Writing to agree or disagree · 寫出同意或不同意的意見文</div>
+<div class="tchips"><span>📖 Student Book pp. 14–21 · 課本</span><span>📒 Workbook pp. 6–9 · 習作</span></div>
+</div></div><div class="corner"><span class="snum">01 / 40</span></div></section>
+<section class="slide" data-s="0" data-id="toc" id="p2" aria-label="Slide 2"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Unit 2 · 第二單元</div><h2>This Unit in 3 Sessions</h2><div class="hzh">本單元共三堂課</div></header><div class="toclist"><button type="button" class="toc toc1" data-goto="s1">
+<span class="tocn">1</span><span class="toct"><div class="bi tt"><span class="en">Agree or disagree?</span><span class="zh">同意還是不同意？</span></div><div class="bi td"><span class="en">Opinion poll · Read the model essay · Find the 3 reasons</span><span class="zh">意見調查 · 閱讀範文 · 找出三個理由</span></div><span class="tocp">Student Book pp. 14–17</span></span></button><button type="button" class="toc toc2" data-goto="s2">
+<span class="tocn">2</span><span class="toct"><div class="bi tt"><span class="en">Three sentence patterns</span><span class="zh">三個句型</span></div><div class="bi td"><span class="en">I agree/disagree that… · (not) as… as… · Even though…, …</span><span class="zh">表達意見 · 比較 · 對比</span></div><span class="tocp">Student Book pp. 18–19 · Homework: Workbook pp. 8–9</span></span></button><button type="button" class="toc toc3" data-goto="s3">
+<span class="tocn">3</span><span class="toct"><div class="bi tt"><span class="en">Plan your opinion essay</span><span class="zh">規劃你的意見文</span></div><div class="bi td"><span class="en">Brainstorm · Outline · Get ready for the writing test</span><span class="zh">腦力激盪 · 大綱 · 準備寫作測驗</span></div><span class="tocp">Student Book pp. 20–21 → Workbook pp. 6–7</span></span></button></div></div><div class="corner"><span class="snum">02 / 40</span></div></section>
+<section class="slide title" data-s="1" data-id="s1" id="p3" aria-label="Slide 3"><div class="inner"><div class="tcenter"><div class="eyebrow">Session 1 · Student Book pp. 14–17</div>
+<div class="bignum">1</div><h1 class="h1s">Agree or Disagree?</h1><div class="tsub">同意還是不同意？</div></div></div><div class="corner"><span class="snum">03 / 40</span></div></section>
+<section class="slide" data-s="1" id="p4" aria-label="Slide 4"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Today's goals</div><h2>Today I Can…</h2><div class="hzh">今天我會……</div></header><div class="body col"><ol class="steps big"><li><div class="bi "><span class="en">say if I agree or disagree with a statement, and why.</span><span class="zh">說出我是否同意一個說法，以及為什麼。</span></div></li><li><div class="bi "><span class="en">find the introduction, body, and conclusion of an opinion essay.</span><span class="zh">找出意見文的引言、本文和結論。</span></div></li><li><div class="bi "><span class="en">find the writer's opinion and three reasons.</span><span class="zh">找出作者的意見和三個理由。</span></div></li></ol><div class="kw"><div class="kwh">Key words · 關鍵字</div><div class="kwl"><span class="chip c-topic">opinion · 意見</span><span class="chip c-topic">statement · 說法</span><span class="chip c-main">reason · 理由</span><span class="chip c-det">example · 例子</span><span class="chip c-topic">introduction · 引言</span><span class="chip c-topic">conclusion · 結論</span></div></div></div></div><div class="corner"><span class="snum">04 / 40</span></div></section>
+<section class="slide" data-s="1" id="p5" aria-label="Slide 5"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Warm-up · 暖身</div><h2>Quick Vote: Agree or Disagree?</h2><div class="hzh">快速投票：同意還是不同意？</div></header><div class="body col"><div class="votes"><div class="vote"><span class="num">1</span><span class="vt">Every student should learn to swim.</span><span class="vbtn"><b class="va">👍 Agree</b><b class="vd">👎 Disagree</b></span></div><div class="vote"><span class="num">2</span><span class="vt">Bubble tea is better than water.</span><span class="vbtn"><b class="va">👍 Agree</b><b class="vd">👎 Disagree</b></span></div><div class="vote"><span class="num">3</span><span class="vt">Students should have homework every day.</span><span class="vbtn"><b class="va">👍 Agree</b><b class="vd">👎 Disagree</b></span></div><div class="vote"><span class="num">4</span><span class="vt">Phones make people less friendly.</span><span class="vbtn"><b class="va">👍 Agree</b><b class="vd">👎 Disagree</b></span></div></div><div class="bi note"><span class="en">Raise your hand: 👍 agree or 👎 disagree. Then tell a partner why: "I agree that… because…"</span><span class="zh">舉手投票：同意或不同意，再告訴同伴原因。</span></div></div></div><div class="corner"><span class="snum">05 / 40</span></div></section>
+<section class="slide" data-s="1" id="p6" aria-label="Slide 6"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 15 · 課本第 15 頁</span></div><h2>Opinion Poll</h2><div class="hzh">意見調查</div></header><div class="body cols c46"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Circle Agree or Disagree for all 10 statements.</span><span class="zh">10 個說法都圈出 Agree 或 Disagree。</span></div></li><li><div class="bi "><span class="en">Choose 3. Write: I agree / disagree that … because ….</span><span class="zh">選 3 個，寫成完整句子。</span></div></li></ol><div class="timer" data-min="8"><div class="tlabel">Timer · 計時器</div><div class="tdisp">08:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div><div class="col"><div class="card frame2">
+<div class="anh">Sentence frame · 句型</div>
+<div class="fr"><span class="pat">I agree that</span> + statement + <span class="pat">because</span> + reason.</div>
+<div class="fr"><span class="pat">I disagree that</span> + statement + <span class="pat">because</span> + reason.</div>
+<div class="anh" style="margin-top:.4rem">More examples · 更多例句</div>
+<div class="exs">I agree that every student should learn to swim because Taiwan is an island.</div>
+<div class="exs">I disagree that bubble tea is better than water because it has a lot of sugar.</div></div><div class="card errs"><div class="anh">Watch out · 常見錯誤</div><div class="errrow"><span class="wrong">✗ I am agree that…</span><span class="right">✓ I agree that…</span></div><div class="errrow"><span class="wrong">✗ I disagree that because…</span><span class="right">✓ I disagree that + full sentence</span></div></div></div></div></div><div class="corner"><span class="snum">06 / 40</span></div></section>
+<section class="slide" data-s="1" id="p7" aria-label="Slide 7"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 14 · 課本第 14 頁</span></div><h2>How to Write to Agree or Disagree</h2><div class="hzh">如何寫同意或不同意的意見文</div></header><div class="body col"><div class="rules3 big">
+<div class="r3"><div class="bi "><span class="en">Tell if you agree or disagree with the statement.</span><span class="zh">說出你同意還是不同意這個說法。</span></div></div>
+<div class="r3"><div class="bi "><span class="en">Give reasons and examples for your opinion.</span><span class="zh">為你的意見提出理由和例子。</span></div></div>
+<div class="r3"><div class="bi "><span class="en">You can say what many people think, then why you agree or disagree.</span><span class="zh">可以先說很多人的想法，再說你為什麼同意或不同意。</span></div></div></div><div class="card exlist"><div class="anh">Rule 3 in action · 第三點的例子</div>
+<div class="exs"><span class="c-topic-t">Many people think that money makes people happy.</span> <span class="pat">However, I disagree that</span> money is the most important thing.</div></div></div></div><div class="corner"><span class="snum">07 / 40</span></div></section>
+<section class="slide" data-s="1" id="p8" aria-label="Slide 8"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Structure · 結構</div><h2>The Shape of an Opinion Essay</h2><div class="hzh">意見文的結構</div></header><div class="body col"><div class="svgwrap"><svg class="dia wide" viewBox="0 0 1200 470" role="img" aria-label="Essay shape: introduction, three reasons in the body, conclusion"><defs><marker id="ah" markerWidth="12" markerHeight="12" refX="6" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 Z" fill="#5B667C"/></marker></defs><rect x="100.0" y="10" width="1000" height="104" rx="14" fill="#EEE7FB" stroke="#6D3FC4" stroke-width="2.5"/><text x="130" y="48" font-size="28" font-weight="800" fill="#6D3FC4">Introduction · 引言</text><text x="130" y="88" font-size="26" fill="#1D2B47">What many people think. → <tspan font-weight="800">However, I agree / disagree that …</tspan></text><line x1="600" y1="116" x2="250" y2="156" stroke="#5B667C" stroke-width="2.5" marker-end="url(#ah)"/><line x1="250" y1="300" x2="600" y2="338" stroke="#5B667C" stroke-width="2.5" marker-end="url(#ah)"/><line x1="600" y1="116" x2="600" y2="156" stroke="#5B667C" stroke-width="2.5" marker-end="url(#ah)"/><line x1="600" y1="300" x2="600" y2="338" stroke="#5B667C" stroke-width="2.5" marker-end="url(#ah)"/><line x1="600" y1="116" x2="950" y2="156" stroke="#5B667C" stroke-width="2.5" marker-end="url(#ah)"/><line x1="950" y1="300" x2="600" y2="338" stroke="#5B667C" stroke-width="2.5" marker-end="url(#ah)"/><rect x="85" y="162" width="330" height="136" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="250" y="200" text-anchor="middle" font-size="27" font-weight="800" fill="#2563C9">Reason 1 · 理由 1</text><rect x="100" y="222" width="300" height="56" rx="10" fill="#E1F1E8" stroke="#17784E" stroke-width="2"/><text x="250" y="257" text-anchor="middle" font-size="23" font-weight="700" fill="#17784E">example / explanation</text><rect x="435" y="162" width="330" height="136" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="600" y="200" text-anchor="middle" font-size="27" font-weight="800" fill="#2563C9">Reason 2 · 理由 2</text><rect x="450" y="222" width="300" height="56" rx="10" fill="#E1F1E8" stroke="#17784E" stroke-width="2"/><text x="600" y="257" text-anchor="middle" font-size="23" font-weight="700" fill="#17784E">example / explanation</text><rect x="785" y="162" width="330" height="136" rx="14" fill="#E6EEFB" stroke="#2563C9" stroke-width="2.5"/><text x="950" y="200" text-anchor="middle" font-size="27" font-weight="800" fill="#2563C9">Reason 3 · 理由 3</text><rect x="800" y="222" width="300" height="56" rx="10" fill="#E1F1E8" stroke="#17784E" stroke-width="2"/><text x="950" y="257" text-anchor="middle" font-size="23" font-weight="700" fill="#17784E">example / explanation</text><text x="48" y="236" font-size="24" font-weight="800" fill="#2563C9" transform="rotate(-90 48 236)" text-anchor="middle">Body · 本文</text><rect x="100.0" y="344" width="1000" height="104" rx="14" fill="#EEE7FB" stroke="#6D3FC4" stroke-width="2.5"/><text x="130" y="382" font-size="28" font-weight="800" fill="#6D3FC4">Conclusion · 結論</text><text x="130" y="422" font-size="26" fill="#1D2B47"><tspan font-weight="800">Even though …, …</tspan> → Say your opinion again.</text></svg></div></div></div><div class="corner"><span class="snum">08 / 40</span></div></section>
+<section class="slide" data-s="1" id="p9" aria-label="Slide 9"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 16 · 課本第 16 頁</span></div><h2>Read the Model: Having a Lot of Money</h2><div class="hzh">閱讀範文：擁有很多錢</div></header><div class="body cols c37"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Read the essay on page 16.</span><span class="zh">閱讀第 16 頁的文章。</span></div></li><li><div class="bi "><span class="en">Mark the introduction and the conclusion.</span><span class="zh">標出引言和結論。</span></div></li><li><div class="bi "><span class="en">Write the 3 main points (reasons).</span><span class="zh">寫下三個重點（理由）。</span></div></li><li><div class="bi "><span class="en">Find the example for main point 2.</span><span class="zh">找出重點 2 的例子。</span></div></li></ol></div><div class="card ans"><div class="anh">Answers · 答案</div>
+<div class="arow"><span class="tag c-topic">Introduction</span><div class="rv hide " data-g="1"><span class="rvc">paragraph 1 (People need money… the happiest.)</span></div></div>
+<div class="arow"><span class="tag c-topic">Conclusion</span><div class="rv hide " data-g="1"><span class="rvc">the last paragraph (Even though…)</span></div></div>
+<div class="arow"><span class="tag c-main">Reason 1</span><div class="rv hide " data-g="2"><span class="rvc">People with a lot of money are often very stressed.</span></div></div>
+<div class="arow"><span class="tag c-main">Reason 2</span><div class="rv hide " data-g="3"><span class="rvc">Some people do bad things to become rich.</span></div></div>
+<div class="arow"><span class="tag c-main">Reason 3</span><div class="rv hide " data-g="4"><span class="rvc">Being able to buy many things doesn't make someone happy.</span></div></div>
+<div class="arow"><span class="tag c-det">Example (2)</span><div class="rv hide " data-g="5"><span class="rvc">They might steal from other people or gamble.</span></div></div></div></div></div><div class="corner"><span class="snum">09 / 40</span></div></section>
+<section class="slide" data-s="1" id="p10" aria-label="Slide 10"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 17 · 課本第 17 頁</span></div><h2>Writing Analysis: Fill In the Outline</h2><div class="hzh">寫作分析：完成大綱</div></header><div class="body cols c28"><div class="col"><div class="bi note"><span class="en">Look for <b>However</b>. It shows the change from what many people think to the writer's opinion.</span><span class="zh">注意 However：它從「很多人的想法」轉到「作者的意見」。</span></div></div><div class="outline tight"><div class="ol-row ol-topic"><span class="ol-k">Introduction</span><div class="ol-v"><span class="given">need money to eat and live</span></div></div><div class="ol-row ol-topic"><span class="ol-k">My opinion</span><div class="ol-v"><div class="rv hide " data-g="1"><span class="rvc">disagree: rich people are not the happiest</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Reason 1</span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">people with a lot of money are often very stressed</span></div></div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v"><div class="rv hide " data-g="2"><span class="rvc">want more money and work too hard</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Reason 2</span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">some people do bad things to become rich</span></div></div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v"><div class="rv hide " data-g="3"><span class="rvc">steal or gamble → jail or lose money → not happy</span></div></div></div><div class="ol-row ol-main"><span class="ol-k">Reason 3</span><div class="ol-v"><div class="rv hide " data-g="4"><span class="rvc">being able to buy many things doesn't make someone happy</span></div></div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v"><div class="rv hide " data-g="4"><span class="rvc">cars and clothes: not as important as love, friendship</span></div></div></div><div class="ol-row ol-close"><span class="ol-k">Conclusion</span><div class="ol-v"><div class="rv hide " data-g="5"><span class="rvc">money ≠ everything; be happy with what you have</span></div></div></div></div></div></div><div class="corner"><span class="snum">10 / 40</span></div></section>
+<section class="slide" data-s="1" id="p11" aria-label="Slide 11"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Practice · 練習</div><h2>Does It Support the Opinion?</h2><div class="hzh">這句話支持這個意見嗎？</div></header><div class="body col"><div class="bi lead"><span class="en">Read each sentence. Can the writer use it in this essay?</span><span class="zh">讀每一句。作者可以把它用在這篇文章裡嗎？</span></div><div class="card bel"><div class="extopic"><span class="tag c-topic">Opinion</span> I disagree that students should have homework every day.</div><div class="rv row " data-g="1"><span class="txt">a. Students need time to rest and play.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ supports 支持</span></span></div><div class="rv row isbad" data-g="2"><span class="txt">b. Homework helps you remember your lessons.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge bad">✗ other side 反方</span></span></div><div class="rv row " data-g="3"><span class="txt">c. Some students go to cram school until 9 p.m.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge good">✓ example 例子</span></span></div><div class="rv row isbad" data-g="4"><span class="txt">d. My favorite subject is art.</span><span class="off-only qmark">?</span><span class="on-only"><span class="badge bad">✗ off topic 離題</span></span></div></div><div class="bi note"><span class="en">A reason for the other side does not help your opinion. Keep it out, or answer it with <b>Even though</b>.</span><span class="zh">反方的理由不能支持你的意見。不要用，或用 Even though 回應它。</span></div></div></div><div class="corner"><span class="snum">11 / 40</span></div></section>
+<section class="slide" data-s="1" id="p12" aria-label="Slide 12"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 · Exit ticket · 下課前小測驗</div><h2>Check Your Understanding</h2><div class="hzh">檢查你的理解</div></header><div class="body col quizwrap" data-quiz="q1"></div></div><div class="corner"><span class="snum">12 / 40</span></div></section>
+<section class="slide" data-s="1" id="p13" aria-label="Slide 13"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 1 → Session 2</div><h2>What We Learned · Coming Up Next</h2><div class="hzh">今天學到的 · 下一堂課</div></header><div class="body cols"><div class="card bridge learned"><div class="brh">✓ What we learned · 學到的</div><ul><li><div class="bi "><span class="en">An opinion essay has an introduction, a body, and a conclusion.</span><span class="zh">意見文有引言、本文和結論。</span></div></li><li><div class="bi "><span class="en">The introduction tells your opinion. The body gives 3 reasons.</span><span class="zh">引言說出意見，本文提出三個理由。</span></div></li><li><div class="bi "><span class="en">Every reason needs an example or explanation.</span><span class="zh">每個理由都需要例子或解釋。</span></div></li></ul></div><div class="card bridge next"><div class="brh">→ Coming up next · 下一堂</div><ul><li><div class="bi "><span class="en">I agree / disagree that …</span><span class="zh">表達同意或不同意</span></div></li><li><div class="bi "><span class="en">(not) as … as …</span><span class="zh">比較兩件事</span></div></li><li><div class="bi "><span class="en">Even though …, …</span><span class="zh">表達對比的想法</span></div></li></ul></div></div></div><div class="corner"><span class="snum">13 / 40</span></div></section>
+<section class="slide title" data-s="2" data-id="s2" id="p14" aria-label="Slide 14"><div class="inner"><div class="tcenter"><div class="eyebrow">Session 2 · Student Book pp. 18–19 · Homework: Workbook pp. 8–9</div>
+<div class="bignum">2</div><h1 class="h1s">Three Sentence Patterns</h1><div class="tsub">三個句型</div></div></div><div class="corner"><span class="snum">14 / 40</span></div></section>
+<section class="slide" data-s="2" id="p15" aria-label="Slide 15"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Today's goals</div><h2>Today I Can…</h2><div class="hzh">今天我會……</div></header><div class="body col"><ol class="steps big"><li><div class="bi "><span class="en">say my opinion with <b>I agree / disagree that…</b></span><span class="zh">用 I agree / disagree that… 說出意見。</span></div></li><li><div class="bi "><span class="en">compare two things with <b>(not) as… as…</b></span><span class="zh">用 (not) as… as… 比較兩件事。</span></div></li><li><div class="bi "><span class="en">show two different ideas with <b>Even though…, …</b></span><span class="zh">用 Even though…, … 表達對比。</span></div></li></ol></div></div><div class="corner"><span class="snum">15 / 40</span></div></section>
+<section class="slide" data-s="2" id="p16" aria-label="Slide 16"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Pattern 1 · 句型一</div><h2>I Agree / Disagree That …</h2><div class="hzh">表達同意或不同意</div></header><div class="body cols"><div class="col"><div class="card pchart">
+<div class="pcol"><div class="pch ok">Agree · 同意</div><div class="pw">I agree that…</div><div class="pw">I believe that…</div></div>
+<div class="pcol"><div class="pch no">Disagree · 不同意</div><div class="pw">I disagree that…</div><div class="pw">I don't agree that…</div><div class="pw">I don't believe that…</div></div></div><div class="bi note"><span class="en">After <b>that</b>, write a full sentence: who + verb.</span><span class="zh">that 後面要接完整的句子：主詞 + 動詞。</span></div></div><div class="col"><div class="card exlist"><div class="anh">Examples · 例句</div>
+<div class="exs"><span class="pat">I believe that</span> every student should learn to swim.</div>
+<div class="exs"><span class="pat">I don't agree that</span> phones make people less friendly.</div>
+<div class="exs"><span class="pat">I disagree that</span> bubble tea is better than water <span class="pat">because</span> it has too much sugar.</div></div><div class="card errs"><div class="anh">Watch out · 常見錯誤</div><div class="errrow"><span class="wrong">✗ I am agree that…</span><span class="right">✓ I agree that…</span></div><div class="errrow"><span class="wrong">✗ I disagree with that school is boring.</span><span class="right">✓ I disagree that school is boring.</span></div></div></div></div></div><div class="corner"><span class="snum">16 / 40</span></div></section>
+<section class="slide" data-s="2" id="p17" aria-label="Slide 17"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 18 · 課本第 18 頁</span></div><h2>Tell If You Agree or Disagree</h2><div class="hzh">說出你同意或不同意</div></header><div class="body col"><div class="bi lead"><span class="en">Write your own opinion for each statement. These are only models.</span><span class="zh">為每個說法寫出你自己的意見。下面只是範例。</span></div><div class="col p15list"><div class="card p15"><div class="p15t"><span class="num">1</span><span>The most exciting school subject is music.</span></div><div class="rv hide block" data-g="1"><span class="rvc">I don't believe that the most exciting school subject is music.</span></div></div><div class="card p15"><div class="p15t"><span class="num">2</span><span>You can be happy even if you are poor.</span></div><div class="rv hide block" data-g="2"><span class="rvc">I agree that you can be happy even if you are poor.</span></div></div><div class="card p15"><div class="p15t"><span class="num">3</span><span>Rich people should give money to poor people.</span></div><div class="rv hide block" data-g="3"><span class="rvc">I believe that rich people should give money to poor people.</span></div></div></div><div class="bi note"><span class="en">Both answers are correct if the grammar is right. Check: agree/disagree + that + full sentence.</span><span class="zh">只要文法正確，同意或不同意都可以。</span></div></div></div><div class="corner"><span class="snum">17 / 40</span></div></section>
+<section class="slide" data-s="2" id="p18" aria-label="Slide 18"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Pattern 2 · 句型二</div><h2>(Not) As … As …</h2><div class="hzh">比較：一樣……／沒有那麼……</div></header><div class="body col"><div class="cols c64"><div class="card pchart one">
+<div class="fr"><b>A</b> is <span class="pat">as</span> + adj. + <span class="pat">as</span> <b>B</b> <span class="fz">same · 一樣</span></div>
+<div class="fr"><b>A</b> is <span class="pat">not as</span> + adj. + <span class="pat">as</span> <b>B</b> <span class="fz">A is less · A 比較不</span></div>
+<div class="exs">Fancy cars and clothes are <span class="pat">not as important as</span> love and friendship.</div></div><div class="card errs"><div class="anh">Watch out · 常見錯誤</div><div class="errrow"><span class="wrong">✗ not as important than</span><span class="right">✓ not as important as</span></div><div class="errrow"><span class="wrong">✗ Studying English are not as fun as…</span><span class="right">✓ Studying English is… (-ing = one thing)</span></div></div></div><div class="svgwrap"><svg class="dia" viewBox="0 0 1000 400" role="img" aria-label="as tall as: two equal bars; not as tall as: a shorter bar beside a taller bar"><line x1="40" y1="330" x2="460" y2="330" stroke="#5B667C" stroke-width="2"/><line x1="540" y1="330" x2="960" y2="330" stroke="#5B667C" stroke-width="2"/><text x="250" y="40" text-anchor="middle" font-size="30" font-weight="800" fill="#17784E">as tall as = same · 一樣</text><text x="750" y="40" text-anchor="middle" font-size="30" font-weight="800" fill="#C2412D">not as tall as = less · 比較不</text><rect x="80" y="130" width="100" height="200" rx="10" fill="#E1F1E8" stroke="#17784E" stroke-width="3"/><text x="130" y="364" text-anchor="middle" font-size="26" font-weight="700" fill="#1D2B47">my brother</text><rect x="280" y="130" width="100" height="200" rx="10" fill="#E1F1E8" stroke="#17784E" stroke-width="3"/><text x="330" y="364" text-anchor="middle" font-size="26" font-weight="700" fill="#1D2B47">my dad</text><rect x="590" y="183" width="100" height="147" rx="10" fill="#FBE6E2" stroke="#C2412D" stroke-width="3"/><text x="640" y="171" text-anchor="middle" font-size="24" font-weight="700" fill="#5B667C">508 m</text><text x="640" y="364" text-anchor="middle" font-size="26" font-weight="700" fill="#1D2B47">Taipei 101</text><rect x="810" y="90" width="100" height="240" rx="10" fill="#FBE6E2" stroke="#C2412D" stroke-width="3"/><text x="860" y="78" text-anchor="middle" font-size="24" font-weight="700" fill="#5B667C">828 m</text><text x="860" y="364" text-anchor="middle" font-size="26" font-weight="700" fill="#1D2B47">Burj Khalifa</text></svg></div></div></div><div class="corner"><span class="snum">18 / 40</span></div></section>
+<section class="slide" data-s="2" id="p19" aria-label="Slide 19"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 18 · 課本第 18 頁</span></div><h2>Compare Two Things</h2><div class="hzh">比較兩件事</div></header><div class="body col"><div class="bi lead"><span class="en">Use a word from the box in each sentence.</span><span class="zh">每一句用框框裡的一個字。</span></div><div class="wbank"><span>important</span><span>meaningful</span><span>fun</span><span>difficult</span><span>necessary</span></div><div class="card nlist"><div class="nrow"><span class="note-n">friends / family</span><span class="arrow">→</span><div class="rv hide " data-g="1"><span class="rvc">Friends are as important as family.</span></div></div><div class="nrow"><span class="note-n">studying science / studying English</span><span class="arrow">→</span><div class="rv hide " data-g="2"><span class="rvc">Studying science is not as difficult as studying English.</span></div></div><div class="nrow"><span class="note-n">having free time / going to school</span><span class="arrow">→</span><div class="rv hide " data-g="3"><span class="rvc">Having free time is as necessary as going to school.</span></div></div></div><div class="bi note"><span class="en">Your opinion can be different. Check <b>as + adjective + as</b> and <b>is / are</b>.</span><span class="zh">你的意見可以不同。檢查 as + 形容詞 + as，以及 is / are。</span></div></div></div><div class="corner"><span class="snum">19 / 40</span></div></section>
+<section class="slide" data-s="2" id="p20" aria-label="Slide 20"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Pattern 3 · 句型三</div><h2>Even Though …, …</h2><div class="hzh">雖然……，但是……</div></header><div class="body cols c64"><div class="card pchart one">
+<div class="fr"><span class="pat">Even though</span> idea A<b class="comma">,</b> idea B.</div>
+<div class="bi small"><span class="en">Use it for two ideas that seem opposite. Idea B is the important one.</span><span class="zh">用在兩個看起來相反的想法。B 是比較重要的想法。</span></div>
+<div class="exs"><span class="pat">Even though</span> it was raining, we played basketball.</div>
+<div class="exs"><span class="pat">Even though</span> bubble tea is sweet, many people drink it every day.</div>
+<div class="exs">We played basketball <span class="pat">even though</span> it was raining. <small>(no comma)</small></div></div><div class="col"><div class="card errs"><div class="anh">Watch out · 常見錯誤</div><div class="errrow"><span class="wrong">✗ Even though it was raining, but we played.</span><span class="right">✓ Even though it was raining, we played.</span></div><div class="errrow"><span class="wrong">✗ Even though it was raining we played.</span><span class="right">✓ Add a comma: raining, we played.</span></div></div><div class="bi note"><span class="en">In English, <b>Even though</b> works alone. Don't add <b>but</b>.</span><span class="zh">中文說「雖然……但是……」，英文只用 Even though，不加 but。</span></div></div></div></div><div class="corner"><span class="snum">20 / 40</span></div></section>
+<section class="slide" data-s="2" id="p21" aria-label="Slide 21"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Practice · 練習</div><h2>Finish the Sentence</h2><div class="hzh">完成句子</div></header><div class="body col"><div class="bi lead"><span class="en">Match each start with an ending.</span><span class="zh">把句子前半和後半配對。</span></div><div class="card bank"><div class="bankh">Endings · 句子後半</div><div class="bankl">
+<span><b>A</b> I still got a good grade.</span><span><b>B</b> I like living in Taipei.</span><span><b>C</b> she finished her homework.</span></div></div><div class="card nlist"><div class="nrow ev"><span class="note-n ev">Even though the test was very hard,</span><span class="arrow">→</span><div class="rv hide " data-g="1"><span class="rvc">A · I still got a good grade.</span></div></div><div class="nrow ev"><span class="note-n ev">Even though summer is very hot,</span><span class="arrow">→</span><div class="rv hide " data-g="2"><span class="rvc">B · I like living in Taipei.</span></div></div><div class="nrow ev"><span class="note-n ev">Even though she was very tired,</span><span class="arrow">→</span><div class="rv hide " data-g="3"><span class="rvc">C · she finished her homework.</span></div></div></div></div></div><div class="corner"><span class="snum">21 / 40</span></div></section>
+<section class="slide" data-s="2" id="p22" aria-label="Slide 22"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 19 · 課本第 19 頁</span></div><h2>Show Contrasting Ideas</h2><div class="hzh">表達對比的想法</div></header><div class="body cols c37"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Match a sentence from the left box with one from the right box.</span><span class="zh">把左框的句子和右框的句子配對。</span></div></li><li><div class="bi "><span class="en">Join them with <b>Even though…, …</b></span><span class="zh">用 Even though…, … 連起來。</span></div></li></ol><div class="bi note"><span class="en">Don't forget the comma. No <b>but</b>!</span><span class="zh">別忘了逗號，不要加 but！</span></div></div><div class="card ans"><div class="anh">Answers · 答案</div><div class="arow sm"><span class="tag c-tr">1</span><div class="rv hide " data-g="1"><span class="rvc">Even though studying English is necessary, it is not the only subject you should learn.</span></div></div><div class="arow sm"><span class="tag c-tr">2</span><div class="rv hide " data-g="2"><span class="rvc">Even though you can learn many things in a classroom, you can learn some things better outside of a classroom.</span></div></div><div class="arow sm"><span class="tag c-tr">3</span><div class="rv hide " data-g="3"><span class="rvc">Even though rich people may look very happy, they might not be as happy as you think.</span></div></div><div class="arow sm"><span class="tag c-tr">4</span><div class="rv hide " data-g="4"><span class="rvc">Even though classes are important, students also need more free time.</span></div></div></div></div></div><div class="corner"><span class="snum">22 / 40</span></div></section>
+<section class="slide" data-s="2" id="p23" aria-label="Slide 23"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Putting it together · 整合</div><h2>Where Do the Patterns Go?</h2><div class="hzh">句型放在文章哪裡？</div></header><div class="body col"><div class="wgrid"><div class="card wcard c-topic-b"><div class="wh">Introduction · 引言</div><div class="wp">I agree / disagree that …</div><div class="exs">However, I disagree that people who have a lot of money are the happiest.</div></div><div class="card wcard c-main-b"><div class="wh">Body · 本文</div><div class="wp">(not) as … as …</div><div class="exs">These things are not as important as love and friendship.</div></div><div class="card wcard c-tr-b"><div class="wh">Conclusion · 結論</div><div class="wp">Even though …, …</div><div class="exs">Even though having some money is important, it is not everything.</div></div></div><div class="bi note"><span class="en">These examples come from the model essay on page 16.</span><span class="zh">這些例句都來自第 16 頁的範文。</span></div></div></div><div class="corner"><span class="snum">23 / 40</span></div></section>
+<section class="slide" data-s="2" id="p24" aria-label="Slide 24"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Homework · Workbook pp. 8–9 · 作業 · 習作第 8–9 頁</span></div><h2>Homework: More Sentence Practice</h2><div class="hzh">作業：更多句型練習</div></header><div class="body col"><div class="tsteps"><div class="card hwc"><span class="pn">1</span><div class="bi tsh"><span class="en">p. 8 · I agree / disagree that…</span><span class="zh">第 8 頁 · 同意／不同意</span></div><div class="bi small"><span class="en">Write your opinion on 3 statements. Use the phrases in the box.</span><span class="zh">用框框裡的片語，對 3 個說法寫出你的意見。</span></div></div><div class="card hwc"><span class="pn">2</span><div class="bi tsh"><span class="en">p. 8 · (not) as… as…</span><span class="zh">第 8 頁 · 比較</span></div><div class="bi small"><span class="en">Compare 3 pairs. Use important, helpful, useful, or good.</span><span class="zh">比較 3 組，用 important、helpful、useful 或 good。</span></div></div><div class="card hwc"><span class="pn">3</span><div class="bi tsh"><span class="en">p. 9 · Even though…, …</span><span class="zh">第 9 頁 · 對比</span></div><div class="bi small"><span class="en">Match the sentences and write 4 sentences with Even though.</span><span class="zh">配對句子，用 Even though 寫 4 個句子。</span></div></div></div><div class="bi callout"><span class="en">Bring your workbook to the next class. We will check the answers together.</span><span class="zh">下一堂課帶習作來，我們會一起對答案。</span></div></div></div><div class="corner"><span class="snum">24 / 40</span></div></section>
+<section class="slide" data-s="2" id="p25" aria-label="Slide 25"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 · Exit ticket · 下課前小測驗</div><h2>Check Your Understanding</h2><div class="hzh">檢查你的理解</div></header><div class="body col quizwrap" data-quiz="q2"></div></div><div class="corner"><span class="snum">25 / 40</span></div></section>
+<section class="slide" data-s="2" id="p26" aria-label="Slide 26"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 2 → Session 3</div><h2>What We Learned · Coming Up Next</h2><div class="hzh">今天學到的 · 下一堂課</div></header><div class="body cols"><div class="card bridge learned"><div class="brh">✓ What we learned · 學到的</div><ul><li><div class="bi "><span class="en">I agree / disagree that + full sentence.</span><span class="zh">I agree / disagree that + 完整句子。</span></div></li><li><div class="bi "><span class="en">(not) as + adjective + as compares two things.</span><span class="zh">(not) as + 形容詞 + as 比較兩件事。</span></div></li><li><div class="bi "><span class="en">Even though…, … shows two different ideas. Use a comma, no but.</span><span class="zh">Even though 表達對比，加逗號，不加 but。</span></div></li></ul></div><div class="card bridge next"><div class="brh">→ Coming up next · 下一堂</div><ul><li><div class="bi "><span class="en">Check the homework (Workbook pp. 8–9).</span><span class="zh">檢查作業（習作第 8–9 頁）。</span></div></li><li><div class="bi "><span class="en">Brainstorm and outline your own opinion essay.</span><span class="zh">腦力激盪並寫出你自己的大綱。</span></div></li><li><div class="bi "><span class="en">Get ready for the writing test (Workbook pp. 6–7).</span><span class="zh">準備寫作測驗（習作第 6–7 頁）。</span></div></li></ul></div></div></div><div class="corner"><span class="snum">26 / 40</span></div></section>
+<section class="slide title" data-s="3" data-id="s3" id="p27" aria-label="Slide 27"><div class="inner"><div class="tcenter"><div class="eyebrow">Session 3 · Student Book pp. 20–21 · Then Workbook pp. 6–7</div>
+<div class="bignum">3</div><h1 class="h1s">Plan Your Opinion Essay</h1><div class="tsub">規劃你的意見文</div></div></div><div class="corner"><span class="snum">27 / 40</span></div></section>
+<section class="slide" data-s="3" id="p28" aria-label="Slide 28"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Today's goals</div><h2>Today I Can…</h2><div class="hzh">今天我會……</div></header><div class="body col"><ol class="steps big"><li><div class="bi "><span class="en">check my homework and fix my sentences.</span><span class="zh">檢查作業並改正句子。</span></div></li><li><div class="bi "><span class="en">brainstorm reasons and examples for my opinion.</span><span class="zh">為我的意見想出理由和例子。</span></div></li><li><div class="bi "><span class="en">make an outline for my opinion essay.</span><span class="zh">寫出意見文的大綱。</span></div></li></ol><div class="kw"><div class="kwh">Key words · 關鍵字</div><div class="kwl"><span class="chip c-topic">brainstorm · 腦力激盪</span><span class="chip c-main">outline · 大綱</span><span class="chip c-det">first draft · 初稿</span><span class="chip c-tr">final draft · 定稿</span></div></div></div></div><div class="corner"><span class="snum">28 / 40</span></div></section>
+<section class="slide" data-s="3" id="p29" aria-label="Slide 29"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Homework check · Workbook p. 8 · 對答案 · 習作第 8 頁</span></div><h2>Check: Agree / Disagree and (Not) As … As</h2><div class="hzh">對答案：同意／不同意與比較</div></header><div class="body col"><div class="bi note"><span class="en">Model answers. Your opinion can be different. Check the grammar.</span><span class="zh">這些是範例答案，你的意見可以不同，請檢查文法。</span></div><div class="cols"><div class="card ans"><div class="anh">I agree / disagree that…</div><div class="arow sm"><span class="tag c-topic">1</span><div class="rv hide " data-g="1"><span class="rvc">I don't believe that it is worth buying very expensive clothes.</span></div></div><div class="arow sm"><span class="tag c-topic">2</span><div class="rv hide " data-g="2"><span class="rvc">I agree that schools should begin later in the day.</span></div></div><div class="arow sm"><span class="tag c-topic">3</span><div class="rv hide " data-g="3"><span class="rvc">I believe that people should be rewarded for recycling.</span></div></div></div><div class="card ans"><div class="anh">(not) as… as…</div><div class="arow sm"><span class="tag c-main">1</span><div class="rv hide " data-g="4"><span class="rvc">Desktop computers are not as useful as laptop computers.</span></div></div><div class="arow sm"><span class="tag c-main">2</span><div class="rv hide " data-g="5"><span class="rvc">Studying with friends is as helpful as studying alone.</span></div></div><div class="arow sm"><span class="tag c-main">3</span><div class="rv hide " data-g="6"><span class="rvc">Having a lot of friends is not as good as having one or two close friends.</span></div></div></div></div></div></div><div class="corner"><span class="snum">29 / 40</span></div></section>
+<section class="slide" data-s="3" id="p30" aria-label="Slide 30"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Homework check · Workbook p. 9 · 對答案 · 習作第 9 頁</span></div><h2>Check: Even Though …, …</h2><div class="hzh">對答案：Even though</div></header><div class="body col"><div class="card ans"><div class="arow sm"><span class="tag c-tr">1</span><div class="rv hide " data-g="1"><span class="rvc">Even though learning at home is comfortable, you can learn more at school.</span></div></div><div class="arow sm"><span class="tag c-tr">2</span><div class="rv hide " data-g="2"><span class="rvc">Even though you get more attention as an only child, you can get lonely.</span></div></div><div class="arow sm"><span class="tag c-tr">3</span><div class="rv hide " data-g="3"><span class="rvc">Even though French is a beautiful language, learning Chinese is more useful.</span></div></div><div class="arow sm"><span class="tag c-tr">4</span><div class="rv hide " data-g="4"><span class="rvc">Even though you can watch movies on your cell phone, watching movies on a big screen is still better.</span></div></div></div><div class="bi note"><span class="en">Did you use a comma? Did you leave out <b>but</b>? Swap books and check a partner's sentences.</span><span class="zh">有加逗號嗎？有沒有多加 but？和同伴交換檢查。</span></div></div></div><div class="corner"><span class="snum">30 / 40</span></div></section>
+<section class="slide" data-s="3" id="p31" aria-label="Slide 31"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · The plan · 計畫</div><h2>5 Steps to a Good Opinion Essay</h2><div class="hzh">寫好意見文的五個步驟</div></header><div class="body col"><div class="process"><div class="pstep today"><span class="pn">1</span><div class="bi pt"><span class="en">Brainstorm</span><span class="zh">腦力激盪</span></div><span class="pp">Student Book p. 20</span></div><div class="pstep today"><span class="pn">2</span><div class="bi pt"><span class="en">Outline</span><span class="zh">大綱</span></div><span class="pp">Student Book p. 21</span></div><div class="pstep test"><span class="pn">3</span><div class="bi pt"><span class="en">First draft</span><span class="zh">初稿</span></div><span class="pp">Workbook p. 6</span></div><div class="pstep test"><span class="pn">4</span><div class="bi pt"><span class="en">Revise and edit</span><span class="zh">修改與校對</span></div><span class="pp">Workbook p. 6</span></div><div class="pstep test"><span class="pn">5</span><div class="bi pt"><span class="en">Final draft</span><span class="zh">定稿</span></div><span class="pp">Workbook p. 7</span></div></div><div class="pkey"><span class="chip today">Today · 今天</span><span class="chip test">Writing test · 寫作測驗</span></div></div></div><div class="corner"><span class="snum">31 / 40</span></div></section>
+<section class="slide" data-s="3" id="p32" aria-label="Slide 32"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 20 · 課本第 20 頁</span></div><h2>Choose Your Topic</h2><div class="hzh">選擇你的題目</div></header><div class="body cols c64"><div class="col"><div class="votes"><div class="vote"><span class="num">1</span><span class="vt">People who have a lot of money are the happiest.</span><span class="vbtn"><b class="va">Agree</b><b class="vd">Disagree</b></span></div><div class="vote"><span class="num">2</span><span class="vt">English is the most important school subject.</span><span class="vbtn"><b class="va">Agree</b><b class="vd">Disagree</b></span></div><div class="vote"><span class="num">3</span><span class="vt">School should only be four days a week.</span><span class="vbtn"><b class="va">Agree</b><b class="vd">Disagree</b></span></div></div><div class="bi note"><span class="en">Choose the side you can explain best, not the side you think the teacher likes.</span><span class="zh">選你最能說明理由的一方，而不是你覺得老師喜歡的一方。</span></div></div><div class="col"><div class="bi callout"><span class="en">Tell a partner: "I chose topic 2. I disagree that… because…"</span><span class="zh">告訴同伴你選哪個題目，以及你的意見和原因。</span></div><div class="timer" data-min="3"><div class="tlabel">Timer · 計時器</div><div class="tdisp">03:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div></div></div><div class="corner"><span class="snum">32 / 40</span></div></section>
+<section class="slide" data-s="3" id="p33" aria-label="Slide 33"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Model · 範例</div><h2>Brainstorm: My Example</h2><div class="hzh">腦力激盪：範例</div></header><div class="body col"><div class="legend"><span class="chip c-topic">Statement + my opinion · 說法與意見</span><span class="chip c-main">Reason · 理由</span><span class="chip c-det">Example or explanation · 例子或解釋</span></div><div class="svgwrap"><svg class="dia wide" viewBox="0 0 1200 440" role="img" aria-label="Brainstorm map: every student should join a school club, I agree, with three reasons"><path d="M330,220 C400,220 400,70 470,70" fill="none" stroke="#5B667C" stroke-width="2.5"/><path d="M330,220 C400,220 400,220 470,220" fill="none" stroke="#5B667C" stroke-width="2.5"/><path d="M330,220 C400,220 400,370 470,370" fill="none" stroke="#5B667C" stroke-width="2.5"/><ellipse cx="180" cy="220" rx="170" ry="92" fill="#EEE7FB" stroke="#6D3FC4" stroke-width="3"/><text x="180" y="182" text-anchor="middle" font-size="26" font-weight="800" fill="#6D3FC4">Every student</text><text x="180" y="213" text-anchor="middle" font-size="26" font-weight="800" fill="#6D3FC4">should join</text><text x="180" y="244" text-anchor="middle" font-size="26" font-weight="800" fill="#6D3FC4">a school club.</text><text x="180" y="275" text-anchor="middle" font-size="26" font-weight="900" fill="#6D3FC4">→ I agree</text><rect x="470" y="8" width="700" height="124" rx="14" fill="#FFFDF8" stroke="#2563C9" stroke-width="2.5"/><text x="494" y="50" font-size="27" font-weight="800" fill="#2563C9">make new friends:</text><text x="494" y="84" font-size="25" font-weight="600" fill="#17784E">meet people who like the same things</text><text x="494" y="116" font-size="25" font-weight="600" fill="#17784E">→ basketball club: other classes</text><rect x="470" y="158" width="700" height="124" rx="14" fill="#FFFDF8" stroke="#2563C9" stroke-width="2.5"/><text x="494" y="200" font-size="27" font-weight="800" fill="#2563C9">learn new skills:</text><text x="494" y="234" font-size="25" font-weight="600" fill="#17784E">guitar, photos, speaking in public</text><text x="494" y="266" font-size="25" font-weight="600" fill="#17784E">→ not as easy in normal classes</text><rect x="470" y="308" width="700" height="124" rx="14" fill="#FFFDF8" stroke="#2563C9" stroke-width="2.5"/><text x="494" y="350" font-size="27" font-weight="800" fill="#2563C9">relax:</text><text x="494" y="384" font-size="25" font-weight="600" fill="#17784E">after a long day of tests</text><text x="494" y="416" font-size="25" font-weight="600" fill="#17784E">→ sports or art = less stressed</text></svg></div><div class="bi note"><span class="en">Write short notes. For each reason, ask: Why? What is an example?</span><span class="zh">寫短筆記。每個理由都問：為什麼？有什麼例子？</span></div></div></div><div class="corner"><span class="snum">33 / 40</span></div></section>
+<section class="slide" data-s="3" id="p34" aria-label="Slide 34"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 20 · ✏️ Your turn · 課本第 20 頁 · 換你寫</span></div><h2>Your Brainstorming</h2><div class="hzh">你的腦力激盪</div></header><div class="body cols c64"><div class="col"><ol class="steps"><li><div class="bi "><span class="en">Write the statement and your opinion in the middle.</span><span class="zh">在中間寫下說法和你的意見。</span></div></li><li><div class="bi "><span class="en">Add 3 reasons around it.</span><span class="zh">在周圍加上三個理由。</span></div></li><li><div class="bi "><span class="en">Add an example or explanation for each reason.</span><span class="zh">每個理由加上一個例子或解釋。</span></div></li></ol><div class="bi note"><span class="en">Stuck? Think about what many people think. Why do you agree or disagree with them?</span><span class="zh">想不出來？想想很多人怎麼想，你為什麼同意或不同意他們？</span></div></div><div class="col"><div class="timer" data-min="8"><div class="tlabel">Timer · 計時器</div><div class="tdisp">08:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div></div></div><div class="corner"><span class="snum">34 / 40</span></div></section>
+<section class="slide" data-s="3" id="p35" aria-label="Slide 35"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Model · 範例</div><h2>From Brainstorm to Outline</h2><div class="hzh">從腦力激盪到大綱</div></header><div class="body cols c64"><div class="outline tight"><div class="ol-row ol-topic"><span class="ol-k">Introduction</span><div class="ol-v">many students are busy with homework and cram school</div></div><div class="ol-row ol-topic"><span class="ol-k">My opinion</span><div class="ol-v">agree that every student should join a school club</div></div><div class="ol-row ol-main"><span class="ol-k">Reason 1</span><div class="ol-v">clubs help students make new friends</div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v">meet people who like the same things; basketball club → other classes</div></div><div class="ol-row ol-main"><span class="ol-k">Reason 2</span><div class="ol-v">students can learn new skills</div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v">guitar, photos, speaking in public; not as easy to learn in normal classes</div></div><div class="ol-row ol-main"><span class="ol-k">Reason 3</span><div class="ol-v">clubs are a good way to relax</div></div><div class="ol-row ol-det"><span class="ol-k"></span><div class="ol-v">after a long day of tests, sports or art → less stressed</div></div><div class="ol-row ol-close"><span class="ol-k">Conclusion</span><div class="ol-v">even though clubs take time, they are worth it; school is more fun</div></div></div><div class="col"><div class="bi note"><span class="en">Your outline on page 21 has the same 3 parts: introduction, body (3 reasons), conclusion.</span><span class="zh">第 21 頁的大綱也有三部分：引言、本文（三個理由）、結論。</span></div></div></div></div><div class="corner"><span class="snum">35 / 40</span></div></section>
+<section class="slide" data-s="3" id="p36" aria-label="Slide 36"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📖 Student Book p. 21 · ✏️ Your turn · 課本第 21 頁 · 換你寫</span></div><h2>Your Outline</h2><div class="hzh">你的大綱</div></header><div class="body cols c64"><div class="col"><ol class="steps"><li><div class="bi "><span class="en"><b>Introduction:</b> what many people think + your opinion.</span><span class="zh">引言：很多人的想法 + 你的意見。</span></div></li><li><div class="bi "><span class="en"><b>Body:</b> 3 reasons, each with an example or explanation.</span><span class="zh">本文：三個理由，每個都有例子或解釋。</span></div></li><li><div class="bi "><span class="en"><b>Conclusion:</b> Even though…, + your opinion again.</span><span class="zh">結論：Even though…, + 再說一次你的意見。</span></div></li></ol><div class="bi note"><span class="en">Finished? Raise your hand and show your teacher.</span><span class="zh">寫完了嗎？舉手給老師看。</span></div></div><div class="col"><div class="timer" data-min="10"><div class="tlabel">Timer · 計時器</div><div class="tdisp">10:00</div><div class="tbtns"><button type="button" data-a="minus" aria-label="minus one minute">−1</button><button type="button" data-a="go" class="tgo">Start 開始</button><button type="button" data-a="reset">Reset 重設</button><button type="button" data-a="plus" aria-label="plus one minute">+1</button></div></div></div></div></div><div class="corner"><span class="snum">36 / 40</span></div></section>
+<section class="slide" data-s="3" id="p37" aria-label="Slide 37"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Model essay · 範文</div><h2>From Outline to Essay</h2><div class="hzh">從大綱到文章</div></header><div class="body col"><div class="legend"><span class="chip c-topic">Introduction / conclusion · 引言／結論</span><span class="chip c-main">Reason (main point) · 理由（重點）</span><span class="chip c-det">Example or explanation · 例子或解釋</span><span class="chip c-tr">Sentence pattern · 句型</span></div><div class="card para essay"><div class="ptitle">Every Student Should Join a Club</div><p class="ep"><span class="rv mark c-topic" data-g="1">Many students are busy with homework and cram school.</span> <span class="rv mark c-tr" data-g="4">However, I agree that</span> <span class="rv mark c-topic" data-g="1">every student should join a school club.</span></p><p class="ep"><span class="rv mark c-main" data-g="2">First of all, clubs help students make new friends.</span> <span class="rv mark c-det" data-g="3">In a club, you meet people who like the same things as you. For example, in the basketball club, you practice with students from other classes.</span></p><p class="ep"><span class="rv mark c-main" data-g="2">Second, students can learn new skills.</span> <span class="rv mark c-det" data-g="3">They might learn to play the guitar, take photos, or speak in front of people. These skills are</span> <span class="rv mark c-tr" data-g="4">not as easy</span> <span class="rv mark c-det" data-g="3">to learn in normal classes.</span></p><p class="ep"><span class="rv mark c-main" data-g="2">Finally, clubs are a good way to relax.</span> <span class="rv mark c-det" data-g="3">After a long day of tests, playing a sport or making art helps students feel less stressed.</span></p><p class="ep"><span class="rv mark c-tr" data-g="4">Even though</span> <span class="rv mark c-topic" data-g="1">clubs take some time, they are worth it. Every student can find a club that makes school more fun.</span></p></div></div></div><div class="corner"><span class="snum">37 / 40</span></div></section>
+<section class="slide" data-s="3" id="p38" aria-label="Slide 38"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker"><span class="bk">📒 Workbook pp. 6–7 · 習作第 6–7 頁</span></div><h2>Next: Your Writing Test</h2><div class="hzh">下一步：寫作測驗</div></header><div class="body col"><div class="tsteps">
+<div class="card ts"><span class="pn">1</span><div class="bi tsh"><span class="en">First draft (p. 6)</span><span class="zh">初稿（第 6 頁）</span></div><div class="bi small"><span class="en">Use your outline from p. 21. Write a title, an introduction, a body, and a conclusion.</span><span class="zh">用第 21 頁的大綱寫標題、引言、本文和結論。</span></div></div>
+<div class="card ts"><span class="pn">2</span><div class="bi tsh"><span class="en">Revise and edit (p. 6)</span><span class="zh">修改與校對（第 6 頁）</span></div><div class="bi small"><span class="en">Read your draft. Use the checklist. Fix your mistakes.</span><span class="zh">讀你的初稿，用檢查表改錯。</span></div></div>
+<div class="card ts"><span class="pn">3</span><div class="bi tsh"><span class="en">Final draft (p. 7)</span><span class="zh">定稿（第 7 頁）</span></div><div class="bi small"><span class="en">Copy your essay neatly with all your fixes.</span><span class="zh">把改好的文章工整地抄寫一次。</span></div></div></div><div class="card checklist"><div class="anh">Checklist · 檢查表</div>
+<div class="cl">☐ <div class="bi small"><span class="en">I say if I agree or disagree in the introduction.</span><span class="zh">我在引言說出同意或不同意。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">My main points say why I agree or disagree.</span><span class="zh">我的重點說明為什麼同意或不同意。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">I give reasons or examples to support my main points.</span><span class="zh">我用理由或例子支持重點。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">I wrote a good conclusion.</span><span class="zh">我寫了好的結論。</span></div></div>
+<div class="cl">☐ <div class="bi small"><span class="en">Grammar · capital letters · punctuation · spelling</span><span class="zh">文法 · 大寫 · 標點符號 · 拼字</span></div></div></div></div></div><div class="corner"><span class="snum">38 / 40</span></div></section>
+<section class="slide" data-s="3" id="p39" aria-label="Slide 39"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Session 3 · Exit ticket · 下課前小測驗</div><h2>Check Your Understanding</h2><div class="hzh">檢查你的理解</div></header><div class="body col quizwrap" data-quiz="q3"></div></div><div class="corner"><span class="snum">39 / 40</span></div></section>
+<section class="slide" data-s="3" id="p40" aria-label="Slide 40"><div class="stripe"></div><div class="inner"><header class="sh"><div class="kicker">Unit 2 · 第二單元</div><h2>Unit 2 Summary</h2><div class="hzh">第二單元重點整理</div></header><div class="body"><div class="sumgrid"><div class="card sumc c-topic-b"><div class="bi sumh"><span class="en">Say your opinion</span><span class="zh">說出意見</span></div><div class="bi small"><span class="en">Introduction: what many people think, then I agree / disagree that…</span><span class="zh">引言：先說很多人的想法，再說你的意見。</span></div></div><div class="card sumc c-main-b"><div class="bi sumh"><span class="en">Give 3 reasons</span><span class="zh">提出三個理由</span></div><div class="bi small"><span class="en">Each reason gets an example or explanation.</span><span class="zh">每個理由都要有例子或解釋。</span></div></div><div class="card sumc c-tr-b"><div class="bi sumh"><span class="en">Use the patterns</span><span class="zh">使用句型</span></div><div class="bi small"><span class="en">(not) as… as… to compare · Even though…, … to show contrast</span><span class="zh">用 (not) as… as… 比較，用 Even though 對比。</span></div></div><div class="card sumc c-det-b"><div class="bi sumh"><span class="en">Plan, then write</span><span class="zh">先規劃再寫</span></div><div class="bi small"><span class="en">Brainstorm → Outline → First draft → Revise and edit → Final draft</span><span class="zh">腦力激盪 → 大綱 → 初稿 → 修改校對 → 定稿</span></div></div></div></div></div><div class="corner"><span class="snum">40 / 40</span></div></section>
+<nav id="nav" aria-label="Slide navigation"><button type="button" id="btoc" class="nb ghost" aria-label="Contents">☰ <span class="nz">Contents 目錄</span></button><button type="button" id="bprev" class="nb">◀ <span class="nz">Back 上一頁</span></button><span id="count">1 / 40</span><button type="button" id="bnext" class="nb primary"><span class="nz">Next 下一頁</span> ▶</button><button type="button" id="bfs" class="nb ghost" aria-label="Full screen">⛶ <span class="nz">Full screen 全螢幕</span></button></nav><div id="blank" hidden></div><div id="keylog" hidden></div>
+<script>const QUIZ={"q1": [{"q": "In an agree/disagree essay, where do you first say your opinion?", "z": "在意見文中，你在哪裡第一次說出你的意見？", "o": ["only in the conclusion", "in the introduction", "in Reason 3", "only in the title"]}, {"q": "Opinion: \"I disagree that people who have a lot of money are the happiest.\" Which reason supports it?", "z": "哪一個理由支持這個意見？", "o": ["Rich people can buy big houses.", "Money makes everyone happy.", "Many rich people work too hard and feel stressed.", "Rich people can travel a lot."]}, {"q": "What does each body paragraph need?", "z": "每一段本文需要什麼？", "o": ["a reason and an example or explanation", "only a title", "a new topic", "the conclusion"]}, {"q": "\"People need money to eat and live. However, I disagree that…\" What does However show?", "z": "However 在這裡表示什麼？", "o": ["an example", "the same idea again", "the end of the essay", "a change to the writer's own opinion"]}], "q2": [{"q": "Which sentence is correct?", "z": "哪一個句子正確？", "o": ["I am agree that homework is useful.", "I agree homework that is useful.", "I agreeing that homework is useful.", "I agree that homework is useful."]}, {"q": "Which sentence is correct?", "z": "哪一個句子正確？", "o": ["Cats are not as big as dogs.", "Cats are not as big than dogs.", "Cats are not big as dogs.", "Cats are not as bigger as dogs."]}, {"q": "Which sentence is correct?", "z": "哪一個句子正確？", "o": ["Even though it was cold, but I went swimming.", "Even though it was cold I went swimming but.", "Even though it was cold, I went swimming.", "Even it was cold, I went swimming."]}, {"q": "Fill in the blank: \"_____ the test was hard, I got a good grade.\"", "z": "空格要填什麼？", "o": ["Because", "Even though", "So", "And"]}], "q3": [{"q": "What goes in the introduction?", "z": "引言要寫什麼？", "o": ["what many people think and your opinion", "all three reasons with examples", "only the title", "a new topic"]}, {"q": "When you brainstorm, which side should you choose?", "z": "腦力激盪時，你應該選哪一方？", "o": ["the side your best friend chooses", "the side you can explain best with reasons", "always agree", "always disagree"]}, {"q": "Which sentence is a good conclusion for \"Every student should join a club\"?", "z": "哪一句是好的結論？", "o": ["Clubs meet on Fridays.", "First of all, clubs help students make friends.", "My brother likes soccer.", "Even though clubs take time, they make school more fun."]}, {"q": "Which question is on the revising checklist?", "z": "哪一個問題在修改檢查表上？", "o": ["Did you use a lot of difficult words?", "Did you write more than 500 words?", "Did you say if you agree or disagree in the introduction?", "Did you draw a picture?"]}]};
+(function(){
+const slides=[...document.querySelectorAll('.slide')];
+const TOTAL=slides.length;
+let cur=0;
+const $=id=>document.getElementById(id);
+const count=$('count'), bprev=$('bprev'), bnext=$('bnext'), blank=$('blank');
+
+/* ---------- reveals */
+function groups(sl){
+  const gs=[...new Set([...sl.querySelectorAll('.rv')].map(e=>+e.dataset.g))];
+  return gs.sort((a,b)=>a-b);
+}
+function revealGroup(sl,g){ sl.querySelectorAll('.rv[data-g="'+g+'"]').forEach(e=>e.classList.add('on')); }
+function revealNext(){
+  const sl=slides[cur];
+  for(const g of groups(sl)){
+    const items=sl.querySelectorAll('.rv[data-g="'+g+'"]');
+    if([...items].some(e=>!e.classList.contains('on'))){ revealGroup(sl,g); return true; }
+  }
+  return false;
+}
+slides.forEach(sl=>{
+  if(!sl.querySelector('.rv')) return;
+  const corner=sl.querySelector('.corner');
+  const all=document.createElement('button'); all.type='button'; all.className='tool'; all.textContent='Show all 全部顯示';
+  const hide=document.createElement('button'); hide.type='button'; hide.className='tool'; hide.textContent='Hide 隱藏';
+  all.addEventListener('click',e=>{e.stopPropagation();sl.querySelectorAll('.rv').forEach(x=>x.classList.add('on'));all.blur();});
+  hide.addEventListener('click',e=>{e.stopPropagation();sl.querySelectorAll('.rv').forEach(x=>x.classList.remove('on'));hide.blur();});
+  corner.prepend(hide); corner.prepend(all);
+  sl.addEventListener('click',e=>{
+    const r=e.target.closest('.rv'); if(!r) return;
+    revealGroup(sl,r.dataset.g);
+  });
+});
+
+/* ---------- navigation */
+function show(i){
+  if(i<0||i>=TOTAL) return;
+  slides[cur].classList.remove('active');
+  cur=i;
+  slides[cur].classList.add('active');
+  slides[cur].scrollTop=0;
+  count.textContent=(cur+1)+' / '+TOTAL;
+  bprev.disabled=cur===0; bnext.disabled=cur===TOTAL-1;
+  try{ history.replaceState(null,'','#p'+(cur+1)); }catch(e){}
+}
+function next(){ if(revealNext()) return; show(cur+1); }
+function prev(){ show(cur-1); }
+bprev.addEventListener('click',()=>{prev();bprev.blur();});
+bnext.addEventListener('click',()=>{next();bnext.blur();});
+$('btoc').addEventListener('click',()=>{const t=document.querySelector('.slide[data-id="toc"]');show(slides.indexOf(t));});
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>{
+  const t=document.querySelector('.slide[data-id="'+b.dataset.goto+'"]'); if(t) show(slides.indexOf(t));
+}));
+
+/* ---------- fullscreen + blank */
+function toggleFS(){
+  const d=document, el=d.documentElement;
+  try{
+    if(d.fullscreenElement||d.webkitFullscreenElement){ (d.exitFullscreen||d.webkitExitFullscreen).call(d); }
+    else { const p=(el.requestFullscreen||el.webkitRequestFullscreen); if(p){ const r=p.call(el); if(r&&r.catch) r.catch(()=>{}); } }
+  }catch(e){}
+}
+$('bfs').addEventListener('click',()=>{toggleFS();$('bfs').blur();});
+function toggleBlank(){ blank.hidden=!blank.hidden; }
+blank.addEventListener('click',toggleBlank);
+
+/* ---------- keys (clicker friendly, capture phase) */
+const keylog=$('keylog');
+const showKeys=/[?&]keys\b/.test(location.search)||location.hash==='#keys';
+if(showKeys){ keylog.hidden=false; keylog.textContent='Press a clicker button · key / code / keyCode appear here'; }
+window.addEventListener('keydown',e=>{
+  if(showKeys) keylog.textContent='key: '+e.key+' · code: '+e.code+' · keyCode: '+e.keyCode;
+  if(e.altKey||e.metaKey||(e.ctrlKey&&e.key!=='F5')) return;
+  const k=e.key;
+  if(!blank.hidden && k!=='b' && k!=='B' && k!=='.' && k!=='F5'){
+    if(k==='Escape'||k==='Enter'||k==='PageDown'||k==='PageUp'||k.startsWith('Arrow')||k===' '){ e.preventDefault(); toggleBlank(); return; }
+  }
+  if(['ArrowRight','ArrowDown','PageDown',' ','Enter','Spacebar'].includes(k)){ e.preventDefault(); next(); }
+  else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(k)){ e.preventDefault(); prev(); }
+  else if(k==='Home'){ e.preventDefault(); show(0); }
+  else if(k==='End'){ e.preventDefault(); show(TOTAL-1); }
+  else if(k==='F5'){ e.preventDefault(); toggleFS(); }
+  else if(k==='b'||k==='B'||k==='.'){ e.preventDefault(); toggleBlank(); }
+},true);
+
+/* ---------- timers */
+document.querySelectorAll('.timer').forEach(t=>{
+  const disp=t.querySelector('.tdisp'), go=t.querySelector('.tgo');
+  let total=(+t.dataset.min)*60, left=total, iv=null;
+  const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+  const paint=()=>{ disp.textContent=fmt(left); };
+  const stop=()=>{ clearInterval(iv); iv=null; t.classList.remove('running'); };
+  t.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return; e.stopPropagation(); b.blur();
+    const a=b.dataset.a;
+    if(a==='go'){
+      if(iv){ stop(); go.textContent='Resume 繼續'; return; }
+      if(left<=0){ left=total; t.classList.remove('done'); }
+      t.classList.add('running'); go.textContent='Pause 暫停';
+      iv=setInterval(()=>{ left--; paint(); if(left<=0){ stop(); t.classList.add('done'); disp.textContent="Time's up! 時間到！"; go.textContent='Start 開始'; } },1000);
+    } else if(a==='reset'){ stop(); left=total; t.classList.remove('done'); go.textContent='Start 開始'; paint(); }
+    else if(a==='plus'||a==='minus'){
+      if(a==='plus'){ total=Math.min(3600,total+60); left=Math.min(total,left+60); }
+      else { total=Math.max(60,total-60); left=Math.min(total,Math.max(0,left-60)); }
+      t.classList.remove('done'); paint();
+    }
+  });
+});
+
+/* ---------- exit tickets (never show answers) */
+document.querySelectorAll('[data-quiz]').forEach(w=>{
+  const qs=QUIZ[w.dataset.quiz]; let i=0;
+  w.innerHTML='<div class="qcard"><div class="qprog"></div><div class="bi qt"><span class="en"></span><span class="zh"></span></div><div class="qopts"></div></div>'+
+    '<div class="qnav"><button type="button" data-d="-1">◀ Previous 上一題</button><button type="button" data-d="1">Next question 下一題 ▶</button></div>';
+  const prog=w.querySelector('.qprog'), en=w.querySelector('.qt .en'), zh=w.querySelector('.qt .zh'), opts=w.querySelector('.qopts');
+  const [bp,bn]=w.querySelectorAll('.qnav button');
+  const chosen={};
+  function render(){
+    const q=qs[i];
+    prog.textContent='Question '+(i+1)+' of '+qs.length+' · 第 '+(i+1)+' / '+qs.length+' 題';
+    en.textContent=q.q; zh.textContent=q.z; opts.innerHTML='';
+    q.o.forEach((o,j)=>{
+      const b=document.createElement('button'); b.type='button'; b.className='qopt'+(chosen[i]===j?' sel':'');
+      b.innerHTML='<span class="ql">'+'ABCD'[j]+'</span><span></span>'; b.lastChild.textContent=o;
+      b.addEventListener('click',()=>{ chosen[i]=j; opts.querySelectorAll('.qopt').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); });
+      opts.appendChild(b);
+    });
+    bp.disabled=i===0; bn.disabled=i===qs.length-1;
+  }
+  w.querySelector('.qnav').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; b.blur(); const n=i+(+b.dataset.d); if(n>=0&&n<qs.length){i=n;render();}});
+  render();
+});
+
+/* ---------- start */
+const m=/^#p(\d+)$/.exec(location.hash);
+const start=m?Math.min(Math.max(+m[1]-1,0),TOTAL-1):0;
+slides[0].classList.add('active');
+show(start);
+window.addEventListener('hashchange',()=>{const h=/^#p(\d+)$/.exec(location.hash); if(h&&(+h[1]-1)!==cur) show(Math.min(Math.max(+h[1]-1,0),TOTAL-1));});
+})();
+</script>
+</body>
+</html>
