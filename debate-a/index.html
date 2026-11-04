@@ -484,6 +484,32 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
   .codebox .code{font-size:3.2em}
 }
 @media (prefers-reduced-motion:reduce){.slide,.ans,.tocc{transition:none}}
+
+/* ---- Session 3 debate order + debate tabs ---- */
+.lineup{display:grid;grid-template-rows:repeat(4,1fr);gap:.6em;min-height:0}
+.lu{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:.4em 1.1em;padding:.4em 1.1em;border-radius:18px;background:var(--panel);border:2px solid var(--line)}
+.lu-n{font-family:var(--font-display);font-weight:800;font-size:2.3em;line-height:1;color:#FFFDF8;background:var(--accent);width:1.5em;height:1.5em;border-radius:50%;display:grid;place-items:center}
+.lu-res .en{display:block;font-weight:800;font-size:1.4em;line-height:1.2}
+.lu-res .zh{display:block;font-size:.95em;color:var(--fg-2);margin-top:.1em}
+.lu-res .note{display:block;font-size:.85em;font-weight:700;color:var(--fg-2);margin-top:.2em}
+.lu-t{display:flex;align-items:center;gap:.6em;white-space:nowrap}
+.lu-t .t{display:grid;justify-items:center;padding:.25em .8em;border-radius:14px;border:2px solid;font-family:var(--font-display);font-weight:800;font-size:1.45em;line-height:1.05}
+.lu-t .t small{font-family:var(--font-body,inherit);font-size:.5em;font-weight:800;letter-spacing:.02em}
+.lu-t .t.a{color:var(--aff);border-color:var(--aff);background:color-mix(in srgb,var(--aff) 8%,var(--panel))}
+.lu-t .t.n{color:var(--neg);border-color:var(--neg);background:color-mix(in srgb,var(--neg) 8%,var(--panel))}
+.lu-t .vs{font-weight:800;color:var(--muted)}
+.rdeb{display:flex;align-items:center;gap:.45em;flex-wrap:wrap;min-width:0}
+.dtab{cursor:pointer;display:grid;justify-items:center;gap:0;padding:.25em .75em;border-radius:12px;border:1.5px solid var(--line);background:var(--panel);font:inherit;color:var(--fg-2);line-height:1.15}
+.dtab b{font-family:var(--font-display);font-size:1em;font-weight:800}
+.dtab span{font-weight:800;font-size:.95em}
+.dtab i{font-style:normal}
+.dtab i.a{color:var(--aff)} .dtab i.n{color:var(--neg)}
+.dtab.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--panel));color:var(--ink);box-shadow:0 0 0 2px var(--accent)}
+.dtab.done{opacity:.5}
+.dres{flex:1;min-width:14em;padding-left:.4em;line-height:1.2}
+.dres .en{display:block;font-weight:800;font-size:1.12em;color:var(--ink)}
+.dres .zh{display:block;font-size:.85em;color:var(--fg-2)}
+@media (max-width:700px){.lu{grid-template-columns:auto minmax(0,1fr)}.lu-t{grid-column:1/-1;justify-content:center}.lu-n{font-size:1.6em}}
 </style>
 </head>
 <body>
@@ -1030,9 +1056,13 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
 </div>
 <div class="kp">Change jobs after every speech, so everyone speaks and everyone coaches.<span class="zh">每講完一篇就換工作，每個人都要上台、也都要當教練。</span></div>
 </section>
+<section class="slide tight" id="s3-lineup" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
+<div class="top"><div><div class="eyebrow">Period 7 · Practice debates</div><h2 class="h1">Today's debate order<span class="zh">今天的辯論順序</span></h2></div></div>
+<div class="lineup fill"><div class="lu"><span class="lu-n">1</span><div class="lu-res"><span class="en">“The school week should be four days long.”</span><span class="zh">學校一週應該只上四天課。</span></div><div class="lu-t"><span class="t a">Team C<small>Affirmative · 正方</small></span><span class="vs">vs</span><span class="t n">Team F<small>Negative · 反方</small></span></div></div><div class="lu"><span class="lu-n">2</span><div class="lu-res"><span class="en">“Students shouldn&#x27;t have to clean the school.”</span><span class="zh">學生不應該需要打掃學校。</span></div><div class="lu-t"><span class="t a">Team A<small>Affirmative · 正方</small></span><span class="vs">vs</span><span class="t n">Team D<small>Negative · 反方</small></span></div></div><div class="lu"><span class="lu-n">3</span><div class="lu-res"><span class="en">“Students should be able to use their phones at break time.”</span><span class="zh">學生下課時間應該可以使用手機。</span></div><div class="lu-t"><span class="t a">Team G<small>Affirmative · 正方</small></span><span class="vs">vs</span><span class="t n">Team E<small>Negative · 反方</small></span></div></div><div class="lu"><span class="lu-n">4</span><div class="lu-res"><span class="en">“There should be no homework on weekends.”</span><span class="zh">週末不應該有回家作業。</span><span class="note">Team H has 3 speakers: no Negative 3rd speech. · H 隊有 3 位講者：沒有反方第三位講者。</span></div><div class="lu-t"><span class="t a">Team B<small>Affirmative · 正方</small></span><span class="vs">vs</span><span class="t n">Team H<small>Negative · 反方</small></span></div></div></div>
+</section>
 <section class="slide tight" id="s3-practice" data-sect="Session 3 · 11/4" style="--accent:var(--s3)" aria-label="Session 3 · 11/4">
-<div class="top"><div><div class="eyebrow">Period 7 · Practice debates</div><h2 class="h1">All four debates at once<span class="zh">四場同時模擬辯論</span></h2><p class="sub">Each debate takes a corner. Follow the clock on the screen. Score each speaker in your book, pp. 45–46.<span class="zh">每場辯論占一個角落，跟著螢幕上的時鐘進行，並在課本第 45–46 頁評分。</span></p></div></div><div class="runner" id="run-s3" data-long="150" data-short="120">
-  
+<div class="top"><div><div class="eyebrow">Period 7 · Practice debates</div><h2 class="h1">One debate at a time<span class="zh">一次進行一場模擬辯論</span></h2><p class="sub">Follow the clock on the screen. Everyone else scores each speaker in their book, pp. 45–46.<span class="zh">跟著螢幕上的時鐘進行。其他同學在課本第 45–46 頁替每位講者評分。</span></p></div></div><div class="runner" id="run-s3" data-long="150" data-short="120">
+  <div class="rdeb" aria-label="Debates"><button class="dtab" type="button" data-d="0" data-a="C" data-n="F" data-skip="" data-en="“The school week should be four days long.”" data-zh="學校一週應該只上四天課。"><b>Debate 1</b><span><i class="a">C</i> vs <i class="n">F</i></span></button><button class="dtab" type="button" data-d="1" data-a="A" data-n="D" data-skip="" data-en="“Students shouldn&#x27;t have to clean the school.”" data-zh="學生不應該需要打掃學校。"><b>Debate 2</b><span><i class="a">A</i> vs <i class="n">D</i></span></button><button class="dtab" type="button" data-d="2" data-a="G" data-n="E" data-skip="" data-en="“Students should be able to use their phones at break time.”" data-zh="學生下課時間應該可以使用手機。"><b>Debate 3</b><span><i class="a">G</i> vs <i class="n">E</i></span></button><button class="dtab" type="button" data-d="3" data-a="B" data-n="H" data-skip="5" data-en="“There should be no homework on weekends.”" data-zh="週末不應該有回家作業。"><b>Debate 4</b><span><i class="a">B</i> vs <i class="n">H</i></span></button><div class="dres"><span class="en"></span><span class="zh"></span></div></div>
   <div class="rlist"><button class="rsp a" type="button" data-i="0"><b>1</b><small>Aff 1st</small><em>2:30</em></button><button class="rsp n" type="button" data-i="1"><b>2</b><small>Neg 1st</small><em>2:30</em></button><button class="rsp a" type="button" data-i="2"><b>3</b><small>Aff 2nd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="3"><b>4</b><small>Neg 2nd</small><em>2:00</em></button><button class="rsp a" type="button" data-i="4"><b>5</b><small>Aff 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="5"><b>6</b><small>Neg 3rd</small><em>2:00</em></button><button class="rsp n" type="button" data-i="6"><b>7</b><small>Neg Final</small><em>2:30</em></button><button class="rsp a" type="button" data-i="7"><b>8</b><small>Aff Final</small><em>2:30</em></button></div>
   <div class="rmain">
     <div class="rnow"><span class="rwho">Ready</span><span class="rteam"></span></div>
@@ -1485,11 +1515,12 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
     var chips = Array.prototype.slice.call(R.querySelectorAll('.rsp'));
     var three = false, pos = 0, left = L, h = null;
     var who = R.querySelector('.rwho'), tm = R.querySelector('.rteam'), clock = R.querySelector('.rclock'), sig = R.querySelector('.rcard-sig span'), go = R.querySelector('.rgo');
-    function active() { return chips.filter(function (c) { var i = +c.getAttribute('data-i'); return !(three && (i === 4 || i === 5)); }); }
+    function active() { var sk = (R.getAttribute('data-skip') || '').split(',').filter(String).map(Number); return chips.filter(function (c) { var i = +c.getAttribute('data-i'); return !(three && (i === 4 || i === 5)) && sk.indexOf(i) < 0; }); }
     function lim(c) { var i = +c.getAttribute('data-i'); return (i < 2 || i > 5) ? L : SH; }
     function fmt(s) { var a = Math.abs(s), m = Math.floor(a / 60), x = a % 60; return (s < 0 ? '+' : '') + m + ':' + (x < 10 ? '0' : '') + x; }
     function teamName(c) {
       var isA = c.classList.contains('a');
+      if (R.hasAttribute('data-ta')) return 'Team ' + R.getAttribute(isA ? 'data-ta' : 'data-tn');
       var sel = R.querySelector('.rteams select.' + (isA ? 'a' : 'n'));
       return sel && sel.value ? 'Team ' + sel.value : '';
     }
@@ -1522,6 +1553,35 @@ ul.clean li .zh{display:block;font-size:.82em;color:var(--fg-2)}
     R.__paint = paint;
     select(0);
   });
+
+
+  /* ---- Session 3: practice debates one at a time ---- */
+  (function () {
+    var R = document.getElementById('run-s3');
+    if (!R) return;
+    var tabs = Array.prototype.slice.call(R.querySelectorAll('.dtab'));
+    if (!tabs.length) return;
+    var en = R.querySelector('.dres .en'), zh = R.querySelector('.dres .zh');
+    var d = +(load('s3deb') || 0); if (!(d >= 0 && d < tabs.length)) d = 0;
+    function setDeb(k, reset) {
+      d = Math.max(0, Math.min(tabs.length - 1, k));
+      var t = tabs[d];
+      tabs.forEach(function (x, j) { x.classList.toggle('on', j === d); x.classList.toggle('done', j < d); x.setAttribute('aria-pressed', j === d ? 'true' : 'false'); });
+      R.setAttribute('data-ta', t.getAttribute('data-a'));
+      R.setAttribute('data-tn', t.getAttribute('data-n'));
+      R.setAttribute('data-skip', t.getAttribute('data-skip') || '');
+      en.textContent = t.getAttribute('data-en');
+      zh.textContent = t.getAttribute('data-zh');
+      store('s3deb', d);
+      if (reset) { R.querySelector('.rsp[data-i="0"]').click(); } else if (R.__paint) { R.__paint(); }
+    }
+    tabs.forEach(function (t, j) { t.addEventListener('click', function () { setDeb(j, true); }); });
+    var wasLast = false;
+    function lastIsCur() { var act = R.querySelectorAll('.rsp:not(.off)'); return act.length > 0 && act[act.length - 1].classList.contains('cur'); }
+    R.addEventListener('click', function (e) { if (e.target.closest('.rnext')) wasLast = lastIsCur(); }, true);
+    R.addEventListener('click', function (e) { if (e.target.closest('.rnext') && wasLast) { wasLast = false; if (d < tabs.length - 1) setDeb(d + 1, true); } });
+    setDeb(d, true);
+  })();
 
   /* ---- Debate Day selects: prefilled from the Session 1 matchup table ---- */
   var dd = load('dd') || {};
