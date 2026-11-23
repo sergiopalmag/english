@@ -584,6 +584,7 @@ img.zoomable{cursor:zoom-in}
 .tour{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:1.2em;align-items:center;min-height:0}
 .shotwrap{position:relative;border-radius:14px;overflow:hidden;border:1.5px solid var(--line);box-shadow:0 10px 26px rgba(29,43,71,.14);background:var(--bg)}
 .shotwrap img{display:block;width:100%;height:auto}
+.tour > .shotwrap{width:100%;max-width:calc((100vh - var(--nav-h) - 10.6em) * 1.3485);justify-self:center}
 .hs{position:absolute;transform:translate(-50%,-50%);width:1.9em;height:1.9em;padding:0;border-radius:50%;border:3px solid #fff;background:var(--gold);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:1.05em;line-height:1;display:grid;place-items:center;box-shadow:0 3px 10px rgba(29,43,71,.4);cursor:pointer;z-index:3}
 .hs.on{background:var(--ink);color:var(--gold)}
 .spot{position:absolute;border-radius:12px;box-shadow:0 0 0 4px var(--gold-2),0 0 0 9999px rgba(29,43,71,.55);opacity:0;pointer-events:none;z-index:2;transition:opacity .25s ease}
